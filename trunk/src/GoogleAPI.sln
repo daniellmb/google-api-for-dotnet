@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleTranslateAPI", "Googl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleTranslateAPI.Test", "GoogleTranslateAPI.Test\GoogleTranslateAPI.Test.csproj", "{457AC356-506B-4553-8C50-E55EA3F3C810}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleSearchAPI", "GoogleSearchAPI\GoogleSearchAPI.csproj", "{A082B9C3-1FD6-423A-ABD8-3DEF4A346C84}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleSearchAPI.Test", "GoogleSearchAPI.Test\GoogleSearchAPI.Test.csproj", "{849606C5-6852-47E8-9D1A-35CF4EF8C6AE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{457AC356-506B-4553-8C50-E55EA3F3C810}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{457AC356-506B-4553-8C50-E55EA3F3C810}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{457AC356-506B-4553-8C50-E55EA3F3C810}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A082B9C3-1FD6-423A-ABD8-3DEF4A346C84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A082B9C3-1FD6-423A-ABD8-3DEF4A346C84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A082B9C3-1FD6-423A-ABD8-3DEF4A346C84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A082B9C3-1FD6-423A-ABD8-3DEF4A346C84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{849606C5-6852-47E8-9D1A-35CF4EF8C6AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{849606C5-6852-47E8-9D1A-35CF4EF8C6AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{849606C5-6852-47E8-9D1A-35CF4EF8C6AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{849606C5-6852-47E8-9D1A-35CF4EF8C6AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
