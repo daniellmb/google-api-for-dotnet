@@ -27,8 +27,11 @@ using Newtonsoft.Json;
 namespace Google.API.Search
 {
     [JsonObject]
-    internal class GWebSearchResult
+    internal class GWebSearchResult : IWebSearchResult
     {
+        private string m_PlaneTitle;
+        private string m_PlaneContent;
+
         /// <summary>
         /// Indicates the "type" of result.
         /// </summary>
@@ -79,7 +82,51 @@ namespace Google.API.Search
 
         public override string ToString()
         {
-            return string.Format("[{0}] {1}", TitleNoFormatting, Content);
+            IWebSearchResult result = this;
+            return string.Format("[{0}] {1}", result.Title, result.Content);
         }
+
+        #region IWebSearchResult Members
+
+        string IWebSearchResult.Url
+        {
+            get { return Url; }
+        }
+
+        string IWebSearchResult.VisibleUrl
+        {
+            get { return VisibleUrl; }
+        }
+
+        string IWebSearchResult.CacheUrl
+        {
+            get { return CacheUrl; }
+        }
+
+        string IWebSearchResult.Title
+        {
+            get
+            {
+                if(m_PlaneTitle == null)
+                {
+                    m_PlaneTitle = HttpUtility.HtmlDecode(TitleNoFormatting);
+                }
+                return m_PlaneTitle;
+            }
+        }
+
+        string IWebSearchResult.Content
+        {
+            get
+            {
+                if(m_PlaneContent == null)
+                {
+                    m_PlaneContent = HttpUtility.RemoveHtmlTags(Content);
+                }
+                return m_PlaneContent;
+            }
+        }
+
+        #endregion
     }
 }

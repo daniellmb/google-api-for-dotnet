@@ -23,21 +23,31 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Net;
-[assembly: CLSCompliant(true)]
 
 namespace Google.API.Search
 {
     public static class GWebSearcher
     {
-        internal static SearchData<GWebSearchResult> Search(string text)
+        internal static SearchData<GWebSearchResult> Search(string keyword)
         {
-            if (text == null)
+            return Search(keyword, 0, new ResultSizeEnum());
+        }
+
+        internal static SearchData<GWebSearchResult> Search(string keyword, int start)
+        {
+            return Search(keyword, start, new ResultSizeEnum());
+        }
+
+        internal static SearchData<GWebSearchResult> Search(string keyword, int start, ResultSizeEnum resultSize)
+        {
+            if(keyword == null)
             {
-                throw new ArgumentNullException("text");
+                throw new ArgumentNullException("keyword");
             }
 
-            GWebSearchRequest request = new GWebSearchRequest(text);
+            GWebSearchRequest request = new GWebSearchRequest(keyword, start, resultSize);
 
             WebRequest webRequest = request.GetWebRequest();
 
@@ -53,50 +63,58 @@ namespace Google.API.Search
             return responseData;
         }
 
-        internal static SearchData<GWebSearchResult> Search(string text, int start)
+        public static IList<IWebSearchResult> Search(string keyword, int start, int resultCount)
         {
-            if (text == null)
+            if(keyword == null)
             {
-                throw new ArgumentNullException("text");
+                throw new ArgumentNullException("keyword");
+            }
+            if(start < 0)
+            {
+                start = 0;
             }
 
-            GWebSearchRequest request = new GWebSearchRequest(text, start);
-
-            WebRequest webRequest = request.GetWebRequest();
-
-            SearchData<GWebSearchResult> responseData;
-            try
+            List<IWebSearchResult> results = new List<IWebSearchResult>();
+            int restCount = resultCount;
+            while(restCount > 0)
             {
-                responseData = RequestUtility.GetResponseData<SearchData<GWebSearchResult>>(webRequest);
-            }
-            catch (GoogleAPIException ex)
-            {
-                throw new SearchException(string.Format("request:\"{0}\"", request), ex);
-            }
-            return responseData;
-        }
+                SearchData<GWebSearchResult> searchData;
+                try
+                {
+                    if (restCount > 4)
+                    {
+                        searchData = Search(keyword, start, ResultSizeEnum.large);
+                    }
+                    else
+                    {
+                        searchData = Search(keyword, start);
+                    }
+                }
+                catch(SearchException ex)
+                {
+                    //throw new SearchException("Search Failed.", ex);
+                    return results;
+                }
 
-        internal static SearchData<GWebSearchResult> Search(string text, int start, ResultSizeEnum resultSize)
-        {
-            if(text == null)
-            {
-                throw new ArgumentNullException("text");
+                
+                int count = searchData.Results.Length;
+                if(count <= restCount)
+                {
+                    results.AddRange(searchData.Results);
+                }
+                else
+                {
+                    count = restCount;
+                    for(int i = 0; i < count; ++i)
+                    {
+                        results.Add(searchData.Results[i]);
+                    }
+                }
+                start += count;
+                restCount -= count;
             }
 
-            GWebSearchRequest request = new GWebSearchRequest(text, start, resultSize);
-
-            WebRequest webRequest = request.GetWebRequest();
-
-            SearchData<GWebSearchResult> responseData;
-            try
-            {
-                responseData = RequestUtility.GetResponseData<SearchData<GWebSearchResult>>(webRequest);
-            }
-            catch (GoogleAPIException ex)
-            {
-                throw new SearchException(string.Format("request:\"{0}\"", request), ex);
-            }
-            return responseData;
+            return results;
         }
     }
 }

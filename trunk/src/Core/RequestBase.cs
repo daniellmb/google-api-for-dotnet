@@ -68,7 +68,7 @@ namespace Google.API
         [Argument("v", "1.0")]
         public string Version { get; private set; }
 
-        [Argument("key?")]
+        [Argument("key")]
         public string Key { get; private set; }
 
         /// <summary>
@@ -98,14 +98,6 @@ namespace Google.API
         }
 
         protected abstract string BaseAddress { get; }
-
-        private ICollection<KeyValuePair<string, string>> Arguments
-        {
-            get
-            {
-                return GetArguments();
-            }
-        }
 
         #endregion
 
@@ -175,14 +167,14 @@ namespace Google.API
                 }
 
                 dict[name] = valueString;
-
             }
             return dict;
         }
 
         private string GetUrlString()
         {
-            if (Arguments.Count == 0)
+            ICollection<KeyValuePair<string, string>> arguments = GetArguments();
+            if (arguments.Count == 0)
             {
                 return BaseAddress;
             }
@@ -190,7 +182,7 @@ namespace Google.API
             StringBuilder sb = new StringBuilder(BaseAddress);
             sb.Append("?");
             bool isFirst = true;
-            foreach (KeyValuePair<string, string> argument in Arguments)
+            foreach (KeyValuePair<string, string> argument in arguments)
             {
                 if (!isFirst)
                 {
