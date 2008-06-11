@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="ArgumentAttribute.cs" />
     <Compile Include="GoogleAPIException.cs" />
+    <Compile Include="HttpUtility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequestBase.cs" />
     <Compile Include="RequestUtility.cs" />

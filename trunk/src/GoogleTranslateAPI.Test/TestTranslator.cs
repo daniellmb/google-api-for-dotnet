@@ -97,14 +97,14 @@ namespace Google.API.Translate.Test
         }
 
         [Test]
-        public void TranslateTestWithDetect()
+        public void TranslateAndDetectTest()
         {
             string text = "I love this game.";
 
             Language from;
             Language to = Language.English;
 
-            string translated = Translator.Translate(text, to, out from);
+            string translated = Translator.TranslateAndDetect(text, to, out from);
 
             Assert.AreEqual(Language.English, from);
             StringAssert.AreEqualIgnoringCase(text, translated);

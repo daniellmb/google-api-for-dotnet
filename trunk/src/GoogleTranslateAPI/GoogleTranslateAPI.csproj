@@ -50,6 +50,9 @@
     <Compile Include="..\Core\GoogleAPIException.cs">
       <Link>GoogleAPIException.cs</Link>
     </Compile>
+    <Compile Include="..\Core\HttpUtility.cs">
+      <Link>HttpUtility.cs</Link>
+    </Compile>
     <Compile Include="..\Core\RequestBase.cs">
       <Link>RequestBase.cs</Link>
     </Compile>

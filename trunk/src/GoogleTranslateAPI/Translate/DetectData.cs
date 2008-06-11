@@ -29,12 +29,21 @@ namespace Google.API.Translate
     [JsonObject(MemberSerialization.OptOut)]
     internal class DetectData
     {
+        /// <summary>
+        /// The detected language.
+        /// </summary>
         [JsonProperty("language")]
         public string LanguageCode { get; private set; }
 
+        /// <summary>
+        /// The reliability of the detect.
+        /// </summary>
         [JsonProperty("isReliable")]
         public bool IsReliable { get; private set; }
 
+        /// <summary>
+        /// The confidence level of the detect.
+        /// </summary>
         [JsonProperty("confidence")]
         public double Confidence { get; private set; }
     }

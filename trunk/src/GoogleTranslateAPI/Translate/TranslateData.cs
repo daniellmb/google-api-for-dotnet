@@ -29,9 +29,15 @@ namespace Google.API.Translate
     [JsonObject(MemberSerialization.OptOut)]
     internal class TranslateData
     {
+        /// <summary>
+        /// The translated text.
+        /// </summary>
         [JsonProperty("translatedText")]
         public string TranslatedText { get; private set; }
 
+        /// <summary>
+        /// The source language.
+        /// </summary>
         [JsonProperty("detectedSourceLanguage")]
         public string DetectedSourceLanguage { get; private set; }
     }

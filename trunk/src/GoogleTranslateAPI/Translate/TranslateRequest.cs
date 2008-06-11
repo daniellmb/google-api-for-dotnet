@@ -46,6 +46,9 @@ namespace Google.API.Translate
 
         public string To { get; private set; }
 
+        /// <summary>
+        /// This argument supplies the optional source language and required destination language. The language pairs are seperated by a properly escaped | vertical bar which escapes as %7C. In order to translate from English to Italian, you would specify a value of langpair=en%7Cit. To use the aut-detect source feature, leave off the source language and only specify the vertical bar followed by the destination langauge as in: langpair=%7Cit.
+        /// </summary>
         [Argument("langpair", Optional = false)]
         private string LanguagePair
         {
@@ -56,6 +59,9 @@ namespace Google.API.Translate
             }
         }
 
+        /// <summary>
+        /// This optional argument allows you to indicate that the text to be translated is either plain-text or HTML. A value of html indicates html and a value of text indicates plain-text. Note that text is the default behavior.
+        /// </summary>
         [Argument("format?")]
         public TranslateFormat Format { get; private set; }
 

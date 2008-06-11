@@ -44,31 +44,9 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Core\RequestBase.cs">
-      <Link>RequestBase.cs</Link>
-    </Compile>
-    <Compile Include="..\Core\RequestUtility.cs">
-      <Link>RequestUtility.cs</Link>
-    </Compile>
-    <Compile Include="..\Core\ResultObject.cs">
-      <Link>ResultObject.cs</Link>
-    </Compile>
-    <Compile Include="..\GoogleSearchAPI\Search\GWebSearcher.cs">
-      <Link>GWebSearcher.cs</Link>
-    </Compile>
-    <Compile Include="..\GoogleSearchAPI\Search\GWebSearchRequest.cs">
-      <Link>GWebSearchRequest.cs</Link>
-    </Compile>
-    <Compile Include="..\GoogleSearchAPI\Search\GWebSearchResult.cs">
-      <Link>GWebSearchResult.cs</Link>
-    </Compile>
-    <Compile Include="..\GoogleSearchAPI\Search\SearchData.cs">
-      <Link>SearchData.cs</Link>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestGWebSearcher.cs" />
   </ItemGroup>

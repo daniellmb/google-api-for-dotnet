@@ -24,14 +24,14 @@
 
 namespace Google.API.Search
 {
+    internal enum ResultSizeEnum
+    {
+        small = 0,
+        large = 1,
+    }
+
     internal class GWebSearchRequest : RequestBase
     {
-        public enum ResultSizeEnum
-        {
-            small = 0,
-            large = 1,
-        }
-
         private static readonly string s_BaseAddress = @"http://ajax.googleapis.com/ajax/services/search/web";
 
         public GWebSearchRequest(string text)

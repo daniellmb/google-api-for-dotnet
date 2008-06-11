@@ -29,27 +29,51 @@ namespace Google.API.Search
     [JsonObject]
     internal class GWebSearchResult
     {
+        /// <summary>
+        /// Indicates the "type" of result.
+        /// </summary>
         [JsonProperty("GsearchResultClass")]
         public string GSearchResultClass { get; private set; }
 
+        /// <summary>
+        /// Supplies the raw URL of the result.
+        /// </summary>
         [JsonProperty("unescapedUrl")]
         public string UnescapedUrl { get; private set; }
 
+        /// <summary>
+        /// Supplies an escaped version of the above URL.
+        /// </summary>
         [JsonProperty("url")]
         public string Url { get; private set; }
 
+        /// <summary>
+        /// Supplies a shortened version of the URL associated with the result. Typically displayed in green, stripped of a protocol and path.
+        /// </summary>
         [JsonProperty("visibleUrl")]
         public string VisibleUrl { get; private set; }
 
+        /// <summary>
+        /// Supplies a url to google's cached version of the page responsible for producting this result. This property may be null indicating that there is no cache, and it might be out of date in cases where the search result has been saved and in the mean time, the cache has gone stale. For best results, this property should not be persisted.
+        /// </summary>
         [JsonProperty("cacheUrl")]
         public string CacheUrl { get; private set; }
 
+        /// <summary>
+        /// Supplies the title value of the result.
+        /// </summary>
         [JsonProperty("title")]
         public string Title { get; private set; }
 
+        /// <summary>
+        /// Supplies the title, but unlike .title, this property is stripped of html markup (e.g., <b>, <i>, etc.)
+        /// </summary>
         [JsonProperty("titleNoFormatting")]
         public string TitleNoFormatting { get; private set; }
 
+        /// <summary>
+        /// Supplies a brief snippet of information from the page associated with the search result.
+        /// </summary>
         [JsonProperty("content")]
         public string Content { get; private set; }
 

@@ -1,5 +1,5 @@
 ﻿/**
- * TestRequestBase.cs
+ * TestHttpUtility.cs
  *
  * Copyright (C) 2008,  iron9light
  *
@@ -28,37 +28,41 @@ using NUnit.Framework;
 namespace Google.API.Test
 {
     [TestFixture]
-    public class TestRequestBase
+    public class TestHttpUtility
     {
         [Test]
-        public void UrlStringTest()
+        public void HtmlDecodeTest()
         {
-            MockRequest mockRequest = new MockRequest("http://www.xxx.com", "xx");
-            mockRequest.ArgB = 50;
-            Console.Write(mockRequest.Uri.Query);
-            Assert.AreEqual("http://www.xxx.com?a=default&b=50&q=xx&v=1.0", mockRequest.UrlString);
-        }
-    }
+            string s = @"<%xxx>\\\<///>hi...";
 
-    class MockRequest : RequestBase
-    {
-        public MockRequest(string address, string content)
-            : base(content)
-        {
-            m_BaseAddress = address;
+            string encodedS = System.Web.HttpUtility.HtmlEncode(s);
+
+            string decodedBackS = HttpUtility.HtmlDecode(encodedS);
+
+            Assert.AreEqual(s, decodedBackS);
         }
 
-        private readonly string m_BaseAddress;
-
-        [Argument("a", "default")]
-        public string ArgA { get; set; }
-
-        [Argument("b", Optional = false)]
-        public object ArgB { get; set; }
-
-        protected override string BaseAddress
+        [Test]
+        public void UrlEncodeTest()
         {
-            get { return m_BaseAddress; }
+            string s = "我喜欢" + Environment.NewLine + "这样的感觉.";
+
+            string expected = System.Web.HttpUtility.UrlEncode(s);
+
+            string actual = HttpUtility.UrlEncode(s);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void RemoveHtmlTagsTest()
+        {
+            string s = "<chinese>我爱我家。</chinese>" + Environment.NewLine + "<english>I love my family.</english>";
+            string encodedS = System.Web.HttpUtility.HtmlEncode(s);
+            encodedS = string.Format("<html><b><i>{0}</i></b></html>", encodedS);
+
+            string decodedBackS = HttpUtility.RemoveHtmlTags(encodedS);
+            Assert.AreEqual(s, decodedBackS);
         }
     }
 }
