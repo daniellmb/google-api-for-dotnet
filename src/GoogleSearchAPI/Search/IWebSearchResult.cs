@@ -1,5 +1,5 @@
-﻿/**
- * GWebSearchRequest.cs
+/**
+ * IWebSearchResult.cs
  *
  * Copyright (C) 2008,  iron9light
  *
@@ -24,42 +24,16 @@
 
 namespace Google.API.Search
 {
-    internal enum ResultSizeEnum
+    public interface IWebSearchResult
     {
-        small = 0,
-        large = 1,
-    }
+        string Url { get; }
 
-    internal class GWebSearchRequest : RequestBase
-    {
-        private static readonly string s_BaseAddress = @"http://ajax.googleapis.com/ajax/services/search/web";
+        string VisibleUrl { get; }
 
-        public GWebSearchRequest(string text)
-            : base(text)
-        { }
+        string CacheUrl { get; }
 
-        public GWebSearchRequest(string text, int start)
-            : base(text)
-        {
-            Start = start;
-        }
+        string Title { get; }
 
-        public GWebSearchRequest(string text, int start, ResultSizeEnum resultSize)
-            : base(text)
-        {
-            Start = start;
-            ResultSize = resultSize;
-        }
-
-        [Argument("rsz")]
-        public ResultSizeEnum ResultSize { get; private set; }
-
-        [Argument("start")]
-        public int Start { get; private set; }
-
-        protected override string BaseAddress
-        {
-            get { return s_BaseAddress; }
-        }
+        string Content { get; }
     }
 }

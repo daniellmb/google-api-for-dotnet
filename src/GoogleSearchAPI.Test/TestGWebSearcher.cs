@@ -22,6 +22,7 @@
  * THE SOFTWARE.
  */
 
+using System.Collections.Generic;
 using NUnit.Framework;
 
 namespace Google.API.Search.Test
@@ -32,10 +33,23 @@ namespace Google.API.Search.Test
         [Test]
         public void SearchTest()
         {
-            SearchData<GWebSearchResult> data = GWebSearcher.Search("Google Translate API .NET");
+            SearchData<GWebSearchResult> data = GWebSearcher.Search("Google Translate API .NET", 50);
             Assert.IsNotNull(data);
             Assert.IsNotNull(data.Results);
             Assert.Greater(data.Results.Length, 0);
+
+            IWebSearchResult[] result = data.Results as IWebSearchResult[];
+            Assert.IsNotNull(result);
+            Assert.Greater(result.Length, 0);
+        }
+
+        [Test]
+        public void SearchTest2()
+        {
+            int count = 11;
+            IList<IWebSearchResult> results = GWebSearcher.Search("hust", 0, count);
+            Assert.IsNotNull(results);
+            Assert.AreEqual(count, results.Count);
         }
     }
 }

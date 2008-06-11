@@ -62,7 +62,7 @@ namespace Google.API.Translate
         /// <summary>
         /// This optional argument allows you to indicate that the text to be translated is either plain-text or HTML. A value of html indicates html and a value of text indicates plain-text. Note that text is the default behavior.
         /// </summary>
-        [Argument("format?")]
+        [Argument("format")]
         public TranslateFormat Format { get; private set; }
 
         protected override string BaseAddress

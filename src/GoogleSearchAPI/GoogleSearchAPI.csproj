@@ -66,6 +66,7 @@
     <Compile Include="Search\GWebSearcher.cs" />
     <Compile Include="Search\GWebSearchRequest.cs" />
     <Compile Include="Search\GWebSearchResult.cs" />
+    <Compile Include="Search\IWebSearchResult.cs" />
     <Compile Include="Search\SearchData.cs" />
     <Compile Include="Search\SearchException.cs" />
   </ItemGroup>
