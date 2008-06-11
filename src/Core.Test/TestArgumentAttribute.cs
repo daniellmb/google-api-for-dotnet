@@ -24,7 +24,7 @@
 
 using NUnit.Framework;
 
-namespace Google.API.Translate.Test
+namespace Google.API.Test
 {
     [TestFixture]
     public class TestArgumentAttribute

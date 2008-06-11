@@ -24,7 +24,6 @@
 
 using System;
 using System.Net;
-using System.Web;
 
 namespace Google.API.Translate
 {
@@ -147,14 +146,14 @@ namespace Google.API.Translate
         /// <code>
         /// string text = "Je t'aime.";
         /// Language from;
-        /// string translated = Translator.Translate(text, Language.English, out from);
+        /// string translated = Translator.TranslateAndDetect(text, Language.English, out from);
         /// Console.WriteLine("\"{0}\" is \"{1}\" in {2}", text, translated, from);
         /// // "Je t'aime." is "I love you." in French.
         /// </code>
         /// </example>
-        public static string Translate(string text, Language to, out Language from)
+        public static string TranslateAndDetect(string text, Language to, out Language from)
         {
-            return Translate(text, to, TranslateFormat.text, out from);
+            return TranslateAndDetect(text, to, TranslateFormat.text, out from);
         }
 
         /// <summary>
@@ -166,7 +165,7 @@ namespace Google.API.Translate
         /// <param name="from">The detected language of the original text.</param>
         /// <returns>The translate result.</returns>
         /// <exception cref="TranslateException">Translate failed.</exception>
-        public static string Translate(string text, Language to, TranslateFormat format, out Language from)
+        public static string TranslateAndDetect(string text, Language to, TranslateFormat format, out Language from)
         {
             if (!LanguageUtility.IsTranslatable(to))
             {

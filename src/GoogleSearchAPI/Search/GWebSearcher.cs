@@ -24,6 +24,7 @@
 
 using System;
 using System.Net;
+[assembly: CLSCompliant(true)]
 
 namespace Google.API.Search
 {
@@ -54,12 +55,35 @@ namespace Google.API.Search
 
         internal static SearchData<GWebSearchResult> Search(string text, int start)
         {
-            if(text == null)
+            if (text == null)
             {
                 throw new ArgumentNullException("text");
             }
 
             GWebSearchRequest request = new GWebSearchRequest(text, start);
+
+            WebRequest webRequest = request.GetWebRequest();
+
+            SearchData<GWebSearchResult> responseData;
+            try
+            {
+                responseData = RequestUtility.GetResponseData<SearchData<GWebSearchResult>>(webRequest);
+            }
+            catch (GoogleAPIException ex)
+            {
+                throw new SearchException(string.Format("request:\"{0}\"", request), ex);
+            }
+            return responseData;
+        }
+
+        internal static SearchData<GWebSearchResult> Search(string text, int start, ResultSizeEnum resultSize)
+        {
+            if(text == null)
+            {
+                throw new ArgumentNullException("text");
+            }
+
+            GWebSearchRequest request = new GWebSearchRequest(text, start, resultSize);
 
             WebRequest webRequest = request.GetWebRequest();
 
