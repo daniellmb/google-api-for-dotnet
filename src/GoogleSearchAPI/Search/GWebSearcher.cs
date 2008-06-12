@@ -28,28 +28,67 @@ using System.Net;
 
 namespace Google.API.Search
 {
+    /// <summary>
+    /// Utility class for Google Web Search service.
+    /// </summary>
     public static class GWebSearcher
     {
-        internal static SearchData<GWebSearchResult> Search(string keyword)
+        private static int s_Timeout = 0;
+
+        /// <summary>
+        /// Get or set the length of time, in milliseconds, before the request times out.
+        /// </summary>
+        public static int Timeout
         {
-            return Search(keyword, 0, new ResultSizeEnum());
+            get
+            {
+                return s_Timeout;
+            }
+            set
+            {
+                if (s_Timeout < 0)
+                {
+                    throw new ArgumentOutOfRangeException("value");
+                }
+                s_Timeout = value;
+            }
         }
 
-        internal static SearchData<GWebSearchResult> Search(string keyword, int start)
+        internal static SearchData<GWebSearchResult> GSearch(string keyword)
         {
-            return Search(keyword, start, new ResultSizeEnum());
+            return GSearch(keyword, 0, new ResultSizeEnum());
         }
 
-        internal static SearchData<GWebSearchResult> Search(string keyword, int start, ResultSizeEnum resultSize)
+        internal static SearchData<GWebSearchResult> GSearch(string keyword, int start)
         {
-            if(keyword == null)
+            return GSearch(keyword, start, new ResultSizeEnum());
+        }
+
+        internal static SearchData<GWebSearchResult> GSearch(string keyword, int start, ResultSizeEnum resultSize)
+        {
+            return GSearch(keyword, start, resultSize, new Language());
+        }
+
+        internal static SearchData<GWebSearchResult> GSearch(string keyword, int start, ResultSizeEnum resultSize, Language language)
+        {
+            if (keyword == null)
             {
                 throw new ArgumentNullException("keyword");
             }
 
-            GWebSearchRequest request = new GWebSearchRequest(keyword, start, resultSize);
+            string languageCode = LanguageUtility.GetLanguageCode(language);
 
-            WebRequest webRequest = request.GetWebRequest();
+            GWebSearchRequest request = new GWebSearchRequest(keyword, start, resultSize, languageCode);
+
+            WebRequest webRequest;
+            if (Timeout != 0)
+            {
+                webRequest = request.GetWebRequest(Timeout);
+            }
+            else
+            {
+                webRequest = request.GetWebRequest();
+            }
 
             SearchData<GWebSearchResult> responseData;
             try
@@ -63,49 +102,77 @@ namespace Google.API.Search
             return responseData;
         }
 
-        public static IList<IWebSearchResult> Search(string keyword, int start, int resultCount)
+        /// <summary>
+        /// Search.
+        /// </summary>
+        /// <param name="keyword">The keyword.</param>
+        /// <param name="resultCount">The count of result itmes.
+        /// (Now, the max count of items Google given is <b>32</b>.)</param>
+        /// <returns>The result items.</returns>
+        /// <example>
+        /// This is the c# code example.
+        /// <code>
+        /// IList<IWebSearchResult> results = GWebSearcher.Search("Google API for .NET", 8);
+        /// </code>
+        /// </example>
+        public static IList<IWebSearchResult> Search(string keyword, int resultCount)
         {
-            if(keyword == null)
+            return Search(keyword, resultCount, new Language());
+        }
+
+        /// <summary>
+        /// Search.
+        /// </summary>
+        /// <param name="keyword">The keyword.</param>
+        /// <param name="resultCount">The count of result itmes.
+        /// (Now, the max count of items Google given is <b>32</b>.)</param>
+        /// <param name="language">The language you want to search.</param>
+        /// <returns>The result itmes.</returns>
+        /// <example>
+        /// This is the c# code example.
+        /// <code>
+        /// IList<IWebSearchResult> results = GWebSearcher.Search("Google API for .NET", 32, Language.Chinese_Simplified);
+        /// </code>
+        /// </example>
+        public static IList<IWebSearchResult> Search(string keyword, int resultCount, Language language)
+        {
+            if (keyword == null)
             {
                 throw new ArgumentNullException("keyword");
             }
-            if(start < 0)
-            {
-                start = 0;
-            }
-
+            int start = 0;
             List<IWebSearchResult> results = new List<IWebSearchResult>();
             int restCount = resultCount;
-            while(restCount > 0)
+            while (restCount > 0)
             {
                 SearchData<GWebSearchResult> searchData;
                 try
                 {
                     if (restCount > 4)
                     {
-                        searchData = Search(keyword, start, ResultSizeEnum.large);
+                        searchData = GSearch(keyword, start, ResultSizeEnum.large, language);
                     }
                     else
                     {
-                        searchData = Search(keyword, start);
+                        searchData = GSearch(keyword, start, new ResultSizeEnum(), language);
                     }
                 }
-                catch(SearchException ex)
+                catch (SearchException ex)
                 {
                     //throw new SearchException("Search Failed.", ex);
                     return results;
                 }
 
-                
+
                 int count = searchData.Results.Length;
-                if(count <= restCount)
+                if (count <= restCount)
                 {
                     results.AddRange(searchData.Results);
                 }
                 else
                 {
                     count = restCount;
-                    for(int i = 0; i < count; ++i)
+                    for (int i = 0; i < count; ++i)
                     {
                         results.Add(searchData.Results[i]);
                     }

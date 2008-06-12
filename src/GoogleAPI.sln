@@ -21,6 +21,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleSearchAPI", "GoogleSe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleSearchAPI.Test", "GoogleSearchAPI.Test\GoogleSearchAPI.Test.csproj", "{849606C5-6852-47E8-9D1A-35CF4EF8C6AE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Doc", "Doc", "{853EA051-A98E-4402-B37C-78D85DC464B6}"
+	ProjectSection(SolutionItems) = preProject
+		Doc\GoogleTranslateAPI.shfb = Doc\GoogleTranslateAPI.shfb
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

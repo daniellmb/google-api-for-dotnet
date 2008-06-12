@@ -35,7 +35,7 @@ namespace Google.API.Translate
         /// <summary>
         /// Text format. Default value.
         /// </summary>
-        text,
+        text = 0,
         /// <summary>
         /// Html format.
         /// </summary>
@@ -60,7 +60,7 @@ namespace Google.API.Translate
             }
             set
             {
-                if (s_Timeout <= 0)
+                if (s_Timeout < 0)
                 {
                     throw new ArgumentOutOfRangeException("value");
                 }
@@ -87,7 +87,7 @@ namespace Google.API.Translate
         /// </example>
         public static string Translate(string text, Language from, Language to)
         {
-            return Translate(text, from, to, TranslateFormat.text);
+            return Translate(text, from, to, new TranslateFormat());
         }
 
         /// <summary>
@@ -153,7 +153,7 @@ namespace Google.API.Translate
         /// </example>
         public static string TranslateAndDetect(string text, Language to, out Language from)
         {
-            return TranslateAndDetect(text, to, TranslateFormat.text, out from);
+            return TranslateAndDetect(text, to, new TranslateFormat(), out from);
         }
 
         /// <summary>
@@ -217,7 +217,7 @@ namespace Google.API.Translate
 
         internal static TranslateData Translate(string text, string from, string to)
         {
-            return Translate(text, from, to, TranslateFormat.text);
+            return Translate(text, from, to, new TranslateFormat());
         }
 
         internal static TranslateData Translate(string text, string from, string to, TranslateFormat format)

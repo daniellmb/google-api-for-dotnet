@@ -24,38 +24,45 @@
 
 namespace Google.API.Search
 {
-    internal enum ResultSizeEnum
-    {
-        small = 0,
-        large = 1,
-    }
-
-    internal class GWebSearchRequest : RequestBase
+    internal class GWebSearchRequest : GSearchRequestBase
     {
         private static readonly string s_BaseAddress = @"http://ajax.googleapis.com/ajax/services/search/web";
 
-        public GWebSearchRequest(string text)
-            : base(text)
+        public GWebSearchRequest(string keyword)
+            : base(keyword)
         { }
 
-        public GWebSearchRequest(string text, int start)
-            : base(text)
+        public GWebSearchRequest(string keyword, string language)
+            : base(keyword)
         {
-            Start = start;
+            Language = language;
         }
 
-        public GWebSearchRequest(string text, int start, ResultSizeEnum resultSize)
-            : base(text)
+        public GWebSearchRequest(string keyword, int start)
+            : base(keyword, start)
+        { }
+
+        public GWebSearchRequest(string keyword, int start, string language)
+            : base(keyword, start)
         {
-            Start = start;
-            ResultSize = resultSize;
+            Language = language;
         }
 
-        [Argument("rsz")]
-        public ResultSizeEnum ResultSize { get; private set; }
+        public GWebSearchRequest(string keyword, int start, ResultSizeEnum resultSize)
+            : base(keyword, start, resultSize)
+        { }
 
-        [Argument("start")]
-        public int Start { get; private set; }
+        public GWebSearchRequest(string keyword, int start, ResultSizeEnum resultSize, string language)
+            : base(keyword, start, resultSize)
+        {
+            Language = language;
+        }
+
+        /// <summary>
+        /// This optional argument allows the caller to restrict the search to documents written in a particular language, e.g., lr=lang_ja.
+        /// </summary>
+        [Argument("lr")]
+        public string Language { get; private set; }
 
         protected override string BaseAddress
         {

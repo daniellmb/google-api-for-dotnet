@@ -31,9 +31,9 @@ namespace Google.API.Search.Test
     public class TestGWebSearcher
     {
         [Test]
-        public void SearchTest()
+        public void GSearchTest()
         {
-            SearchData<GWebSearchResult> data = GWebSearcher.Search("Google Translate API .NET", 50);
+            SearchData<GWebSearchResult> data = GWebSearcher.GSearch("Google Translate API .NET", 12);
             Assert.IsNotNull(data);
             Assert.IsNotNull(data.Results);
             Assert.Greater(data.Results.Length, 0);
@@ -44,12 +44,29 @@ namespace Google.API.Search.Test
         }
 
         [Test]
-        public void SearchTest2()
+        public void SearchTest()
         {
             int count = 11;
-            IList<IWebSearchResult> results = GWebSearcher.Search("hust", 0, count);
+            IList<IWebSearchResult> results = GWebSearcher.Search("Kobe bryant", count);
             Assert.IsNotNull(results);
+            foreach (IWebSearchResult result in results)
+            {
+                Assert.IsNotNull(result);
+            }
             Assert.AreEqual(count, results.Count);
+        }
+
+        [Test]
+        public void SearchTest2()
+        {
+            int count = 50;
+            Language language = Language.Japanese;
+            IList<IWebSearchResult> results = GWebSearcher.Search("Kobe bryant", count, language);
+            Assert.IsNotNull(results);
+            foreach (IWebSearchResult result in results)
+            {
+                Assert.IsNotNull(result);
+            }
         }
     }
 }
