@@ -23,6 +23,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleSearchAPI.Test", "Goo
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Doc", "Doc", "{853EA051-A98E-4402-B37C-78D85DC464B6}"
 	ProjectSection(SolutionItems) = preProject
+		Doc\GoogleSearchAPI.shfb = Doc\GoogleSearchAPI.shfb
 		Doc\GoogleTranslateAPI.shfb = Doc\GoogleTranslateAPI.shfb
 	EndProjectSection
 EndProject

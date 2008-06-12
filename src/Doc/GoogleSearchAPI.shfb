@@ -1,11 +1,11 @@
 ﻿<project schemaVersion="1.6.0.7">
     <assemblies>
-        <assembly assemblyPath="..\GoogleTranslateAPI\bin\Release\GoogleTranslateAPI.dll" xmlCommentsPath="..\GoogleTranslateAPI\bin\Release\GoogleTranslateAPI.xml" commentsOnly="False" />
+        <assembly assemblyPath="..\GoogleSearchAPI\bin\Release\GoogleSearchAPI.dll" xmlCommentsPath="..\GoogleSearchAPI\bin\Release\GoogleSearchAPI.xml" commentsOnly="False" />
     </assemblies>
     <namespaceSummaries>
         <namespaceSummaryItem name="" isDocumented="False" />
         <namespaceSummaryItem name="Google.API" isDocumented="True">The &lt;b&gt;Google.API&lt;/b&gt; namespace provides some base utility classes.</namespaceSummaryItem>
-        <namespaceSummaryItem name="Google.API.Translate" isDocumented="True">The &lt;b&gt;Google.API.Translate&lt;/b&gt; namespace provides classes that are used to translate.</namespaceSummaryItem>
+        <namespaceSummaryItem name="Google.API.Search" isDocumented="True">The &lt;b&gt;Google.API.Search&lt;/b&gt; namespace provides classes for using Google Web Search service.</namespaceSummaryItem>
     </namespaceSummaries>
     <dependencies>
         <dependencyItem depPath="..\lib\Newtonsoft.Json.dll" />
@@ -16,7 +16,7 @@
     <VisibleItems>InheritedMembers, InheritedFrameworkMembers, Protected, SealedProtected</VisibleItems>
     <HtmlHelp1xCompilerPath path="" />
     <HtmlHelp2xCompilerPath path="" />
-    <OutputPath>..\GoogleTranslateAPI\bin\Release\</OutputPath>
+    <OutputPath>..\GoogleSearchAPI\bin\Release\</OutputPath>
     <SandcastlePath path="E:\Development\Sandcastle\" />
     <WorkingPath path="" />
     <CleanIntermediates>True</CleanIntermediates>
@@ -24,12 +24,12 @@
     <BuildLogFile path="" />
     <HelpFileFormat>HtmlHelp1x</HelpFileFormat>
     <CppCommentsFixup>False</CppCommentsFixup>
-    <FrameworkVersion>3.5</FrameworkVersion>
+    <FrameworkVersion>2.0.50727</FrameworkVersion>
     <IndentHtml>False</IndentHtml>
     <Preliminary>False</Preliminary>
     <RootNamespaceContainer>False</RootNamespaceContainer>
     <RootNamespaceTitle />
-    <HelpTitle>Google Translate API Documentation</HelpTitle>
+    <HelpTitle>Google Search API Documentation</HelpTitle>
     <HtmlHelpName>Documentation</HtmlHelpName>
     <Language>en-US</Language>
     <CopyrightHref />

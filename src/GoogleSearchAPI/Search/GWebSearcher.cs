@@ -112,7 +112,7 @@ namespace Google.API.Search
         /// <example>
         /// This is the c# code example.
         /// <code>
-        /// IList<IWebSearchResult> results = GWebSearcher.Search("Google API for .NET", 8);
+        /// IList(IWebSearchResult) results = GWebSearcher.Search("Google API for .NET", 8);
         /// </code>
         /// </example>
         public static IList<IWebSearchResult> Search(string keyword, int resultCount)
@@ -131,7 +131,7 @@ namespace Google.API.Search
         /// <example>
         /// This is the c# code example.
         /// <code>
-        /// IList<IWebSearchResult> results = GWebSearcher.Search("Google API for .NET", 32, Language.Chinese_Simplified);
+        /// IList(IWebSearchResult) results = GWebSearcher.Search("Google API for .NET", 32, Language.Chinese_Simplified);
         /// </code>
         /// </example>
         public static IList<IWebSearchResult> Search(string keyword, int resultCount, Language language)
