@@ -27,7 +27,7 @@ using System;
 namespace Google.API
 {
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-    public sealed class ArgumentAttribute : Attribute
+    internal sealed class ArgumentAttribute : Attribute
     {
         /// <summary>
         /// Constructor of ArgumentAttribute

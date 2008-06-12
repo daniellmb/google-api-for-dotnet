@@ -27,55 +27,6 @@ using System.Collections.Generic;
 namespace Google.API.Translate
 {
     /// <summary>
-    /// The enum of languages.
-    /// </summary>
-    public enum Language
-    {
-        Unknown = 0,
-        Arabic,
-        Bulgarian,
-        Catalan,
-        Chinese,
-        Chinese_Simplified,
-        Chinese_Traditional,
-        Croatian,
-        Czech,
-        Danish,
-        Dutch,
-        English,
-        Estonian,
-        Filipino,
-        Finnish,
-        French,
-        German,
-        Greek,
-        Hebrew,
-        Hindi,
-        Hungarian,
-        Indonesian,
-        Italian,
-        Japanese,
-        Korean,
-        Latvian,
-        Lithuanian,
-        Norwegian,
-        Persian,
-        Polish,
-        Portuguese,
-        Romanian,
-        Russian,
-        Serbian,
-        Slovak,
-        Slovenian,
-        Spanish,
-        Swedish,
-        Thai,
-        Turkish,
-        Ukranian, 
-        Vietnamese
-    }
-
-    /// <summary>
     /// Utility class for language and language codes.
     /// </summary>
     public static class LanguageUtility
@@ -87,7 +38,7 @@ namespace Google.API.Translate
         static LanguageUtility()
         {
             s_LanguageCodeDict = new Dictionary<Language, string>();
-            s_LanguageCodeDict[Language.Unknown] = "";
+            s_LanguageCodeDict[Language.Unknown] = string.Empty;
             s_LanguageCodeDict[Language.Arabic] = "ar";
             s_LanguageCodeDict[Language.Bulgarian] = "bg";
             s_LanguageCodeDict[Language.Catalan] = "ca";
@@ -162,7 +113,7 @@ namespace Google.API.Translate
         /// <summary>
         /// Get translatable language collection.
         /// </summary>
-        public static ICollection<Language> translatableCollection
+        public static ICollection<Language> TranslatableCollection
         {
             get
             {
@@ -173,7 +124,7 @@ namespace Google.API.Translate
         /// <summary>
         /// Get language collection.
         /// </summary>
-        public static ICollection<Language> languageCollection
+        public static ICollection<Language> LanguageCollection
         {
             get
             {
@@ -199,7 +150,7 @@ namespace Google.API.Translate
         /// <returns>Return true if the language is translatable.</returns>
         public static bool IsTranslatable(Language language)
         {
-            return translatableCollection.Contains(language);
+            return TranslatableCollection.Contains(language);
         }
 
         /// <summary>

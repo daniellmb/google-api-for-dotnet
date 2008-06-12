@@ -1,5 +1,5 @@
-/**
- * IWebSearchResult.cs
+﻿/**
+ * Language.cs
  *
  * Copyright (C) 2008,  iron9light
  *
@@ -22,36 +22,55 @@
  * THE SOFTWARE.
  */
 
-namespace Google.API.Search
+namespace Google.API
 {
     /// <summary>
-    /// Web search result.
+    /// The enum of languages.
     /// </summary>
-    public interface IWebSearchResult
+    public enum Language
     {
-        /// <summary>
-        /// Get the url.
-        /// </summary>
-        string Url { get; }
-
-        /// <summary>
-        /// Get a shortened version of the URL associated with the result.
-        /// </summary>
-        string VisibleUrl { get; }
-
-        /// <summary>
-        /// Get a url to google's cached version of the page responsible for producting this result. This property may be null indicating that there is no cache, and it might be out of date in cases where the search result has been saved and in the mean time, the cache has gone stale. For best results, this property should not be persisted.
-        /// </summary>
-        string CacheUrl { get; }
-
-        /// <summary>
-        /// Get the title.
-        /// </summary>
-        string Title { get; }
-
-        /// <summary>
-        /// Get a brief snippet of information from the page associated with the search result.
-        /// </summary>
-        string Content { get; }
+        Unknown = 0,
+        Arabic,
+        Bulgarian,
+        Catalan,
+        Chinese,
+        Chinese_Simplified,
+        Chinese_Traditional,
+        Croatian,
+        Czech,
+        Danish,
+        Dutch,
+        English,
+        Estonian,
+        Filipino,
+        Finnish,
+        French,
+        German,
+        Greek,
+        Hebrew,
+        Hindi,
+        Hungarian,
+        Icelandic,
+        Indonesian,
+        Italian,
+        Japanese,
+        Korean,
+        Latvian,
+        Lithuanian,
+        Norwegian,
+        Persian,
+        Polish,
+        Portuguese,
+        Romanian,
+        Russian,
+        Serbian,
+        Slovak,
+        Slovenian,
+        Spanish,
+        Swedish,
+        Thai,
+        Turkish,
+        Ukranian,
+        Vietnamese
     }
 }

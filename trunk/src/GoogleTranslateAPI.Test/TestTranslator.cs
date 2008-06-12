@@ -48,7 +48,7 @@ namespace Google.API.Translate.Test
 
             Print(originalLanguage, originalText);
 
-            foreach (Language language in LanguageUtility.translatableCollection)
+            foreach (Language language in LanguageUtility.TranslatableCollection)
             {
                 if (language == originalLanguage)
                 {
@@ -118,7 +118,7 @@ namespace Google.API.Translate.Test
 
             Print(originalLanguage, originalText);
 
-            foreach (Language language in LanguageUtility.translatableCollection)
+            foreach (Language language in LanguageUtility.TranslatableCollection)
             {
                 if (language == originalLanguage)
                 {

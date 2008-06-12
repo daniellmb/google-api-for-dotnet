@@ -29,6 +29,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\GoogleTranslateAPI.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -52,6 +53,9 @@
     </Compile>
     <Compile Include="..\Core\HttpUtility.cs">
       <Link>HttpUtility.cs</Link>
+    </Compile>
+    <Compile Include="..\Core\Language.cs">
+      <Link>Language.cs</Link>
     </Compile>
     <Compile Include="..\Core\RequestBase.cs">
       <Link>RequestBase.cs</Link>
