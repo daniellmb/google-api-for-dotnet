@@ -63,13 +63,13 @@ namespace Google.API
         #region Properties
 
         [Argument("q", Optional = false, NeedEncode = true)]
-        public string Content { get; private set; }
+        public string Content { get; protected set; }
 
         [Argument("v", "1.0")]
-        public string Version { get; private set; }
+        public string Version { get; protected set; }
 
         [Argument("key")]
-        public string Key { get; private set; }
+        public string Key { get; protected set; }
 
         /// <summary>
         /// Get the url string.

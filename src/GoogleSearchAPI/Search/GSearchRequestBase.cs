@@ -6,6 +6,12 @@ namespace Google.API.Search
         large = 1,
     }
 
+    internal enum SortType
+    {
+        relevance = 0,
+        date,
+    }
+
     internal abstract class GSearchRequestBase : RequestBase
     {
         protected GSearchRequestBase(string keyword)
