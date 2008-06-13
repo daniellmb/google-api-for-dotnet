@@ -69,7 +69,7 @@ namespace Google.API.Search
         public string Title { get; private set; }
 
         /// <summary>
-        /// Supplies the title, but unlike .title, this property is stripped of html markup (e.g., <b>, <i>, etc.)
+        /// Supplies the title, but unlike .title, this property is stripped of html markup (e.g., &lt;b&gt;, &lt;i&gt;, etc.)
         /// </summary>
         [JsonProperty("titleNoFormatting")]
         public string TitleNoFormatting { get; private set; }
@@ -90,7 +90,7 @@ namespace Google.API.Search
 
         string IWebSearchResult.Url
         {
-            get { return Url; }
+            get { return UnescapedUrl; }
         }
 
         string IWebSearchResult.VisibleUrl
@@ -107,6 +107,11 @@ namespace Google.API.Search
         {
             get
             {
+                if (TitleNoFormatting == null)
+                {
+                    return null;
+                }
+
                 if(m_PlaneTitle == null)
                 {
                     m_PlaneTitle = HttpUtility.HtmlDecode(TitleNoFormatting);
@@ -119,6 +124,11 @@ namespace Google.API.Search
         {
             get
             {
+                if(Content == null)
+                {
+                    return null;
+                }
+
                 if(m_PlaneContent == null)
                 {
                     m_PlaneContent = HttpUtility.RemoveHtmlTags(Content);
