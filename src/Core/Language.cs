@@ -29,48 +29,177 @@ namespace Google.API
     /// </summary>
     public enum Language
     {
+        /// <summary>
+        /// Unknown. Default value.
+        /// </summary>
         Unknown = 0,
+        /// <summary>
+        /// Arabic.
+        /// </summary>
         Arabic,
+        /// <summary>
+        /// Bulgarian.
+        /// </summary>
         Bulgarian,
+        /// <summary>
+        /// Catalan.
+        /// </summary>
         Catalan,
+        /// <summary>
+        /// Chinese.
+        /// </summary>
         Chinese,
+        /// <summary>
+        /// Chinese(Simplified)
+        /// </summary>
         Chinese_Simplified,
+        /// <summary>
+        /// Chinese(Traditional)
+        /// </summary>
         Chinese_Traditional,
+        /// <summary>
+        /// Croatian.
+        /// </summary>
         Croatian,
+        /// <summary>
+        /// Czech.
+        /// </summary>
         Czech,
+        /// <summary>
+        /// Danish.
+        /// </summary>
         Danish,
+        /// <summary>
+        /// Dutch.
+        /// </summary>
         Dutch,
+        /// <summary>
+        /// English.
+        /// </summary>
         English,
+        /// <summary>
+        /// Estonian.
+        /// </summary>
         Estonian,
+        /// <summary>
+        /// Filipino.
+        /// </summary>
         Filipino,
+        /// <summary>
+        /// Finnish.
+        /// </summary>
         Finnish,
+        /// <summary>
+        /// French.
+        /// </summary>
         French,
+        /// <summary>
+        /// German.
+        /// </summary>
         German,
+        /// <summary>
+        /// Greek.
+        /// </summary>
         Greek,
+        /// <summary>
+        /// Hebrew.
+        /// </summary>
         Hebrew,
+        /// <summary>
+        /// Hindi.
+        /// </summary>
         Hindi,
+        /// <summary>
+        /// Hungarian.
+        /// </summary>
         Hungarian,
+        /// <summary>
+        /// Icelandic.
+        /// </summary>
         Icelandic,
+        /// <summary>
+        /// Indonesian.
+        /// </summary>
         Indonesian,
+        /// <summary>
+        /// Italian.
+        /// </summary>
         Italian,
+        /// <summary>
+        /// Japanese.
+        /// </summary>
         Japanese,
+        /// <summary>
+        /// Korean.
+        /// </summary>
         Korean,
+        /// <summary>
+        /// Latvian.
+        /// </summary>
         Latvian,
+        /// <summary>
+        /// Lithuanian.
+        /// </summary>
         Lithuanian,
+        /// <summary>
+        /// Norwegian.
+        /// </summary>
         Norwegian,
+        /// <summary>
+        /// Persian.
+        /// </summary>
         Persian,
+        /// <summary>
+        /// Polish.
+        /// </summary>
         Polish,
+        /// <summary>
+        /// Portuguese.
+        /// </summary>
         Portuguese,
+        /// <summary>
+        /// Romanian.
+        /// </summary>
         Romanian,
+        /// <summary>
+        /// Russian.
+        /// </summary>
         Russian,
+        /// <summary>
+        /// Serbian.
+        /// </summary>
         Serbian,
+        /// <summary>
+        /// Slovak.
+        /// </summary>
         Slovak,
+        /// <summary>
+        /// Slovenian.
+        /// </summary>
         Slovenian,
+        /// <summary>
+        /// Spanish.
+        /// </summary>
         Spanish,
+        /// <summary>
+        /// Swedish.
+        /// </summary>
         Swedish,
+        /// <summary>
+        /// Thai.
+        /// </summary>
         Thai,
+        /// <summary>
+        /// Turkish.
+        /// </summary>
         Turkish,
+        /// <summary>
+        /// Ukranian.
+        /// </summary>
         Ukranian,
-        Vietnamese
+        /// <summary>
+        /// Vietnamese.
+        /// </summary>
+        Vietnamese,
     }
 }

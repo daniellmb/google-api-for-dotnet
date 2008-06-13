@@ -5,11 +5,10 @@
     <namespaceSummaries>
         <namespaceSummaryItem name="" isDocumented="False" />
         <namespaceSummaryItem name="Google.API" isDocumented="True">The &lt;b&gt;Google.API&lt;/b&gt; namespace provides some base utility classes.</namespaceSummaryItem>
-        <namespaceSummaryItem name="Google.API.Search" isDocumented="True">The &lt;b&gt;Google.API.Search&lt;/b&gt; namespace provides classes for using Google Web Search service.</namespaceSummaryItem>
+        <namespaceSummaryItem name="Google.API.Search" isDocumented="True">The &lt;b&gt;Google.API.Search&lt;/b&gt; namespace provides classes for using Google Search services.</namespaceSummaryItem>
     </namespaceSummaries>
     <dependencies>
         <dependencyItem depPath="..\lib\Newtonsoft.Json.dll" />
-        <dependencyItem depPath="GAC:System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
     </dependencies>
     <ProjectSummary />
     <MissingTags>Summary, Parameter, Returns, AutoDocumentCtors, Namespace, TypeParameter</MissingTags>
@@ -17,7 +16,7 @@
     <HtmlHelp1xCompilerPath path="" />
     <HtmlHelp2xCompilerPath path="" />
     <OutputPath>..\GoogleSearchAPI\bin\Release\</OutputPath>
-    <SandcastlePath path="E:\Development\Sandcastle\" />
+    <SandcastlePath path="" />
     <WorkingPath path="" />
     <CleanIntermediates>True</CleanIntermediates>
     <KeepLogFile>True</KeepLogFile>

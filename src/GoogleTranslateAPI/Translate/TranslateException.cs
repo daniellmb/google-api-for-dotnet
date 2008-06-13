@@ -31,15 +31,27 @@ namespace Google.API.Translate
     /// </summary>
     public class TranslateException : GoogleAPIException
     {
-        public TranslateException(string message, Exception innerException)
-            : base(message, innerException)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TranslateException"/> class.
+        /// </summary>
+        public TranslateException()
         { }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TranslateException"/> class with a specified error message.
+        /// </summary>
+        /// <param name="message">The message that describes the error.</param>
         public TranslateException(string message)
             : base(message)
         { }
 
-        public TranslateException()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TranslateException"/> class with a specified error message and a reference to the inner exception that is the cause of this exception.
+        /// </summary>
+        /// <param name="message">The error message that explains the reason for the exception.</param>
+        /// <param name="innerException">The exception that is the cause of the current exception, or a null reference (<b>Nothing</b> in Visual Basic) if no inner exception is specified.</param>
+        public TranslateException(string message, Exception innerException)
+            : base(message, innerException)
         { }
     }
 }
