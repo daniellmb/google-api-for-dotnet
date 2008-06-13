@@ -106,13 +106,14 @@ namespace Google.API.Search
         /// Search.
         /// </summary>
         /// <param name="keyword">The keyword.</param>
-        /// <param name="resultCount">The count of result itmes.
-        /// (Now, the max count of items Google given is <b>32</b>.)</param>
+        /// <param name="resultCount">The count of result itmes.</param>
         /// <returns>The result items.</returns>
+        /// <exception cref="SearchException">Search failed.</exception>
+        /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
         /// <example>
         /// This is the c# code example.
         /// <code>
-        /// IList(IWebSearchResult) results = GWebSearcher.Search("Google API for .NET", 8);
+        /// IList&lt;IWebSearchResult&gt; results = GWebSearcher.Search("Google API for .NET", 8);
         /// </code>
         /// </example>
         public static IList<IWebSearchResult> Search(string keyword, int resultCount)
@@ -124,14 +125,15 @@ namespace Google.API.Search
         /// Search.
         /// </summary>
         /// <param name="keyword">The keyword.</param>
-        /// <param name="resultCount">The count of result itmes.
-        /// (Now, the max count of items Google given is <b>32</b>.)</param>
+        /// <param name="resultCount">The count of result itmes.</param>
         /// <param name="language">The language you want to search.</param>
         /// <returns>The result itmes.</returns>
+        /// <exception cref="SearchException">Search failed.</exception>
+        /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
         /// <example>
         /// This is the c# code example.
         /// <code>
-        /// IList(IWebSearchResult) results = GWebSearcher.Search("Google API for .NET", 32, Language.Chinese_Simplified);
+        /// IList&lt;IWebSearchResult&gt; results = GWebSearcher.Search("Google API for .NET", 32, Language.Chinese_Simplified);
         /// </code>
         /// </example>
         public static IList<IWebSearchResult> Search(string keyword, int resultCount, Language language)
