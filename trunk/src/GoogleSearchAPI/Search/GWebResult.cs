@@ -1,5 +1,5 @@
 ﻿/**
- * GWebSearchResult.cs
+ * GWebResult.cs
  *
  * Copyright (C) 2008,  iron9light
  *
@@ -27,7 +27,7 @@ using Newtonsoft.Json;
 namespace Google.API.Search
 {
     [JsonObject]
-    internal class GWebSearchResult : IWebSearchResult
+    internal class GWebResult : IWebResult
     {
         private string m_PlaneTitle;
         private string m_PlaneContent;
@@ -82,28 +82,28 @@ namespace Google.API.Search
 
         public override string ToString()
         {
-            IWebSearchResult result = this;
+            IWebResult result = this;
             return string.Format("[{0}] {1}", result.Title, result.Content);
         }
 
-        #region IWebSearchResult Members
+        #region IWebResult Members
 
-        string IWebSearchResult.Url
+        string IWebResult.Url
         {
             get { return UnescapedUrl; }
         }
 
-        string IWebSearchResult.VisibleUrl
+        string IWebResult.VisibleUrl
         {
             get { return VisibleUrl; }
         }
 
-        string IWebSearchResult.CacheUrl
+        string IWebResult.CacheUrl
         {
             get { return CacheUrl; }
         }
 
-        string IWebSearchResult.Title
+        string IWebResult.Title
         {
             get
             {
@@ -120,7 +120,7 @@ namespace Google.API.Search
             }
         }
 
-        string IWebSearchResult.Content
+        string IWebResult.Content
         {
             get
             {

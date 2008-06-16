@@ -1,5 +1,5 @@
 ﻿/**
- * GNewsSearchResult.cs
+ * GNewsResult.cs
  *
  * Copyright (C) 2008,  iron9light
  *
@@ -27,7 +27,7 @@ using Newtonsoft.Json;
 namespace Google.API.Search
 {
     [JsonObject]
-    internal class GNewsSearchResult : GNewsSearchResultItem, INewsSearchResult
+    internal class GNewsResult : GNewsResultItem, INewsResult
     {
         private string m_PlaneContent;
 
@@ -53,16 +53,16 @@ namespace Google.API.Search
         /// This property is optional. It only appears in a result when the story also has a set of closely related stories. In this case, the relatedStories[] array will be present.
         /// </summary>
         [JsonProperty("relatedStories")]
-        public GNewsSearchResultItem[] RelatedStories { get; private set; }
+        public GNewsResultItem[] RelatedStories { get; private set; }
 
-        #region INewsSearchResult Members
+        #region INewsResult Members
 
-        string INewsSearchResult.ClusterUrl
+        string INewsResult.ClusterUrl
         {
             get { return ClusterUrl; }
         }
 
-        string INewsSearchResult.Content
+        string INewsResult.Content
         {
             get
             {
@@ -79,7 +79,7 @@ namespace Google.API.Search
             }
         }
 
-        INewsSearchResultItem[] INewsSearchResult.RelatedStories
+        INewsResultItem[] INewsResult.RelatedStories
         {
             get { return RelatedStories; }
         }

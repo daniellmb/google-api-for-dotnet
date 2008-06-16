@@ -1,5 +1,5 @@
 /**
- * INewsSearchResult.cs
+ * IWebResult.cs
  *
  * Copyright (C) 2008,  iron9light
  *
@@ -25,23 +25,33 @@
 namespace Google.API.Search
 {
     /// <summary>
-    /// News search result.
+    /// Web search result.
     /// </summary>
-    public interface INewsSearchResult : INewsSearchResultItem
+    public interface IWebResult
     {
         /// <summary>
-        /// Get the URL points to a landing page that points to all of the related stories. When a news result has a set of related stories, this URL is available and non-null. Otherwise, it is null.
+        /// Get the url.
         /// </summary>
-        string ClusterUrl { get; }
+        string Url { get; }
 
         /// <summary>
-        /// Get a snippet of content from the news story associated with this search result.
+        /// Get a shortened version of the URL associated with the result.
+        /// </summary>
+        string VisibleUrl { get; }
+
+        /// <summary>
+        /// Get a url to google's cached version of the page responsible for producting this result. This property may be null indicating that there is no cache, and it might be out of date in cases where the search result has been saved and in the mean time, the cache has gone stale. For best results, this property should not be persisted.
+        /// </summary>
+        string CacheUrl { get; }
+
+        /// <summary>
+        /// Get the title.
+        /// </summary>
+        string Title { get; }
+
+        /// <summary>
+        /// Get a brief snippet of information from the page associated with the search result.
         /// </summary>
         string Content { get; }
-
-        /// <summary>
-        /// Get a set of closely related stories. If there is no related story it will return null.
-        /// </summary>
-        INewsSearchResultItem[] RelatedStories { get; }
     }
 }

@@ -28,20 +28,20 @@ using NUnit.Framework;
 namespace Google.API.Search.Test
 {
     [TestFixture]
-    public class TestGNewsSearchAPI
+    public class TestGNewsSearcher
     {
         [Test]
         public void GSearchTest()
         {
             string keyword = "Olympic";
-            string geo = "beijing china";
+            string geo = "Beijing China";
             SortType sortBy = new SortType();
-            SearchData<GNewsSearchResult> results =
+            SearchData<GNewsResult> results =
                 GNewsSearcher.GSearch(keyword, 0, new ResultSizeEnum(), geo, sortBy);
 
             Assert.IsNotNull(results);
             Assert.Greater(results.Results.Length, 0);
-            foreach (GNewsSearchResult result in results.Results)
+            foreach (GNewsResult result in results.Results)
             {
                 Assert.IsNotNull(result);
             }
@@ -52,7 +52,7 @@ namespace Google.API.Search.Test
         {
             string keyword = "NBA";
             int count = 15;
-            IList<INewsSearchResult> results = GNewsSearcher.Search(keyword, count);
+            IList<INewsResult> results = GNewsSearcher.Search(keyword, count);
             Assert.IsNotNull(results);
             Assert.AreEqual(count, results.Count);
         }
@@ -63,7 +63,7 @@ namespace Google.API.Search.Test
             string keyword = "earthquake";
             string geo = "China";
             int count = 32;
-            IList<INewsSearchResult> results = GNewsSearcher.Search(keyword, count);
+            IList<INewsResult> results = GNewsSearcher.Search(keyword, count, geo);
             Assert.IsNotNull(results);
             Assert.AreEqual(count, results.Count);
         }
@@ -73,8 +73,8 @@ namespace Google.API.Search.Test
         {
             string keyword = "Obama";
             int count = 32;
-            IList<INewsSearchResult> resultsByRelevance = GNewsSearcher.Search(keyword, count, SortType.relevance);
-            IList<INewsSearchResult> resultsByDate = GNewsSearcher.Search(keyword, count, SortType.date);
+            IList<INewsResult> resultsByRelevance = GNewsSearcher.Search(keyword, count, SortType.relevance);
+            IList<INewsResult> resultsByDate = GNewsSearcher.Search(keyword, count, SortType.date);
             Assert.IsNotNull(resultsByRelevance);
             Assert.IsNotNull(resultsByDate);
             Assert.AreEqual(resultsByRelevance.Count, resultsByDate.Count);
@@ -94,8 +94,8 @@ namespace Google.API.Search.Test
         public void SearchLocalTest()
         {
             int count = 16;
-            IList<INewsSearchResult> results1 = GNewsSearcher.SearchLocal("Tokyo", count);
-            IList<INewsSearchResult> results2 = GNewsSearcher.SearchLocal("Japan", count);
+            IList<INewsResult> results1 = GNewsSearcher.SearchLocal("Tokyo", count);
+            IList<INewsResult> results2 = GNewsSearcher.SearchLocal("Japan", count);
             Assert.IsNotNull(results1);
             Assert.IsNotNull(results2);
             Assert.AreEqual(count, results1.Count);

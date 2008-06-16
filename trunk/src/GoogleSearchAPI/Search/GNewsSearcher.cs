@@ -54,7 +54,7 @@ namespace Google.API.Search
             }
         }
 
-        internal static SearchData<GNewsSearchResult> GSearch(string keyword, int start, ResultSizeEnum resultSize, string geo, SortType sortBy)
+        internal static SearchData<GNewsResult> GSearch(string keyword, int start, ResultSizeEnum resultSize, string geo, SortType sortBy)
         {
             if (keyword == null && string.IsNullOrEmpty(geo))
             {
@@ -73,10 +73,10 @@ namespace Google.API.Search
                 webRequest = request.GetWebRequest();
             }
 
-            SearchData<GNewsSearchResult> responseData;
+            SearchData<GNewsResult> responseData;
             try
             {
-                responseData = RequestUtility.GetResponseData<SearchData<GNewsSearchResult>>(webRequest);
+                responseData = RequestUtility.GetResponseData<SearchData<GNewsResult>>(webRequest);
             }
             catch (GoogleAPIException ex)
             {
@@ -96,14 +96,14 @@ namespace Google.API.Search
         /// <example>
         /// This is the c# code example.
         /// <code>
-        /// IList&lt;INewsSearchResult&gt; results = GNewsSearcher.Search("Olympic", 16);
+        /// IList&lt;INewsResult&gt; results = GNewsSearcher.Search("Olympic", 16);
         /// foreach(INewsSearchResult result in results)
         /// {
         ///     Console.WriteLine("[{0}, {1} - {2:d}]{3}", result.Publisher, result.Location, result.PublishedDate, result.Title);
         /// }
         /// </code>
         /// </example>
-        public static IList<INewsSearchResult> Search(string keyword, int resultCount)
+        public static IList<INewsResult> Search(string keyword, int resultCount)
         {
             return Search(keyword, resultCount, null, new SortType());
         }
@@ -127,7 +127,7 @@ namespace Google.API.Search
         /// }
         /// </code>
         /// </example>
-        public static IList<INewsSearchResult> Search(string keyword, int resultCount, SortType sortBy)
+        public static IList<INewsResult> Search(string keyword, int resultCount, SortType sortBy)
         {
             return Search(keyword, resultCount, null, sortBy);
         }
@@ -151,7 +151,7 @@ namespace Google.API.Search
         /// }
         /// </code>
         /// </example>
-        public static IList<INewsSearchResult> Search(string keyword, int resultCount, string geo)
+        public static IList<INewsResult> Search(string keyword, int resultCount, string geo)
         {
             return Search(keyword, resultCount, geo, new SortType());
         }
@@ -176,18 +176,18 @@ namespace Google.API.Search
         /// }
         /// </code>
         /// </example>
-        public static IList<INewsSearchResult> Search(string keyword, int resultCount, string geo, SortType sortBy)
+        public static IList<INewsResult> Search(string keyword, int resultCount, string geo, SortType sortBy)
         {
             if (keyword == null && string.IsNullOrEmpty(geo))
             {
                 throw new ArgumentNullException("keyword");
             }
             int start = 0;
-            List<INewsSearchResult> results = new List<INewsSearchResult>();
+            List<INewsResult> results = new List<INewsResult>();
             int restCount = resultCount;
             while (restCount > 0)
             {
-                SearchData<GNewsSearchResult> searchData;
+                SearchData<GNewsResult> searchData;
                 try
                 {
                     if (restCount > 4)
@@ -242,7 +242,7 @@ namespace Google.API.Search
         /// }
         /// </code>
         /// </example>
-        public static IList<INewsSearchResult> SearchLocal(string geo, int resultCount)
+        public static IList<INewsResult> SearchLocal(string geo, int resultCount)
         {
             return SearchLocal(geo, resultCount, new SortType());
         }
@@ -266,7 +266,7 @@ namespace Google.API.Search
         /// }
         /// </code>
         /// </example>
-        public static IList<INewsSearchResult> SearchLocal(string geo, int resultCount, SortType sortBy)
+        public static IList<INewsResult> SearchLocal(string geo, int resultCount, SortType sortBy)
         {
             if (geo == null)
             {
