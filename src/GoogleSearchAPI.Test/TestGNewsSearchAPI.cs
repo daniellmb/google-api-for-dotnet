@@ -22,6 +22,7 @@
  * THE SOFTWARE.
  */
 
+using System.Collections.Generic;
 using NUnit.Framework;
 
 namespace Google.API.Search.Test
@@ -32,8 +33,8 @@ namespace Google.API.Search.Test
         [Test]
         public void GSearchTest()
         {
-            string keyword = "NBA";
-            string geo = "china";
+            string keyword = "Olympic";
+            string geo = "beijing china";
             SortType sortBy = new SortType();
             SearchData<GNewsSearchResult> results =
                 GNewsSearcher.GSearch(keyword, 0, new ResultSizeEnum(), geo, sortBy);
@@ -44,6 +45,72 @@ namespace Google.API.Search.Test
             {
                 Assert.IsNotNull(result);
             }
+        }
+
+        [Test]
+        public void SearchTest()
+        {
+            string keyword = "NBA";
+            int count = 15;
+            IList<INewsSearchResult> results = GNewsSearcher.Search(keyword, count);
+            Assert.IsNotNull(results);
+            Assert.AreEqual(count, results.Count);
+        }
+
+        [Test]
+        public void SearchTest2()
+        {
+            string keyword = "earthquake";
+            string geo = "China";
+            int count = 32;
+            IList<INewsSearchResult> results = GNewsSearcher.Search(keyword, count);
+            Assert.IsNotNull(results);
+            Assert.AreEqual(count, results.Count);
+        }
+
+        [Test]
+        public void SearchTest3()
+        {
+            string keyword = "Obama";
+            int count = 32;
+            IList<INewsSearchResult> resultsByRelevance = GNewsSearcher.Search(keyword, count, SortType.relevance);
+            IList<INewsSearchResult> resultsByDate = GNewsSearcher.Search(keyword, count, SortType.date);
+            Assert.IsNotNull(resultsByRelevance);
+            Assert.IsNotNull(resultsByDate);
+            Assert.AreEqual(resultsByRelevance.Count, resultsByDate.Count);
+            bool areSame = true;
+            for(int i = 0; i < resultsByRelevance.Count;++i)
+            {
+                if(resultsByRelevance[i].ToString() != resultsByDate[i].ToString())
+                {
+                    areSame = false;
+                    break;
+                }
+            }
+            Assert.IsFalse(areSame);
+        }
+
+        [Test]
+        public void SearchLocalTest()
+        {
+            int count = 16;
+            IList<INewsSearchResult> results1 = GNewsSearcher.SearchLocal("Tokyo", count);
+            IList<INewsSearchResult> results2 = GNewsSearcher.SearchLocal("Japan", count);
+            Assert.IsNotNull(results1);
+            Assert.IsNotNull(results2);
+            Assert.AreEqual(count, results1.Count);
+            Assert.AreEqual(count, results2.Count);
+
+            bool areSame = true;
+            for(int i = 0; i < results1.Count; ++i)
+            {
+                if(results1[i].ToString() != results2[i].ToString())
+                {
+                    areSame = false;
+                    break;
+                }
+            }
+            Assert.IsFalse(areSame);
         }
     }
 }

@@ -6,9 +6,18 @@ namespace Google.API.Search
         large = 1,
     }
 
-    internal enum SortType
+    /// <summary>
+    /// Sort type enum.
+    /// </summary>
+    public enum SortType
     {
+        /// <summary>
+        /// Sort by relevance. Default value.
+        /// </summary>
         relevance = 0,
+        /// <summary>
+        /// Sort by date.
+        /// </summary>
         date,
     }
 
