@@ -24,12 +24,24 @@
 
 namespace Google.API.Search
 {
+    /// <summary>
+    /// News search result.
+    /// </summary>
     public interface INewsSearchResult : INewsSearchResultItem
     {
+        /// <summary>
+        /// Get the URL points to a landing page that points to all of the related stories. When a news result has a set of related stories, this URL is available and non-null. Otherwise, it is null.
+        /// </summary>
         string ClusterUrl { get; }
 
+        /// <summary>
+        /// Get a snippet of content from the news story associated with this search result.
+        /// </summary>
         string Content { get; }
 
+        /// <summary>
+        /// Get a set of closely related stories. If there is no related story it will return null.
+        /// </summary>
         INewsSearchResultItem[] RelatedStories { get; }
     }
 }
