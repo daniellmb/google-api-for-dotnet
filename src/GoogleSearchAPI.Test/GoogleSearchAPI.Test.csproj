@@ -48,7 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestGNewsSearchAPI.cs" />
+    <Compile Include="TestGNewsSearcher.cs" />
     <Compile Include="TestGWebSearcher.cs" />
   </ItemGroup>
   <ItemGroup>

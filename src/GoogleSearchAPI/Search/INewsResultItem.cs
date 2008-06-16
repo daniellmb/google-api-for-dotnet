@@ -1,5 +1,5 @@
 /**
- * IWebSearchResult.cs
+ * INewsResultItem.cs
  *
  * Copyright (C) 2008,  iron9light
  *
@@ -22,12 +22,14 @@
  * THE SOFTWARE.
  */
 
+using System;
+
 namespace Google.API.Search
 {
     /// <summary>
-    /// Web search result.
+    /// A story of news search result.
     /// </summary>
-    public interface IWebSearchResult
+    public interface INewsResultItem
     {
         /// <summary>
         /// Get the url.
@@ -35,23 +37,23 @@ namespace Google.API.Search
         string Url { get; }
 
         /// <summary>
-        /// Get a shortened version of the URL associated with the result.
-        /// </summary>
-        string VisibleUrl { get; }
-
-        /// <summary>
-        /// Get a url to google's cached version of the page responsible for producting this result. This property may be null indicating that there is no cache, and it might be out of date in cases where the search result has been saved and in the mean time, the cache has gone stale. For best results, this property should not be persisted.
-        /// </summary>
-        string CacheUrl { get; }
-
-        /// <summary>
         /// Get the title.
         /// </summary>
         string Title { get; }
 
         /// <summary>
-        /// Get a brief snippet of information from the page associated with the search result.
+        /// Get the name of the publisher of the news story.
         /// </summary>
-        string Content { get; }
+        string Publisher { get; }
+
+        /// <summary>
+        /// Get the location of the news story. This is a list of locations in most specific to least specific order where the components are seperated by ",". Note, there may only be one element in the list... A typical value for this property is "Edinburgh,Scotland,UK" or possibly "USA".
+        /// </summary>
+        string Location { get; }
+
+        /// <summary>
+        /// Get the published date of the news story referenced by this search result.
+        /// </summary>
+        DateTime PublishedDate { get; }
     }
 }

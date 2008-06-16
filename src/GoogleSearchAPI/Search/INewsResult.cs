@@ -1,5 +1,5 @@
 /**
- * INewsSearchResultItem.cs
+ * INewsResult.cs
  *
  * Copyright (C) 2008,  iron9light
  *
@@ -22,38 +22,26 @@
  * THE SOFTWARE.
  */
 
-using System;
-
 namespace Google.API.Search
 {
     /// <summary>
-    /// A story of news search result.
+    /// News search result.
     /// </summary>
-    public interface INewsSearchResultItem
+    public interface INewsResult : INewsResultItem
     {
         /// <summary>
-        /// Get the url.
+        /// Get the URL points to a landing page that points to all of the related stories. When a news result has a set of related stories, this URL is available and non-null. Otherwise, it is null.
         /// </summary>
-        string Url { get; }
+        string ClusterUrl { get; }
 
         /// <summary>
-        /// Get the title.
+        /// Get a snippet of content from the news story associated with this search result.
         /// </summary>
-        string Title { get; }
+        string Content { get; }
 
         /// <summary>
-        /// Get the name of the publisher of the news story.
+        /// Get a set of closely related stories. If there is no related story it will return null.
         /// </summary>
-        string Publisher { get; }
-
-        /// <summary>
-        /// Get the location of the news story. This is a list of locations in most specific to least specific order where the components are seperated by ",". Note, there may only be one element in the list... A typical value for this property is "Edinburgh,Scotland,UK" or possibly "USA".
-        /// </summary>
-        string Location { get; }
-
-        /// <summary>
-        /// Get the published date of the news story referenced by this search result.
-        /// </summary>
-        DateTime PublishedDate { get; }
+        INewsResultItem[] RelatedStories { get; }
     }
 }

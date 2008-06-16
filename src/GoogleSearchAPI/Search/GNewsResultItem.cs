@@ -1,5 +1,5 @@
 ﻿/**
- * GNewsSearchResultItem.cs
+ * GNewsResultItem.cs
  *
  * Copyright (C) 2008,  iron9light
  *
@@ -28,7 +28,7 @@ using Newtonsoft.Json;
 namespace Google.API.Search
 {
     [JsonObject]
-    internal class GNewsSearchResultItem : INewsSearchResultItem
+    internal class GNewsResultItem : INewsResultItem
     {
         private string m_PlaneTitle;
         private string m_PlanePublisher;
@@ -78,18 +78,18 @@ namespace Google.API.Search
 
         public override string ToString()
         {
-            INewsSearchResultItem result = this;
+            INewsResultItem result = this;
             return string.Format("[{0}, {1} - {2:d}]{3}", result.Publisher, result.Location, result.PublishedDate, result.Title);
         }
 
-        #region INewsSearchResultItem Members
+        #region INewsResultItem Members
 
-        string INewsSearchResultItem.Url
+        string INewsResultItem.Url
         {
             get { return UnescapedUrl; }
         }
 
-        string INewsSearchResultItem.Title
+        string INewsResultItem.Title
         {
             get
             {
@@ -106,7 +106,7 @@ namespace Google.API.Search
             }
         }
 
-        string INewsSearchResultItem.Publisher
+        string INewsResultItem.Publisher
         {
             get
             {
@@ -123,7 +123,7 @@ namespace Google.API.Search
             }
         }
 
-        string INewsSearchResultItem.Location
+        string INewsResultItem.Location
         {
             get
             {
@@ -140,7 +140,7 @@ namespace Google.API.Search
             }
         }
 
-        DateTime INewsSearchResultItem.PublishedDate
+        DateTime INewsResultItem.PublishedDate
         {
             get { return PublishedDate; }
         }
