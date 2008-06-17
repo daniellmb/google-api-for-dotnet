@@ -99,6 +99,10 @@ namespace Google.API.Search
         /// This is the c# code example.
         /// <code>
         /// IList&lt;IWebResult&gt; results = GwebSearcher.Search("Google API for .NET", 8);
+        /// foreach(IWebResult result in results)
+        /// {
+        ///     Console.WriteLine("{0} - {1}", result.Title, result.Content);
+        /// }
         /// </code>
         /// </example>
         public static IList<IWebResult> Search(string keyword, int resultCount)
@@ -118,7 +122,11 @@ namespace Google.API.Search
         /// <example>
         /// This is the c# code example.
         /// <code>
-        /// IList&lt;IWebSearchResult&gt; results = GwebSearcher.Search("Google API for .NET", 32, Language.Chinese_Simplified);
+        /// IList&lt;IWebResult&gt; results = GwebSearcher.Search("Google API for .NET", 32, Language.Chinese_Simplified);
+        /// foreach(IWebResult result in results)
+        /// {
+        ///     Console.WriteLine("{0} - {1}", result.Title, result.Content);
+        /// }
         /// </code>
         /// </example>
         public static IList<IWebResult> Search(string keyword, int resultCount, Language language)

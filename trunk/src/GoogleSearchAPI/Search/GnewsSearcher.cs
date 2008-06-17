@@ -97,7 +97,7 @@ namespace Google.API.Search
         /// This is the c# code example.
         /// <code>
         /// IList&lt;INewsResult&gt; results = GnewsSearcher.Search("Olympic", 16);
-        /// foreach(INewsSearchResult result in results)
+        /// foreach(INewsResult result in results)
         /// {
         ///     Console.WriteLine("[{0}, {1} - {2:d}]{3}", result.Publisher, result.Location, result.PublishedDate, result.Title);
         /// }
@@ -120,8 +120,8 @@ namespace Google.API.Search
         /// <example>
         /// This is the c# code example.
         /// <code>
-        /// IList&lt;INewsSearchResult&gt; results = GnewsSearcher.Search("Olympic", 16, SortType.date);
-        /// foreach(INewsSearchResult result in results)
+        /// IList&lt;INewsResult&gt; results = GnewsSearcher.Search("Olympic", 16, SortType.date);
+        /// foreach(INewsResult result in results)
         /// {
         ///     Console.WriteLine("[{0}, {1} - {2:d}]{3}", result.Publisher, result.Location, result.PublishedDate, result.Title);
         /// }
@@ -144,8 +144,8 @@ namespace Google.API.Search
         /// <example>
         /// This is the c# code example.
         /// <code>
-        /// IList&lt;INewsSearchResult&gt; results = GnewsSearcher.Search("Olympic", 16, "Beijing China");
-        /// foreach(INewsSearchResult result in results)
+        /// IList&lt;INewsResult&gt; results = GnewsSearcher.Search("Olympic", 16, "Beijing China");
+        /// foreach(INewsResult result in results)
         /// {
         ///     Console.WriteLine("[{0}, {1} - {2:d}]{3}", result.Publisher, result.Location, result.PublishedDate, result.Title);
         /// }
@@ -169,8 +169,8 @@ namespace Google.API.Search
         /// <example>
         /// This is the c# code example.
         /// <code>
-        /// IList&lt;INewsSearchResult&gt; results = GnewsSearcher.Search("Olympic", 16, "Beijing China", SortType.date);
-        /// foreach(INewsSearchResult result in results)
+        /// IList&lt;INewsResult&gt; results = GnewsSearcher.Search("Olympic", 16, "Beijing China", SortType.date);
+        /// foreach(INewsResult result in results)
         /// {
         ///     Console.WriteLine("[{0}, {1} - {2:d}]{3}", result.Publisher, result.Location, result.PublishedDate, result.Title);
         /// }
@@ -199,8 +199,8 @@ namespace Google.API.Search
         /// <example>
         /// This is the c# code example.
         /// <code>
-        /// IList&lt;INewsSearchResult&gt; results = GnewsSearcher.SearchLocal("Tokyo", 16);
-        /// foreach(INewsSearchResult result in results)
+        /// IList&lt;INewsResult&gt; results = GnewsSearcher.SearchLocal("Tokyo", 16);
+        /// foreach(INewsResult result in results)
         /// {
         ///     Console.WriteLine("[{0}, {1} - {2:d}]{3}", result.Publisher, result.Location, result.PublishedDate, result.Title);
         /// }
@@ -223,8 +223,8 @@ namespace Google.API.Search
         /// <example>
         /// This is the c# code example.
         /// <code>
-        /// IList&lt;INewsSearchResult&gt; results = GnewsSearcher.Search("Tokyo", 16, SortType.date);
-        /// foreach(INewsSearchResult result in results)
+        /// IList&lt;INewsResult&gt; results = GnewsSearcher.Search("Tokyo", 16, SortType.date);
+        /// foreach(INewsResult result in results)
         /// {
         ///     Console.WriteLine("[{0}, {1} - {2:d}]{3}", result.Publisher, result.Location, result.PublishedDate, result.Title);
         /// }
