@@ -26,6 +26,9 @@ using System;
 
 namespace Google.API.Search
 {
+    /// <summary>
+    /// Blog search result.
+    /// </summary>
     public interface IBlogResult
     {
         /// <summary>

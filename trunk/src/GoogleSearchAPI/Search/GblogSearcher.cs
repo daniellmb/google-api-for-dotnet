@@ -28,6 +28,9 @@ using System.Net;
 
 namespace Google.API.Search
 {
+    /// <summary>
+    /// Utility class for Google Blog Search service.
+    /// </summary>
     public static class GblogSearcher
     {
         private static int s_Timeout = 0;
@@ -82,11 +85,48 @@ namespace Google.API.Search
             return responseData;
         }
 
+        /// <summary>
+        /// Search blogs.
+        /// </summary>
+        /// <param name="keyword">The keyword.</param>
+        /// <param name="resultCount">The count of result itmes.</param>
+        /// <returns>The result items.</returns>
+        /// <exception cref="SearchException">Search failed.</exception>
+        /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
+        /// <example>
+        /// This is the c# code example.
+        /// <code>
+        /// IList&lt;IBlogSearchResult&gt; results = GblogSearcher.Search("Coldplay", 32);
+        /// foreach(IBlogSearchResult result in results)
+        /// {
+        ///     Console.WriteLine("[{0} - {1:d} by {2}] {3} => {4}", result.Title, result.PublishedDate, result.Author, result.Content, result.BlogUrl);
+        /// }
+        /// </code>
+        /// </example>
         public static IList<IBlogResult> Search(string keyword, int resultCount)
         {
             return Search(keyword, resultCount, new SortType());
         }
 
+        /// <summary>
+        /// Search blogs.
+        /// </summary>
+        /// <param name="keyword">The keyword.</param>
+        /// <param name="resultCount">The count of result itmes.</param>
+        /// <param name="sortBy">The way to order results.</param>
+        /// <returns>The result items.</returns>
+        /// <exception cref="SearchException">Search failed.</exception>
+        /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
+        /// <example>
+        /// This is the c# code example.
+        /// <code>
+        /// IList&lt;IBlogSearchResult&gt; results = GblogSearcher.Search("Coldplay", 32, SortType.relevance);
+        /// foreach(IBlogSearchResult result in results)
+        /// {
+        ///     Console.WriteLine("[{0} - {1:d} by {2}] {3} => {4}", result.Title, result.PublishedDate, result.Author, result.Content, result.BlogUrl);
+        /// }
+        /// </code>
+        /// </example>
         public static IList<IBlogResult> Search(string keyword, int resultCount, SortType sortBy)
         {
             if(keyword == null)
