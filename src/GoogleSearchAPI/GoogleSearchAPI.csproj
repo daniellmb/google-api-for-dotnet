@@ -67,6 +67,9 @@
       <Link>ResultObject.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Search\GBlogResult.cs" />
+    <Compile Include="Search\GBlogSearcher.cs" />
+    <Compile Include="Search\GBlogSearchRequest.cs" />
     <Compile Include="Search\GNewsSearcher.cs" />
     <Compile Include="Search\GNewsSearchRequest.cs" />
     <Compile Include="Search\GNewsResult.cs" />
@@ -75,12 +78,14 @@
     <Compile Include="Search\GWebSearcher.cs" />
     <Compile Include="Search\GWebSearchRequest.cs" />
     <Compile Include="Search\GWebResult.cs" />
+    <Compile Include="Search\IBlogResult.cs" />
     <Compile Include="Search\INewsResult.cs" />
     <Compile Include="Search\INewsResultItem.cs" />
     <Compile Include="Search\IWebResult.cs" />
     <Compile Include="Search\LanguageUtility.cs" />
     <Compile Include="Search\SearchData.cs" />
     <Compile Include="Search\SearchException.cs" />
+    <Compile Include="Search\SearchUtility.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,5 +1,5 @@
 ﻿/**
- * TestGWebSearcher.cs
+ * TestGBlogSearcher.cs
  *
  * Copyright (C) 2008,  iron9light
  *
@@ -29,25 +29,24 @@ using NUnit.Framework;
 namespace Google.API.Search.Test
 {
     [TestFixture]
-    public class TestGWebSearcher
+    public class TestGBlogSearcher
     {
         [Test]
         public void GSearchTest()
         {
-            string keyword = "Google Translate API .NET";
-            int start = 1;
-            ResultSizeEnum resultSize = ResultSizeEnum.small;
-            Language language = new Language();
+            string keyword = "lesbian";
+            int start = 4;
+            ResultSizeEnum resultSize = ResultSizeEnum.large;
+            SortType sortBy = SortType.relevance;
 
-            SearchData<GWebResult> searchData = GWebSearcher.GSearch(keyword, start, resultSize, language);
+            SearchData<GBlogResult> searchData = GBlogSearcher.GSearch(keyword, start, resultSize, sortBy);
             Assert.IsNotNull(searchData);
             Assert.IsNotNull(searchData.Results);
             Assert.Greater(searchData.Results.Length, 0);
-
-            foreach (GWebResult result in searchData.Results)
+            foreach (GBlogResult result in searchData.Results)
             {
                 Assert.IsNotNull(result);
-                Assert.AreEqual("GwebSearch", result.GSearchResultClass);
+                Assert.AreEqual("GblogSearch", result.GSearchResultClass);
                 Console.WriteLine(result);
                 Console.WriteLine();
             }
@@ -56,26 +55,33 @@ namespace Google.API.Search.Test
         [Test]
         public void SearchTest()
         {
-            int count = 11;
-            IList<IWebResult> results = GWebSearcher.Search("Kobe bryant", count);
+            string keyword = "Coldplay";
+            int count = 20;
+            IList<IBlogResult> results = GBlogSearcher.Search(keyword, count);
             Assert.IsNotNull(results);
-            foreach (IWebResult result in results)
+            Assert.AreEqual(count, results.Count);
+            foreach (IBlogResult result in results)
             {
                 Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
             }
-            Assert.AreEqual(count, results.Count);
         }
 
         [Test]
         public void SearchTest2()
         {
-            int count = 50;
-            Language language = Language.Japanese;
-            IList<IWebResult> results = GWebSearcher.Search("Kobe bryant", count, language);
+            string keyword = "iron9light";
+            int count = 3;
+            SortType sortBy = SortType.date;
+            IList<IBlogResult> results = GBlogSearcher.Search(keyword, count, sortBy);
             Assert.IsNotNull(results);
-            foreach (IWebResult result in results)
+            Assert.AreEqual(count, results.Count);
+            foreach (IBlogResult result in results)
             {
                 Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
             }
         }
     }

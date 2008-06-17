@@ -22,6 +22,7 @@
  * THE SOFTWARE.
  */
 
+using System;
 using Newtonsoft.Json;
 
 namespace Google.API.Search
@@ -29,7 +30,7 @@ namespace Google.API.Search
     [JsonObject]
     internal class GNewsResult : GNewsResultItem, INewsResult
     {
-        private string m_PlaneContent;
+        private string m_PlainContent;
 
         /// <summary>
         /// Indicates the "type" of result.
@@ -55,6 +56,12 @@ namespace Google.API.Search
         [JsonProperty("relatedStories")]
         public GNewsResultItem[] RelatedStories { get; private set; }
 
+        public override string ToString()
+        {
+            INewsResult result = this;
+            return string.Format("{0}" + Environment.NewLine + "{1}", base.ToString(), result.Content);
+        }
+
         #region INewsResult Members
 
         string INewsResult.ClusterUrl
@@ -71,11 +78,11 @@ namespace Google.API.Search
                     return null;
                 }
 
-                if (m_PlaneContent == null)
+                if (m_PlainContent == null)
                 {
-                    m_PlaneContent = HttpUtility.RemoveHtmlTags(Content);
+                    m_PlainContent = HttpUtility.RemoveHtmlTags(Content);
                 }
-                return m_PlaneContent;
+                return m_PlainContent;
             }
         }
 

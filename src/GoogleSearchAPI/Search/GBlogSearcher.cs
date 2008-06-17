@@ -1,5 +1,5 @@
 ﻿/**
- * GWebSearcher.cs
+ * GBlogSearcher.cs
  *
  * Copyright (C) 2008,  iron9light
  *
@@ -28,10 +28,7 @@ using System.Net;
 
 namespace Google.API.Search
 {
-    /// <summary>
-    /// Utility class for Google Web Search service.
-    /// </summary>
-    public static class GWebSearcher
+    public static class GBlogSearcher
     {
         private static int s_Timeout = 0;
 
@@ -54,16 +51,14 @@ namespace Google.API.Search
             }
         }
 
-        internal static SearchData<GWebResult> GSearch(string keyword, int start, ResultSizeEnum resultSize, Language language)
+        internal static SearchData<GBlogResult> GSearch(string keyword, int start, ResultSizeEnum resultSize, SortType sortBy)
         {
             if (keyword == null)
             {
                 throw new ArgumentNullException("keyword");
             }
 
-            string languageCode = LanguageUtility.GetLanguageCode(language);
-
-            GWebSearchRequest request = new GWebSearchRequest(keyword, start, resultSize, languageCode);
+            GBlogSearchRequest request = new GBlogSearchRequest(keyword, start, resultSize, sortBy);
 
             WebRequest webRequest;
             if (Timeout != 0)
@@ -75,10 +70,10 @@ namespace Google.API.Search
                 webRequest = request.GetWebRequest();
             }
 
-            SearchData<GWebResult> responseData;
+            SearchData<GBlogResult> responseData;
             try
             {
-                responseData = RequestUtility.GetResponseData<SearchData<GWebResult>>(webRequest);
+                responseData = RequestUtility.GetResponseData<SearchData<GBlogResult>>(webRequest);
             }
             catch (GoogleAPIException ex)
             {
@@ -87,50 +82,21 @@ namespace Google.API.Search
             return responseData;
         }
 
-        /// <summary>
-        /// Search.
-        /// </summary>
-        /// <param name="keyword">The keyword.</param>
-        /// <param name="resultCount">The count of result itmes.</param>
-        /// <returns>The result items.</returns>
-        /// <exception cref="SearchException">Search failed.</exception>
-        /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
-        /// <example>
-        /// This is the c# code example.
-        /// <code>
-        /// IList&lt;IWebResult&gt; results = GWebSearcher.Search("Google API for .NET", 8);
-        /// </code>
-        /// </example>
-        public static IList<IWebResult> Search(string keyword, int resultCount)
+        public static IList<IBlogResult> Search(string keyword, int resultCount)
         {
-            return Search(keyword, resultCount, new Language());
+            return Search(keyword, resultCount, new SortType());
         }
 
-        /// <summary>
-        /// Search.
-        /// </summary>
-        /// <param name="keyword">The keyword.</param>
-        /// <param name="resultCount">The count of result itmes.</param>
-        /// <param name="language">The language you want to search.</param>
-        /// <returns>The result itmes.</returns>
-        /// <exception cref="SearchException">Search failed.</exception>
-        /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
-        /// <example>
-        /// This is the c# code example.
-        /// <code>
-        /// IList&lt;IWebSearchResult&gt; results = GWebSearcher.Search("Google API for .NET", 32, Language.Chinese_Simplified);
-        /// </code>
-        /// </example>
-        public static IList<IWebResult> Search(string keyword, int resultCount, Language language)
+        public static IList<IBlogResult> Search(string keyword, int resultCount, SortType sortBy)
         {
             if(keyword == null)
             {
                 throw new ArgumentNullException("keyword");
             }
 
-            SearchUtility.GSearchCallback<GWebResult> gsearch = (start, resultSize) => GSearch(keyword, start, resultSize, language);
-            List<GWebResult> results = SearchUtility.Search(gsearch, resultCount);
-            return results.ConvertAll<IWebResult>(item => (IWebResult)item);
+            SearchUtility.GSearchCallback<GBlogResult> gsearch = (start, resultSize) => GSearch(keyword, start, resultSize, sortBy);
+            List<GBlogResult> results = SearchUtility.Search(gsearch, resultCount);
+            return results.ConvertAll<IBlogResult>(item => (IBlogResult)item);
         }
     }
 }
