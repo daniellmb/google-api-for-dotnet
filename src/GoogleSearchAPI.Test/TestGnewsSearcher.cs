@@ -1,5 +1,5 @@
 ﻿/**
- * TestGNewsSearcher.cs
+ * TestGnewsSearcher.cs
  *
  * Copyright (C) 2008,  iron9light
  *
@@ -29,7 +29,7 @@ using NUnit.Framework;
 namespace Google.API.Search.Test
 {
     [TestFixture]
-    public class TestGNewsSearcher
+    public class TestGnewsSearcher
     {
         [Test]
         public void GSearchTest()
@@ -40,13 +40,13 @@ namespace Google.API.Search.Test
             string geo = "Beijing China";
             SortType sortBy = new SortType();
 
-            SearchData<GNewsResult> results =
-                GNewsSearcher.GSearch(keyword, start, resultSize, geo, sortBy);
+            SearchData<GnewsResult> results =
+                GnewsSearcher.GSearch(keyword, start, resultSize, geo, sortBy);
 
             Assert.IsNotNull(results);
             Assert.IsNotNull(results.Results);
             Assert.Greater(results.Results.Length, 0);
-            foreach (GNewsResult result in results.Results)
+            foreach (GnewsResult result in results.Results)
             {
                 Assert.IsNotNull(result);
                 Assert.AreEqual("GnewsSearch", result.GSearchResultClass);
@@ -60,7 +60,7 @@ namespace Google.API.Search.Test
         {
             string keyword = "NBA";
             int count = 15;
-            IList<INewsResult> results = GNewsSearcher.Search(keyword, count);
+            IList<INewsResult> results = GnewsSearcher.Search(keyword, count);
             Assert.IsNotNull(results);
             Assert.AreEqual(count, results.Count);
         }
@@ -71,7 +71,7 @@ namespace Google.API.Search.Test
             string keyword = "earthquake";
             string geo = "China";
             int count = 32;
-            IList<INewsResult> results = GNewsSearcher.Search(keyword, count, geo);
+            IList<INewsResult> results = GnewsSearcher.Search(keyword, count, geo);
             Assert.IsNotNull(results);
             Assert.AreEqual(count, results.Count);
         }
@@ -81,8 +81,8 @@ namespace Google.API.Search.Test
         {
             string keyword = "Obama";
             int count = 32;
-            IList<INewsResult> resultsByRelevance = GNewsSearcher.Search(keyword, count, SortType.relevance);
-            IList<INewsResult> resultsByDate = GNewsSearcher.Search(keyword, count, SortType.date);
+            IList<INewsResult> resultsByRelevance = GnewsSearcher.Search(keyword, count, SortType.relevance);
+            IList<INewsResult> resultsByDate = GnewsSearcher.Search(keyword, count, SortType.date);
             Assert.IsNotNull(resultsByRelevance);
             Assert.IsNotNull(resultsByDate);
             Assert.AreEqual(resultsByRelevance.Count, resultsByDate.Count);
@@ -102,8 +102,8 @@ namespace Google.API.Search.Test
         public void SearchLocalTest()
         {
             int count = 16;
-            IList<INewsResult> results1 = GNewsSearcher.SearchLocal("Tokyo", count);
-            IList<INewsResult> results2 = GNewsSearcher.SearchLocal("Japan", count);
+            IList<INewsResult> results1 = GnewsSearcher.SearchLocal("Tokyo", count);
+            IList<INewsResult> results2 = GnewsSearcher.SearchLocal("Japan", count);
             Assert.IsNotNull(results1);
             Assert.IsNotNull(results2);
             Assert.AreEqual(count, results1.Count);

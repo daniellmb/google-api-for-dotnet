@@ -1,5 +1,5 @@
 ﻿/**
- * GWebSearcher.cs
+ * GwebSearcher.cs
  *
  * Copyright (C) 2008,  iron9light
  *
@@ -31,7 +31,7 @@ namespace Google.API.Search
     /// <summary>
     /// Utility class for Google Web Search service.
     /// </summary>
-    public static class GWebSearcher
+    public static class GwebSearcher
     {
         private static int s_Timeout = 0;
 
@@ -54,7 +54,7 @@ namespace Google.API.Search
             }
         }
 
-        internal static SearchData<GWebResult> GSearch(string keyword, int start, ResultSizeEnum resultSize, Language language)
+        internal static SearchData<GwebResult> GSearch(string keyword, int start, ResultSizeEnum resultSize, Language language)
         {
             if (keyword == null)
             {
@@ -63,7 +63,7 @@ namespace Google.API.Search
 
             string languageCode = LanguageUtility.GetLanguageCode(language);
 
-            GWebSearchRequest request = new GWebSearchRequest(keyword, start, resultSize, languageCode);
+            GwebSearchRequest request = new GwebSearchRequest(keyword, start, resultSize, languageCode);
 
             WebRequest webRequest;
             if (Timeout != 0)
@@ -75,10 +75,10 @@ namespace Google.API.Search
                 webRequest = request.GetWebRequest();
             }
 
-            SearchData<GWebResult> responseData;
+            SearchData<GwebResult> responseData;
             try
             {
-                responseData = RequestUtility.GetResponseData<SearchData<GWebResult>>(webRequest);
+                responseData = RequestUtility.GetResponseData<SearchData<GwebResult>>(webRequest);
             }
             catch (GoogleAPIException ex)
             {
@@ -98,7 +98,7 @@ namespace Google.API.Search
         /// <example>
         /// This is the c# code example.
         /// <code>
-        /// IList&lt;IWebResult&gt; results = GWebSearcher.Search("Google API for .NET", 8);
+        /// IList&lt;IWebResult&gt; results = GwebSearcher.Search("Google API for .NET", 8);
         /// </code>
         /// </example>
         public static IList<IWebResult> Search(string keyword, int resultCount)
@@ -118,7 +118,7 @@ namespace Google.API.Search
         /// <example>
         /// This is the c# code example.
         /// <code>
-        /// IList&lt;IWebSearchResult&gt; results = GWebSearcher.Search("Google API for .NET", 32, Language.Chinese_Simplified);
+        /// IList&lt;IWebSearchResult&gt; results = GwebSearcher.Search("Google API for .NET", 32, Language.Chinese_Simplified);
         /// </code>
         /// </example>
         public static IList<IWebResult> Search(string keyword, int resultCount, Language language)
@@ -128,8 +128,8 @@ namespace Google.API.Search
                 throw new ArgumentNullException("keyword");
             }
 
-            SearchUtility.GSearchCallback<GWebResult> gsearch = (start, resultSize) => GSearch(keyword, start, resultSize, language);
-            List<GWebResult> results = SearchUtility.Search(gsearch, resultCount);
+            SearchUtility.GSearchCallback<GwebResult> gsearch = (start, resultSize) => GSearch(keyword, start, resultSize, language);
+            List<GwebResult> results = SearchUtility.Search(gsearch, resultCount);
             return results.ConvertAll<IWebResult>(item => (IWebResult)item);
         }
     }

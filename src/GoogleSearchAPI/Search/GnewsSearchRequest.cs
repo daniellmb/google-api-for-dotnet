@@ -1,5 +1,5 @@
 ﻿/**
- * GNewsSearchRequest.cs
+ * GnewsSearchRequest.cs
  *
  * Copyright (C) 2008,  iron9light
  *
@@ -24,21 +24,21 @@
 
 namespace Google.API.Search
 {
-    internal class GNewsSearchRequest : GSearchRequestBase
+    internal class GnewsSearchRequest : GSearchRequestBase
     {
         private static readonly string s_BaseAddress = @"http://ajax.googleapis.com/ajax/services/search/news";
 
-        public GNewsSearchRequest(string keyword, int start, ResultSizeEnum resultSize)
+        public GnewsSearchRequest(string keyword, int start, ResultSizeEnum resultSize)
             : base(keyword, start, resultSize)
         { }
 
-        public GNewsSearchRequest(string keyword, int start, ResultSizeEnum resultSize, SortType sortBy)
+        public GnewsSearchRequest(string keyword, int start, ResultSizeEnum resultSize, SortType sortBy)
             : base(keyword, start, resultSize)
         {
             SortBy = sortBy;
         }
 
-        public GNewsSearchRequest(string keyword, int start, ResultSizeEnum resultSize, string geo)
+        public GnewsSearchRequest(string keyword, int start, ResultSizeEnum resultSize, string geo)
             : base(keyword, start, resultSize)
         {
             if (!string.IsNullOrEmpty(geo))
@@ -51,7 +51,7 @@ namespace Google.API.Search
             }
         }
 
-        public GNewsSearchRequest(string keyword, int start, ResultSizeEnum resultSize, string geo, SortType sortBy)
+        public GnewsSearchRequest(string keyword, int start, ResultSizeEnum resultSize, string geo, SortType sortBy)
             : this(keyword, start, resultSize, geo)
         {
             SortBy = sortBy;

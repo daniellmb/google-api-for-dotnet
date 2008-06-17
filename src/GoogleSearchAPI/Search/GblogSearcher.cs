@@ -1,5 +1,5 @@
 ﻿/**
- * GBlogSearcher.cs
+ * GblogSearcher.cs
  *
  * Copyright (C) 2008,  iron9light
  *
@@ -28,7 +28,7 @@ using System.Net;
 
 namespace Google.API.Search
 {
-    public static class GBlogSearcher
+    public static class GblogSearcher
     {
         private static int s_Timeout = 0;
 
@@ -51,14 +51,14 @@ namespace Google.API.Search
             }
         }
 
-        internal static SearchData<GBlogResult> GSearch(string keyword, int start, ResultSizeEnum resultSize, SortType sortBy)
+        internal static SearchData<GblogResult> GSearch(string keyword, int start, ResultSizeEnum resultSize, SortType sortBy)
         {
             if (keyword == null)
             {
                 throw new ArgumentNullException("keyword");
             }
 
-            GBlogSearchRequest request = new GBlogSearchRequest(keyword, start, resultSize, sortBy);
+            GblogSearchRequest request = new GblogSearchRequest(keyword, start, resultSize, sortBy);
 
             WebRequest webRequest;
             if (Timeout != 0)
@@ -70,10 +70,10 @@ namespace Google.API.Search
                 webRequest = request.GetWebRequest();
             }
 
-            SearchData<GBlogResult> responseData;
+            SearchData<GblogResult> responseData;
             try
             {
-                responseData = RequestUtility.GetResponseData<SearchData<GBlogResult>>(webRequest);
+                responseData = RequestUtility.GetResponseData<SearchData<GblogResult>>(webRequest);
             }
             catch (GoogleAPIException ex)
             {
@@ -94,8 +94,8 @@ namespace Google.API.Search
                 throw new ArgumentNullException("keyword");
             }
 
-            SearchUtility.GSearchCallback<GBlogResult> gsearch = (start, resultSize) => GSearch(keyword, start, resultSize, sortBy);
-            List<GBlogResult> results = SearchUtility.Search(gsearch, resultCount);
+            SearchUtility.GSearchCallback<GblogResult> gsearch = (start, resultSize) => GSearch(keyword, start, resultSize, sortBy);
+            List<GblogResult> results = SearchUtility.Search(gsearch, resultCount);
             return results.ConvertAll<IBlogResult>(item => (IBlogResult)item);
         }
     }

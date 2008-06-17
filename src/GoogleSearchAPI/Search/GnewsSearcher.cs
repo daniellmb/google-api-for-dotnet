@@ -1,5 +1,5 @@
 ﻿/**
- * GNewsSearcher.cs
+ * GnewsSearcher.cs
  *
  * Copyright (C) 2008,  iron9light
  *
@@ -31,7 +31,7 @@ namespace Google.API.Search
     /// <summary>
     /// Utility class for Google News Search service.
     /// </summary>
-    public static class GNewsSearcher
+    public static class GnewsSearcher
     {
         private static int s_Timeout = 0;
 
@@ -54,14 +54,14 @@ namespace Google.API.Search
             }
         }
 
-        internal static SearchData<GNewsResult> GSearch(string keyword, int start, ResultSizeEnum resultSize, string geo, SortType sortBy)
+        internal static SearchData<GnewsResult> GSearch(string keyword, int start, ResultSizeEnum resultSize, string geo, SortType sortBy)
         {
             if (keyword == null && string.IsNullOrEmpty(geo))
             {
                 throw new ArgumentNullException("keyword");
             }
 
-            GNewsSearchRequest request = new GNewsSearchRequest(keyword, start, resultSize, geo, sortBy);
+            GnewsSearchRequest request = new GnewsSearchRequest(keyword, start, resultSize, geo, sortBy);
 
             WebRequest webRequest;
             if (Timeout != 0)
@@ -73,10 +73,10 @@ namespace Google.API.Search
                 webRequest = request.GetWebRequest();
             }
 
-            SearchData<GNewsResult> responseData;
+            SearchData<GnewsResult> responseData;
             try
             {
-                responseData = RequestUtility.GetResponseData<SearchData<GNewsResult>>(webRequest);
+                responseData = RequestUtility.GetResponseData<SearchData<GnewsResult>>(webRequest);
             }
             catch (GoogleAPIException ex)
             {
@@ -96,7 +96,7 @@ namespace Google.API.Search
         /// <example>
         /// This is the c# code example.
         /// <code>
-        /// IList&lt;INewsResult&gt; results = GNewsSearcher.Search("Olympic", 16);
+        /// IList&lt;INewsResult&gt; results = GnewsSearcher.Search("Olympic", 16);
         /// foreach(INewsSearchResult result in results)
         /// {
         ///     Console.WriteLine("[{0}, {1} - {2:d}]{3}", result.Publisher, result.Location, result.PublishedDate, result.Title);
@@ -120,7 +120,7 @@ namespace Google.API.Search
         /// <example>
         /// This is the c# code example.
         /// <code>
-        /// IList&lt;INewsSearchResult&gt; results = GNewsSearcher.Search("Olympic", 16, SortType.date);
+        /// IList&lt;INewsSearchResult&gt; results = GnewsSearcher.Search("Olympic", 16, SortType.date);
         /// foreach(INewsSearchResult result in results)
         /// {
         ///     Console.WriteLine("[{0}, {1} - {2:d}]{3}", result.Publisher, result.Location, result.PublishedDate, result.Title);
@@ -144,7 +144,7 @@ namespace Google.API.Search
         /// <example>
         /// This is the c# code example.
         /// <code>
-        /// IList&lt;INewsSearchResult&gt; results = GNewsSearcher.Search("Olympic", 16, "Beijing China");
+        /// IList&lt;INewsSearchResult&gt; results = GnewsSearcher.Search("Olympic", 16, "Beijing China");
         /// foreach(INewsSearchResult result in results)
         /// {
         ///     Console.WriteLine("[{0}, {1} - {2:d}]{3}", result.Publisher, result.Location, result.PublishedDate, result.Title);
@@ -169,7 +169,7 @@ namespace Google.API.Search
         /// <example>
         /// This is the c# code example.
         /// <code>
-        /// IList&lt;INewsSearchResult&gt; results = GNewsSearcher.Search("Olympic", 16, "Beijing China", SortType.date);
+        /// IList&lt;INewsSearchResult&gt; results = GnewsSearcher.Search("Olympic", 16, "Beijing China", SortType.date);
         /// foreach(INewsSearchResult result in results)
         /// {
         ///     Console.WriteLine("[{0}, {1} - {2:d}]{3}", result.Publisher, result.Location, result.PublishedDate, result.Title);
@@ -183,8 +183,8 @@ namespace Google.API.Search
                 throw new ArgumentNullException("keyword");
             }
 
-            SearchUtility.GSearchCallback<GNewsResult> gsearch = (start, resultSize) => GSearch(keyword, start, resultSize, geo, sortBy);
-            List<GNewsResult> results = SearchUtility.Search(gsearch, resultCount);
+            SearchUtility.GSearchCallback<GnewsResult> gsearch = (start, resultSize) => GSearch(keyword, start, resultSize, geo, sortBy);
+            List<GnewsResult> results = SearchUtility.Search(gsearch, resultCount);
             return results.ConvertAll<INewsResult>(item => (INewsResult)item);
         }
 
@@ -199,7 +199,7 @@ namespace Google.API.Search
         /// <example>
         /// This is the c# code example.
         /// <code>
-        /// IList&lt;INewsSearchResult&gt; results = GNewsSearcher.SearchLocal("Tokyo", 16);
+        /// IList&lt;INewsSearchResult&gt; results = GnewsSearcher.SearchLocal("Tokyo", 16);
         /// foreach(INewsSearchResult result in results)
         /// {
         ///     Console.WriteLine("[{0}, {1} - {2:d}]{3}", result.Publisher, result.Location, result.PublishedDate, result.Title);
@@ -223,7 +223,7 @@ namespace Google.API.Search
         /// <example>
         /// This is the c# code example.
         /// <code>
-        /// IList&lt;INewsSearchResult&gt; results = GNewsSearcher.Search("Tokyo", 16, SortType.date);
+        /// IList&lt;INewsSearchResult&gt; results = GnewsSearcher.Search("Tokyo", 16, SortType.date);
         /// foreach(INewsSearchResult result in results)
         /// {
         ///     Console.WriteLine("[{0}, {1} - {2:d}]{3}", result.Publisher, result.Location, result.PublishedDate, result.Title);

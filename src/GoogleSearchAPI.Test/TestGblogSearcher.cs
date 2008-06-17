@@ -1,5 +1,5 @@
 ﻿/**
- * TestGBlogSearcher.cs
+ * TestGblogSearcher.cs
  *
  * Copyright (C) 2008,  iron9light
  *
@@ -29,7 +29,7 @@ using NUnit.Framework;
 namespace Google.API.Search.Test
 {
     [TestFixture]
-    public class TestGBlogSearcher
+    public class TestGblogSearcher
     {
         [Test]
         public void GSearchTest()
@@ -39,11 +39,11 @@ namespace Google.API.Search.Test
             ResultSizeEnum resultSize = ResultSizeEnum.large;
             SortType sortBy = SortType.relevance;
 
-            SearchData<GBlogResult> searchData = GBlogSearcher.GSearch(keyword, start, resultSize, sortBy);
+            SearchData<GblogResult> searchData = GblogSearcher.GSearch(keyword, start, resultSize, sortBy);
             Assert.IsNotNull(searchData);
             Assert.IsNotNull(searchData.Results);
             Assert.Greater(searchData.Results.Length, 0);
-            foreach (GBlogResult result in searchData.Results)
+            foreach (GblogResult result in searchData.Results)
             {
                 Assert.IsNotNull(result);
                 Assert.AreEqual("GblogSearch", result.GSearchResultClass);
@@ -57,7 +57,7 @@ namespace Google.API.Search.Test
         {
             string keyword = "Coldplay";
             int count = 20;
-            IList<IBlogResult> results = GBlogSearcher.Search(keyword, count);
+            IList<IBlogResult> results = GblogSearcher.Search(keyword, count);
             Assert.IsNotNull(results);
             Assert.AreEqual(count, results.Count);
             foreach (IBlogResult result in results)
@@ -74,7 +74,7 @@ namespace Google.API.Search.Test
             string keyword = "iron9light";
             int count = 3;
             SortType sortBy = SortType.date;
-            IList<IBlogResult> results = GBlogSearcher.Search(keyword, count, sortBy);
+            IList<IBlogResult> results = GblogSearcher.Search(keyword, count, sortBy);
             Assert.IsNotNull(results);
             Assert.AreEqual(count, results.Count);
             foreach (IBlogResult result in results)
