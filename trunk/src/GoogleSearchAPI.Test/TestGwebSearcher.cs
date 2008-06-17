@@ -1,5 +1,5 @@
 ﻿/**
- * TestGWebSearcher.cs
+ * TestGwebSearcher.cs
  *
  * Copyright (C) 2008,  iron9light
  *
@@ -29,7 +29,7 @@ using NUnit.Framework;
 namespace Google.API.Search.Test
 {
     [TestFixture]
-    public class TestGWebSearcher
+    public class TestGwebSearcher
     {
         [Test]
         public void GSearchTest()
@@ -39,12 +39,12 @@ namespace Google.API.Search.Test
             ResultSizeEnum resultSize = ResultSizeEnum.small;
             Language language = new Language();
 
-            SearchData<GWebResult> searchData = GWebSearcher.GSearch(keyword, start, resultSize, language);
+            SearchData<GwebResult> searchData = GwebSearcher.GSearch(keyword, start, resultSize, language);
             Assert.IsNotNull(searchData);
             Assert.IsNotNull(searchData.Results);
             Assert.Greater(searchData.Results.Length, 0);
 
-            foreach (GWebResult result in searchData.Results)
+            foreach (GwebResult result in searchData.Results)
             {
                 Assert.IsNotNull(result);
                 Assert.AreEqual("GwebSearch", result.GSearchResultClass);
@@ -57,7 +57,7 @@ namespace Google.API.Search.Test
         public void SearchTest()
         {
             int count = 11;
-            IList<IWebResult> results = GWebSearcher.Search("Kobe bryant", count);
+            IList<IWebResult> results = GwebSearcher.Search("Kobe bryant", count);
             Assert.IsNotNull(results);
             foreach (IWebResult result in results)
             {
@@ -71,7 +71,7 @@ namespace Google.API.Search.Test
         {
             int count = 50;
             Language language = Language.Japanese;
-            IList<IWebResult> results = GWebSearcher.Search("Kobe bryant", count, language);
+            IList<IWebResult> results = GwebSearcher.Search("Kobe bryant", count, language);
             Assert.IsNotNull(results);
             foreach (IWebResult result in results)
             {

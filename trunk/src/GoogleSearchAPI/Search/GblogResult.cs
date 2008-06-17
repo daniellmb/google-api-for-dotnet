@@ -1,5 +1,5 @@
 ﻿/**
- * GBlogResult.cs
+ * GblogResult.cs
  *
  * Copyright (C) 2008,  iron9light
  *
@@ -28,7 +28,7 @@ using Newtonsoft.Json;
 namespace Google.API.Search
 {
     [JsonObject]
-    internal class GBlogResult : IBlogResult
+    internal class GblogResult : IBlogResult
     {
         private string m_PlainTitle;
         private string m_PlainContent;

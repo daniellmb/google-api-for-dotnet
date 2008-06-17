@@ -1,5 +1,5 @@
 ﻿/**
- * GBlogSearchRequest.cs
+ * GblogSearchRequest.cs
  *
  * Copyright (C) 2008,  iron9light
  *
@@ -24,11 +24,11 @@
 
 namespace Google.API.Search
 {
-    internal class GBlogSearchRequest : GSearchRequestBase
+    internal class GblogSearchRequest : GSearchRequestBase
     {
         private static readonly string s_BaseAddress = @"http://ajax.googleapis.com/ajax/services/search/blogs";
 
-        public GBlogSearchRequest(string keyword, int start, ResultSizeEnum resultSize, SortType sortBy)
+        public GblogSearchRequest(string keyword, int start, ResultSizeEnum resultSize, SortType sortBy)
             : base(keyword, start, resultSize)
         {
             SortBy = sortBy;

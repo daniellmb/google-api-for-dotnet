@@ -48,9 +48,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestGBlogSearcher.cs" />
-    <Compile Include="TestGNewsSearcher.cs" />
-    <Compile Include="TestGWebSearcher.cs" />
+    <Compile Include="TestGblogSearcher.cs" />
+    <Compile Include="TestGnewsSearcher.cs" />
+    <Compile Include="TestGwebSearcher.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GoogleSearchAPI\GoogleSearchAPI.csproj">

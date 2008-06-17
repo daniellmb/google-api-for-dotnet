@@ -1,5 +1,5 @@
 ﻿/**
- * GWebSearchRequest.cs
+ * GwebSearchRequest.cs
  *
  * Copyright (C) 2008,  iron9light
  *
@@ -24,35 +24,35 @@
 
 namespace Google.API.Search
 {
-    internal class GWebSearchRequest : GSearchRequestBase
+    internal class GwebSearchRequest : GSearchRequestBase
     {
         private static readonly string s_BaseAddress = @"http://ajax.googleapis.com/ajax/services/search/web";
 
-        public GWebSearchRequest(string keyword)
+        public GwebSearchRequest(string keyword)
             : base(keyword)
         { }
 
-        public GWebSearchRequest(string keyword, string language)
+        public GwebSearchRequest(string keyword, string language)
             : base(keyword)
         {
             Language = language;
         }
 
-        public GWebSearchRequest(string keyword, int start)
+        public GwebSearchRequest(string keyword, int start)
             : base(keyword, start)
         { }
 
-        public GWebSearchRequest(string keyword, int start, string language)
+        public GwebSearchRequest(string keyword, int start, string language)
             : base(keyword, start)
         {
             Language = language;
         }
 
-        public GWebSearchRequest(string keyword, int start, ResultSizeEnum resultSize)
+        public GwebSearchRequest(string keyword, int start, ResultSizeEnum resultSize)
             : base(keyword, start, resultSize)
         { }
 
-        public GWebSearchRequest(string keyword, int start, ResultSizeEnum resultSize, string language)
+        public GwebSearchRequest(string keyword, int start, ResultSizeEnum resultSize, string language)
             : base(keyword, start, resultSize)
         {
             Language = language;

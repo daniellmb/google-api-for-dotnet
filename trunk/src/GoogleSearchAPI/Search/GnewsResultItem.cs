@@ -1,5 +1,5 @@
 ﻿/**
- * GNewsResultItem.cs
+ * GnewsResultItem.cs
  *
  * Copyright (C) 2008,  iron9light
  *
@@ -28,7 +28,7 @@ using Newtonsoft.Json;
 namespace Google.API.Search
 {
     [JsonObject]
-    internal class GNewsResultItem : INewsResultItem
+    internal class GnewsResultItem : INewsResultItem
     {
         private string m_PlainTitle;
         private string m_PlainPublisher;
