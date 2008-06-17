@@ -1,5 +1,5 @@
 ﻿/**
- * GNewsResultItem.cs
+ * GBlogResult.cs
  *
  * Copyright (C) 2008,  iron9light
  *
@@ -28,76 +28,79 @@ using Newtonsoft.Json;
 namespace Google.API.Search
 {
     [JsonObject]
-    internal class GNewsResultItem : INewsResultItem
+    internal class GBlogResult : IBlogResult
     {
         private string m_PlainTitle;
-        private string m_PlainPublisher;
-        private string m_PlainLocation;
+        private string m_PlainContent;
+        private string m_PlainAuthor;
+
+        /// <summary>
+        /// Indicates the "type" of result.
+        /// </summary>
+        [JsonProperty("GsearchResultClass")]
+        public string GSearchResultClass { get; private set; }
 
         /// <summary>
         /// Supplies the title value of the result.
         /// </summary>
         [JsonProperty("title")]
-        public string Title { get; protected set; }
+        public string Title { get; private set; }
 
         /// <summary>
         /// Supplies the title, but unlike .title, this property is stripped of html markup (e.g., &lt;b&gt;, &lt;i&gt;, etc.)
         /// </summary>
         [JsonProperty("titleNoFormatting")]
-        public string TitleNoFormatting { get; protected set; }
+        public string TitleNoFormatting { get; private set; }
 
         /// <summary>
-        /// Supplies the raw URL of the result.
+        /// Supplies the URL to the blog post referenced in this search result.
         /// </summary>
-        [JsonProperty("unescapedUrl")]
-        public string UnescapedUrl { get; protected set; }
+        [JsonProperty("postUrl")]
+        public string PostUrl { get; private set; }
 
         /// <summary>
-        /// Supplies an escaped version of the above URL.
+        /// Supplies a snippet of content from the blog post associated with this search result.
         /// </summary>
-        [JsonProperty("url")]
-        public string Url { get; protected set; }
+        [JsonProperty("content")]
+        public string Content { get; private set; }
 
         /// <summary>
-        /// Supplies the name of the publisher of the news story.
+        /// Supplies the name of the author that wrote the blog post.
         /// </summary>
-        [JsonProperty("publisher")]
-        public string Publisher { get; protected set; }
+        [JsonProperty("author")]
+        public string Author { get; private set; }
 
         /// <summary>
-        /// Contains the location of the news story. This is a list of locations in most specific to least specific order where the components are seperated by ",". Note, there may only be one element in the list... A typical value for this property is "Edinburgh,Scotland,UK" or possibly "USA".
+        /// Supplies the URL of the blog which contains the post. Typically, this URL is displayed in green, beneath the blog search result and is linked to the blog.
         /// </summary>
-        [JsonProperty("location")]
-        public string Location { get; protected set; }
+        [JsonProperty("blogUrl")]
+        public string BlogUrl { get; private set; }
 
         /// <summary>
-        /// Supplies the published date (rfc-822 format) of the news story referenced by this search result.
+        /// Supplies the published date (rfc-822 format) of the blog post referenced by this search result.
         /// </summary>
         [JsonProperty("publishedDate")]
-        public DateTime PublishedDate { get; protected set; }
+        public DateTime PublishedDate { get; private set; }
 
         public override string ToString()
         {
-            INewsResultItem result = this;
-            return string.Format("{0}" + Environment.NewLine + "[{1}, {2} - {3:d}]",
-                                 result.Title,
-                                 result.Publisher,
-                                 result.Location,
-                                 result.PublishedDate);
+            IBlogResult result = this;
+            return
+                string.Format("{0}" + Environment.NewLine + "[{1:d} by {2}]" + Environment.NewLine + "{3}" + Environment.NewLine + "{4}",
+                              result.Title, 
+                              result.PublishedDate, 
+                              result.Author,
+                              result.Content,
+                              result.BlogUrl);
         }
 
-        #region INewsResultItem Members
+        #region IBlogResult Members
 
-        string INewsResultItem.Url
-        {
-            get { return UnescapedUrl; }
-        }
-
-        string INewsResultItem.Title
+        string IBlogResult.Title
         {
             get
             {
-                if(TitleNoFormatting == null)
+                if (TitleNoFormatting == null)
                 {
                     return null;
                 }
@@ -110,41 +113,51 @@ namespace Google.API.Search
             }
         }
 
-        string INewsResultItem.Publisher
+        string IBlogResult.PostUrl
+        {
+            get { return PostUrl; }
+        }
+
+        string IBlogResult.Content
         {
             get
             {
-                if(Publisher == null)
+                if (Content == null)
                 {
                     return null;
                 }
 
-                if(m_PlainPublisher == null)
+                if (m_PlainContent == null)
                 {
-                    m_PlainPublisher = HttpUtility.HtmlDecode(Publisher);
+                    m_PlainContent = HttpUtility.RemoveHtmlTags(Content);
                 }
-                return m_PlainPublisher;
+                return m_PlainContent;
             }
         }
 
-        string INewsResultItem.Location
+        string IBlogResult.Author
         {
             get
             {
-                if(Location == null)
+                if(Author == null)
                 {
                     return null;
                 }
 
-                if(m_PlainLocation == null)
+                if(m_PlainAuthor == null)
                 {
-                    m_PlainLocation = HttpUtility.HtmlDecode(Location);
+                    m_PlainAuthor = HttpUtility.HtmlDecode(Author);
                 }
-                return m_PlainLocation;
+                return m_PlainAuthor;
             }
         }
 
-        DateTime INewsResultItem.PublishedDate
+        string IBlogResult.BlogUrl
+        {
+            get { return BlogUrl; }
+        }
+
+        DateTime IBlogResult.PublishedDate
         {
             get { return PublishedDate; }
         }

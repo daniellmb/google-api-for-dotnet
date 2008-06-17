@@ -22,6 +22,7 @@
  * THE SOFTWARE.
  */
 
+using System;
 using System.Collections.Generic;
 using NUnit.Framework;
 
@@ -34,16 +35,23 @@ namespace Google.API.Search.Test
         public void GSearchTest()
         {
             string keyword = "Olympic";
+            int start = 0;
+            ResultSizeEnum resultSize = new ResultSizeEnum();
             string geo = "Beijing China";
             SortType sortBy = new SortType();
+
             SearchData<GNewsResult> results =
-                GNewsSearcher.GSearch(keyword, 0, new ResultSizeEnum(), geo, sortBy);
+                GNewsSearcher.GSearch(keyword, start, resultSize, geo, sortBy);
 
             Assert.IsNotNull(results);
+            Assert.IsNotNull(results.Results);
             Assert.Greater(results.Results.Length, 0);
             foreach (GNewsResult result in results.Results)
             {
                 Assert.IsNotNull(result);
+                Assert.AreEqual("GnewsSearch", result.GSearchResultClass);
+                Console.WriteLine(result);
+                Console.WriteLine();
             }
         }
 

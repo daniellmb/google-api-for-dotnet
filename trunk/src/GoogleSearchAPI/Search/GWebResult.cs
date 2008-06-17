@@ -22,6 +22,7 @@
  * THE SOFTWARE.
  */
 
+using System;
 using Newtonsoft.Json;
 
 namespace Google.API.Search
@@ -29,8 +30,8 @@ namespace Google.API.Search
     [JsonObject]
     internal class GWebResult : IWebResult
     {
-        private string m_PlaneTitle;
-        private string m_PlaneContent;
+        private string m_PlainTitle;
+        private string m_PlainContent;
 
         /// <summary>
         /// Indicates the "type" of result.
@@ -83,7 +84,10 @@ namespace Google.API.Search
         public override string ToString()
         {
             IWebResult result = this;
-            return string.Format("[{0}] {1}", result.Title, result.Content);
+            return string.Format("{0}" + Environment.NewLine + "{1}" + Environment.NewLine + "{2}",
+                                 result.Title,
+                                 result.Content,
+                                 result.VisibleUrl);
         }
 
         #region IWebResult Members
@@ -112,11 +116,11 @@ namespace Google.API.Search
                     return null;
                 }
 
-                if(m_PlaneTitle == null)
+                if(m_PlainTitle == null)
                 {
-                    m_PlaneTitle = HttpUtility.HtmlDecode(TitleNoFormatting);
+                    m_PlainTitle = HttpUtility.HtmlDecode(TitleNoFormatting);
                 }
-                return m_PlaneTitle;
+                return m_PlainTitle;
             }
         }
 
@@ -129,11 +133,11 @@ namespace Google.API.Search
                     return null;
                 }
 
-                if(m_PlaneContent == null)
+                if(m_PlainContent == null)
                 {
-                    m_PlaneContent = HttpUtility.RemoveHtmlTags(Content);
+                    m_PlainContent = HttpUtility.RemoveHtmlTags(Content);
                 }
-                return m_PlaneContent;
+                return m_PlainContent;
             }
         }
 

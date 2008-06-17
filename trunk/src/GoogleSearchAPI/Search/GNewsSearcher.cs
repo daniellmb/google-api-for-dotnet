@@ -178,50 +178,14 @@ namespace Google.API.Search
         /// </example>
         public static IList<INewsResult> Search(string keyword, int resultCount, string geo, SortType sortBy)
         {
-            if (keyword == null && string.IsNullOrEmpty(geo))
+            if(keyword == null && string.IsNullOrEmpty(geo))
             {
                 throw new ArgumentNullException("keyword");
             }
-            int start = 0;
-            List<INewsResult> results = new List<INewsResult>();
-            int restCount = resultCount;
-            while (restCount > 0)
-            {
-                SearchData<GNewsResult> searchData;
-                try
-                {
-                    if (restCount > 4)
-                    {
-                        searchData = GSearch(keyword, start, ResultSizeEnum.large, geo, sortBy);
-                    }
-                    else
-                    {
-                        searchData = GSearch(keyword, start, ResultSizeEnum.small, geo, sortBy);
-                    }
-                }
-                catch (SearchException ex)
-                {
-                    return results;
-                }
 
-                int count = searchData.Results.Length;
-                if (count <= restCount)
-                {
-                    results.AddRange(searchData.Results);
-                }
-                else
-                {
-                    count = restCount;
-                    for (int i = 0; i < count; ++i)
-                    {
-                        results.Add(searchData.Results[i]);
-                    }
-                }
-                start += count;
-                restCount -= count;
-            }
-
-            return results;
+            SearchUtility.GSearchCallback<GNewsResult> gsearch = (start, resultSize) => GSearch(keyword, start, resultSize, geo, sortBy);
+            List<GNewsResult> results = SearchUtility.Search(gsearch, resultCount);
+            return results.ConvertAll<INewsResult>(item => (INewsResult)item);
         }
 
         /// <summary>
