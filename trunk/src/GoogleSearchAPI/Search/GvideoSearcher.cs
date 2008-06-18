@@ -23,10 +23,14 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Net;
 
 namespace Google.API.Search
 {
+    /// <summary>
+    /// Utility class for Google Video Search service.
+    /// </summary>
     public static class GvideoSearcher
     {
         private static int s_Timeout = 0;
@@ -79,6 +83,60 @@ namespace Google.API.Search
                 throw new SearchException(string.Format("request:\"{0}\"", request), ex);
             }
             return responseData;
+        }
+
+        /// <summary>
+        /// Search video.
+        /// </summary>
+        /// <param name="keyword">The keyword.</param>
+        /// <param name="resultCount">The count of result itmes.</param>
+        /// <returns>The result items.</returns>
+        /// <exception cref="SearchException">Search failed.</exception>
+        /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
+        /// <example>
+        /// This is the c# code example.
+        /// <code>
+        /// IList&lt;IVideoResult&gt; results = GvideoSearcher.Search("South Park", 32);
+        /// foreach(IVideoResult result in results)
+        /// {
+        ///     Console.WriteLine("[{0} - {1} seconds by {2}] {3} => {4}", result.Title, result.Duration, result.Publisher, result.Content, result.Url);
+        /// }
+        /// </code>
+        /// </example>
+        public static IList<IVideoResult> Search(string keyword, int resultCount)
+        {
+            return Search(keyword, resultCount, new SortType());
+        }
+
+        /// <summary>
+        /// Search video.
+        /// </summary>
+        /// <param name="keyword">The keyword.</param>
+        /// <param name="resultCount">The count of result itmes.</param>
+        /// <param name="sortBy">The way to order results.</param>
+        /// <returns>The result items.</returns>
+        /// <exception cref="SearchException">Search failed.</exception>
+        /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
+        /// <example>
+        /// This is the c# code example.
+        /// <code>
+        /// IList&lt;IVideoResult&gt; results = GvideoSearcher.Search("Metal Gear Solid", 10, SortType.date);
+        /// foreach(IVideoResult result in results)
+        /// {
+        ///     Console.WriteLine("[{0} - {1} seconds by {2}] {3} => {4}", result.Title, result.Duration, result.Publisher, result.Content, result.Url);
+        /// }
+        /// </code>
+        /// </example>
+        public static IList<IVideoResult> Search(string keyword, int resultCount, SortType sortBy)
+        {
+            if (keyword == null)
+            {
+                throw new ArgumentNullException("keyword");
+            }
+
+            SearchUtility.GSearchCallback<GvideoResult> gsearch = (start, resultSize) => GSearch(keyword, start, resultSize, sortBy);
+            List<GvideoResult> results = SearchUtility.Search(gsearch, resultCount);
+            return results.ConvertAll<IVideoResult>(item => (IVideoResult)item);
         }
     }
 }

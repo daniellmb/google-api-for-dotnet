@@ -27,8 +27,12 @@ using Newtonsoft.Json;
 
 namespace Google.API.Search
 {
-    internal class GvideoResult
+    internal class GvideoResult : IVideoResult
     {
+        private string m_PlainTitle;
+        private string m_PlainContent;
+        private ITbImage m_TbImage;
+
         /// <summary>
         /// Indicates the "type" of result.
         /// </summary>
@@ -65,14 +69,6 @@ namespace Google.API.Search
         [JsonProperty("published")]
         public string PublishedDateString { get; private set; }
 
-        public DateTime PublishedDate
-        {
-            get
-            {
-                return SearchUtility.RFC2822DateTimeParse(PublishedDateString);
-            }
-        }
-
         /// <summary>
         /// Supplies the name of the video's publisher, typically displayed in green below the video thumbnail, similar to the treatment used for visibleUrl in the other search result objects.
         /// </summary>
@@ -107,9 +103,100 @@ namespace Google.API.Search
         /// If present, supplies the url of the flash version of the video that can be played inline on your page. To play this video simply create and &lt;embed&gt; element on your page using this value as the src attribute and using application/x-shockwave-flash as the type attribute. If you want the video to play right away, make sure to append &autoPlay=true to the url.
         /// </summary>
         [JsonProperty("playUrl")]
-        public string playUrl { get; private set; }
+        public string PlayUrl { get; private set; }
 
         [JsonProperty("videoType")]
         public string VideoType { get; private set; }
+
+        public override string ToString()
+        {
+            IVideoResult result = this;
+            return
+                string.Format("{0}" + Environment.NewLine + "{1} seconds - {2:d} by {3}" + Environment.NewLine + "{4}",
+                              result.Title, result.Duration, result.PublishedDate, result.Publisher, result.Content);
+        }
+
+        #region IVideoResult Members
+
+        string IVideoResult.Title
+        {
+            get
+            {
+                if (TitleNoFormatting == null)
+                {
+                    return null;
+                }
+
+                if (m_PlainTitle == null)
+                {
+                    m_PlainTitle = HttpUtility.HtmlDecode(TitleNoFormatting);
+                }
+                return m_PlainTitle;
+            }
+        }
+
+        string IVideoResult.Content
+        {
+            get
+            {
+                if (Content == null)
+                {
+                    return null;
+                }
+
+                if (m_PlainContent == null)
+                {
+                    m_PlainContent = HttpUtility.RemoveHtmlTags(Content);
+                }
+                return m_PlainContent;
+            }
+        }
+
+        string IVideoResult.Url
+        {
+            get { return Url; }
+        }
+
+        DateTime IVideoResult.PublishedDate
+        {
+            get
+            {
+                return SearchUtility.RFC2822DateTimeParse(PublishedDateString);
+            }
+        }
+
+        string IVideoResult.Publisher
+        {
+            get { return Publisher; }
+        }
+
+        int IVideoResult.Duration
+        {
+            get { return Duration; }
+        }
+
+        ITbImage IVideoResult.TbImage
+        {
+            get
+            {
+                if (m_TbImage == null)
+                {
+                    m_TbImage = new TbImage(TbUrl, TbWidth, TbHeight);
+                }
+                return m_TbImage;
+            }
+        }
+
+        string IVideoResult.PlayUrl
+        {
+            get { return PlayUrl; }
+        }
+
+        string IVideoResult.VideoType
+        {
+            get { return VideoType; }
+        }
+
+        #endregion
     }
 }
