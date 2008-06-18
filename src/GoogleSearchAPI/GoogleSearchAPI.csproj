@@ -84,11 +84,14 @@
     <Compile Include="Search\IBlogResult.cs" />
     <Compile Include="Search\INewsResult.cs" />
     <Compile Include="Search\INewsResultItem.cs" />
+    <Compile Include="Search\ITbImage.cs" />
+    <Compile Include="Search\IVideoResult.cs" />
     <Compile Include="Search\IWebResult.cs" />
     <Compile Include="Search\LanguageUtility.cs" />
     <Compile Include="Search\SearchData.cs" />
     <Compile Include="Search\SearchException.cs" />
     <Compile Include="Search\SearchUtility.cs" />
+    <Compile Include="Search\TbImage.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

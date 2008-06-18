@@ -23,6 +23,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 
 namespace Google.API.Search.Test
@@ -46,6 +47,39 @@ namespace Google.API.Search.Test
             {
                 Assert.IsNotNull(result);
                 Assert.AreEqual("GvideoSearch", result.GSearchResultClass);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
+        }
+
+        [Test]
+        public void SearchTest()
+        {
+            string keyword = "Metal Gear Solid";
+            int count = 8;
+            IList<IVideoResult> results = GvideoSearcher.Search(keyword, count);
+            Assert.IsNotNull(results);
+            Assert.AreEqual(count, results.Count);
+            foreach (IVideoResult result in results)
+            {
+                Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
+        }
+
+        [Test]
+        public void SearchTest2()
+        {
+            string keyword = "South Park";
+            int count = 32;
+            SortType sortBy = SortType.date;
+            IList<IVideoResult> results = GvideoSearcher.Search(keyword, count, sortBy);
+            Assert.IsNotNull(results);
+            Assert.AreEqual(count, results.Count);
+            foreach (IVideoResult result in results)
+            {
+                Assert.IsNotNull(result);
                 Console.WriteLine(result);
                 Console.WriteLine();
             }
