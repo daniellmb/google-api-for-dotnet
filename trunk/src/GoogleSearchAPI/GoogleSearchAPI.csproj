@@ -75,6 +75,9 @@
     <Compile Include="Search\GnewsResult.cs" />
     <Compile Include="Search\GnewsResultItem.cs" />
     <Compile Include="Search\GSearchRequestBase.cs" />
+    <Compile Include="Search\GvideoResult.cs" />
+    <Compile Include="Search\GvideoSearcher.cs" />
+    <Compile Include="Search\GvideoSearchRequest.cs" />
     <Compile Include="Search\GwebSearcher.cs" />
     <Compile Include="Search\GwebSearchRequest.cs" />
     <Compile Include="Search\GwebResult.cs" />
