@@ -59,7 +59,7 @@ namespace Google.API.Search
         /// <summary>
         /// This optional argument tells the book search system to restrict the search to the specified user-defined library.
         /// </summary>
-        [Argument("as_list")]
+        [Argument("as_list", NeedEncode = true)]
         public string Library { get; private set; }
 
         protected override string BaseAddress
