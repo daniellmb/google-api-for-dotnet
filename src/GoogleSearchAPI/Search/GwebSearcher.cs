@@ -24,7 +24,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Net;
 
 namespace Google.API.Search
 {
@@ -65,25 +64,9 @@ namespace Google.API.Search
 
             GwebSearchRequest request = new GwebSearchRequest(keyword, start, resultSize, languageCode);
 
-            WebRequest webRequest;
-            if (Timeout != 0)
-            {
-                webRequest = request.GetWebRequest(Timeout);
-            }
-            else
-            {
-                webRequest = request.GetWebRequest();
-            }
+            SearchData<GwebResult> responseData =
+                RequestUtility.GetResponseData<SearchData<GwebResult>>(request, Timeout);
 
-            SearchData<GwebResult> responseData;
-            try
-            {
-                responseData = RequestUtility.GetResponseData<SearchData<GwebResult>>(webRequest);
-            }
-            catch (GoogleAPIException ex)
-            {
-                throw new SearchException(string.Format("request:\"{0}\"", request), ex);
-            }
             return responseData;
         }
 
@@ -93,7 +76,6 @@ namespace Google.API.Search
         /// <param name="keyword">The keyword.</param>
         /// <param name="resultCount">The count of result itmes.</param>
         /// <returns>The result items.</returns>
-        /// <exception cref="SearchException">Search failed.</exception>
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
         /// <example>
         /// This is the c# code example.
@@ -117,7 +99,6 @@ namespace Google.API.Search
         /// <param name="resultCount">The count of result itmes.</param>
         /// <param name="language">The language you want to search.</param>
         /// <returns>The result itmes.</returns>
-        /// <exception cref="SearchException">Search failed.</exception>
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
         /// <example>
         /// This is the c# code example.
