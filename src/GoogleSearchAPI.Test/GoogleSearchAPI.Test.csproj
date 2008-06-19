@@ -44,6 +44,7 @@
     <Compile Include="TestGblogSearcher.cs" />
     <Compile Include="TestGbookSearcher.cs" />
     <Compile Include="TestGnewsSearcher.cs" />
+    <Compile Include="TestGpatentSearcher.cs" />
     <Compile Include="TestGvideoSearcher.cs" />
     <Compile Include="TestGwebSearcher.cs" />
   </ItemGroup>

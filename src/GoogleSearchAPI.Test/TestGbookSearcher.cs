@@ -37,11 +37,11 @@ namespace Google.API.Search.Test
             string keyword = "Grimm's Fairy Tales";
             int start = 0;
             ResultSizeEnum resultSize = ResultSizeEnum.large;
-            bool isFullViewable = false;
+            bool fullViewOnly = false;
             string library = null;
 
             SearchData<GbookResult> searchData =
-                GbookSearcher.GSearch(keyword, start, resultSize, isFullViewable, library);
+                GbookSearcher.GSearch(keyword, start, resultSize, fullViewOnly, library);
             Assert.IsNotNull(searchData);
             Assert.IsNotNull(searchData.Results);
             Assert.Greater(searchData.Results.Length, 0);
