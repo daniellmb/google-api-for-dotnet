@@ -24,7 +24,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Net;
 
 namespace Google.API.Search
 {
@@ -63,25 +62,9 @@ namespace Google.API.Search
 
             GnewsSearchRequest request = new GnewsSearchRequest(keyword, start, resultSize, geo, sortBy);
 
-            WebRequest webRequest;
-            if (Timeout != 0)
-            {
-                webRequest = request.GetWebRequest(Timeout);
-            }
-            else
-            {
-                webRequest = request.GetWebRequest();
-            }
+            SearchData<GnewsResult> responseData =
+                RequestUtility.GetResponseData<SearchData<GnewsResult>>(request, Timeout);
 
-            SearchData<GnewsResult> responseData;
-            try
-            {
-                responseData = RequestUtility.GetResponseData<SearchData<GnewsResult>>(webRequest);
-            }
-            catch (GoogleAPIException ex)
-            {
-                throw new SearchException(string.Format("request:\"{0}\"", request), ex);
-            }
             return responseData;
         }
 
@@ -91,7 +74,6 @@ namespace Google.API.Search
         /// <param name="keyword">The keyword.</param>
         /// <param name="resultCount">The count of result itmes.</param>
         /// <returns>The result items.</returns>
-        /// <exception cref="SearchException">Search failed.</exception>
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
         /// <example>
         /// This is the c# code example.
@@ -115,7 +97,6 @@ namespace Google.API.Search
         /// <param name="resultCount">The count of result itmes.</param>
         /// <param name="sortBy">The way to order results.</param>
         /// <returns>The result items.</returns>
-        /// <exception cref="SearchException">Search failed.</exception>
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
         /// <example>
         /// This is the c# code example.
@@ -139,7 +120,6 @@ namespace Google.API.Search
         /// <param name="resultCount">The count of result itmes.</param>
         /// <param name="geo">A particular location of the news. You must supply either a city, state, country, or zip code as in "Santa Barbara" or "British Columbia" or "Peru" or "93108".</param>
         /// <returns>The result items.</returns>
-        /// <exception cref="SearchException">Search failed.</exception>
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
         /// <example>
         /// This is the c# code example.
@@ -164,7 +144,6 @@ namespace Google.API.Search
         /// <param name="geo">A particular location of the news. You must supply either a city, state, country, or zip code as in "Santa Barbara" or "British Columbia" or "Peru" or "93108".</param>
         /// <param name="sortBy">The way to order results.</param>
         /// <returns>The result items.</returns>
-        /// <exception cref="SearchException">Search failed.</exception>
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
         /// <example>
         /// This is the c# code example.
@@ -194,7 +173,6 @@ namespace Google.API.Search
         /// <param name="geo">A particular location of the news. You must supply either a city, state, country, or zip code as in "Santa Barbara" or "British Columbia" or "Peru" or "93108".</param>
         /// <param name="resultCount">The count of result itmes.</param>
         /// <returns>The result items.</returns>
-        /// <exception cref="SearchException">Search failed.</exception>
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
         /// <example>
         /// This is the c# code example.
@@ -218,7 +196,6 @@ namespace Google.API.Search
         /// <param name="resultCount">The count of result itmes.</param>
         /// <param name="sortBy">The way to order results.</param>
         /// <returns>The result items.</returns>
-        /// <exception cref="SearchException">Search failed.</exception>
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
         /// <example>
         /// This is the c# code example.

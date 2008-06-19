@@ -121,7 +121,7 @@ namespace Google.API.Translate
             {
                 result = Translate(text, LanguageUtility.GetLanguageCode(from), LanguageUtility.GetLanguageCode(to), format);
             }
-            catch (TranslateException ex)
+            catch (GoogleAPIException ex)
             {
                 throw new TranslateException("Translate failed!", ex);
             }
@@ -176,7 +176,7 @@ namespace Google.API.Translate
             {
                 result = Translate(text, LanguageUtility.GetLanguageCode(Language.Unknown), LanguageUtility.GetLanguageCode(to), format);
             }
-            catch (TranslateException ex)
+            catch (GoogleAPIException ex)
             {
                 throw new TranslateException("Translate failed!", ex);
             }
@@ -204,7 +204,7 @@ namespace Google.API.Translate
             {
                 result = Detect(text);
             }
-            catch (TranslateException ex)
+            catch (GoogleAPIException ex)
             {
                 throw new TranslateException("Detect failed!", ex);
             }
@@ -237,25 +237,7 @@ namespace Google.API.Translate
 
             TranslateRequest request = new TranslateRequest(text, from, to, format);
 
-            WebRequest webRequest;
-            if(Timeout != 0)
-            {
-                webRequest = request.GetWebRequest(Timeout);
-            }
-            else
-            {
-                webRequest = request.GetWebRequest();
-            }
-
-            TranslateData responseData;
-            try
-            {
-                responseData = RequestUtility.GetResponseData<TranslateData>(webRequest);
-            }
-            catch (GoogleAPIException ex)
-            {
-                throw new TranslateException(string.Format("request:\"{0}\"", request), ex);
-            }
+            TranslateData responseData = RequestUtility.GetResponseData<TranslateData>(request, Timeout);
 
             return responseData;
         }
@@ -269,25 +251,7 @@ namespace Google.API.Translate
 
             DetectRequest request = new DetectRequest(text);
 
-            WebRequest webRequest;
-            if (Timeout != 0)
-            {
-                webRequest = request.GetWebRequest(Timeout);
-            }
-            else
-            {
-                webRequest = request.GetWebRequest();
-            }
-
-            DetectData responseData;
-            try
-            {
-                responseData = RequestUtility.GetResponseData<DetectData>(webRequest);
-            }
-            catch (GoogleAPIException ex)
-            {
-                throw new TranslateException(string.Format("request:\"{0}\"", request), ex);
-            }
+            DetectData responseData = RequestUtility.GetResponseData<DetectData>(request, Timeout);
 
             return responseData;
         }

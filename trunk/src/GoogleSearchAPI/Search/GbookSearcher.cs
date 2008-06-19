@@ -1,5 +1,5 @@
 ﻿/**
- * GvideoSearcher.cs
+ * GbookSearcher.cs
  *
  * Copyright (C) 2008,  iron9light
  *
@@ -28,9 +28,9 @@ using System.Collections.Generic;
 namespace Google.API.Search
 {
     /// <summary>
-    /// Utility class for Google Video Search service.
+    /// Utility class for Google Book Search service.
     /// </summary>
-    public static class GvideoSearcher
+    public static class GbookSearcher
     {
         private static int s_Timeout = 0;
 
@@ -53,23 +53,22 @@ namespace Google.API.Search
             }
         }
 
-        internal static SearchData<GvideoResult> GSearch(string keyword, int start, ResultSizeEnum resultSize, SortType sortBy)
+        internal static SearchData<GbookResult> GSearch(string keyword, int start, ResultSizeEnum resultSize, bool fullViewOnly, string library)
         {
             if (keyword == null)
             {
                 throw new ArgumentNullException("keyword");
             }
 
-            GvideoSearchRequest request = new GvideoSearchRequest(keyword, start, resultSize, sortBy);
+            GbookSearchRequest request = new GbookSearchRequest(keyword, start, resultSize, fullViewOnly, library);
 
-            SearchData<GvideoResult> responseData =
-                RequestUtility.GetResponseData<SearchData<GvideoResult>>(request, Timeout);
+            SearchData<GbookResult> responseData = RequestUtility.GetResponseData<SearchData<GbookResult>>(request, Timeout);
 
             return responseData;
         }
 
         /// <summary>
-        /// Search video.
+        /// Search books.
         /// </summary>
         /// <param name="keyword">The keyword.</param>
         /// <param name="resultCount">The count of result itmes.</param>
@@ -78,46 +77,70 @@ namespace Google.API.Search
         /// <example>
         /// This is the c# code example.
         /// <code>
-        /// IList&lt;IVideoResult&gt; results = GvideoSearcher.Search("South Park", 32);
-        /// foreach(IVideoResult result in results)
+        /// IList&lt;IBookResult&gt; results = GbookSearcher.Search("Grimm's Fairy Tales", 10);
+        /// foreach(IBookResult result in results)
         /// {
-        ///     Console.WriteLine("[{0} - {1} seconds by {2}] {3} => {4}", result.Title, result.Duration, result.Publisher, result.Content, result.Url);
+        ///     Console.WriteLine("{0} [by {1} - {2} - {3} pages] {4}", result.Title, result.Authors, result.PublishedYear, result.PageCount, result.BookId);
         /// }
         /// </code>
         /// </example>
-        public static IList<IVideoResult> Search(string keyword, int resultCount)
+        public static IList<IBookResult> Search(string keyword, int resultCount)
         {
-            return Search(keyword, resultCount, new SortType());
+            return Search(keyword, resultCount, false, null);
         }
 
         /// <summary>
-        /// Search video.
+        /// Search books.
         /// </summary>
         /// <param name="keyword">The keyword.</param>
         /// <param name="resultCount">The count of result itmes.</param>
-        /// <param name="sortBy">The way to order results.</param>
+        /// <param name="fullViewOnly">Whether to restrict the search to "full view" books.</param>
         /// <returns>The result items.</returns>
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
         /// <example>
         /// This is the c# code example.
         /// <code>
-        /// IList&lt;IVideoResult&gt; results = GvideoSearcher.Search("Metal Gear Solid", 10, SortType.date);
-        /// foreach(IVideoResult result in results)
+        /// IList&lt;IBookResult&gt; results = GbookSearcher.Search("love", 4, true);
+        /// foreach(IBookResult result in results)
         /// {
-        ///     Console.WriteLine("[{0} - {1} seconds by {2}] {3} => {4}", result.Title, result.Duration, result.Publisher, result.Content, result.Url);
+        ///     Console.WriteLine("{0} [by {1} - {2} - {3} pages] {4}", result.Title, result.Authors, result.PublishedYear, result.PageCount, result.BookId);
         /// }
         /// </code>
         /// </example>
-        public static IList<IVideoResult> Search(string keyword, int resultCount, SortType sortBy)
+        public static IList<IBookResult> Search(string keyword, int resultCount, bool fullViewOnly)
+        {
+            return Search(keyword, resultCount, fullViewOnly, null);
+        }
+
+        /// <summary>
+        /// Search books.
+        /// </summary>
+        /// <param name="keyword">The keyword.</param>
+        /// <param name="resultCount">The count of result itmes.</param>
+        /// <param name="fullViewOnly">Whether to restrict the search to "full view" books.</param>
+        /// <param name="library">The specified user-defined library. If it not null, the search will restrict the search to this library.</param>
+        /// <returns>The result items.</returns>
+        /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
+        /// <example>
+        /// This is the c# code example.
+        /// <code>
+        /// IList&lt;IBookResult&gt; results = GbookSearcher.Search("Cookbook", 32, fales, null);
+        /// foreach(IBookResult result in results)
+        /// {
+        ///     Console.WriteLine("{0} [by {1} - {2} - {3} pages] {4}", result.Title, result.Authors, result.PublishedYear, result.PageCount, result.BookId);
+        /// }
+        /// </code>
+        /// </example>
+        public static IList<IBookResult> Search(string keyword, int resultCount, bool fullViewOnly, string library)
         {
             if (keyword == null)
             {
                 throw new ArgumentNullException("keyword");
             }
 
-            SearchUtility.GSearchCallback<GvideoResult> gsearch = (start, resultSize) => GSearch(keyword, start, resultSize, sortBy);
-            List<GvideoResult> results = SearchUtility.Search(gsearch, resultCount);
-            return results.ConvertAll<IVideoResult>(item => (IVideoResult)item);
+            SearchUtility.GSearchCallback<GbookResult> gsearch = (start, resultSize) => GSearch(keyword, start, resultSize, fullViewOnly, library);
+            List<GbookResult> results = SearchUtility.Search(gsearch, resultCount);
+            return results.ConvertAll<IBookResult>(item => (IBookResult)item);
         }
     }
 }

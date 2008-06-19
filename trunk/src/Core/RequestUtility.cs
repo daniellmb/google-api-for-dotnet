@@ -66,7 +66,7 @@ namespace Google.API
             {
                 resultObject = JavaScriptConvert.DeserializeObject<ResultObject<T>>(resultString);
             }
-            catch (JsonSerializationException ex)
+            catch (Exception ex)
             {
                 throw new GoogleAPIException(
                     string.Format("Deserialize Failed.{0}Type:{1}{0}String:{2}", Environment.NewLine,
@@ -89,6 +89,30 @@ namespace Google.API
             }
             WebRequest request = WebRequest.Create(url);
             return GetResponseData<T>(request);
+        }
+
+        public static T GetResponseData<T>(RequestBase request, int timeout)
+        {
+            WebRequest webRequest;
+            if (timeout != 0)
+            {
+                webRequest = request.GetWebRequest(timeout);
+            }
+            else
+            {
+                webRequest = request.GetWebRequest();
+            }
+
+            T responseData;
+            try
+            {
+                responseData = GetResponseData<T>(webRequest);
+            }
+            catch (GoogleAPIException ex)
+            {
+                throw new GoogleAPIException(string.Format("request:\"{0}\"", request), ex);
+            }
+            return responseData;
         }
     }
 }

@@ -51,12 +51,16 @@ namespace Google.API.Search
                         searchData = gsearch(start, ResultSizeEnum.small);
                     }
                 }
-                catch (SearchException)
+                catch (GoogleAPIException)
                 {
                     return results;
                 }
 
                 int count = searchData.Results.Length;
+                if(count == 0)
+                {
+                    break;
+                }
                 if (count <= restCount)
                 {
                     results.AddRange(searchData.Results);
