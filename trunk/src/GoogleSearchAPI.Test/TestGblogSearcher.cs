@@ -36,7 +36,7 @@ namespace Google.API.Search.Test
         {
             string keyword = "lesbian";
             int start = 4;
-            ResultSizeEnum resultSize = ResultSizeEnum.large;
+            ResultSize resultSize = ResultSize.large;
             SortType sortBy = SortType.relevance;
 
             SearchData<GblogResult> searchData = GblogSearcher.GSearch(keyword, start, resultSize, sortBy);

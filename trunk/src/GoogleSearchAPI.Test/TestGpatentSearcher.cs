@@ -36,7 +36,7 @@ namespace Google.API.Search.Test
         {
             string keyword = "search engine";
             int start = 0;
-            ResultSizeEnum resultSize = ResultSizeEnum.small;
+            ResultSize resultSize = ResultSize.small;
             bool issuedOnly = true;
             bool filedOnly = false;
             SortType sortBy = SortType.relevance;

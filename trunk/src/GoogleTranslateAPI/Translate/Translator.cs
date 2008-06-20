@@ -23,25 +23,9 @@
  */
 
 using System;
-using System.Net;
 
 namespace Google.API.Translate
 {
-    /// <summary>
-    /// Translate format.
-    /// </summary>
-    public enum TranslateFormat
-    {
-        /// <summary>
-        /// Text format. Default value.
-        /// </summary>
-        text = 0,
-        /// <summary>
-        /// Html format.
-        /// </summary>
-        html,
-    }
-
     /// <summary>
     /// Utility class for translate and detect.
     /// </summary>

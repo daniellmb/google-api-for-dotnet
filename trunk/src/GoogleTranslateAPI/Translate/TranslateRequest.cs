@@ -24,6 +24,21 @@
 
 namespace Google.API.Translate
 {
+    /// <summary>
+    /// Translate format.
+    /// </summary>
+    public enum TranslateFormat
+    {
+        /// <summary>
+        /// Text format. Default value.
+        /// </summary>
+        text = 0,
+        /// <summary>
+        /// Html format.
+        /// </summary>
+        html,
+    }
+
     internal class TranslateRequest : RequestBase
     {
         private static readonly string s_BaseAddress = @"http://ajax.googleapis.com/ajax/services/language/translate";

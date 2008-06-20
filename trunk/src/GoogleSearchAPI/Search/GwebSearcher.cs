@@ -53,7 +53,7 @@ namespace Google.API.Search
             }
         }
 
-        internal static SearchData<GwebResult> GSearch(string keyword, int start, ResultSizeEnum resultSize, Language language)
+        internal static SearchData<GwebResult> GSearch(string keyword, int start, ResultSize resultSize, Language language)
         {
             if (keyword == null)
             {

@@ -53,7 +53,7 @@ namespace Google.API.Search
             }
         }
 
-        internal static SearchData<GnewsResult> GSearch(string keyword, int start, ResultSizeEnum resultSize, string geo, SortType sortBy)
+        internal static SearchData<GnewsResult> GSearch(string keyword, int start, ResultSize resultSize, string geo, SortType sortBy)
         {
             if (keyword == null && string.IsNullOrEmpty(geo))
             {

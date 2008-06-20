@@ -36,7 +36,7 @@ namespace Google.API.Search.Test
         {
             string keyword = "Google Translate API .NET";
             int start = 1;
-            ResultSizeEnum resultSize = ResultSizeEnum.small;
+            ResultSize resultSize = ResultSize.small;
             Language language = new Language();
 
             SearchData<GwebResult> searchData = GwebSearcher.GSearch(keyword, start, resultSize, language);

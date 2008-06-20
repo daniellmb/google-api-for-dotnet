@@ -48,11 +48,11 @@ namespace Google.API.Search
             Language = language;
         }
 
-        public GwebSearchRequest(string keyword, int start, ResultSizeEnum resultSize)
+        public GwebSearchRequest(string keyword, int start, ResultSize resultSize)
             : base(keyword, start, resultSize)
         { }
 
-        public GwebSearchRequest(string keyword, int start, ResultSizeEnum resultSize, string language)
+        public GwebSearchRequest(string keyword, int start, ResultSize resultSize, string language)
             : base(keyword, start, resultSize)
         {
             Language = language;

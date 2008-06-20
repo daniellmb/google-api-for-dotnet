@@ -36,7 +36,7 @@ namespace Google.API.Search.Test
         {
             string keyword = "Olympic";
             int start = 0;
-            ResultSizeEnum resultSize = new ResultSizeEnum();
+            ResultSize resultSize = new ResultSize();
             string geo = "Beijing China";
             SortType sortBy = new SortType();
 

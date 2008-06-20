@@ -53,7 +53,7 @@ namespace Google.API.Search
             }
         }
 
-        internal static SearchData<GbookResult> GSearch(string keyword, int start, ResultSizeEnum resultSize, bool fullViewOnly, string library)
+        internal static SearchData<GbookResult> GSearch(string keyword, int start, ResultSize resultSize, bool fullViewOnly, string library)
         {
             if (keyword == null)
             {
