@@ -36,7 +36,7 @@ namespace Google.API.Search.Test
         {
             string keyword = "Grimm's Fairy Tales";
             int start = 0;
-            ResultSizeEnum resultSize = ResultSizeEnum.large;
+            ResultSize resultSize = ResultSize.large;
             bool fullViewOnly = false;
             string library = null;
 

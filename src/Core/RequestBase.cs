@@ -159,7 +159,11 @@ namespace Google.API
                     throw new GoogleAPIException(string.Format("Property {0}({1}) cannot be null", info.Name, name));
                 }
 
-                string valueString = value.ToString();
+                string valueString = GetValueString(value, info.PropertyType);
+                if(valueString == null)
+                {
+                    continue;
+                }
 
                 if (argAttr.NeedEncode)
                 {
@@ -169,6 +173,32 @@ namespace Google.API
                 dict[name] = valueString;
             }
             return dict;
+        }
+
+        private static string GetValueString(object value, Type valueType)
+        {
+            string valueString = null;
+            if (valueType == typeof(bool))
+            {
+                // bool value
+                if ((bool)value)
+                {
+                    valueString = "1";
+                }
+            }
+            else if (valueType.IsEnum)
+            {
+                // enum value
+                if ((int)value != 0)
+                {
+                    valueString = value.ToString();
+                }
+            }
+            else
+            {
+                valueString = value.ToString();
+            }
+            return valueString;
         }
 
         private string GetUrlString()

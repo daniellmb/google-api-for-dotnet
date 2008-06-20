@@ -28,7 +28,7 @@ namespace Google.API.Search
     {
         private static readonly string s_BaseAddress = @"http://ajax.googleapis.com/ajax/services/search/blogs";
 
-        public GblogSearchRequest(string keyword, int start, ResultSizeEnum resultSize, SortType sortBy)
+        public GblogSearchRequest(string keyword, int start, ResultSize resultSize, SortType sortBy)
             : base(keyword, start, resultSize)
         {
             SortBy = sortBy;

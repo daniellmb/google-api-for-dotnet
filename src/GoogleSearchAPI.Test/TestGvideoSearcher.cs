@@ -36,7 +36,7 @@ namespace Google.API.Search.Test
         {
             string keyword = "super mario";
             int start = 10;
-            ResultSizeEnum resultSize = ResultSizeEnum.large;
+            ResultSize resultSize = ResultSize.large;
             SortType sortBy = SortType.relevance;
 
             SearchData<GvideoResult> searchData = GvideoSearcher.GSearch(keyword, start, resultSize, sortBy);

@@ -28,17 +28,17 @@ namespace Google.API.Search
     {
         private static readonly string s_BaseAddress = @"http://ajax.googleapis.com/ajax/services/search/news";
 
-        public GnewsSearchRequest(string keyword, int start, ResultSizeEnum resultSize)
+        public GnewsSearchRequest(string keyword, int start, ResultSize resultSize)
             : base(keyword, start, resultSize)
         { }
 
-        public GnewsSearchRequest(string keyword, int start, ResultSizeEnum resultSize, SortType sortBy)
+        public GnewsSearchRequest(string keyword, int start, ResultSize resultSize, SortType sortBy)
             : base(keyword, start, resultSize)
         {
             SortBy = sortBy;
         }
 
-        public GnewsSearchRequest(string keyword, int start, ResultSizeEnum resultSize, string geo)
+        public GnewsSearchRequest(string keyword, int start, ResultSize resultSize, string geo)
             : base(keyword, start, resultSize)
         {
             if (!string.IsNullOrEmpty(geo))
@@ -51,7 +51,7 @@ namespace Google.API.Search
             }
         }
 
-        public GnewsSearchRequest(string keyword, int start, ResultSizeEnum resultSize, string geo, SortType sortBy)
+        public GnewsSearchRequest(string keyword, int start, ResultSize resultSize, string geo, SortType sortBy)
             : this(keyword, start, resultSize, geo)
         {
             SortBy = sortBy;

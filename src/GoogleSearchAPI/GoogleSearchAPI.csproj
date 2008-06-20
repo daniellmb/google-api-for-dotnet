@@ -73,6 +73,9 @@
     <Compile Include="Search\GbookResult.cs" />
     <Compile Include="Search\GbookSearcher.cs" />
     <Compile Include="Search\GbookSearchRequest.cs" />
+    <Compile Include="Search\GimageResult.cs" />
+    <Compile Include="Search\GimageSearcher.cs" />
+    <Compile Include="Search\GimageSearchRequest.cs" />
     <Compile Include="Search\GnewsSearcher.cs" />
     <Compile Include="Search\GnewsSearchRequest.cs" />
     <Compile Include="Search\GnewsResult.cs" />
@@ -89,6 +92,7 @@
     <Compile Include="Search\GwebResult.cs" />
     <Compile Include="Search\IBlogResult.cs" />
     <Compile Include="Search\IBookResult.cs" />
+    <Compile Include="Search\IImageResult.cs" />
     <Compile Include="Search\INewsResult.cs" />
     <Compile Include="Search\INewsResultItem.cs" />
     <Compile Include="Search\IPatentResult.cs" />

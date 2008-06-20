@@ -53,7 +53,7 @@ namespace Google.API.Search
             }
         }
 
-        internal static SearchData<GpatentResult> GSearch(string keyword, int start, ResultSizeEnum resultSize, bool issuedOnly, bool filedOnly, SortType sortBy)
+        internal static SearchData<GpatentResult> GSearch(string keyword, int start, ResultSize resultSize, bool issuedOnly, bool filedOnly, SortType sortBy)
         {
             if(keyword == null)
             {

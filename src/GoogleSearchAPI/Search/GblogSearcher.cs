@@ -53,7 +53,7 @@ namespace Google.API.Search
             }
         }
 
-        internal static SearchData<GblogResult> GSearch(string keyword, int start, ResultSizeEnum resultSize, SortType sortBy)
+        internal static SearchData<GblogResult> GSearch(string keyword, int start, ResultSize resultSize, SortType sortBy)
         {
             if (keyword == null)
             {
