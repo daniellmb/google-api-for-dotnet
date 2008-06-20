@@ -91,6 +91,7 @@
     <Compile Include="Search\IBookResult.cs" />
     <Compile Include="Search\INewsResult.cs" />
     <Compile Include="Search\INewsResultItem.cs" />
+    <Compile Include="Search\IPatentResult.cs" />
     <Compile Include="Search\ITbImage.cs" />
     <Compile Include="Search\IVideoResult.cs" />
     <Compile Include="Search\IWebResult.cs" />

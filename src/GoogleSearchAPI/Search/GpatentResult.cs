@@ -27,8 +27,14 @@ using Newtonsoft.Json;
 
 namespace Google.API.Search
 {
-    internal class GpatentResult
+    internal class GpatentResult : IPatentResult
     {
+        private static readonly int s_TbWidth = 128;
+        private static readonly int s_TbHeight = 188;
+        private string m_PlainTitle;
+        private string m_PlainContent;
+        private string m_PlainAssignee;
+
         /// <summary>
         /// Indicates the "type" of result.
         /// </summary>
@@ -97,7 +103,7 @@ namespace Google.API.Search
 
         public override string ToString()
         {
-            GpatentResult result = this;
+            IPatentResult result = this;
             return
                 string.Format(
                     "{0}" + Environment.NewLine + "US Pat. {1} - filed {2:d} - {3}" + Environment.NewLine + "{4}",
@@ -107,5 +113,88 @@ namespace Google.API.Search
                     result.Assignee,
                     result.Content);
         }
+
+        #region IPatentResult Members
+
+        string IPatentResult.Title
+        {
+            get
+            {
+                if (TitleNoFormatting == null)
+                {
+                    return null;
+                }
+
+                if (m_PlainTitle == null)
+                {
+                    m_PlainTitle = HttpUtility.HtmlDecode(TitleNoFormatting);
+                }
+                return m_PlainTitle;
+            }
+        }
+
+        string IPatentResult.Content
+        {
+            get
+            {
+                if (Content == null)
+                {
+                    return null;
+                }
+
+                if (m_PlainContent == null)
+                {
+                    m_PlainContent = HttpUtility.RemoveHtmlTags(Content);
+                }
+                return m_PlainContent;
+            }
+        }
+
+        string IPatentResult.Url
+        {
+            get { return UnescapedUrl; }
+        }
+
+        DateTime IPatentResult.ApplicationDate
+        {
+            get { return ApplicationDate; }
+        }
+
+        string IPatentResult.PatentNumber
+        {
+            get { return PatentNumber; }
+        }
+
+        string IPatentResult.PatentStatus
+        {
+            get { return PatentStatus; }
+        }
+
+        string IPatentResult.Assignee
+        {
+            get
+            {
+                if(Assignee == null)
+                {
+                    return null;
+                }
+
+                if(m_PlainAssignee == null)
+                {
+                    m_PlainAssignee = HttpUtility.HtmlDecode(Assignee);
+                }
+                return m_PlainAssignee;
+            }
+        }
+
+        ITbImage IPatentResult.TbImage
+        {
+            get
+            {
+                return new TbImage(TbUrl, s_TbWidth, s_TbHeight);
+            }
+        }
+
+        #endregion
     }
 }

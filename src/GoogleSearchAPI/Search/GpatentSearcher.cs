@@ -23,6 +23,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 
 namespace Google.API.Search
 {
@@ -65,6 +66,117 @@ namespace Google.API.Search
                 RequestUtility.GetResponseData<SearchData<GpatentResult>>(request, Timeout);
 
             return responseData;
+        }
+
+        /// <summary>
+        /// Search patents.
+        /// </summary>
+        /// <param name="keyword">The keyword.</param>
+        /// <param name="resultCount">The count of result itmes.</param>
+        /// <returns>The result items.</returns>
+        /// <remarks>
+        /// Now, the max count of items Google given is <b>32</b>.
+        /// </remarks>
+        /// <example>
+        /// This is the c# code example.
+        /// <code>
+        /// IList&lt;IPatentResult&gt; results = GpatentSearcher.Search("auto", 10);
+        /// foreach(IPatentResult result in results)
+        /// {
+        ///     Console.WriteLine("[{0} - US Pat. {1} - filed {2:d} - {3}] {4}", result.Title, result.PatentNumber, result.ApplicationDate, result.Assignee, result.Content);
+        /// }
+        /// </code>
+        /// </example>
+        public static IList<IPatentResult> Search(string keyword, int resultCount)
+        {
+            return Search(keyword, resultCount, false, false, new SortType());
+        }
+
+        /// <summary>
+        /// Search patents.
+        /// </summary>
+        /// <param name="keyword">The keyword.</param>
+        /// <param name="resultCount">The count of result itmes.</param>
+        /// <param name="sortBy">The way to order results.</param>
+        /// <returns>The result items.</returns>
+        /// <remarks>
+        /// Now, the max count of items Google given is <b>32</b>.
+        /// </remarks>
+        /// <example>
+        /// This is the c# code example.
+        /// <code>
+        /// IList&lt;IPatentResult&gt; results = GpatentSearcher.Search("encode", 32, SortType.relevance);
+        /// foreach(IPatentResult result in results)
+        /// {
+        ///     Console.WriteLine("[{0} - US Pat. {1} - filed {2:d} - {3}] {4}", result.Title, result.PatentNumber, result.ApplicationDate, result.Assignee, result.Content);
+        /// }
+        /// </code>
+        /// </example>
+        public static IList<IPatentResult> Search(string keyword, int resultCount, SortType sortBy)
+        {
+            return Search(keyword, resultCount, false, false, sortBy);
+        }
+
+        /// <summary>
+        /// Search patents.
+        /// </summary>
+        /// <param name="keyword">The keyword.</param>
+        /// <param name="resultCount">The count of result itmes.</param>
+        /// <param name="issuedOnly">Whether restrict the search to ONLY patents that having been issued, skiping all patents that have only been filed.</param>
+        /// <param name="filedOnly">Whether restrict the search to ONLY patents that only been filed, skipping over all patents that have been issued.</param>
+        /// <returns>The result items.</returns>
+        /// <remarks>
+        /// When both issuedOnly and filedOnly are true, it equals to both are false.
+        /// Now, the max count of items Google given is <b>32</b>.
+        /// </remarks>
+        /// <example>
+        /// This is the c# code example.
+        /// <code>
+        /// IList&lt;IPatentResult&gt; results = GpatentSearcher.Search("Wifi", 20, true, false);
+        /// foreach(IPatentResult result in results)
+        /// {
+        ///     Console.WriteLine("[{0} - US Pat. {1} - filed {2:d} - {3}] {4}", result.Title, result.PatentNumber, result.ApplicationDate, result.Assignee, result.Content);
+        /// }
+        /// </code>
+        /// </example>
+        public static IList<IPatentResult> Search(string keyword, int resultCount, bool issuedOnly, bool filedOnly)
+        {
+            return Search(keyword, resultCount, issuedOnly, filedOnly, new SortType());
+        }
+
+        /// <summary>
+        /// Search patents.
+        /// </summary>
+        /// <param name="keyword">The keyword.</param>
+        /// <param name="resultCount">The count of result itmes.</param>
+        /// <param name="issuedOnly">Whether restrict the search to ONLY patents that having been issued, skiping all patents that have only been filed.</param>
+        /// <param name="filedOnly">Whether restrict the search to ONLY patents that only been filed, skipping over all patents that have been issued.</param>
+        /// <param name="sortBy">The way to order results.</param>
+        /// <returns>The result items.</returns>
+        /// <remarks>
+        /// When both issuedOnly and filedOnly are true, it equals to both are false.
+        /// Now, the max count of items Google given is <b>32</b>.
+        /// </remarks>
+        /// <example>
+        /// This is the c# code example.
+        /// <code>
+        /// IList&lt;IPatentResult&gt; results = GpatentSearcher.Search("search engine", 30, true, false, SortType.date);
+        /// foreach(IPatentResult result in results)
+        /// {
+        ///     Console.WriteLine("[{0} - US Pat. {1} - filed {2:d} - {3}] {4}", result.Title, result.PatentNumber, result.ApplicationDate, result.Assignee, result.Content);
+        /// }
+        /// </code>
+        /// </example>
+        public static IList<IPatentResult> Search(string keyword, int resultCount, bool issuedOnly, bool filedOnly, SortType sortBy)
+        {
+            if(keyword == null)
+            {
+                throw new ArgumentNullException("keyword");
+            }
+
+            SearchUtility.GSearchCallback<GpatentResult> gsearch = (start, resultSize) => GSearch(keyword, start, resultSize, issuedOnly, filedOnly, sortBy);
+            List<GpatentResult> results = SearchUtility.Search(gsearch, resultCount);
+            return results.ConvertAll<IPatentResult>(item => (IPatentResult)item);
         }
     }
 }

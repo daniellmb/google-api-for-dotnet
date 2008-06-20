@@ -23,6 +23,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 
 namespace Google.API.Search.Test
@@ -33,12 +34,12 @@ namespace Google.API.Search.Test
         [Test]
         public void GSearchTest()
         {
-            string keyword = "auto";
+            string keyword = "search engine";
             int start = 0;
             ResultSizeEnum resultSize = ResultSizeEnum.small;
             bool issuedOnly = true;
-            bool filedOnly = true;
-            SortType sortBy = new SortType();
+            bool filedOnly = false;
+            SortType sortBy = SortType.relevance;
 
             SearchData<GpatentResult> searchData =
                 GpatentSearcher.GSearch(keyword, start, resultSize, issuedOnly, filedOnly, sortBy);
@@ -49,6 +50,80 @@ namespace Google.API.Search.Test
             {
                 Assert.IsNotNull(result);
                 Assert.AreEqual("GpatentSearch", result.GSearchResultClass);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
+        }
+
+        [Test]
+        public void SearchTest()
+        {
+            string keyword = "Artificial Intelligence";
+            int count = 10;
+            IList<IPatentResult> results = GpatentSearcher.Search(keyword, count);
+
+            Assert.IsNotNull(results);
+            Assert.AreEqual(count, results.Count);
+            foreach (IPatentResult result in results)
+            {
+                Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
+        }
+
+        [Test]
+        public void SearchTest2()
+        {
+            string keyword = "encode";
+            int count = 32;
+            SortType sortBy = SortType.relevance;
+            IList<IPatentResult> results = GpatentSearcher.Search(keyword, count, sortBy);
+
+            Assert.IsNotNull(results);
+            Assert.AreEqual(count, results.Count);
+            foreach (IPatentResult result in results)
+            {
+                Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
+        }
+
+        [Test]
+        public void SearchTest3()
+        {
+            string keyword = "wifi";
+            int count = 20;
+            bool issuedOnly = false;
+            bool filedOnly = true;
+            IList<IPatentResult> results = GpatentSearcher.Search(keyword, count, issuedOnly, filedOnly);
+
+            Assert.IsNotNull(results);
+            Assert.AreEqual(count, results.Count);
+            foreach (IPatentResult result in results)
+            {
+                Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
+        }
+
+        [Test]
+        public void SearchTest4()
+        {
+            string keyword = "render";
+            int count = 30;
+            bool issuedOnly = true;
+            bool filedOnly = true;
+            SortType sortBy = SortType.date;
+            IList<IPatentResult> results = GpatentSearcher.Search(keyword, count, issuedOnly, filedOnly, sortBy);
+
+            Assert.IsNotNull(results);
+            Assert.AreEqual(count, results.Count);
+            foreach (IPatentResult result in results)
+            {
+                Assert.IsNotNull(result);
                 Console.WriteLine(result);
                 Console.WriteLine();
             }
