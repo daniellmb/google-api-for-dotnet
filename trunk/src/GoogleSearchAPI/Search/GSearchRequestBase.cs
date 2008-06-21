@@ -1,5 +1,26 @@
 namespace Google.API.Search
 {
+    /// <summary>
+    /// The search safety level.
+    /// </summary>
+    public enum SafeLevel
+    {
+        /// <summary>
+        /// Disables safe search filtering.
+        /// </summary>
+        off,
+
+        /// <summary>
+        /// Enables moderate safe search filtering. Default value.
+        /// </summary>
+        moderate = 0,
+
+        /// <summary>
+        /// Enables the highest level of safe search filtering.
+        /// </summary>
+        active,
+    }
+
     internal enum ResultSize
     {
         small = 0,
