@@ -38,8 +38,9 @@ namespace Google.API.Search.Test
             int start = 1;
             ResultSize resultSize = ResultSize.small;
             Language language = new Language();
+            SafeLevel safeLevel = SafeLevel.active;
 
-            SearchData<GwebResult> searchData = GwebSearcher.GSearch(keyword, start, resultSize, language);
+            SearchData<GwebResult> searchData = GwebSearcher.GSearch(keyword, start, resultSize, language, safeLevel);
             Assert.IsNotNull(searchData);
             Assert.IsNotNull(searchData.Results);
             Assert.Greater(searchData.Results.Length, 0);
@@ -76,6 +77,25 @@ namespace Google.API.Search.Test
             foreach (IWebResult result in results)
             {
                 Assert.IsNotNull(result);
+            }
+        }
+
+        [Test]
+        public void SearchTest3()
+        {
+            string keyword = "Disney";
+            int count = 25;
+            Language language = Language.French;
+            SafeLevel safeLevel = SafeLevel.off;
+
+            IList<IWebResult> results = GwebSearcher.Search(keyword, count, language, safeLevel);
+            Assert.IsNotNull(results);
+            Assert.AreEqual(count, results.Count);
+            foreach (IWebResult result in results)
+            {
+                Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
             }
         }
     }

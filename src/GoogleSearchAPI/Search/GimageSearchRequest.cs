@@ -22,61 +22,124 @@
  * THE SOFTWARE.
  */
 
-using System;
-
 namespace Google.API.Search
 {
     /// <summary>
-    /// The search safety level.
+    /// The image size.
     /// </summary>
-    public enum SafeLevel
-    {
-        /// <summary>
-        /// Disables safe search filtering.
-        /// </summary>
-        off,
-        /// <summary>
-        /// Enables moderate safe search filtering. Default value.
-        /// </summary>
-        moderate = 0,
-        /// <summary>
-        /// Enables the highest level of safe search filtering.
-        /// </summary>
-        active,
-    }
-
     public enum ImageSize
     {
+        /// <summary>
+        /// All sizes. Default value.
+        /// </summary>
         all = 0,
+
+        /// <summary>
+        /// Icon size.
+        /// </summary>
         icon,
+
+        /// <summary>
+        /// Small size.
+        /// </summary>
         small,
+
+        /// <summary>
+        /// Medium size.
+        /// </summary>
         medium,
+
+        /// <summary>
+        /// Large size.
+        /// </summary>
         large,
+
+        /// <summary>
+        /// Large plus size.
+        /// </summary>
         xlarge,
+
+        /// <summary>
+        /// Large plus plus size.
+        /// </summary>
         xxlarge,
+
+        /// <summary>
+        /// Huge size.
+        /// </summary>
         huge,
     }
 
+    /// <summary>
+    /// A specified colorization of images.
+    /// </summary>
     public enum Colorization
     {
+        /// <summary>
+        /// All colorizations. Default value.
+        /// </summary>
         all = 0,
+
+        /// <summary>
+        /// The black and white images.
+        /// </summary>
         mono,
+
+        /// <summary>
+        /// The grayscale images.
+        /// </summary>
         gray,
+
+        /// <summary>
+        /// The color images.
+        /// </summary>
         color,
     }
 
+    /// <summary>
+    /// The special type of image.
+    /// </summary>
     public enum ImageType
     {
+        /// <summary>
+        /// All types. Default value.
+        /// </summary>
         all = 0,
+
+        /// <summary>
+        /// Images of faces.
+        /// </summary>
         face,
     }
 
+    /// <summary>
+    /// The specified file type of image.
+    /// </summary>
     public enum FileType
     {
+        /// <summary>
+        /// All types. Default value.
+        /// </summary>
         all = 0,
+
+        /// <summary>
+        /// The jpg images.
+        /// </summary>
         jpg,
+
+        /// <summary>
+        /// The png images.
+        /// </summary>
         png,
+
+        /// <summary>
+        /// The gif images.
+        /// </summary>
         gif,
+
+        /// <summary>
+        /// The bmp images.
+        /// </summary>
         bmp,
     }
 
@@ -84,7 +147,7 @@ namespace Google.API.Search
     {
         private static readonly string s_BaseAddress = @"http://ajax.googleapis.com/ajax/services/search/images";
 
-        public GimageSearchRequest(string keyword, int start, ResultSize resultSize, SafeLevel safeLevel, ImageSize imageSize, Colorization colorization, ImageType imageType, FileType fileType, string site)
+        public GimageSearchRequest(string keyword, int start, ResultSize resultSize, ImageSize imageSize, Colorization colorization, ImageType imageType, FileType fileType, string site, SafeLevel safeLevel)
             : base(keyword, start, resultSize)
         {
             SafeLevel = safeLevel;

@@ -143,8 +143,8 @@ namespace Google.API.Search.Test
         [Test]
         public void SearchTest4()
         {
-            string keyword = "刘德华";
-            int count = 30;
+            string keyword = "金城武";
+            int count = 25;
             ImageSize imageSize = ImageSize.all;
             Colorization colorization = Colorization.color;
             ImageType imageType = ImageType.all;

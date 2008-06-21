@@ -28,35 +28,18 @@ namespace Google.API.Search
     {
         private static readonly string s_BaseAddress = @"http://ajax.googleapis.com/ajax/services/search/web";
 
-        public GwebSearchRequest(string keyword)
-            : base(keyword)
-        { }
-
-        public GwebSearchRequest(string keyword, string language)
-            : base(keyword)
-        {
-            Language = language;
-        }
-
-        public GwebSearchRequest(string keyword, int start)
-            : base(keyword, start)
-        { }
-
-        public GwebSearchRequest(string keyword, int start, string language)
-            : base(keyword, start)
-        {
-            Language = language;
-        }
-
-        public GwebSearchRequest(string keyword, int start, ResultSize resultSize)
-            : base(keyword, start, resultSize)
-        { }
-
-        public GwebSearchRequest(string keyword, int start, ResultSize resultSize, string language)
+        public GwebSearchRequest(string keyword, int start, ResultSize resultSize, string language, SafeLevel safeLevel)
             : base(keyword, start, resultSize)
         {
             Language = language;
+            SafeLevel = safeLevel;
         }
+
+        /// <summary>
+        /// This optional argument supplies the search safety level.
+        /// </summary>
+        [Argument("safe")]
+        public SafeLevel SafeLevel { get; private set; }
 
         /// <summary>
         /// This optional argument allows the caller to restrict the search to documents written in a particular language, e.g., lr=lang_ja.

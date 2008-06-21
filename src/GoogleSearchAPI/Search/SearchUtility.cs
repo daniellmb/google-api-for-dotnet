@@ -88,7 +88,7 @@ namespace Google.API.Search
             string dpart;
             string hour, minute;
             string timeZone;
-            System.DateTime dt = System.DateTime.Now;
+            DateTime dt;
             //--- strip comments
             //--- XXX : FIXME : how to handle nested comments ?
             tmp = Regex.Replace(str, "(\\([^(].*\\))", "");
