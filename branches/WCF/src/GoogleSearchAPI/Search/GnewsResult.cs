@@ -23,11 +23,11 @@
  */
 
 using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Google.API.Search
 {
-    [JsonObject]
+    [DataContract]
     internal class GnewsResult : GnewsResultItem, INewsResult
     {
         private string m_PlainContent;
@@ -35,25 +35,25 @@ namespace Google.API.Search
         /// <summary>
         /// Indicates the "type" of result.
         /// </summary>
-        [JsonProperty("GsearchResultClass")]
+        [DataMember(Name = "GsearchResultClass")]
         public string GSearchResultClass { get; private set; }
 
         /// <summary>
         /// When a news result has a set of related stories, this URL is available and non-null. In this situation, the URL points to a landing page that points to all of the related stories.
         /// </summary>
-        [JsonProperty("clusterUrl")]
+        [DataMember(Name = "clusterUrl")]
         public string ClusterUrl { get; private set; }
 
         /// <summary>
         /// Supplies a snippet of content from the news story associated with this search result.
         /// </summary>
-        [JsonProperty("content")]
+        [DataMember(Name = "content")]
         public string Content { get; private set; }
 
         /// <summary>
         /// This property is optional. It only appears in a result when the story also has a set of closely related stories. In this case, the relatedStories[] array will be present.
         /// </summary>
-        [JsonProperty("relatedStories")]
+        [DataMember(Name = "relatedStories")]
         public GnewsResultItem[] RelatedStories { get; private set; }
 
         public override string ToString()

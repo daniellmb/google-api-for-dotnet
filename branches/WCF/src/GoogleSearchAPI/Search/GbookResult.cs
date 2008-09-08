@@ -23,11 +23,11 @@
  */
 
 using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Google.API.Search
 {
-    [JsonObject]
+    [DataContract]
     internal class GbookResult : IBookResult
     {
         private string m_PlainTitle;
@@ -37,73 +37,74 @@ namespace Google.API.Search
         /// <summary>
         /// Indicates the "type" of result.
         /// </summary>
-        [JsonProperty("GsearchResultClass")]
+        [DataMember(Name = "GsearchResultClass")]
         public string GSearchResultClass { get; private set; }
 
         /// <summary>
         /// Supplies the title of the book.
         /// </summary>
-        [JsonProperty("title")]
+        [DataMember(Name = "title")]
         public string Title { get; private set; }
 
         /// <summary>
         /// Supplies the title, but unlike .title, this property is stripped of html markup (e.g., &lt;b&gt;, &lt;i&gt;, etc.)
         /// </summary>
-        [JsonProperty("titleNoFormatting")]
+        [DataMember(Name = "titleNoFormatting")]
         public string TitleNoFormatting { get; private set; }
 
         /// <summary>
         /// Supplies the raw URL of the result.
         /// </summary>
-        [JsonProperty("unescapedUrl")]
+        [DataMember(Name = "unescapedUrl")]
         public string UnescapedUrl { get; private set; }
 
         /// <summary>
         /// Supplies an escaped version of the above URL.
         /// </summary>
-        [JsonProperty("url")]
+        [DataMember(Name = "url")]
         public string Url { get; private set; }
 
         /// <summary>
         /// Supplies the list of authors of the book.
         /// </summary>
-        [JsonProperty("authors")]
+        [DataMember(Name = "authors")]
         public string Authors { get; private set; }
 
         /// <summary>
         /// Supplies the identifier associated with the book. This is typically an ISBN.
         /// </summary>
-        [JsonProperty("bookId")]
+        [DataMember(Name = "bookId")]
         public string BookId { get; private set; }
 
         /// <summary>
         /// Supplies the year that the book was published.
         /// </summary>
-        [JsonProperty("publishedYear")]
-        public int PublishedYear { get; private set; }
+        [DataMember(Name = "publishedYear")]
+        //public int PublishedYear { get; private set; }
+        public string PublishedYearString { get; private set; }
 
         /// <summary>
         /// Supplies the number of pages contained within the book.
         /// </summary>
-        [JsonProperty("pageCount")]
+        [DataMember(Name = "pageCount")]
         public int PageCount { get; private set; }
 
         /// <summary>
         /// Supplies the width in pixels of the book cover thumbnail.
         /// </summary>
-        [JsonProperty("tbWidth")]
+        [DataMember(Name = "tbWidth")]
         public int TbWidth { get; private set; }
 
         /// <summary>
         /// Supplies the height in pixels of the book cover thumbnail.
         /// </summary>
-        [JsonProperty("tbHeight")]
+        [DataMember(Name = "tbHeight")]
         public int TbHeight { get; private set; }
 
         /// <summary>
         /// Supplies the url of a thumbnail image which visually represents book cover.
         /// </summary>
-        [JsonProperty("tbUrl")]
+        [DataMember(Name = "tbUrl")]
         public string TbUrl { get; private set; }
 
         public override string ToString()
@@ -112,7 +113,7 @@ namespace Google.API.Search
             return string.Format("{0}" + Environment.NewLine + "by {1} - {2} - {3} pages" + Environment.NewLine + "{4}",
                                  result.Title,
                                  result.Authors,
-                                 result.PublishedYear,
+                                 result.PublishedYear >= 0 ? result.PublishedYear.ToString() : "unknown",
                                  result.PageCount,
                                  result.BookId);
         }
@@ -165,7 +166,14 @@ namespace Google.API.Search
 
         int IBookResult.PublishedYear
         {
-            get { return PublishedYear; }
+            //get { return PublishedYear; }
+            get
+            {
+                if (string.CompareOrdinal(PublishedYearString, "unknown") == 0)
+                    return -1;
+
+                return int.Parse(PublishedYearString);
+            }
         }
 
         int IBookResult.PageCount

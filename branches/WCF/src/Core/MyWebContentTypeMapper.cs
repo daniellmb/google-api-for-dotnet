@@ -1,5 +1,5 @@
 ﻿/**
- * GwebSearchRequest.cs
+ * MyWebContentTypeMapper.cs
  *
  * Copyright (C) 2008,  iron9light
  *
@@ -22,34 +22,27 @@
  * THE SOFTWARE.
  */
 
-namespace Google.API.Search
+using System.ServiceModel.Channels;
+
+namespace Google.API
 {
-    internal class GwebSearchRequest : GSearchRequestBase
+    internal class MyWebContentTypeMapper : WebContentTypeMapper
     {
-        private static readonly string s_BaseAddress = @"http://ajax.googleapis.com/ajax/services/search/web";
-
-        public GwebSearchRequest(string keyword, int start, ResultSize resultSize, string language, SafeLevel safeLevel)
-            : base(keyword, start, resultSize)
+        public override WebContentFormat GetMessageFormatForContentType(string contentType)
         {
-            Language = language;
-            SafeLevel = safeLevel;
-        }
+            if (contentType.StartsWith("text/xml"))
+                return WebContentFormat.Xml;
 
-        /// <summary>
-        /// This optional argument supplies the search safety level.
-        /// </summary>
-        [Argument("safe")]
-        public SafeLevel SafeLevel { get; private set; }
+            if (contentType.StartsWith("application/json"))
+                return WebContentFormat.Json;
 
-        /// <summary>
-        /// This optional argument allows the caller to restrict the search to documents written in a particular language, e.g., lr=lang_ja.
-        /// </summary>
-        [Argument("lr")]
-        public string Language { get; private set; }
+            if (contentType.StartsWith("text/javascript"))
+                return WebContentFormat.Json;
 
-        protected override string BaseAddress
-        {
-            get { return s_BaseAddress; }
+            if (contentType.StartsWith("text"))
+                return WebContentFormat.Default;
+
+            return WebContentFormat.Raw;
         }
     }
 }

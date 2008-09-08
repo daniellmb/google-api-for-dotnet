@@ -32,26 +32,26 @@ namespace Google.API.Search
     /// </summary>
     public static class GnewsSearcher
     {
-        private static int s_Timeout = 0;
+        //private static int s_Timeout = 0;
 
-        /// <summary>
-        /// Get or set the length of time, in milliseconds, before the request times out.
-        /// </summary>
-        public static int Timeout
-        {
-            get
-            {
-                return s_Timeout;
-            }
-            set
-            {
-                if (s_Timeout < 0)
-                {
-                    throw new ArgumentOutOfRangeException("value");
-                }
-                s_Timeout = value;
-            }
-        }
+        ///// <summary>
+        ///// Get or set the length of time, in milliseconds, before the request times out.
+        ///// </summary>
+        //public static int Timeout
+        //{
+        //    get
+        //    {
+        //        return s_Timeout;
+        //    }
+        //    set
+        //    {
+        //        if (s_Timeout < 0)
+        //        {
+        //            throw new ArgumentOutOfRangeException("value");
+        //        }
+        //        s_Timeout = value;
+        //    }
+        //}
 
         internal static SearchData<GnewsResult> GSearch(string keyword, int start, ResultSize resultSize, string geo, SortType sortBy)
         {
@@ -60,10 +60,9 @@ namespace Google.API.Search
                 throw new ArgumentNullException("keyword");
             }
 
-            GnewsSearchRequest request = new GnewsSearchRequest(keyword, start, resultSize, geo, sortBy);
-
-            SearchData<GnewsResult> responseData =
-                RequestUtility.GetResponseData<SearchData<GnewsResult>>(request, Timeout);
+            var responseData = SearchUtility.GetResponseData(
+                service => service.NewsSearch(keyword, resultSize.ToString(), start, sortBy.GetString(), geo)
+                );
 
             return responseData;
         }

@@ -22,23 +22,23 @@
  * THE SOFTWARE.
  */
 
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Google.API.Search
 {
-    [JsonObject]
+    [DataContract]
     internal class SearchData<TResult>
     {
-        [JsonObject]
+        [DataContract]
         public class CursorObject
         {
-            [JsonObject]
+            [DataContract]
             public class Page
             {
-                [JsonProperty("start")]
+                [DataMember(Name = "start")]
                 public int Start { get; private set; }
 
-                [JsonProperty("label")]
+                [DataMember(Name = "label")]
                 public int Label { get; private set; }
 
                 public override string ToString()
@@ -47,23 +47,23 @@ namespace Google.API.Search
                 }
             }
 
-            [JsonProperty("pages")]
+            [DataMember(Name = "pages")]
             public Page[] Pages { get; private set; }
 
-            [JsonProperty("estimatedResultCount")]
+            [DataMember(Name = "estimatedResultCount")]
             public int EstimatedResultCount { get; private set; }
 
-            [JsonProperty("currentPageIndex")]
+            [DataMember(Name = "currentPageIndex")]
             public int CurrentPageIndex { get; private set; }
 
-            [JsonProperty("moreResultsUrl")]
+            [DataMember(Name = "moreResultsUrl")]
             public string MoreResultsUrl { get; private set; }
         }
 
-        [JsonProperty("results")]
+        [DataMember(Name = "results")]
         public TResult[] Results { get; private set; }
 
-        [JsonProperty("cursor")]
+        [DataMember(Name = "cursor")]
         public CursorObject Cursor { get; private set; }
     }
 }

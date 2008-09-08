@@ -32,26 +32,26 @@ namespace Google.API.Search
     /// </summary>
     public static class GimageSearcher
     {
-        private static int s_Timeout = 0;
+        //private static int s_Timeout = 0;
 
-        /// <summary>
-        /// Get or set the length of time, in milliseconds, before the request times out.
-        /// </summary>
-        public static int Timeout
-        {
-            get
-            {
-                return s_Timeout;
-            }
-            set
-            {
-                if (s_Timeout < 0)
-                {
-                    throw new ArgumentOutOfRangeException("value");
-                }
-                s_Timeout = value;
-            }
-        }
+        ///// <summary>
+        ///// Get or set the length of time, in milliseconds, before the request times out.
+        ///// </summary>
+        //public static int Timeout
+        //{
+        //    get
+        //    {
+        //        return s_Timeout;
+        //    }
+        //    set
+        //    {
+        //        if (s_Timeout < 0)
+        //        {
+        //            throw new ArgumentOutOfRangeException("value");
+        //        }
+        //        s_Timeout = value;
+        //    }
+        //}
 
         internal static SearchData<GimageResult> GSearch(string keyword, int start, ResultSize resultSize, SafeLevel safeLevel, ImageSize imageSize, Colorization colorization, ImageType imageType, FileType fileType, string searchSite)
         {
@@ -60,10 +60,18 @@ namespace Google.API.Search
                 throw new ArgumentNullException("keyword");
             }
 
-            GimageSearchRequest request = new GimageSearchRequest(keyword, start, resultSize, imageSize, colorization, imageType, fileType, searchSite, safeLevel);
-
-            SearchData<GimageResult> responseData =
-                RequestUtility.GetResponseData<SearchData<GimageResult>>(request, Timeout);
+            var responseData = SearchUtility.GetResponseData(
+                service => service.ImageSearch(
+                               keyword,
+                               resultSize.ToString(),
+                               start,
+                               safeLevel.ToString(),
+                               imageSize.GetString(),
+                               colorization.GetString(),
+                               imageType.GetString(),
+                               fileType.GetString(),
+                               searchSite)
+                );
 
             return responseData;
         }

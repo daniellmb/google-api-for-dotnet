@@ -43,18 +43,6 @@ namespace Google.API.Test
         }
 
         [Test]
-        public void UrlEncodeTest()
-        {
-            string s = "我喜欢" + Environment.NewLine + "这样的感觉.";
-
-            string expected = System.Web.HttpUtility.UrlEncode(s);
-
-            string actual = HttpUtility.UrlEncode(s);
-
-            Assert.AreEqual(expected, actual);
-        }
-
-        [Test]
         public void RemoveHtmlTagsTest()
         {
             string s = "<chinese>我爱我家。</chinese>" + Environment.NewLine + "<english>I love my family.</english>";

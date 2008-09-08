@@ -32,26 +32,26 @@ namespace Google.API.Search
     /// </summary>
     public static class GpatentSearcher
     {
-        private static int s_Timeout = 0;
+        //private static int s_Timeout = 0;
 
-        /// <summary>
-        /// Get or set the length of time, in milliseconds, before the request times out.
-        /// </summary>
-        public static int Timeout
-        {
-            get
-            {
-                return s_Timeout;
-            }
-            set
-            {
-                if (s_Timeout < 0)
-                {
-                    throw new ArgumentOutOfRangeException("value");
-                }
-                s_Timeout = value;
-            }
-        }
+        ///// <summary>
+        ///// Get or set the length of time, in milliseconds, before the request times out.
+        ///// </summary>
+        //public static int Timeout
+        //{
+        //    get
+        //    {
+        //        return s_Timeout;
+        //    }
+        //    set
+        //    {
+        //        if (s_Timeout < 0)
+        //        {
+        //            throw new ArgumentOutOfRangeException("value");
+        //        }
+        //        s_Timeout = value;
+        //    }
+        //}
 
         internal static SearchData<GpatentResult> GSearch(string keyword, int start, ResultSize resultSize, bool issuedOnly, bool filedOnly, SortType sortBy)
         {
@@ -60,10 +60,14 @@ namespace Google.API.Search
                 throw new ArgumentNullException("keyword");
             }
 
-            GpatentSearchRequest request = new GpatentSearchRequest(keyword, start, resultSize, issuedOnly, filedOnly, sortBy);
-
-            SearchData<GpatentResult> responseData =
-                RequestUtility.GetResponseData<SearchData<GpatentResult>>(request, Timeout);
+            var responseData = SearchUtility.GetResponseData(
+                service => service.PatentSearch(
+                               keyword,
+                               resultSize.ToString(),
+                               start, sortBy.GetString(),
+                               issuedOnly.GetString(),
+                               filedOnly.GetString())
+                );
 
             return responseData;
         }

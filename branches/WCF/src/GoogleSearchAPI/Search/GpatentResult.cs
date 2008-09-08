@@ -23,10 +23,11 @@
  */
 
 using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Google.API.Search
 {
+    [DataContract]
     internal class GpatentResult : IPatentResult
     {
         private static readonly int s_TbWidth = 128;
@@ -38,67 +39,68 @@ namespace Google.API.Search
         /// <summary>
         /// Indicates the "type" of result.
         /// </summary>
-        [JsonProperty("GsearchResultClass")]
+        [DataMember(Name = "GsearchResultClass")]
         public string GSearchResultClass { get; private set; }
 
         /// <summary>
         /// Supplies the title value of the result.
         /// </summary>
-        [JsonProperty("title")]
+        [DataMember(Name = "title")]
         public string Title { get; private set; }
 
         /// <summary>
         /// Supplies the title, but unlike .title, this property is stripped of html markup (e.g., &lt;b&gt;, &lt;i&gt;, etc.)
         /// </summary>
-        [JsonProperty("titleNoFormatting")]
+        [DataMember(Name = "titleNoFormatting")]
         public string TitleNoFormatting { get; private set; }
 
         /// <summary>
         /// Supplies a snippet style description of the patent.
         /// </summary>
-        [JsonProperty("content")]
+        [DataMember(Name = "content")]
         public string Content { get; private set; }
 
         /// <summary>
         /// Supplies the raw URL of the result.
         /// </summary>
-        [JsonProperty("unescapedUrl")]
+        [DataMember(Name = "unescapedUrl")]
         public string UnescapedUrl { get; private set; }
 
         /// <summary>
         /// Supplies an escaped version of the above URL.
         /// </summary>
-        [JsonProperty("url")]
+        [DataMember(Name = "url")]
         public string Url { get; private set; }
 
         /// <summary>
         /// Supplies the application filing date of the patent (rfc-822 format).
         /// </summary>
-        [JsonProperty("applicationDate")]
-        public DateTime ApplicationDate { get; private set; }
+        [DataMember(Name = "applicationDate")]
+        //public DateTime ApplicationDate { get; private set; }
+        public string ApplicationDateString { get; private set; }
 
         /// <summary>
         /// Supplies the patent number for issued patents, and the application number for filed, but not yet issued patents.
         /// </summary>
-        [JsonProperty("patentNumber")]
+        [DataMember(Name = "patentNumber")]
         public string PatentNumber { get; private set; }
 
         /// <summary>
         /// Supplies the status of the patent which can either be "filed" for filed, but not yet issued patents, or "issued" for issued patents.
         /// </summary>
-        [JsonProperty("patentStatus")]
+        [DataMember(Name = "patentStatus")]
         public string PatentStatus { get; private set; }
 
         /// <summary>
         /// Supplies the assignee of the patent.
         /// </summary>
-        [JsonProperty("assignee")]
+        [DataMember(Name = "assignee")]
         public string Assignee { get; private set; }
 
         /// <summary>
         /// Supplies the url of a thumbnail image which visually represents the patent.
         /// </summary>
-        [JsonProperty("tbUrl")]
+        [DataMember(Name = "tbUrl")]
         public string TbUrl { get; private set; }
 
         public override string ToString()
@@ -157,7 +159,11 @@ namespace Google.API.Search
 
         DateTime IPatentResult.ApplicationDate
         {
-            get { return ApplicationDate; }
+            //get { return ApplicationDate; }
+            get
+            {
+                return SearchUtility.RFC2822DateTimeParse(ApplicationDateString);
+            }
         }
 
         string IPatentResult.PatentNumber

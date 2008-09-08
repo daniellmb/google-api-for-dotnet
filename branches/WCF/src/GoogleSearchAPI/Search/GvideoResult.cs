@@ -23,10 +23,11 @@
  */
 
 using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Google.API.Search
 {
+    [DataContract]
     internal class GvideoResult : IVideoResult
     {
         private string m_PlainTitle;
@@ -36,76 +37,76 @@ namespace Google.API.Search
         /// <summary>
         /// Indicates the "type" of result.
         /// </summary>
-        [JsonProperty("GsearchResultClass")]
+        [DataMember(Name = "GsearchResultClass")]
         public string GSearchResultClass { get; private set; }
 
         /// <summary>
         /// Supplies the title of the video result.
         /// </summary>
-        [JsonProperty("title")]
+        [DataMember(Name = "title")]
         public string Title { get; private set; }
 
         /// <summary>
         /// Supplies the title, but unlike .title, this property is stripped of html markup (e.g., &lt;b&gt;, &lt;i&gt;, etc.) 
         /// </summary>
-        [JsonProperty("titleNoFormatting")]
+        [DataMember(Name = "titleNoFormatting")]
         public string TitleNoFormatting { get; private set; }
 
         /// <summary>
         /// Supplies a snippet style description of the video clip.
         /// </summary>
-        [JsonProperty("content")]
+        [DataMember(Name = "content")]
         public string Content { get; private set; }
 
         /// <summary>
         /// Supplies the url of a playable version of the video result.
         /// </summary>
-        [JsonProperty("url")]
+        [DataMember(Name = "url")]
         public string Url { get; private set; }
 
         /// <summary>
         /// Supplies the published date of the video (rfc-822 format).
         /// </summary>
-        [JsonProperty("published")]
+        [DataMember(Name = "published")]
         public string PublishedDateString { get; private set; }
 
         /// <summary>
         /// Supplies the name of the video's publisher, typically displayed in green below the video thumbnail, similar to the treatment used for visibleUrl in the other search result objects.
         /// </summary>
-        [JsonProperty("publisher")]
+        [DataMember(Name = "publisher")]
         public string Publisher { get; private set; }
 
         /// <summary>
         /// The approximate duration, in seconds, of the video.
         /// </summary>
-        [JsonProperty("duration")]
+        [DataMember(Name = "duration")]
         public int Duration { get; private set; }
 
         /// <summary>
         /// Supplies the width in pixels of the video thumbnail.
         /// </summary>
-        [JsonProperty("tbWidth")]
+        [DataMember(Name = "tbWidth")]
         public int TbWidth { get; private set; }
 
         /// <summary>
         /// Supplies the height in pixels of the video thumbnail.
         /// </summary>
-        [JsonProperty("tbHeight")]
+        [DataMember(Name = "tbHeight")]
         public int TbHeight { get; private set; }
 
         /// <summary>
         /// Supplies the url of a thumbnail image which visually represents the video.
         /// </summary>
-        [JsonProperty("tbUrl")]
+        [DataMember(Name = "tbUrl")]
         public string TbUrl { get; private set; }
 
         /// <summary>
         /// If present, supplies the url of the flash version of the video that can be played inline on your page. To play this video simply create and &lt;embed&gt; element on your page using this value as the src attribute and using application/x-shockwave-flash as the type attribute. If you want the video to play right away, make sure to append &autoPlay=true to the url.
         /// </summary>
-        [JsonProperty("playUrl")]
+        [DataMember(Name = "playUrl")]
         public string PlayUrl { get; private set; }
 
-        [JsonProperty("videoType")]
+        [DataMember(Name = "videoType")]
         public string VideoType { get; private set; }
 
         public override string ToString()

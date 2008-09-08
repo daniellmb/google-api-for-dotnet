@@ -1,5 +1,5 @@
-﻿/**
- * TestRequestBase.cs
+/**
+ * ITranslateService.cs
  *
  * Copyright (C) 2008,  iron9light
  *
@@ -22,43 +22,24 @@
  * THE SOFTWARE.
  */
 
-using System;
-using NUnit.Framework;
+using System.ServiceModel;
+using System.ServiceModel.Web;
 
-namespace Google.API.Test
+namespace Google.API.Translate
 {
-    [TestFixture]
-    public class TestRequestBase
+    [ServiceContract]
+    internal interface ITranslateService
     {
-        [Test]
-        public void UrlStringTest()
-        {
-            MockRequest mockRequest = new MockRequest("http://www.xxx.com", "xx");
-            mockRequest.ArgB = 50;
-            Console.Write(mockRequest.Uri.Query);
-            Assert.AreEqual("http://www.xxx.com?a=default&b=50&q=xx&v=1.0", mockRequest.UrlString);
-        }
-    }
+        [OperationContract]
+        [WebGet(
+            UriTemplate = "/translate?v=1.0&q={query}&langpair={langpair}&format={format}",
+            ResponseFormat = WebMessageFormat.Json)]
+        ResultObject<TranslateData> Translate(string query, string langpair, string format);
 
-    class MockRequest : RequestBase
-    {
-        public MockRequest(string address, string content)
-            : base(content)
-        {
-            m_BaseAddress = address;
-        }
-
-        private readonly string m_BaseAddress;
-
-        [Argument("a", "default")]
-        public string ArgA { get; set; }
-
-        [Argument("b", Optional = false)]
-        public object ArgB { get; set; }
-
-        protected override string BaseAddress
-        {
-            get { return m_BaseAddress; }
-        }
+        [OperationContract]
+        [WebGet(
+            UriTemplate = "/detect?v=1.0&q={query}",
+            ResponseFormat = WebMessageFormat.Json)]
+        ResultObject<DetectData> Detect(string query);
     }
 }

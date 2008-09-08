@@ -52,6 +52,9 @@ namespace Google.API.Search
         /// <summary>
         /// Get the year that the book was published.
         /// </summary>
+        /// <remarks>
+        /// If the published year is unknown, it will return -1.
+        /// </remarks>
         int PublishedYear { get; }
 
         /// <summary>

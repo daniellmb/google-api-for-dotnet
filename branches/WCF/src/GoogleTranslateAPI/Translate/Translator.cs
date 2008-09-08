@@ -27,10 +27,40 @@ using System;
 namespace Google.API.Translate
 {
     /// <summary>
+    /// Translate format.
+    /// </summary>
+    public enum TranslateFormat
+    {
+        /// <summary>
+        /// Text format. Default value.
+        /// </summary>
+        text = 0,
+        /// <summary>
+        /// Html format.
+        /// </summary>
+        html,
+    }
+
+    /// <summary>
     /// Utility class for translate and detect.
     /// </summary>
     public static class Translator
     {
+        private static string addressString = "http://ajax.googleapis.com/ajax/services/language";
+
+        private static Uri address;
+
+        private static Uri Address
+        {
+            get
+            {
+                if (address == null)
+                    address = new Uri(addressString);
+
+                return address;
+            }
+        }
+
         private static int s_Timeout = 0;
 
         /// <summary>
@@ -219,9 +249,7 @@ namespace Google.API.Translate
                 throw new ArgumentNullException("to");
             }
 
-            TranslateRequest request = new TranslateRequest(text, from, to, format);
-
-            TranslateData responseData = RequestUtility.GetResponseData<TranslateData>(request, Timeout);
+            var responseData = RequestUtility.GetResponseData<TranslateData, ITranslateService>(service => service.Translate(text, from + '|' + to, format.ToString()), Address);
 
             return responseData;
         }
@@ -233,9 +261,7 @@ namespace Google.API.Translate
                 throw new ArgumentNullException("text");
             }
 
-            DetectRequest request = new DetectRequest(text);
-
-            DetectData responseData = RequestUtility.GetResponseData<DetectData>(request, Timeout);
+            var responseData = RequestUtility.GetResponseData<DetectData, ITranslateService>(service => service.Detect(text), Address);
 
             return responseData;
         }

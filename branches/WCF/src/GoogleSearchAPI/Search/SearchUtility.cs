@@ -28,8 +28,189 @@ using System.Text.RegularExpressions;
 
 namespace Google.API.Search
 {
+    /// <summary>
+    /// The search safety level.
+    /// </summary>
+    public enum SafeLevel
+    {
+        /// <summary>
+        /// Disables safe search filtering.
+        /// </summary>
+        off,
+
+        /// <summary>
+        /// Enables moderate safe search filtering. Default value.
+        /// </summary>
+        moderate = 0,
+
+        /// <summary>
+        /// Enables the highest level of safe search filtering.
+        /// </summary>
+        active,
+    }
+
+    internal enum ResultSize
+    {
+        small = 0,
+        large,
+    }
+
+    /// <summary>
+    /// Sort type enum.
+    /// </summary>
+    public enum SortType
+    {
+        /// <summary>
+        /// Sort by relevance. Default value.
+        /// </summary>
+        relevance = 0,
+        /// <summary>
+        /// Sort by date.
+        /// </summary>
+        date,
+    }
+
+    /// <summary>
+    /// The image size.
+    /// </summary>
+    public enum ImageSize
+    {
+        /// <summary>
+        /// All sizes. Default value.
+        /// </summary>
+        all = 0,
+
+        /// <summary>
+        /// Icon size.
+        /// </summary>
+        icon,
+
+        /// <summary>
+        /// Small size.
+        /// </summary>
+        small,
+
+        /// <summary>
+        /// Medium size.
+        /// </summary>
+        medium,
+
+        /// <summary>
+        /// Large size.
+        /// </summary>
+        large,
+
+        /// <summary>
+        /// Large plus size.
+        /// </summary>
+        xlarge,
+
+        /// <summary>
+        /// Large plus plus size.
+        /// </summary>
+        xxlarge,
+
+        /// <summary>
+        /// Huge size.
+        /// </summary>
+        huge,
+    }
+
+    /// <summary>
+    /// A specified colorization of images.
+    /// </summary>
+    public enum Colorization
+    {
+        /// <summary>
+        /// All colorizations. Default value.
+        /// </summary>
+        all = 0,
+
+        /// <summary>
+        /// The black and white images.
+        /// </summary>
+        mono,
+
+        /// <summary>
+        /// The grayscale images.
+        /// </summary>
+        gray,
+
+        /// <summary>
+        /// The color images.
+        /// </summary>
+        color,
+    }
+
+    /// <summary>
+    /// The special type of image.
+    /// </summary>
+    public enum ImageType
+    {
+        /// <summary>
+        /// All types. Default value.
+        /// </summary>
+        all = 0,
+
+        /// <summary>
+        /// Images of faces.
+        /// </summary>
+        face,
+    }
+
+    /// <summary>
+    /// The specified file type of image.
+    /// </summary>
+    public enum FileType
+    {
+        /// <summary>
+        /// All types. Default value.
+        /// </summary>
+        all = 0,
+
+        /// <summary>
+        /// The jpg images.
+        /// </summary>
+        jpg,
+
+        /// <summary>
+        /// The png images.
+        /// </summary>
+        png,
+
+        /// <summary>
+        /// The gif images.
+        /// </summary>
+        gif,
+
+        /// <summary>
+        /// The bmp images.
+        /// </summary>
+        bmp,
+    }
+
     internal static class SearchUtility
     {
+        private static string addressString = "http://ajax.googleapis.com/ajax/services/search";
+
+        private static Uri address;
+
+        public static Uri Address
+        {
+            get
+            {
+                if(address == null)
+                    address = new Uri(addressString);
+
+                return address;
+            }
+        }
+
+        public static T GetResponseData<T>(RequestUtility.RequestCallback<T, ISearchService> service)
+        {
+            return RequestUtility.GetResponseData(service, Address);
+        }
+
         public delegate SearchData<T> GSearchCallback<T>(int start, ResultSize resultSize);
 
         public static List<T> Search<T>(GSearchCallback<T> gsearch, int resultCount)
@@ -78,6 +259,47 @@ namespace Google.API.Search
             }
 
             return results;
+        }
+
+        public static string GetString(this bool value)
+        {
+            if (value)
+                return "1";
+
+            return null;
+        }
+
+        public static string GetString(this SortType value)
+        {
+            switch (value)
+            {
+                case SortType.relevance:
+                    return null;
+                case SortType.date:
+                    return "d";
+                default:
+                    return null;
+            }
+        }
+
+        public static string GetString(this ImageSize value)
+        {
+            return GetStringIgnoreDefault(value);
+        }
+
+        public static string GetString(this Colorization value)
+        {
+            return GetStringIgnoreDefault(value);
+        }
+
+        public static string GetString(this ImageType value)
+        {
+            return GetStringIgnoreDefault(value);
+        }
+
+        public static string GetString(this FileType value)
+        {
+            return GetStringIgnoreDefault(value);
         }
 
         public static DateTime RFC2822DateTimeParse(string str)
@@ -194,6 +416,14 @@ namespace Google.API.Search
                 throw new FormatException(string.Format("Invalide date:{0}:{1}", e.Message, str));
             }
             return dt;
+        }
+
+        private static string GetStringIgnoreDefault(Enum value)
+        {
+            if (Enum.IsDefined(value.GetType(), value))
+                return null;
+
+            return value.ToString();
         }
     }
 }

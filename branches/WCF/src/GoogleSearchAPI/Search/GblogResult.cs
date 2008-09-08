@@ -23,11 +23,11 @@
  */
 
 using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Google.API.Search
 {
-    [JsonObject]
+    [DataContract]
     internal class GblogResult : IBlogResult
     {
         private string m_PlainTitle;
@@ -37,50 +37,51 @@ namespace Google.API.Search
         /// <summary>
         /// Indicates the "type" of result.
         /// </summary>
-        [JsonProperty("GsearchResultClass")]
+        [DataMember(Name = "GsearchResultClass")]
         public string GSearchResultClass { get; private set; }
 
         /// <summary>
         /// Supplies the title value of the result.
         /// </summary>
-        [JsonProperty("title")]
+        [DataMember(Name = "title")]
         public string Title { get; private set; }
 
         /// <summary>
         /// Supplies the title, but unlike .title, this property is stripped of html markup (e.g., &lt;b&gt;, &lt;i&gt;, etc.)
         /// </summary>
-        [JsonProperty("titleNoFormatting")]
+        [DataMember(Name = "titleNoFormatting")]
         public string TitleNoFormatting { get; private set; }
 
         /// <summary>
         /// Supplies the URL to the blog post referenced in this search result.
         /// </summary>
-        [JsonProperty("postUrl")]
+        [DataMember(Name = "postUrl")]
         public string PostUrl { get; private set; }
 
         /// <summary>
         /// Supplies a snippet of content from the blog post associated with this search result.
         /// </summary>
-        [JsonProperty("content")]
+        [DataMember(Name = "content")]
         public string Content { get; private set; }
 
         /// <summary>
         /// Supplies the name of the author that wrote the blog post.
         /// </summary>
-        [JsonProperty("author")]
+        [DataMember(Name = "author")]
         public string Author { get; private set; }
 
         /// <summary>
         /// Supplies the URL of the blog which contains the post. Typically, this URL is displayed in green, beneath the blog search result and is linked to the blog.
         /// </summary>
-        [JsonProperty("blogUrl")]
+        [DataMember(Name = "blogUrl")]
         public string BlogUrl { get; private set; }
 
         /// <summary>
         /// Supplies the published date (rfc-822 format) of the blog post referenced by this search result.
         /// </summary>
-        [JsonProperty("publishedDate")]
-        public DateTime PublishedDate { get; private set; }
+        [DataMember(Name = "publishedDate")]
+        //public DateTime PublishedDate { get; private set; }
+        public string PublishedDateString { get; private set; }
 
         public override string ToString()
         {
@@ -159,7 +160,11 @@ namespace Google.API.Search
 
         DateTime IBlogResult.PublishedDate
         {
-            get { return PublishedDate; }
+            //get { return PublishedDate; }
+            get
+            {
+                return SearchUtility.RFC2822DateTimeParse(PublishedDateString);
+            }
         }
 
         #endregion

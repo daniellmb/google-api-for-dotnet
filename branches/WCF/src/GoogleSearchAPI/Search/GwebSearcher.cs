@@ -32,26 +32,26 @@ namespace Google.API.Search
     /// </summary>
     public static class GwebSearcher
     {
-        private static int s_Timeout = 0;
+        //private static int s_Timeout = 0;
 
-        /// <summary>
-        /// Get or set the length of time, in milliseconds, before the request times out.
-        /// </summary>
-        public static int Timeout
-        {
-            get
-            {
-                return s_Timeout;
-            }
-            set
-            {
-                if (s_Timeout < 0)
-                {
-                    throw new ArgumentOutOfRangeException("value");
-                }
-                s_Timeout = value;
-            }
-        }
+        ///// <summary>
+        ///// Get or set the length of time, in milliseconds, before the request times out.
+        ///// </summary>
+        //public static int Timeout
+        //{
+        //    get
+        //    {
+        //        return s_Timeout;
+        //    }
+        //    set
+        //    {
+        //        if (s_Timeout < 0)
+        //        {
+        //            throw new ArgumentOutOfRangeException("value");
+        //        }
+        //        s_Timeout = value;
+        //    }
+        //}
 
         internal static SearchData<GwebResult> GSearch(string keyword, int start, ResultSize resultSize, Language language, SafeLevel safeLevel)
         {
@@ -62,10 +62,9 @@ namespace Google.API.Search
 
             string languageCode = LanguageUtility.GetLanguageCode(language);
 
-            GwebSearchRequest request = new GwebSearchRequest(keyword, start, resultSize, languageCode, safeLevel);
-
-            SearchData<GwebResult> responseData =
-                RequestUtility.GetResponseData<SearchData<GwebResult>>(request, Timeout);
+            var responseData = SearchUtility.GetResponseData(
+                service => service.WebSearch(keyword, resultSize.ToString(), start, languageCode, safeLevel.ToString())
+                );
 
             return responseData;
         }

@@ -32,26 +32,26 @@ namespace Google.API.Search
     /// </summary>
     public static class GbookSearcher
     {
-        private static int s_Timeout = 0;
+        //private static int s_Timeout = 0;
 
-        /// <summary>
-        /// Get or set the length of time, in milliseconds, before the request times out.
-        /// </summary>
-        public static int Timeout
-        {
-            get
-            {
-                return s_Timeout;
-            }
-            set
-            {
-                if (s_Timeout < 0)
-                {
-                    throw new ArgumentOutOfRangeException("value");
-                }
-                s_Timeout = value;
-            }
-        }
+        ///// <summary>
+        ///// Get or set the length of time, in milliseconds, before the request times out.
+        ///// </summary>
+        //public static int Timeout
+        //{
+        //    get
+        //    {
+        //        return s_Timeout;
+        //    }
+        //    set
+        //    {
+        //        if (s_Timeout < 0)
+        //        {
+        //            throw new ArgumentOutOfRangeException("value");
+        //        }
+        //        s_Timeout = value;
+        //    }
+        //}
 
         internal static SearchData<GbookResult> GSearch(string keyword, int start, ResultSize resultSize, bool fullViewOnly, string library)
         {
@@ -60,9 +60,9 @@ namespace Google.API.Search
                 throw new ArgumentNullException("keyword");
             }
 
-            GbookSearchRequest request = new GbookSearchRequest(keyword, start, resultSize, fullViewOnly, library);
-
-            SearchData<GbookResult> responseData = RequestUtility.GetResponseData<SearchData<GbookResult>>(request, Timeout);
+            var responseData = SearchUtility.GetResponseData(
+                service => service.BookSearch(keyword, resultSize.ToString(), start, fullViewOnly.GetString(), library)
+                );
 
             return responseData;
         }

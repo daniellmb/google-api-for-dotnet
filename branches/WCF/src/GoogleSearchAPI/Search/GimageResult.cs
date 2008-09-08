@@ -23,10 +23,11 @@
  */
 
 using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Google.API.Search
 {
+    [DataContract]
     internal class GimageResult : IImageResult
     {
         private string m_PlainTitle;
@@ -35,88 +36,88 @@ namespace Google.API.Search
         /// <summary>
         /// Indicates the "type" of result.
         /// </summary>
-        [JsonProperty("GsearchResultClass")]
+        [DataMember(Name = "GsearchResultClass")]
         public string GSearchResultClass { get; private set; }
 
-        [JsonProperty("imageId")]
+        [DataMember(Name = "imageId")]
         public string ImageId { get; private set; }
 
         /// <summary>
         /// Supplies the title of the image, which is usually the base filename.
         /// </summary>
-        [JsonProperty("title")]
+        [DataMember(Name = "title")]
         public string Title { get; private set; }
 
         /// <summary>
         /// Supplies the title, but unlike .title, this property is stripped of html markup (e.g., &lt;b&gt;, &lt;i&gt;, etc.)
         /// </summary>
-        [JsonProperty("titleNoFormatting")]
+        [DataMember(Name = "titleNoFormatting")]
         public string TitleNoFormatting { get; private set; }
 
         /// <summary>
         /// Supplies the raw URL of the result.
         /// </summary>
-        [JsonProperty("unescapedUrl")]
+        [DataMember(Name = "unescapedUrl")]
         public string UnescapedUrl { get; private set; }
 
         /// <summary>
         /// Supplies an escaped version of the above URL.
         /// </summary>
-        [JsonProperty("url")]
+        [DataMember(Name = "url")]
         public string Url { get; private set; }
 
         /// <summary>
         /// Supplies a shortened version of the URL associated with the result. Typically displayed in green, stripped of a protocol and path.
         /// </summary>
-        [JsonProperty("visibleUrl")]
+        [DataMember(Name = "visibleUrl")]
         public string VisibleUrl { get; private set; }
 
         /// <summary>
         /// Supplies the URL of the page containing the image.
         /// </summary>
-        [JsonProperty("originalContextUrl")]
+        [DataMember(Name = "originalContextUrl")]
         public string OriginalContextUrl { get; private set; }
 
         /// <summary>
         /// Supplies the width of the image in pixels.
         /// </summary>
-        [JsonProperty("width")]
+        [DataMember(Name = "width")]
         public int Width { get; private set; }
 
         /// <summary>
         /// Supplies the height of the image in pixels.
         /// </summary>
-        [JsonProperty("height")]
+        [DataMember(Name = "height")]
         public int Height { get; private set; }
 
         /// <summary>
         /// Supplies the width in pixels of the image thumbnail.
         /// </summary>
-        [JsonProperty("tbWidth")]
+        [DataMember(Name = "tbWidth")]
         public int TbWidth { get; private set; }
 
         /// <summary>
         /// Supplies the height in pixels of the image thumbnail.
         /// </summary>
-        [JsonProperty("tbHeight")]
+        [DataMember(Name = "tbHeight")]
         public int TbHeight { get; private set; }
 
         /// <summary>
         /// Supplies the url of a thumbnail image.
         /// </summary>
-        [JsonProperty("tbUrl")]
+        [DataMember(Name = "tbUrl")]
         public string TbUrl { get; private set; }
 
         /// <summary>
         /// Supplies a brief snippet of information from the page associated with the search result.
         /// </summary>
-        [JsonProperty("content")]
+        [DataMember(Name = "content")]
         public string Content { get; private set; }
 
         /// <summary>
         /// Supplies the same information as .content only stripped of HTML formatting.
         /// </summary>
-        [JsonProperty("contentNoFormatting")]
+        [DataMember(Name = "contentNoFormatting")]
         public string ContentNoFormatting { get; private set; }
 
         public override string ToString()

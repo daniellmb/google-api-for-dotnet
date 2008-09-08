@@ -23,11 +23,11 @@
  */
 
 using System;
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Google.API.Search
 {
-    [JsonObject]
+    [DataContract]
     internal class GwebResult : IWebResult
     {
         private string m_PlainTitle;
@@ -36,49 +36,49 @@ namespace Google.API.Search
         /// <summary>
         /// Indicates the "type" of result.
         /// </summary>
-        [JsonProperty("GsearchResultClass")]
+        [DataMember(Name = "GsearchResultClass")]
         public string GSearchResultClass { get; private set; }
 
         /// <summary>
         /// Supplies the raw URL of the result.
         /// </summary>
-        [JsonProperty("unescapedUrl")]
+        [DataMember(Name = "unescapedUrl")]
         public string UnescapedUrl { get; private set; }
 
         /// <summary>
         /// Supplies an escaped version of the above URL.
         /// </summary>
-        [JsonProperty("url")]
+        [DataMember(Name = "url")]
         public string Url { get; private set; }
 
         /// <summary>
         /// Supplies a shortened version of the URL associated with the result. Typically displayed in green, stripped of a protocol and path.
         /// </summary>
-        [JsonProperty("visibleUrl")]
+        [DataMember(Name = "visibleUrl")]
         public string VisibleUrl { get; private set; }
 
         /// <summary>
         /// Supplies a url to google's cached version of the page responsible for producting this result. This property may be null indicating that there is no cache, and it might be out of date in cases where the search result has been saved and in the mean time, the cache has gone stale. For best results, this property should not be persisted.
         /// </summary>
-        [JsonProperty("cacheUrl")]
+        [DataMember(Name = "cacheUrl")]
         public string CacheUrl { get; private set; }
 
         /// <summary>
         /// Supplies the title value of the result.
         /// </summary>
-        [JsonProperty("title")]
+        [DataMember(Name = "title")]
         public string Title { get; private set; }
 
         /// <summary>
         /// Supplies the title, but unlike .title, this property is stripped of html markup (e.g., &lt;b&gt;, &lt;i&gt;, etc.)
         /// </summary>
-        [JsonProperty("titleNoFormatting")]
+        [DataMember(Name = "titleNoFormatting")]
         public string TitleNoFormatting { get; private set; }
 
         /// <summary>
         /// Supplies a brief snippet of information from the page associated with the search result.
         /// </summary>
-        [JsonProperty("content")]
+        [DataMember(Name = "content")]
         public string Content { get; private set; }
 
         public override string ToString()

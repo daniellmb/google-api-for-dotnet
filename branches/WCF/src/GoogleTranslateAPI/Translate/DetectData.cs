@@ -22,29 +22,29 @@
  * THE SOFTWARE.
  */
 
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Google.API.Translate
 {
-    [JsonObject(MemberSerialization.OptOut)]
+    [DataContract]
     internal class DetectData
     {
         /// <summary>
         /// The detected language.
         /// </summary>
-        [JsonProperty("language")]
+        [DataMember(Name = "language")]
         public string LanguageCode { get; private set; }
 
         /// <summary>
         /// The reliability of the detect.
         /// </summary>
-        [JsonProperty("isReliable")]
+        [DataMember(Name = "isReliable")]
         public bool IsReliable { get; private set; }
 
         /// <summary>
         /// The confidence level of the detect.
         /// </summary>
-        [JsonProperty("confidence")]
+        [DataMember(Name = "confidence")]
         public double Confidence { get; private set; }
     }
 }

@@ -23,6 +23,9 @@
  */
 
 using System;
+using System.Globalization;
+using System.IO;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Google.API
@@ -35,25 +38,116 @@ namespace Google.API
         private static readonly string s_HtmlTagPattern = "<[^>]*>";
         static readonly Regex s_HtmlTagRegex = new Regex(s_HtmlTagPattern, RegexOptions.Compiled);
 
+        #region System.Web.HttpUtility
+
+        // The code under this region is provided by Microsoft .NET reference source project.
+        // http://referencesource.microsoft.com/
+
         /// <summary>
         /// Converts a string that has been HTML-encoded for HTTP transmission into a decoded string.
         /// </summary>
         /// <param name="s">The string to decode.</param>
         /// <returns>A decoded string.</returns>
+        //public static string HtmlDecode(string s)
+        //{
+        //    return System.Web.HttpUtility.HtmlDecode(s);
+        //}
         public static string HtmlDecode(string s)
         {
-            return System.Web.HttpUtility.HtmlDecode(s);
+            if (s == null)
+                return null;
+
+            // See if this string needs to be decoded at all.  If no 
+            // ampersands are found, then no special HTML-encoded chars
+            // are in the string.
+            if (s.IndexOf('&') < 0)
+                return s;
+
+            StringBuilder builder = new StringBuilder();
+            StringWriter writer = new StringWriter(builder);
+
+            HtmlDecode(s, writer);
+
+            return builder.ToString();
         }
 
-        /// <summary>
-        /// Encodes a URL string.
-        /// </summary>
-        /// <param name="str">The text to encode.</param>
-        /// <returns>An encoded string.</returns>
-        public static string UrlEncode(string str)
+        private static char[] s_entityEndingChars = new char[] { ';', '&' };
+
+        public static void HtmlDecode(string s, TextWriter output)
         {
-            return System.Web.HttpUtility.UrlEncode(str);
+            if (s == null)
+                return;
+
+            if (s.IndexOf('&') < 0)
+            {
+                output.Write(s);        // good as is
+                return;
+            }
+
+            int l = s.Length;
+            for (int i = 0; i < l; i++)
+            {
+                char ch = s[i];
+
+                if (ch == '&')
+                {
+                    // We found a '&'. Now look for the next ';' or '&'. The idea is that
+                    // if we find another '&' before finding a ';', then this is not an entity, 
+                    // and the next '&' might start a real entity (
+                    int index = s.IndexOfAny(s_entityEndingChars, i + 1);
+                    if (index > 0 && s[index] == ';')
+                    {
+                        string entity = s.Substring(i + 1, index - i - 1);
+
+                        if (entity.Length > 1 && entity[0] == '#')
+                        {
+                            try
+                            {
+                                // The # syntax can be in decimal or hex, e.g.
+                                //      &#229;  --> decimal 
+                                //      &#xE5;  --> same char in hex
+                                // See http://www.w3.org/TR/REC-html40/charset.html#entities
+                                if (entity[1] == 'x' || entity[1] == 'X')
+                                    ch = (char)Int32.Parse(entity.Substring(2), NumberStyles.AllowHexSpecifier);
+                                else
+                                    ch = (char)Int32.Parse(entity.Substring(1));
+                                i = index; // already looked at everything until semicolon 
+                            }
+                            catch (System.FormatException)
+                            {
+                                i++;    //if the number isn't valid, ignore it
+                            }
+                            catch (System.ArgumentException)
+                            {
+                                i++;    // if there is no number, ignore it. 
+                            }
+                        }
+                        else
+                        {
+                            i = index; // already looked at everything until semicolon
+
+                            char entityChar = HtmlEntities.Lookup(entity);
+                            if (entityChar != (char)0)
+                            {
+                                ch = entityChar;
+                            }
+                            else
+                            {
+                                output.Write('&');
+                                output.Write(entity);
+                                output.Write(';');
+                                continue;
+                            }
+                        }
+
+                    }
+                }
+
+                output.Write(ch);
+            }
         }
+
+        #endregion
 
         /// <summary>
         /// Capture the text content from a html formatted string.

@@ -22,23 +22,23 @@
  * THE SOFTWARE.
  */
 
-using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace Google.API.Translate
 {
-    [JsonObject(MemberSerialization.OptOut)]
+    [DataContract]
     internal class TranslateData
     {
         /// <summary>
         /// The translated text.
         /// </summary>
-        [JsonProperty("translatedText")]
+        [DataMember(Name = "translatedText")]
         public string TranslatedText { get; private set; }
 
         /// <summary>
         /// The source language.
         /// </summary>
-        [JsonProperty("detectedSourceLanguage")]
+        [DataMember(Name = "detectedSourceLanguage")]
         public string DetectedSourceLanguage { get; private set; }
     }
 }

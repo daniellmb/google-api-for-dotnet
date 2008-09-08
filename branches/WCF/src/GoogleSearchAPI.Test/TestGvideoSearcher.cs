@@ -71,7 +71,7 @@ namespace Google.API.Search.Test
         [Test]
         public void SearchTest2()
         {
-            string keyword = "South Park";
+            string keyword = "and1";
             int count = 32;
             SortType sortBy = SortType.date;
             IList<IVideoResult> results = GvideoSearcher.Search(keyword, count, sortBy);

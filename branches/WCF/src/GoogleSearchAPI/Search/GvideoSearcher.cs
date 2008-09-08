@@ -32,26 +32,26 @@ namespace Google.API.Search
     /// </summary>
     public static class GvideoSearcher
     {
-        private static int s_Timeout = 0;
+        //private static int s_Timeout = 0;
 
-        /// <summary>
-        /// Get or set the length of time, in milliseconds, before the request times out.
-        /// </summary>
-        public static int Timeout
-        {
-            get
-            {
-                return s_Timeout;
-            }
-            set
-            {
-                if (s_Timeout < 0)
-                {
-                    throw new ArgumentOutOfRangeException("value");
-                }
-                s_Timeout = value;
-            }
-        }
+        ///// <summary>
+        ///// Get or set the length of time, in milliseconds, before the request times out.
+        ///// </summary>
+        //public static int Timeout
+        //{
+        //    get
+        //    {
+        //        return s_Timeout;
+        //    }
+        //    set
+        //    {
+        //        if (s_Timeout < 0)
+        //        {
+        //            throw new ArgumentOutOfRangeException("value");
+        //        }
+        //        s_Timeout = value;
+        //    }
+        //}
 
         internal static SearchData<GvideoResult> GSearch(string keyword, int start, ResultSize resultSize, SortType sortBy)
         {
@@ -60,10 +60,13 @@ namespace Google.API.Search
                 throw new ArgumentNullException("keyword");
             }
 
-            GvideoSearchRequest request = new GvideoSearchRequest(keyword, start, resultSize, sortBy);
-
-            SearchData<GvideoResult> responseData =
-                RequestUtility.GetResponseData<SearchData<GvideoResult>>(request, Timeout);
+            var responseData = SearchUtility.GetResponseData(
+                service => service.VideoSearch(
+                               keyword,
+                               resultSize.ToString(),
+                               start,
+                               sortBy.GetString())
+                );
 
             return responseData;
         }
