@@ -44,7 +44,9 @@ namespace Google.API.Search
         /// </summary>
         INewsResultItem[] RelatedStories { get; }
 
-        // todo: Need comments.
+        /// <summary>
+        /// Get a image that represents the cluster of news articles related to this result. If there is no good image for this result it will return null.
+        /// </summary>
         INewsImage Image { get; }
     }
 }

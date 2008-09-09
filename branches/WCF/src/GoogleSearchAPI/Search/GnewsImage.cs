@@ -29,27 +29,48 @@ namespace Google.API.Search
     [DataContract]
     internal class GnewsImage : INewsImage
     {
+        ///// <summary>
+        ///// supplies the title of the article associated with the image
+        ///// </summary>
         //[DataMember(Name = "title")]
         //public string Title { get; protected set; }
 
+        ///// <summary>
+        ///// same as above but stripped of HTML formatting
+        ///// </summary>
         //[DataMember(Name = "titleNoFormatting")]
         //public string TitleNoFormatting { get; protected set; }
 
+        /// <summary>
+        /// supplies the URL of the image
+        /// </summary>
         [DataMember(Name = "url")]
         public string Url { get; private set; }
-
+ 
+        /// <summary>
+        /// supplies the URL of the article that contains this image. The image, when displayed, should normally link through this URL
+        /// </summary>
         [DataMember(Name = "originalContextUrl")]
         public string OriginalContextUrl { get; private set; }
 
+        /// <summary>
+        /// supplies the publisher of the news article containing the image. The suggested user interface is to display this under or in close proximity to the image, hyper linked through the .url property from above
+        /// </summary>
         [DataMember(Name = "publisher")]
         public string Publisher { get; private set; }
 
         [DataMember(Name = "tbUrl")]
         public string TbUrl { get; private set; }
 
+        /// <summary>
+        /// supplies the width of the image referenced above. The standard size of this image is 80 pixels wide and 50 pixels tall
+        /// </summary>
         [DataMember(Name = "tbWidth")]
         public int TbWidth { get; private set; }
 
+        /// <summary>
+        /// supplies the height of the image referenced above. The standard size of this image is 80 pixels wide and 50 pixels tall
+        /// </summary>
         [DataMember(Name = "tbHeight")]
         public int TbHeight { get; private set; }
 

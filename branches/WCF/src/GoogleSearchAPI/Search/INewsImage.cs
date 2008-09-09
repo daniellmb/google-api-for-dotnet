@@ -24,15 +24,29 @@
 
 namespace Google.API.Search
 {
-    // Todo : Need comments.
+    /// <summary>
+    /// A image that represents a news article.
+    /// </summary>
     public interface INewsImage
     {
+        /// <summary>
+        /// Get the the URL of the result.
+        /// </summary>
         string Url { get; }
 
+        /// <summary>
+        /// Get the URL of the page containing the image.
+        /// </summary>
         string OriginalContextUrl { get; }
 
+        /// <summary>
+        /// Get the name of the publisher of the image.
+        /// </summary>
         string Publisher { get; }
 
+        /// <summary>
+        /// Get a thumbnail image.
+        /// </summary>
         ITbImage TbImage { get; }
     }
 }

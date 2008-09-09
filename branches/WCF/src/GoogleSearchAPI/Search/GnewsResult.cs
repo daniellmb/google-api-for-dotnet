@@ -56,6 +56,9 @@ namespace Google.API.Search
         [DataMember(Name = "relatedStories")]
         public GnewsResultItem[] RelatedStories { get; private set; }
 
+        /// <summary>
+        /// This property is optional. It only appears in a result when the system has determined that there is a good image that represents the cluster of news articles related to this result.
+        /// </summary>
         [DataMember(Name = "image")]
         public GnewsImage Image { get; private set; }
 
