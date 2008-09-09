@@ -80,7 +80,8 @@ namespace Google.API.Search
         /// Supplies the year that the book was published.
         /// </summary>
         [JsonProperty("publishedYear")]
-        public int PublishedYear { get; private set; }
+        //public int PublishedYear { get; private set; }
+        public string PublishedYearString { get; private set; }
 
         /// <summary>
         /// Supplies the number of pages contained within the book.
@@ -165,7 +166,14 @@ namespace Google.API.Search
 
         int IBookResult.PublishedYear
         {
-            get { return PublishedYear; }
+            //get { return PublishedYear; }
+            get
+            {
+                if (string.CompareOrdinal(PublishedYearString, "unknown") == 0)
+                    return -1;
+
+                return int.Parse(PublishedYearString);
+            }
         }
 
         int IBookResult.PageCount

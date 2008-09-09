@@ -76,6 +76,9 @@ namespace Google.API.Search
         [JsonProperty("publishedDate")]
         public DateTime PublishedDate { get; protected set; }
 
+        [JsonProperty("signedRedirectUrl")]
+        public string SignedRedirectUrl { get; private set; }
+
         public override string ToString()
         {
             INewsResultItem result = this;

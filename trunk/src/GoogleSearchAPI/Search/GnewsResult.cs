@@ -56,6 +56,12 @@ namespace Google.API.Search
         [JsonProperty("relatedStories")]
         public GnewsResultItem[] RelatedStories { get; private set; }
 
+        /// <summary>
+        /// This property is optional. It only appears in a result when the system has determined that there is a good image that represents the cluster of news articles related to this result.
+        /// </summary>
+        [JsonProperty("image")]
+        public GnewsImage Image { get; private set; }
+
         public override string ToString()
         {
             INewsResult result = this;
@@ -89,6 +95,11 @@ namespace Google.API.Search
         INewsResultItem[] INewsResult.RelatedStories
         {
             get { return RelatedStories; }
+        }
+
+        INewsImage INewsResult.Image
+        {
+            get { return Image; }
         }
 
         #endregion
