@@ -61,26 +61,26 @@ namespace Google.API.Translate
             }
         }
 
-        private static int s_Timeout = 0;
+        //private static int s_Timeout = 0;
 
-        /// <summary>
-        /// Get or set the length of time, in milliseconds, before the request times out.
-        /// </summary>
-        public static int Timeout
-        {
-            get
-            {
-                return s_Timeout;
-            }
-            set
-            {
-                if (s_Timeout < 0)
-                {
-                    throw new ArgumentOutOfRangeException("value");
-                }
-                s_Timeout = value;
-            }
-        }
+        ///// <summary>
+        ///// Get or set the length of time, in milliseconds, before the request times out.
+        ///// </summary>
+        //public static int Timeout
+        //{
+        //    get
+        //    {
+        //        return s_Timeout;
+        //    }
+        //    set
+        //    {
+        //        if (s_Timeout < 0)
+        //        {
+        //            throw new ArgumentOutOfRangeException("value");
+        //        }
+        //        s_Timeout = value;
+        //    }
+        //}
 
         /// <summary>
         /// Translate the text from <paramref name="from"/> to <paramref name="to"/>.
@@ -249,7 +249,7 @@ namespace Google.API.Translate
                 throw new ArgumentNullException("to");
             }
 
-            var responseData = RequestUtility.GetResponseData<TranslateData, ITranslateService>(service => service.Translate(text, from + '|' + to, format.ToString()), Address);
+            var responseData = GetResponseData(service => service.Translate(text, from + '|' + to, format.GetString()));
 
             return responseData;
         }
@@ -261,9 +261,21 @@ namespace Google.API.Translate
                 throw new ArgumentNullException("text");
             }
 
-            var responseData = RequestUtility.GetResponseData<DetectData, ITranslateService>(service => service.Detect(text), Address);
+            var responseData = GetResponseData(service => service.Detect(text));
 
             return responseData;
+        }
+
+        private static T GetResponseData<T>(RequestCallback<ResultObject<T>, ITranslateService> request)
+        {
+            return RequestUtility.GetResponseData(request, Address);
+        }
+
+        private static string GetString(this TranslateFormat value)
+        {
+            if (Enum.IsDefined(value.GetType(), value))
+                return null;
+            return value.ToString();
         }
     }
 }

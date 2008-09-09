@@ -28,6 +28,8 @@ using System.ServiceModel.Web;
 
 namespace Google.API
 {
+    internal delegate T RequestCallback<T, TService>(TService service) where TService : class;
+
     internal class RequestUtility
     {
         private static Binding binding;
@@ -49,30 +51,29 @@ namespace Google.API
             }
         }
 
-        public delegate ResultObject<T> RequestCallback<T, TService>(TService service) where TService : class;
-
-        public static T GetResponseData<T, TService>(RequestCallback<T, TService> request, string address) where TService : class
+        public static T GetResponseData<T, TService>(
+            RequestCallback<ResultObject<T>, TService> request,
+            string address
+            ) where TService : class
         {
             return GetResponseData(request, new Uri(address));
         }
 
-        public static T GetResponseData<T, TService>(RequestCallback<T, TService> request, Uri address) where TService : class
+        public static T GetResponseData<T, TService>(
+            RequestCallback<ResultObject<T>, TService> request,
+            Uri address
+            ) where TService : class
         {
-            if(request == null)
+            if (request == null)
                 throw new ArgumentNullException("request");
 
-            if(address == null)
+            if (address == null)
                 throw new ArgumentNullException("address");
 
             ResultObject<T> resultObject;
             try
             {
-                var channelFactory = new WebChannelFactory<TService>(Binding, address);
-                var client = channelFactory.CreateChannel();
-                using (client as IDisposable)
-                {
-                    resultObject = request(client);
-                }
+                resultObject = GetResultObject(request, address, Binding);
             }
             catch (Exception ex)
             {
@@ -80,10 +81,24 @@ namespace Google.API
             }
 
             if (resultObject.ResponseStatus != 200)
-            {
                 throw new GoogleAPIException(string.Format("[error code:{0}]{1}", resultObject.ResponseStatus, resultObject.ResponseDetails));
-            }
+
             return resultObject.ResponseData;
+        }
+
+        private static T GetResultObject<TService, T>(
+            RequestCallback<T, TService> request,
+            Uri address,
+            Binding binding
+            ) where TService : class
+        {
+            var channelFactory = new WebChannelFactory<TService>(binding, address);
+            var client = channelFactory.CreateChannel();
+            using (client as IDisposable)
+            {
+                var resultObject = request(client);
+                return resultObject;
+            }
         }
     }
 }

@@ -161,7 +161,7 @@ namespace Google.API.Search
                 throw new ArgumentNullException("keyword");
             }
 
-            SearchUtility.GSearchCallback<GnewsResult> gsearch = (start, resultSize) => GSearch(keyword, start, resultSize, geo, sortBy);
+            GSearchCallback<GnewsResult> gsearch = (start, resultSize) => GSearch(keyword, start, resultSize, geo, sortBy);
             List<GnewsResult> results = SearchUtility.Search(gsearch, resultCount);
             return results.ConvertAll<INewsResult>(item => (INewsResult)item);
         }

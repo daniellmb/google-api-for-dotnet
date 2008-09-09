@@ -63,7 +63,7 @@ namespace Google.API.Search
             var responseData = SearchUtility.GetResponseData(
                 service => service.VideoSearch(
                                keyword,
-                               resultSize.ToString(),
+                               resultSize.GetString(),
                                start,
                                sortBy.GetString())
                 );
@@ -118,7 +118,7 @@ namespace Google.API.Search
                 throw new ArgumentNullException("keyword");
             }
 
-            SearchUtility.GSearchCallback<GvideoResult> gsearch = (start, resultSize) => GSearch(keyword, start, resultSize, sortBy);
+            GSearchCallback<GvideoResult> gsearch = (start, resultSize) => GSearch(keyword, start, resultSize, sortBy);
             List<GvideoResult> results = SearchUtility.Search(gsearch, resultCount);
             return results.ConvertAll<IVideoResult>(item => (IVideoResult)item);
         }

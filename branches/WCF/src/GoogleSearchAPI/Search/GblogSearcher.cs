@@ -61,7 +61,11 @@ namespace Google.API.Search
             }
 
             var responseData = SearchUtility.GetResponseData(
-                service => service.BlogSearch(keyword, resultSize.ToString(), start, sortBy.GetString())
+                service => service.BlogSearch(
+                               keyword,
+                               resultSize.GetString(),
+                               start,
+                               sortBy.GetString())
                 );
 
             return responseData;
@@ -114,7 +118,7 @@ namespace Google.API.Search
                 throw new ArgumentNullException("keyword");
             }
 
-            SearchUtility.GSearchCallback<GblogResult> gsearch = (start, resultSize) => GSearch(keyword, start, resultSize, sortBy);
+            GSearchCallback<GblogResult> gsearch = (start, resultSize) => GSearch(keyword, start, resultSize, sortBy);
             List<GblogResult> results = SearchUtility.Search(gsearch, resultCount);
             return results.ConvertAll<IBlogResult>(item => (IBlogResult)item);
         }

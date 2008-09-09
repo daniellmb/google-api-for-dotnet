@@ -61,7 +61,12 @@ namespace Google.API.Search
             }
 
             var responseData = SearchUtility.GetResponseData(
-                service => service.BookSearch(keyword, resultSize.ToString(), start, fullViewOnly.GetString(), library)
+                service => service.BookSearch(
+                               keyword,
+                               resultSize.GetString(),
+                               start,
+                               fullViewOnly.GetString(),
+                               library)
                 );
 
             return responseData;
@@ -138,7 +143,7 @@ namespace Google.API.Search
                 throw new ArgumentNullException("keyword");
             }
 
-            SearchUtility.GSearchCallback<GbookResult> gsearch = (start, resultSize) => GSearch(keyword, start, resultSize, fullViewOnly, library);
+            GSearchCallback<GbookResult> gsearch = (start, resultSize) => GSearch(keyword, start, resultSize, fullViewOnly, library);
             List<GbookResult> results = SearchUtility.Search(gsearch, resultCount);
             return results.ConvertAll<IBookResult>(item => (IBookResult)item);
         }

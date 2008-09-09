@@ -63,9 +63,9 @@ namespace Google.API.Search
             var responseData = SearchUtility.GetResponseData(
                 service => service.ImageSearch(
                                keyword,
-                               resultSize.ToString(),
+                               resultSize.GetString(),
                                start,
-                               safeLevel.ToString(),
+                               safeLevel.GetString(),
                                imageSize.GetString(),
                                colorization.GetString(),
                                imageType.GetString(),
@@ -258,7 +258,7 @@ namespace Google.API.Search
                 throw new ArgumentNullException("keyword");
             }
 
-            SearchUtility.GSearchCallback<GimageResult> gsearch = (start, resultSize) => GSearch(keyword, start, resultSize, safeLevel, imageSize, colorization, imageType, fileType, site);
+            GSearchCallback<GimageResult> gsearch = (start, resultSize) => GSearch(keyword, start, resultSize, safeLevel, imageSize, colorization, imageType, fileType, site);
             List<GimageResult> results = SearchUtility.Search(gsearch, resultCount);
             return results.ConvertAll<IImageResult>(item => (IImageResult)item);
         }

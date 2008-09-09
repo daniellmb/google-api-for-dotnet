@@ -63,7 +63,12 @@ namespace Google.API.Search
             string languageCode = LanguageUtility.GetLanguageCode(language);
 
             var responseData = SearchUtility.GetResponseData(
-                service => service.WebSearch(keyword, resultSize.ToString(), start, languageCode, safeLevel.ToString())
+                service => service.WebSearch(
+                               keyword,
+                               resultSize.GetString(),
+                               start,
+                               languageCode,
+                               safeLevel.GetString())
                 );
 
             return responseData;
@@ -140,7 +145,7 @@ namespace Google.API.Search
                 throw new ArgumentNullException("keyword");
             }
 
-            SearchUtility.GSearchCallback<GwebResult> gsearch = (start, resultSize) => GSearch(keyword, start, resultSize, language, safeLevel);
+            GSearchCallback<GwebResult> gsearch = (start, resultSize) => GSearch(keyword, start, resultSize, language, safeLevel);
             List<GwebResult> results = SearchUtility.Search(gsearch, resultCount);
             return results.ConvertAll<IWebResult>(item => (IWebResult)item);            
         }

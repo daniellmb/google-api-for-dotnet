@@ -24,6 +24,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text.RegularExpressions;
 
 namespace Google.API.Search
@@ -189,6 +190,8 @@ namespace Google.API.Search
         bmp,
     }
 
+    internal delegate SearchData<T> GSearchCallback<T>(int start, ResultSize resultSize);
+
     internal static class SearchUtility
     {
         private static string addressString = "http://ajax.googleapis.com/ajax/services/search";
@@ -206,12 +209,10 @@ namespace Google.API.Search
             }
         }
 
-        public static T GetResponseData<T>(RequestUtility.RequestCallback<T, ISearchService> service)
+        public static T GetResponseData<T>(RequestCallback<ResultObject<T>, ISearchService> service)
         {
             return RequestUtility.GetResponseData(service, Address);
         }
-
-        public delegate SearchData<T> GSearchCallback<T>(int start, ResultSize resultSize);
 
         public static List<T> Search<T>(GSearchCallback<T> gsearch, int resultCount)
         {
@@ -269,6 +270,16 @@ namespace Google.API.Search
             return null;
         }
 
+        public static string GetString(this SafeLevel value)
+        {
+            return GetStringIgnoreDefault(value);
+        }
+
+        public static string GetString(this ResultSize value)
+        {
+            return GetStringIgnoreDefault(value);
+        }
+
         public static string GetString(this SortType value)
         {
             switch (value)
@@ -300,6 +311,14 @@ namespace Google.API.Search
         public static string GetString(this FileType value)
         {
             return GetStringIgnoreDefault(value);
+        }
+
+        private static string GetStringIgnoreDefault(Enum value)
+        {
+            if (Enum.IsDefined(value.GetType(), value))
+                return null;
+
+            return value.ToString();
         }
 
         public static DateTime RFC2822DateTimeParse(string str)
@@ -416,14 +435,6 @@ namespace Google.API.Search
                 throw new FormatException(string.Format("Invalide date:{0}:{1}", e.Message, str));
             }
             return dt;
-        }
-
-        private static string GetStringIgnoreDefault(Enum value)
-        {
-            if (Enum.IsDefined(value.GetType(), value))
-                return null;
-
-            return value.ToString();
         }
     }
 }
