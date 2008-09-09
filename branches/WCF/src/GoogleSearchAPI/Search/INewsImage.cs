@@ -1,5 +1,5 @@
 /**
- * INewsResult.cs
+ * INewsImage.cs
  *
  * Copyright (C) 2008,  iron9light
  *
@@ -24,27 +24,15 @@
 
 namespace Google.API.Search
 {
-    /// <summary>
-    /// News search result.
-    /// </summary>
-    public interface INewsResult : INewsResultItem
+    // Todo : Need comments.
+    public interface INewsImage
     {
-        /// <summary>
-        /// Get the URL points to a landing page that points to all of the related stories. When a news result has a set of related stories, this URL is available and non-null. Otherwise, it is null.
-        /// </summary>
-        string ClusterUrl { get; }
+        string Url { get; }
 
-        /// <summary>
-        /// Get a snippet of content from the news story associated with this search result.
-        /// </summary>
-        string Content { get; }
+        string OriginalContextUrl { get; }
 
-        /// <summary>
-        /// Get a set of closely related stories. If there is no related story it will return null.
-        /// </summary>
-        INewsResultItem[] RelatedStories { get; }
+        string Publisher { get; }
 
-        // todo: Need comments.
-        INewsImage Image { get; }
+        ITbImage TbImage { get; }
     }
 }

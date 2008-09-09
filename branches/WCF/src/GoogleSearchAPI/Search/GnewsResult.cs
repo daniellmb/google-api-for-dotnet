@@ -56,6 +56,9 @@ namespace Google.API.Search
         [DataMember(Name = "relatedStories")]
         public GnewsResultItem[] RelatedStories { get; private set; }
 
+        [DataMember(Name = "image")]
+        public GnewsImage Image { get; private set; }
+
         public override string ToString()
         {
             INewsResult result = this;
@@ -89,6 +92,11 @@ namespace Google.API.Search
         INewsResultItem[] INewsResult.RelatedStories
         {
             get { return RelatedStories; }
+        }
+
+        INewsImage INewsResult.Image
+        {
+            get { return Image; }
         }
 
         #endregion

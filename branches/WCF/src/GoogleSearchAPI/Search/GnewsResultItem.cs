@@ -77,6 +77,9 @@ namespace Google.API.Search
         //public DateTime PublishedDate { get; protected set; }
         public string PublishedDateString { get; protected set; }
 
+        [DataMember(Name = "signedRedirectUrl")]
+        public string SignedRedirectUrl { get; private set; }
+
         public override string ToString()
         {
             INewsResultItem result = this;
