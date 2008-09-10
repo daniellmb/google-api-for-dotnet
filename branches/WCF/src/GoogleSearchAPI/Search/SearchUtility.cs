@@ -24,7 +24,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Text.RegularExpressions;
 
 namespace Google.API.Search
@@ -190,6 +189,27 @@ namespace Google.API.Search
         bmp,
     }
 
+    /// <summary>
+    /// The result type of GlocalSearch.
+    /// </summary>
+    public enum LocalResultType
+    {
+        /// <summary>
+        /// Request KML, Local Business Listings, and Geocode results.
+        /// </summary>
+        blended,
+
+        /// <summary>
+        /// Request KML and Geocode results.
+        /// </summary>
+        kmlonly,
+
+        /// <summary>
+        /// Request Local Business Listings and Geocode results.
+        /// </summary>
+        localonly = 0,
+    }
+
     internal delegate SearchData<T> GSearchCallback<T>(int start, ResultSize resultSize);
 
     internal static class SearchUtility
@@ -309,6 +329,11 @@ namespace Google.API.Search
         }
 
         public static string GetString(this FileType value)
+        {
+            return GetStringIgnoreDefault(value);
+        }
+
+        public static string GetString(this LocalResultType value)
         {
             return GetStringIgnoreDefault(value);
         }

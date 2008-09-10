@@ -44,6 +44,19 @@ namespace Google.API.Search
 
         [OperationContract]
         [WebGet(
+            UriTemplate = "/local?v=1.0&q={query}&rsz={resultSize}&start={start}&sll={local}&sspn={bounding}&mrt={resultType}",
+            ResponseFormat = WebMessageFormat.Json)]
+        ResultObject<SearchData<GlocalResult>> LocalSearch(
+            string query,
+            string resultSize,
+            int start,
+            string local,
+            string bounding,
+            string resultType
+            );
+
+        [OperationContract]
+        [WebGet(
             UriTemplate = "/video?v=1.0&q={query}&rsz={resultSize}&start={start}&scoring={scoring}",
             ResponseFormat = WebMessageFormat.Json)]
         ResultObject<SearchData<GvideoResult>> VideoSearch(
