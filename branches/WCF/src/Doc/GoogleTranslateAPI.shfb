@@ -7,9 +7,6 @@
         <namespaceSummaryItem name="Google.API" isDocumented="True">The &lt;b&gt;Google.API&lt;/b&gt; namespace provides some base utility classes.</namespaceSummaryItem>
         <namespaceSummaryItem name="Google.API.Translate" isDocumented="True">The &lt;b&gt;Google.API.Translate&lt;/b&gt; namespace provides classes that are used to translate.</namespaceSummaryItem>
     </namespaceSummaries>
-    <dependencies>
-        <dependencyItem depPath="..\lib\Newtonsoft.Json.dll" />
-    </dependencies>
     <ProjectSummary />
     <MissingTags>Summary, Parameter, Returns, AutoDocumentCtors, Namespace, TypeParameter</MissingTags>
     <VisibleItems>InheritedMembers, InheritedFrameworkMembers, Protected, SealedProtected</VisibleItems>

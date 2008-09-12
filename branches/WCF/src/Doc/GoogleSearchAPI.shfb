@@ -7,9 +7,6 @@
         <namespaceSummaryItem name="Google.API" isDocumented="True">The &lt;b&gt;Google.API&lt;/b&gt; namespace provides some base utility classes.</namespaceSummaryItem>
         <namespaceSummaryItem name="Google.API.Search" isDocumented="True">The &lt;b&gt;Google.API.Search&lt;/b&gt; namespace provides classes for using Google Search services.</namespaceSummaryItem>
     </namespaceSummaries>
-    <dependencies>
-        <dependencyItem depPath="..\lib\Newtonsoft.Json.dll" />
-    </dependencies>
     <ProjectSummary />
     <MissingTags>Summary, Parameter, Returns, AutoDocumentCtors, Namespace, TypeParameter</MissingTags>
     <VisibleItems>InheritedMembers, InheritedFrameworkMembers, Protected, SealedProtected</VisibleItems>
