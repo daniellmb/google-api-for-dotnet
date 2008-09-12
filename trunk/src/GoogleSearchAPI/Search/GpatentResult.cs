@@ -27,6 +27,7 @@ using Newtonsoft.Json;
 
 namespace Google.API.Search
 {
+    [JsonObject]
     internal class GpatentResult : IPatentResult
     {
         private static readonly int s_TbWidth = 128;
