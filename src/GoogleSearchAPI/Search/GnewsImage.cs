@@ -26,6 +26,7 @@ using Newtonsoft.Json;
 
 namespace Google.API.Search
 {
+    [JsonObject]
     internal class GnewsImage : INewsImage
     {
         ///// <summary>

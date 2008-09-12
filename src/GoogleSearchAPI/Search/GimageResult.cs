@@ -27,6 +27,7 @@ using Newtonsoft.Json;
 
 namespace Google.API.Search
 {
+    [JsonObject]
     internal class GimageResult : IImageResult
     {
         private string m_PlainTitle;

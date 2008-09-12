@@ -28,10 +28,10 @@ namespace Google.API.Search
     {
         private static readonly string s_BaseAddress = @"http://ajax.googleapis.com/ajax/services/search/books";
 
-        public GbookSearchRequest(string keyword, int start, ResultSize resultSize, bool FullViewOnly, string library)
+        public GbookSearchRequest(string keyword, int start, ResultSize resultSize, bool fullViewOnly, string library)
             : base(keyword, start, resultSize)
         {
-            this.FullViewOnly = FullViewOnly;
+            FullViewOnly = fullViewOnly;
             Library = library;
         }
 

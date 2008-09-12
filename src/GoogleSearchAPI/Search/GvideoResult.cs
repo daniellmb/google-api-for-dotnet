@@ -27,6 +27,7 @@ using Newtonsoft.Json;
 
 namespace Google.API.Search
 {
+    [JsonObject]
     internal class GvideoResult : IVideoResult
     {
         private string m_PlainTitle;

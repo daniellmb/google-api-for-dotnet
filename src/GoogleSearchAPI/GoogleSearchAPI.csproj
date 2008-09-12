@@ -76,6 +76,9 @@
     <Compile Include="Search\GimageResult.cs" />
     <Compile Include="Search\GimageSearcher.cs" />
     <Compile Include="Search\GimageSearchRequest.cs" />
+    <Compile Include="Search\GlocalResult.cs" />
+    <Compile Include="Search\GlocalSearcher.cs" />
+    <Compile Include="Search\GlocalSearchRequest.cs" />
     <Compile Include="Search\GnewsImage.cs" />
     <Compile Include="Search\GnewsSearcher.cs" />
     <Compile Include="Search\GnewsSearchRequest.cs" />
@@ -94,14 +97,17 @@
     <Compile Include="Search\IBlogResult.cs" />
     <Compile Include="Search\IBookResult.cs" />
     <Compile Include="Search\IImageResult.cs" />
+    <Compile Include="Search\ILocalResult.cs" />
     <Compile Include="Search\INewsImage.cs" />
     <Compile Include="Search\INewsResult.cs" />
     <Compile Include="Search\INewsResultItem.cs" />
     <Compile Include="Search\IPatentResult.cs" />
+    <Compile Include="Search\IPhoneNumber.cs" />
     <Compile Include="Search\ITbImage.cs" />
     <Compile Include="Search\IVideoResult.cs" />
     <Compile Include="Search\IWebResult.cs" />
     <Compile Include="Search\LanguageUtility.cs" />
+    <Compile Include="Search\PhoneNumber.cs" />
     <Compile Include="Search\SearchData.cs" />
     <Compile Include="Search\SearchException.cs" />
     <Compile Include="Search\SearchUtility.cs" />
