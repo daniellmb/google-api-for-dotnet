@@ -24,10 +24,19 @@
 
 namespace Google.API.Search
 {
+    /// <summary>
+    /// A phone number.
+    /// </summary>
     public interface IPhoneNumber
     {
+        /// <summary>
+        /// Get the of this phone number. It can be one of "main", "fax", "mobile", "data", or "".
+        /// </summary>
         string Type { get; }
 
+        /// <summary>
+        /// Get the phone number.
+        /// </summary>
         string Number { get; }
     }
 }

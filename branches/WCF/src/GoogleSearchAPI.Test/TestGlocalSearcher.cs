@@ -23,7 +23,6 @@
  */
 
 using System;
-using System.Collections.Generic;
 using NUnit.Framework;
 
 namespace Google.API.Search.Test
@@ -51,6 +50,92 @@ namespace Google.API.Search.Test
             {
                 Assert.IsNotNull(result);
                 Assert.AreEqual("GlocalSearch", result.GSearchResultClass);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
+        }
+
+        [Test]
+        public void SearchTest()
+        {
+            var keyword = "Cupertino";
+            var count = 10;
+            var latitude = -122.033558f;
+            var longitude = 37.32366f;
+            var results = GlocalSearcher.Search(keyword, count, latitude, longitude);
+            Assert.IsNotNull(results);
+            //Assert.AreEqual(count, results.Count);
+            Assert.Greater(results.Count, 0);
+            Assert.LessOrEqual(results.Count, count);
+            foreach (var result in results)
+            {
+                Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
+        }
+
+        [Test]
+        public void SearchTest2()
+        {
+            var keyword = "wall street";
+            var count = 6;
+            var latitude = -121.844237f;
+            var longitude = 37.29234f;
+            var resultType = LocalResultType.blended;
+            var results = GlocalSearcher.Search(keyword, count, latitude, longitude, resultType);
+            Assert.IsNotNull(results);
+            //Assert.AreEqual(count, results.Count);
+            Assert.Greater(results.Count, 0);
+            Assert.LessOrEqual(results.Count, count);
+            foreach (var result in results)
+            {
+                Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
+        }
+
+        [Test]
+        public void SearchTest3()
+        {
+            var keyword = "France";
+            var count = 8;
+            var latitude = 2.365531f;
+            var longitude = 48.85561f;
+            var width = 10f;
+            var height = 10f;
+            var results = GlocalSearcher.Search(keyword, count, latitude, longitude, width, height);
+            Assert.IsNotNull(results);
+            //Assert.AreEqual(count, results.Count);
+            Assert.Greater(results.Count, 0);
+            Assert.LessOrEqual(results.Count, count);
+            foreach (var result in results)
+            {
+                Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
+        }
+
+        [Test]
+        public void SearchTest4()
+        {
+            var keyword = "hollywood";
+            var count = 5;
+            var latitude = -118.327217f;
+            var longitude = 34.098889f;
+            var width = 10f;
+            var height = 10f;
+            var resultType = LocalResultType.kmlonly;
+            var results = GlocalSearcher.Search(keyword, count, latitude, longitude, width, height, resultType);
+            Assert.IsNotNull(results);
+            //Assert.AreEqual(count, results.Count);
+            Assert.Greater(results.Count, 0);
+            Assert.LessOrEqual(results.Count, count);
+            foreach (var result in results)
+            {
+                Assert.IsNotNull(result);
                 Console.WriteLine(result);
                 Console.WriteLine();
             }

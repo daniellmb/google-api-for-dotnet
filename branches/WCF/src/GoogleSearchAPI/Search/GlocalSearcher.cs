@@ -23,6 +23,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 
 namespace Google.API.Search
 {
@@ -63,6 +64,74 @@ namespace Google.API.Search
                 );
 
             return responseData;
+        }
+
+        public static IList<ILocalResult> Search(
+            string keyword,
+            int resultCount,
+            float latitude,
+            float longitude)
+        {
+            return Search(keyword, resultCount, latitude, longitude, null, null, new LocalResultType());
+        }
+
+        public static IList<ILocalResult> Search(
+            string keyword,
+            int resultCount,
+            float latitude,
+            float longitude,
+            LocalResultType resultType)
+        {
+            return Search(keyword, resultCount, latitude, longitude, null, null, resultType);
+        }
+
+        public static IList<ILocalResult> Search(
+            string keyword,
+            int resultCount,
+            float latitude,
+            float longitude,
+            float width,
+            float height)
+        {
+            return Search(keyword, resultCount, latitude, longitude, (float?)width, (float?)height, new LocalResultType());
+        }
+
+        public static IList<ILocalResult> Search(
+            string keyword,
+            int resultCount,
+            float latitude,
+            float longitude,
+            float width,
+            float height,
+            LocalResultType resultType)
+        {
+            return Search(keyword, resultCount, latitude, longitude, (float?)width, (float?)height, resultType);
+        }
+
+        private static IList<ILocalResult> Search(
+            string keyword,
+            int resultCount,
+            float latitude,
+            float longitude,
+            float? width,
+            float? height,
+            LocalResultType resultType)
+        {
+            if (keyword == null)
+                throw new ArgumentNullException("keyword");
+
+            GSearchCallback<GlocalResult> gsearch = (start, resultSize) => GSearch(
+                                                                               keyword,
+                                                                               start,
+                                                                               resultSize,
+                                                                               latitude,
+                                                                               longitude,
+                                                                               width,
+                                                                               height,
+                                                                               resultType);
+
+            var results = SearchUtility.Search(gsearch, resultCount);
+            return results.ConvertAll(item => (ILocalResult)item);
         }
     }
 }

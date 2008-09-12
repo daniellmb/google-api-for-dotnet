@@ -23,14 +23,15 @@
  */
 
 using System.Runtime.Serialization;
+using System.Text;
 
 namespace Google.API.Search
 {
     [DataContract]
     internal class GlocalResult : ILocalResult
     {
-        private static int s_TbWidth = 150;
-        private static int s_TbHeight = 100;
+        private static readonly int s_TbWidth = 150;
+        private static readonly int s_TbHeight = 100;
 
         /// <summary>
         /// Indicates the "type" of result.
@@ -111,13 +112,13 @@ namespace Google.API.Search
         /// Supplies a url that can be used to provide driving directions from a user specified location to this search result. Note, in some cases this property may be missing or null.
         /// </summary>
         [DataMember(Name = "ddUrlToHere")]
-        public string DirectionUrlToHere { get; private set; }
+        public string ToHereDirectionUrl { get; private set; }
 
         /// <summary>
         /// Supplies a url that can be used to provide driving directions from this search result to a user specified location. Note, in some cases this property may be missing or null.
         /// </summary>
         [DataMember(Name = "ddUrlFromHere")]
-        public string DirectionUrlFromHere { get; private set; }
+        public string FromHereDirectionUrl { get; private set; }
 
         /// <summary>
         /// Supplies a url to a static map image representation of the current result. The image is 150px wide by 100px tall with a single marker representing the current location. Expected usage is to hyperlink this image using the url property.
@@ -137,6 +138,39 @@ namespace Google.API.Search
         [DataMember(Name = "content")]
         public string Content { get; private set; }
 
+        public override string ToString()
+        {
+            ILocalResult result = this;
+            var sb = new StringBuilder();
+            sb.Append(result.Title);
+            if (!string.IsNullOrEmpty(result.StreetAddress))
+            {
+                sb.AppendLine();
+                sb.Append(result.StreetAddress);
+            }
+            if (!string.IsNullOrEmpty(result.City))
+            {
+                sb.AppendLine();
+                sb.Append(result.City);
+                if (!string.IsNullOrEmpty(result.Region))
+                    sb.Append(", " + result.Region);
+            }
+            else if (!string.IsNullOrEmpty(result.Region))
+            {
+                sb.AppendLine();
+                sb.Append(result.Region);
+            }
+            if (PhoneNumbers != null)
+            {
+                foreach (var phoneNumber in result.PhoneNumbers)
+                {
+                    sb.AppendLine();
+                    sb.Append(phoneNumber);
+                }
+            }
+            return sb.ToString();
+        }
+
         #region ILocalResult Members
 
         string ILocalResult.Title
@@ -146,7 +180,7 @@ namespace Google.API.Search
 
         string ILocalResult.Url
         {
-            get { return Url;}
+            get { return Url; }
         }
 
         float ILocalResult.Latitude
@@ -166,7 +200,7 @@ namespace Google.API.Search
 
         string ILocalResult.City
         {
-            get { return City;}
+            get { return City; }
         }
 
         string ILocalResult.Region
@@ -191,12 +225,12 @@ namespace Google.API.Search
 
         string ILocalResult.ToHereDirectionUrl
         {
-            get { return DirectionUrlToHere; }
+            get { return ToHereDirectionUrl; }
         }
 
         string ILocalResult.FromHereDirectionUrl
         {
-            get { return DirectionUrlFromHere; }
+            get { return FromHereDirectionUrl; }
         }
 
         ITbImage ILocalResult.StaticMap
