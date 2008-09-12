@@ -66,6 +66,25 @@ namespace Google.API.Search
             return responseData;
         }
 
+        /// <summary>
+        /// Search local infos.
+        /// </summary>
+        /// <param name="keyword">The keyword.</param>
+        /// <param name="resultCount">The count of result itmes.</param>
+        /// <param name="latitude">The latitude value of local.</param>
+        /// <param name="longitude">The longitude value of local.</param>
+        /// <returns>The result items.</returns>
+        /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
+        /// <example>
+        /// This is the c# code example.
+        /// <code>
+        /// IList&lt;ILocalResult&gt; results = GlocalSearcher.Search("white house", 4, -77.036667f, 38.895000f);
+        /// foreach(ILocalResult result in results)
+        /// {
+        ///     Console.WriteLine("{0} at {1}, {2}", result.Title, result.StreetAddress, result.Region);
+        /// }
+        /// </code>
+        /// </example>
         public static IList<ILocalResult> Search(
             string keyword,
             int resultCount,
@@ -75,6 +94,26 @@ namespace Google.API.Search
             return Search(keyword, resultCount, latitude, longitude, null, null, new LocalResultType());
         }
 
+        /// <summary>
+        /// Search local infos.
+        /// </summary>
+        /// <param name="keyword">The keyword.</param>
+        /// <param name="resultCount">The count of result itmes.</param>
+        /// <param name="latitude">The latitude value of local.</param>
+        /// <param name="longitude">The longitude value of local.</param>
+        /// <param name="resultType">The type of local search results.</param>
+        /// <returns>The result items.</returns>
+        /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
+        /// <example>
+        /// This is the c# code example.
+        /// <code>
+        /// IList&lt;ILocalResult&gt; results = GlocalSearcher.Search("white house", 4, -77.036667f, 38.895000f, LocalResultType.localonly);
+        /// foreach(ILocalResult result in results)
+        /// {
+        ///     Console.WriteLine("{0} at {1}, {2}", result.Title, result.StreetAddress, result.Region);
+        /// }
+        /// </code>
+        /// </example>
         public static IList<ILocalResult> Search(
             string keyword,
             int resultCount,
@@ -85,6 +124,27 @@ namespace Google.API.Search
             return Search(keyword, resultCount, latitude, longitude, null, null, resultType);
         }
 
+        /// <summary>
+        /// Search local infos.
+        /// </summary>
+        /// <param name="keyword">The keyword.</param>
+        /// <param name="resultCount">The count of result itmes.</param>
+        /// <param name="latitude">The latitude value of local.</param>
+        /// <param name="longitude">The longitude value of local.</param>
+        /// <param name="width">The width value of search bouding.</param>
+        /// <param name="height">The height value of search bounding.</param>
+        /// <returns>The result items.</returns>
+        /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
+        /// <example>
+        /// This is the c# code example.
+        /// <code>
+        /// IList&lt;ILocalResult&gt; results = GlocalSearcher.Search("white house", 4, -77.036667f, 38.895000f, 1.0f, 0.5f);
+        /// foreach(ILocalResult result in results)
+        /// {
+        ///     Console.WriteLine("{0} at {1}, {2}", result.Title, result.StreetAddress, result.Region);
+        /// }
+        /// </code>
+        /// </example>
         public static IList<ILocalResult> Search(
             string keyword,
             int resultCount,
@@ -96,6 +156,28 @@ namespace Google.API.Search
             return Search(keyword, resultCount, latitude, longitude, (float?)width, (float?)height, new LocalResultType());
         }
 
+        /// <summary>
+        /// Search local infos.
+        /// </summary>
+        /// <param name="keyword">The keyword.</param>
+        /// <param name="resultCount">The count of result itmes.</param>
+        /// <param name="latitude">The latitude value of local.</param>
+        /// <param name="longitude">The longitude value of local.</param>
+        /// <param name="width">The width value of search bouding.</param>
+        /// <param name="height">The height value of search bounding.</param>
+        /// <param name="resultType">The type of local search results.</param>
+        /// <returns>The result items.</returns>
+        /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
+        /// <example>
+        /// This is the c# code example.
+        /// <code>
+        /// IList&lt;ILocalResult&gt; results = GlocalSearcher.Search("white house", 4, -77.036667f, 38.895000f, 1.0f, 0.5f, LocalResultType.blended);
+        /// foreach(ILocalResult result in results)
+        /// {
+        ///     Console.WriteLine("{0} at {1}, {2}", result.Title, result.StreetAddress, result.Region);
+        /// }
+        /// </code>
+        /// </example>
         public static IList<ILocalResult> Search(
             string keyword,
             int resultCount,
