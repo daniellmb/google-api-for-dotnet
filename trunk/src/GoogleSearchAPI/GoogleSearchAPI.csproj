@@ -115,7 +115,6 @@
     <Compile Include="Search\LanguageUtility.cs" />
     <Compile Include="Search\PhoneNumber.cs" />
     <Compile Include="Search\SearchData.cs" />
-    <Compile Include="Search\SearchException.cs" />
     <Compile Include="Search\SearchUtility.cs" />
     <Compile Include="Search\TbImage.cs" />
   </ItemGroup>

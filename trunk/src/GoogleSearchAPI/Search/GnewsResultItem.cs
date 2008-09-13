@@ -23,6 +23,7 @@
  */
 
 using System;
+using System.Text;
 using Newtonsoft.Json;
 
 namespace Google.API.Search
@@ -82,11 +83,25 @@ namespace Google.API.Search
         public override string ToString()
         {
             INewsResultItem result = this;
-            return string.Format("{0}" + Environment.NewLine + "[{1}, {2} - {3:d}]",
-                                 result.Title,
-                                 result.Publisher,
-                                 result.Location,
-                                 result.PublishedDate);
+            var sb = new StringBuilder();
+            sb.AppendLine(result.Title);
+            sb.Append(result.Publisher);
+            sb.Append(", ");
+            if (!string.IsNullOrEmpty(result.Location))
+            {
+                sb.Append(result.Location);
+                sb.Append(" - ");
+            }
+            sb.Append(result.PublishedDate.ToShortDateString());
+            return sb.ToString();
+        }
+
+        protected virtual string GetTitle()
+        {
+            if (TitleNoFormatting == null)
+                return null;
+
+            return HttpUtility.HtmlDecode(TitleNoFormatting);
         }
 
         #region INewsResultItem Members
@@ -100,15 +115,9 @@ namespace Google.API.Search
         {
             get
             {
-                if(TitleNoFormatting == null)
-                {
-                    return null;
-                }
-
                 if (m_PlainTitle == null)
-                {
-                    m_PlainTitle = HttpUtility.HtmlDecode(TitleNoFormatting);
-                }
+                    m_PlainTitle = GetTitle();
+
                 return m_PlainTitle;
             }
         }

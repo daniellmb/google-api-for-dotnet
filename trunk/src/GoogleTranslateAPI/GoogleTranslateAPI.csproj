@@ -77,7 +77,6 @@
     <Compile Include="Translate\DetectRequest.cs" />
     <Compile Include="Translate\LanguageUtility.cs" />
     <Compile Include="Translate\TranslateData.cs" />
-    <Compile Include="Translate\TranslateException.cs" />
     <Compile Include="Translate\TranslateRequest.cs" />
     <Compile Include="Translate\Translator.cs" />
   </ItemGroup>
