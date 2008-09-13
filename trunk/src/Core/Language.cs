@@ -52,11 +52,11 @@ namespace Google.API
         /// <summary>
         /// Chinese(Simplified)
         /// </summary>
-        Chinese_Simplified,
+        ChineseSimplified,
         /// <summary>
         /// Chinese(Traditional)
         /// </summary>
-        Chinese_Traditional,
+        ChineseTraditional,
         /// <summary>
         /// Croatian.
         /// </summary>
@@ -194,9 +194,9 @@ namespace Google.API
         /// </summary>
         Turkish,
         /// <summary>
-        /// Ukranian.
+        /// Ukrainian.
         /// </summary>
-        Ukranian,
+        Ukrainian,
         /// <summary>
         /// Vietnamese.
         /// </summary>

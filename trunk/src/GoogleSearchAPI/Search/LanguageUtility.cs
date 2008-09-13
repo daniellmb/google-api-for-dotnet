@@ -39,8 +39,8 @@ namespace Google.API.Search
             s_LanguageCodeDict[Language.Arabic] = "lang_ar";
             s_LanguageCodeDict[Language.Bulgarian] = "lang_bg";
             s_LanguageCodeDict[Language.Catalan] = "lang_ca";
-            s_LanguageCodeDict[Language.Chinese_Simplified] = "lang_zh-CN";
-            s_LanguageCodeDict[Language.Chinese_Traditional] = "lang_zh-TW";
+            s_LanguageCodeDict[Language.ChineseSimplified] = "lang_zh-CN";
+            s_LanguageCodeDict[Language.ChineseTraditional] = "lang_zh-TW";
             s_LanguageCodeDict[Language.Croatian] = "lang_hr";
             s_LanguageCodeDict[Language.Czech] = "lang_cs";
             s_LanguageCodeDict[Language.Danish] = "lang_da";
