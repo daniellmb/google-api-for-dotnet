@@ -51,9 +51,9 @@ namespace Google.API.Search
                         searchData = gsearch(start, ResultSize.small);
                     }
                 }
-                catch (GoogleAPIException ex)
+                catch (GoogleServiceException ex)
                 {
-                    if (ex.InnerException == null)
+                    if (ex.ResponseStatus == ResponseStatusConstant.OutOfRangeStatus)
                         return results;
 
                     throw;

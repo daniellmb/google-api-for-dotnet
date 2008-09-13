@@ -1,5 +1,5 @@
 ﻿/**
- * ResultObject.cs
+ * GoogleServiceException.cs
  *
  * Copyright (C) 2008,  iron9light
  *
@@ -22,26 +22,37 @@
  * THE SOFTWARE.
  */
 
-using Newtonsoft.Json;
+using System;
+using System.Runtime.Serialization;
 
 namespace Google.API
 {
-    internal class ResponseStatusConstant
+    [Serializable]
+    internal class GoogleServiceException : GoogleAPIException
     {
-        public const int DefaultStatus = 200;
-        public const int OutOfRangeStatus = 400;        
-    }
+        public GoogleServiceException(int responseStatus, string responseDetails)
+        {
+            ResponseStatus = responseStatus;
+            ResponseDetails = responseDetails;
+        }
 
-    [JsonObject(MemberSerialization.OptOut)]
-    internal class ResultObject<T>
-    {
-        [JsonProperty("responseDetails")]
         public string ResponseDetails { get; private set; }
 
-        [JsonProperty("responseStatus")]
         public int ResponseStatus { get; private set; }
 
-        [JsonProperty("responseData")]
-        public T ResponseData { get; private set; }
+        public override string Message
+        {
+            get
+            {
+                return string.Format("[error code:{0}]{1}", ResponseStatus, ResponseDetails);
+            }
+        }
+
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            base.GetObjectData(info, context);
+            info.AddValue("ResponseStatus", ResponseStatus);
+            info.AddValue("ResponseDetails", ResponseDetails);
+        }
     }
 }

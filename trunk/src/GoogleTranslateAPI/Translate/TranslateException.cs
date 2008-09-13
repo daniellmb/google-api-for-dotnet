@@ -29,6 +29,7 @@ namespace Google.API.Translate
     /// <summary>
     /// Google API translate exception.
     /// </summary>
+    [Serializable]
     public class TranslateException : GoogleAPIException
     {
         /// <summary>

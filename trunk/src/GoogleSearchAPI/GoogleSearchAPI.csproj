@@ -48,8 +48,14 @@
     <Compile Include="..\Core\ArgumentAttribute.cs">
       <Link>ArgumentAttribute.cs</Link>
     </Compile>
+    <Compile Include="..\Core\DeserializeException.cs">
+      <Link>DeserializeException.cs</Link>
+    </Compile>
     <Compile Include="..\Core\GoogleAPIException.cs">
       <Link>GoogleAPIException.cs</Link>
+    </Compile>
+    <Compile Include="..\Core\GoogleServiceException.cs">
+      <Link>GoogleServiceException.cs</Link>
     </Compile>
     <Compile Include="..\Core\HttpUtility.cs">
       <Link>HttpUtility.cs</Link>

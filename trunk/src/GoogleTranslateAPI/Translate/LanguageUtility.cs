@@ -43,8 +43,8 @@ namespace Google.API.Translate
             s_LanguageCodeDict[Language.Bulgarian] = "bg";
             s_LanguageCodeDict[Language.Catalan] = "ca";
             s_LanguageCodeDict[Language.Chinese] = "zh";
-            s_LanguageCodeDict[Language.Chinese_Simplified] = "zh-CN";
-            s_LanguageCodeDict[Language.Chinese_Traditional] = "zh-TW";
+            s_LanguageCodeDict[Language.ChineseSimplified] = "zh-CN";
+            s_LanguageCodeDict[Language.ChineseTraditional] = "zh-TW";
             s_LanguageCodeDict[Language.Croatian] = "hr";
             s_LanguageCodeDict[Language.Czech] = "cs";
             s_LanguageCodeDict[Language.Danish] = "da";
@@ -78,15 +78,15 @@ namespace Google.API.Translate
             s_LanguageCodeDict[Language.Swedish] = "sv";
             s_LanguageCodeDict[Language.Thai] = "th";
             s_LanguageCodeDict[Language.Turkish] = "tr";
-            s_LanguageCodeDict[Language.Ukranian] = "uk";
+            s_LanguageCodeDict[Language.Ukrainian] = "uk";
             s_LanguageCodeDict[Language.Vietnamese] = "vi";
 
             s_TranslatableList = new Language[]
                 {
                     Language.Arabic,
                     Language.Bulgarian,
-                    Language.Chinese_Simplified,
-                    Language.Chinese_Traditional,
+                    Language.ChineseSimplified,
+                    Language.ChineseTraditional,
                     Language.Croatian,
                     Language.Czech,
                     Language.Danish,
@@ -174,7 +174,7 @@ namespace Google.API.Translate
             }
             if (string.Compare(languageCode, "zh-Hant", true) == 0)
             {
-                return Language.Chinese_Traditional;
+                return Language.ChineseTraditional;
             }
             return Language.Unknown;
         }
