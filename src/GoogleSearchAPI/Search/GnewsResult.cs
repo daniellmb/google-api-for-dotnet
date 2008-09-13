@@ -62,10 +62,26 @@ namespace Google.API.Search
         [JsonProperty("image")]
         public GnewsImage Image { get; private set; }
 
+        [JsonProperty("author")]
+        public string Author { get; private set; }
+
         public override string ToString()
         {
             INewsResult result = this;
             return string.Format("{0}" + Environment.NewLine + "{1}", base.ToString(), result.Content);
+        }
+
+        protected override string GetTitle()
+        {
+            if (GSearchResultClass == "GnewsSearch.quote")
+            {
+                if (Author == null)
+                    return null;
+
+                return "[quote]" + HttpUtility.HtmlDecode(Author);
+            }
+
+            return base.GetTitle();
         }
 
         #region INewsResult Members

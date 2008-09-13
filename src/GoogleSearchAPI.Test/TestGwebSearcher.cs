@@ -65,6 +65,12 @@ namespace Google.API.Search.Test
                 Assert.IsNotNull(result);
             }
             Assert.AreEqual(count, results.Count);
+            foreach (var result in results)
+            {
+                Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
         }
 
         [Test]
@@ -77,6 +83,8 @@ namespace Google.API.Search.Test
             foreach (IWebResult result in results)
             {
                 Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
             }
         }
 

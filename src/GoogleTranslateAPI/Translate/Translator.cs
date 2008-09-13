@@ -59,7 +59,7 @@ namespace Google.API.Translate
         /// <param name="from">The language of the original text. You can set it as <c>Language.Unknown</c> to the auto detect it.</param>
         /// <param name="to">The target language you want to translate to.</param>
         /// <returns>The translate result.</returns>
-        /// <exception cref="TranslateException">Translate failed.</exception>
+        /// <exception cref="GoogleAPIException">Translate failed.</exception>
         /// <example>
         /// This is the c# code example.
         /// <code>
@@ -82,7 +82,7 @@ namespace Google.API.Translate
         /// <param name="to">The target language you want to translate to.</param>
         /// <param name="format">The format of the text.</param>
         /// <returns>The translate result.</returns>
-        /// <exception cref="TranslateException">Translate failed.</exception>
+        /// <exception cref="GoogleAPIException">Translate failed.</exception>
         /// <example>
         /// This is the c# code example.
         /// <code>
@@ -94,21 +94,14 @@ namespace Google.API.Translate
         {
             if (from != Language.Unknown && !LanguageUtility.IsTranslatable(from))
             {
-                throw new TranslateException("Can not translate this language : " + from);
+                throw new GoogleAPIException("Can not translate this language : " + from);
             }
             if (!LanguageUtility.IsTranslatable(to))
             {
-                throw new TranslateException(string.Format("Can not translate this language to \"{0}\"", to));
+                throw new GoogleAPIException(string.Format("Can not translate this language to \"{0}\"", to));
             }
-            TranslateData result;
-            try
-            {
-                result = Translate(text, LanguageUtility.GetLanguageCode(from), LanguageUtility.GetLanguageCode(to), format);
-            }
-            catch (GoogleAPIException ex)
-            {
-                throw new TranslateException("Translate failed!", ex);
-            }
+
+            var result = Translate(text, LanguageUtility.GetLanguageCode(from), LanguageUtility.GetLanguageCode(to), format);
 
             if (format == TranslateFormat.text)
             {
@@ -124,7 +117,7 @@ namespace Google.API.Translate
         /// <param name="to">The target language you want to translate to.</param>
         /// <param name="from">The detected language of the original text.</param>
         /// <returns>The translate result.</returns>
-        /// <exception cref="TranslateException">Translate failed.</exception>
+        /// <exception cref="GoogleAPIException">Translate failed.</exception>
         /// <example>
         /// This is the c# code example.
         /// <code>
@@ -148,22 +141,16 @@ namespace Google.API.Translate
         /// <param name="format">The format of the text.</param>
         /// <param name="from">The detected language of the original text.</param>
         /// <returns>The translate result.</returns>
-        /// <exception cref="TranslateException">Translate failed.</exception>
+        /// <exception cref="GoogleAPIException">Translate failed.</exception>
         public static string TranslateAndDetect(string text, Language to, TranslateFormat format, out Language from)
         {
             if (!LanguageUtility.IsTranslatable(to))
             {
-                throw new TranslateException(string.Format("Can not translate this language to \"{0}\"", to));
+                throw new GoogleAPIException(string.Format("Can not translate this language to \"{0}\"", to));
             }
-            TranslateData result;
-            try
-            {
-                result = Translate(text, LanguageUtility.GetLanguageCode(Language.Unknown), LanguageUtility.GetLanguageCode(to), format);
-            }
-            catch (GoogleAPIException ex)
-            {
-                throw new TranslateException("Translate failed!", ex);
-            }
+
+            var result = Translate(text, LanguageUtility.GetLanguageCode(Language.Unknown), LanguageUtility.GetLanguageCode(to), format);
+
             from = LanguageUtility.GetLanguage(result.DetectedSourceLanguage);
 
             if (format == TranslateFormat.text)
@@ -180,18 +167,11 @@ namespace Google.API.Translate
         /// <param name="isReliable">Whether the result is reliable</param>
         /// <param name="confidence">The confidence percent of the result.</param>
         /// <returns>The detected language.</returns>
-        /// <exception cref="TranslateException">Detect failed.</exception>
+        /// <exception cref="GoogleAPIException">Detect failed.</exception>
         public static Language Detect(string text, out bool isReliable, out double confidence)
         {
-            DetectData result;
-            try
-            {
-                result = Detect(text);
-            }
-            catch (GoogleAPIException ex)
-            {
-                throw new TranslateException("Detect failed!", ex);
-            }
+            var result = Detect(text);
+
             string languageCode = result.LanguageCode;
             isReliable = result.IsReliable;
             confidence = result.Confidence;
