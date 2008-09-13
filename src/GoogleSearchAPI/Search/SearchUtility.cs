@@ -30,7 +30,7 @@ namespace Google.API.Search
 {
     internal static class SearchUtility
     {
-        public delegate SearchData<T> GSearchCallback<T>(int start, ResultSize resultSize);
+        public delegate ISearchData<T> GSearchCallback<T>(int start, ResultSize resultSize);
 
         public static List<T> Search<T>(GSearchCallback<T> gsearch, int resultCount)
         {
@@ -39,7 +39,7 @@ namespace Google.API.Search
             int restCount = resultCount;
             while (restCount > 0)
             {
-                SearchData<T> searchData;
+                ISearchData<T> searchData;
                 try
                 {
                     if (restCount > 4)
@@ -51,13 +51,16 @@ namespace Google.API.Search
                         searchData = gsearch(start, ResultSize.small);
                     }
                 }
-                catch (GoogleAPIException)
+                catch (GoogleAPIException ex)
                 {
-                    return results;
+                    if (ex.InnerException == null)
+                        return results;
+
+                    throw;
                 }
 
                 int count = searchData.Results.Length;
-                if(count == 0)
+                if (count == 0)
                 {
                     break;
                 }

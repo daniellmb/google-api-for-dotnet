@@ -26,8 +26,13 @@ using Newtonsoft.Json;
 
 namespace Google.API.Search
 {
+    internal interface ISearchData<TResult>
+    {
+        TResult[] Results { get; }
+    }
+
     [JsonObject]
-    internal class SearchData<TResult>
+    internal class SearchData<TResult> : ISearchData<TResult>
     {
         [JsonObject]
         public class CursorObject

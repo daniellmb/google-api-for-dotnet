@@ -24,9 +24,45 @@
 
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Google.API.Search
 {
+    [JsonObject]
+    internal class LocalSearchData : ISearchData<GlocalResult>
+    {
+        [JsonObject]
+        public class Point
+        {
+            [JsonProperty("lat")]
+            public float Latitude { get; private set; }
+            [JsonProperty("lng")]
+            public float Longitude { get; private set; }
+        }
+
+        [JsonObject]
+        public class ViewportObject
+        {
+            [JsonProperty("center")]
+            public Point center { get; private set; }
+
+            [JsonProperty("span")]
+            public Point span { get; private set; }
+
+            [JsonProperty("sw")]
+            public Point sw { get; private set; }
+
+            [JsonProperty("ne")]
+            public Point ne { get; private set; }
+        }
+
+        [JsonProperty("results")]
+        public GlocalResult[] Results { get; private set; }
+
+        [JsonProperty("viewport")]
+        public ViewportObject Viewport { get; private set; }
+    }
+
     /// <summary>
     /// Utility class for Google Local Search service.
     /// </summary>
@@ -53,7 +89,7 @@ namespace Google.API.Search
             }
         }
 
-        internal static SearchData<GlocalResult> GSearch(
+        internal static LocalSearchData GSearch(
             string keyword,
             int start,
             ResultSize resultSize,
@@ -70,7 +106,7 @@ namespace Google.API.Search
 
             var request = new GlocalSearchRequest(keyword, start, resultSize, latitude, longitude, width, height, resultType);
 
-            var responseData = RequestUtility.GetResponseData<SearchData<GlocalResult>>(request, Timeout);
+            var responseData = RequestUtility.GetResponseData<LocalSearchData>(request, Timeout);
 
             return responseData;
         }
