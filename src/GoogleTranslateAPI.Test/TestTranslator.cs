@@ -33,7 +33,7 @@ namespace Google.API.Translate.Test
     {
         private static readonly ICollection<Language> s_Undetectable = new Language[]
             {
-                Language.Chinese_Simplified,
+                Language.ChineseSimplified,
                 Language.Croatian,
                 Language.Greek,
                 Language.Hindi,
@@ -73,7 +73,7 @@ namespace Google.API.Translate.Test
             // TODO : The test case TranslateTestForHtml is not stable. There may add some space after being translated.
 
             Language from = Language.English;
-            Language to = Language.Chinese_Simplified;
+            Language to = Language.ChineseSimplified;
 
             string textTemplate =
                 "<html><head><title>{0} </title></head><body> <b>{1}</b> </body></html>";

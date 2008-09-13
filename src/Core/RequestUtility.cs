@@ -68,15 +68,12 @@ namespace Google.API
             }
             catch (Exception ex)
             {
-                throw new GoogleAPIException(
-                    string.Format("Deserialize Failed.{0}Type:{1}{0}String:{2}", Environment.NewLine,
-                                  typeof(ResultObject<T>), resultString)
-                    , ex);
+                throw new DeserializeException(typeof(ResultObject<T>), resultString, ex);
             }
 
-            if (resultObject.ResponseStatus != 200)
+            if (resultObject.ResponseStatus != ResponseStatusConstant.DefaultStatus)
             {
-                throw new GoogleAPIException(string.Format("[error code:{0}]{1}", resultObject.ResponseStatus, resultObject.ResponseDetails));
+                throw new GoogleServiceException(resultObject.ResponseStatus, resultObject.ResponseDetails);
             }
             return resultObject.ResponseData;
         }
@@ -108,7 +105,7 @@ namespace Google.API
             {
                 responseData = GetResponseData<T>(webRequest);
             }
-            catch (GoogleAPIException ex)
+            catch (DeserializeException ex)
             {
                 throw new GoogleAPIException(string.Format("request:\"{0}\"", request), ex);
             }
