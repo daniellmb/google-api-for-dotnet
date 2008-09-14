@@ -84,7 +84,9 @@ namespace Google.API.Search
         {
             INewsResultItem result = this;
             var sb = new StringBuilder();
-            sb.AppendLine(result.Title);
+            if (!string.IsNullOrEmpty(result.Title))
+                sb.AppendLine(result.Title);
+
             sb.Append(result.Publisher);
             sb.Append(", ");
             if (!string.IsNullOrEmpty(result.Location))
@@ -94,14 +96,6 @@ namespace Google.API.Search
             }
             sb.Append(result.PublishedDate.ToShortDateString());
             return sb.ToString();
-        }
-
-        protected virtual string GetTitle()
-        {
-            if (TitleNoFormatting == null)
-                return null;
-
-            return HttpUtility.HtmlDecode(TitleNoFormatting);
         }
 
         #region INewsResultItem Members
@@ -115,8 +109,11 @@ namespace Google.API.Search
         {
             get
             {
+                if (TitleNoFormatting == null)
+                    return null;
+
                 if (m_PlainTitle == null)
-                    m_PlainTitle = GetTitle();
+                    m_PlainTitle = HttpUtility.HtmlDecode(TitleNoFormatting);
 
                 return m_PlainTitle;
             }
@@ -126,12 +123,12 @@ namespace Google.API.Search
         {
             get
             {
-                if(Publisher == null)
+                if (Publisher == null)
                 {
                     return null;
                 }
 
-                if(m_PlainPublisher == null)
+                if (m_PlainPublisher == null)
                 {
                     m_PlainPublisher = HttpUtility.HtmlDecode(Publisher);
                 }
@@ -143,12 +140,12 @@ namespace Google.API.Search
         {
             get
             {
-                if(Location == null)
+                if (Location == null)
                 {
                     return null;
                 }
 
-                if(m_PlainLocation == null)
+                if (m_PlainLocation == null)
                 {
                     m_PlainLocation = HttpUtility.HtmlDecode(Location);
                 }
