@@ -48,5 +48,15 @@ namespace Google.API.Search
         /// Get a image that represents the cluster of news articles related to this result. If there is no good image for this result it will return null.
         /// </summary>
         INewsImage Image { get; }
+
+        /// <summary>
+        /// Get the name of the person that the quote is attributed to. Note, you can get the author only when this is a quote. 
+        /// </summary>
+        string Author { get; }
+
+        /// <summary>
+        /// Get whether it is a quote or a normal news.
+        /// </summary>
+        bool IsQuote { get; }
     }
 }

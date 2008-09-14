@@ -23,6 +23,7 @@
  */
 
 using System;
+using System.Text;
 using Newtonsoft.Json;
 
 namespace Google.API.Search
@@ -68,20 +69,17 @@ namespace Google.API.Search
         public override string ToString()
         {
             INewsResult result = this;
-            return string.Format("{0}" + Environment.NewLine + "{1}", base.ToString(), result.Content);
-        }
 
-        protected override string GetTitle()
-        {
-            if (GSearchResultClass == "GnewsSearch.quote")
+            var sb = new StringBuilder();
+            if (result.IsQuote)
             {
-                if (Author == null)
-                    return null;
-
-                return "[quote]" + HttpUtility.HtmlDecode(Author);
+                sb.Append("[quote]");
+                sb.AppendLine(Author);
             }
+            sb.AppendLine(base.ToString());
+            sb.Append(result.Content);
 
-            return base.GetTitle();
+            return sb.ToString();
         }
 
         #region INewsResult Members
@@ -116,6 +114,16 @@ namespace Google.API.Search
         INewsImage INewsResult.Image
         {
             get { return Image; }
+        }
+
+        string INewsResult.Author
+        {
+            get { return Author; }
+        }
+
+        bool INewsResult.IsQuote
+        {
+            get { return GSearchResultClass == "GnewsSearch.quote"; }
         }
 
         #endregion
