@@ -26,10 +26,10 @@ using Newtonsoft.Json;
 
 namespace Google.API
 {
-    internal class ResponseStatusConstant
+    internal static class ResponseStatusConstant
     {
         public const int DefaultStatus = 200;
-        public const int OutOfRangeStatus = 400;        
+        public const int OutOfRangeStatus = 400;
     }
 
     [JsonObject(MemberSerialization.OptOut)]

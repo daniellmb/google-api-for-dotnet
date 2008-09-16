@@ -44,7 +44,7 @@ namespace Google.API
         {
             get
             {
-                return string.Format("[error code:{0}]{1}", ResponseStatus, ResponseDetails);
+                return string.Format("[response status:{0}]{1}", ResponseStatus, ResponseDetails);
             }
         }
 
