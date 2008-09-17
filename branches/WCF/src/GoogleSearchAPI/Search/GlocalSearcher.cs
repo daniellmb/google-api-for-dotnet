@@ -24,15 +24,51 @@
 
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace Google.API.Search
 {
+    [DataContract]
+    internal class LocalSearchData : ISearchData<GlocalResult>
+    {
+        [DataContract]
+        public class Point
+        {
+            [DataMember(Name = "lat")]
+            public float Latitude { get; private set; }
+            [DataMember(Name = "lng")]
+            public float Longitude { get; private set; }
+        }
+
+        [DataContract]
+        public class ViewportObject
+        {
+            [DataMember(Name = "center")]
+            public Point center { get; private set; }
+
+            [DataMember(Name = "span")]
+            public Point span { get; private set; }
+
+            [DataMember(Name = "sw")]
+            public Point sw { get; private set; }
+
+            [DataMember(Name = "ne")]
+            public Point ne { get; private set; }
+        }
+
+        [DataMember(Name = "results")]
+        public GlocalResult[] Results { get; private set; }
+
+        [DataMember(Name = "viewport")]
+        public ViewportObject Viewport { get; private set; }
+    }
+
     /// <summary>
     /// Utility class for Google Local Search service.
     /// </summary>
     public static class GlocalSearcher
     {
-        internal static SearchData<GlocalResult> GSearch(
+        internal static LocalSearchData GSearch(
             string keyword,
             int start,
             ResultSize resultSize,

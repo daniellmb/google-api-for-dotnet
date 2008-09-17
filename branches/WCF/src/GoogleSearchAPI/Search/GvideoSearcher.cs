@@ -120,7 +120,7 @@ namespace Google.API.Search
 
             GSearchCallback<GvideoResult> gsearch = (start, resultSize) => GSearch(keyword, start, resultSize, sortBy);
             List<GvideoResult> results = SearchUtility.Search(gsearch, resultCount);
-            return results.ConvertAll<IVideoResult>(item => (IVideoResult)item);
+            return results.ConvertAll(item => (IVideoResult)item);
         }
     }
 }

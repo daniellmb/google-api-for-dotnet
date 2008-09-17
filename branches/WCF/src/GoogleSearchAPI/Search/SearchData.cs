@@ -26,8 +26,13 @@ using System.Runtime.Serialization;
 
 namespace Google.API.Search
 {
+    internal interface ISearchData<TResult>
+    {
+        TResult[] Results { get; }
+    }
+
     [DataContract]
-    internal class SearchData<TResult>
+    internal class SearchData<TResult> : ISearchData<TResult>
     {
         [DataContract]
         public class CursorObject

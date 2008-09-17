@@ -163,7 +163,7 @@ namespace Google.API.Search
 
             GSearchCallback<GnewsResult> gsearch = (start, resultSize) => GSearch(keyword, start, resultSize, geo, sortBy);
             List<GnewsResult> results = SearchUtility.Search(gsearch, resultCount);
-            return results.ConvertAll<INewsResult>(item => (INewsResult)item);
+            return results.ConvertAll(item => (INewsResult)item);
         }
 
         /// <summary>

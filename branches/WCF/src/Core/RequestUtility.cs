@@ -80,8 +80,8 @@ namespace Google.API
                 throw new GoogleAPIException("Failed to get response.", ex);
             }
 
-            if (resultObject.ResponseStatus != 200)
-                throw new GoogleAPIException(string.Format("[error code:{0}]{1}", resultObject.ResponseStatus, resultObject.ResponseDetails));
+            if (resultObject.ResponseStatus != ResponseStatusConstant.DefaultStatus)
+                throw new GoogleServiceException(resultObject.ResponseStatus, resultObject.ResponseDetails);
 
             return resultObject.ResponseData;
         }

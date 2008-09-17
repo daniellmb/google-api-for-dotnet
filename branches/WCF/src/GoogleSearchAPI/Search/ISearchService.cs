@@ -46,7 +46,7 @@ namespace Google.API.Search
         [WebGet(
             UriTemplate = "/local?v=1.0&q={query}&rsz={resultSize}&start={start}&sll={local}&sspn={bounding}&mrt={resultType}",
             ResponseFormat = WebMessageFormat.Json)]
-        ResultObject<SearchData<GlocalResult>> LocalSearch(
+        ResultObject<LocalSearchData> LocalSearch(
             string query,
             string resultSize,
             int start,

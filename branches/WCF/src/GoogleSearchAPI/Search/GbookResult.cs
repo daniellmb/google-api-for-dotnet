@@ -80,7 +80,6 @@ namespace Google.API.Search
         /// Supplies the year that the book was published.
         /// </summary>
         [DataMember(Name = "publishedYear")]
-        //public int PublishedYear { get; private set; }
         public string PublishedYearString { get; private set; }
 
         /// <summary>
@@ -166,7 +165,6 @@ namespace Google.API.Search
 
         int IBookResult.PublishedYear
         {
-            //get { return PublishedYear; }
             get
             {
                 if (string.CompareOrdinal(PublishedYearString, "unknown") == 0)

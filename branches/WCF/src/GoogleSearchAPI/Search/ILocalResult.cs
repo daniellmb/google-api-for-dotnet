@@ -103,5 +103,10 @@ namespace Google.API.Search
         /// For "kml" results, this property contains a content snippet associated with the KML result. For "local" results, this property is the empty string.
         /// </summary>
         string Content { get; }
+
+        /// <summary>
+        /// Get a postal code of this result.
+        /// </summary>
+        string PostalCode { get; }
     }
 }

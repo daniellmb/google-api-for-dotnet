@@ -22,8 +22,8 @@
  * THE SOFTWARE.
  */
 
-using System;
 using System.Runtime.Serialization;
+using System.Text;
 
 namespace Google.API.Search
 {
@@ -62,10 +62,23 @@ namespace Google.API.Search
         [DataMember(Name = "image")]
         public GnewsImage Image { get; private set; }
 
+        [DataMember(Name = "author")]
+        public string Author { get; private set; }
+
         public override string ToString()
         {
             INewsResult result = this;
-            return string.Format("{0}" + Environment.NewLine + "{1}", base.ToString(), result.Content);
+
+            var sb = new StringBuilder();
+            if (result.IsQuote)
+            {
+                sb.Append("[quote]");
+                sb.AppendLine(result.Author);
+            }
+            sb.AppendLine(base.ToString());
+            sb.Append(result.Content);
+
+            return sb.ToString();
         }
 
         #region INewsResult Members
@@ -100,6 +113,16 @@ namespace Google.API.Search
         INewsImage INewsResult.Image
         {
             get { return Image; }
+        }
+
+        string INewsResult.Author
+        {
+            get { return Author; }
+        }
+
+        bool INewsResult.IsQuote
+        {
+            get { return GSearchResultClass == "GnewsSearch.quote"; }
         }
 
         #endregion

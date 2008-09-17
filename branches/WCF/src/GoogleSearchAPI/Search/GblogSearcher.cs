@@ -120,7 +120,7 @@ namespace Google.API.Search
 
             GSearchCallback<GblogResult> gsearch = (start, resultSize) => GSearch(keyword, start, resultSize, sortBy);
             List<GblogResult> results = SearchUtility.Search(gsearch, resultCount);
-            return results.ConvertAll<IBlogResult>(item => (IBlogResult)item);
+            return results.ConvertAll(item => (IBlogResult)item);
         }
     }
 }

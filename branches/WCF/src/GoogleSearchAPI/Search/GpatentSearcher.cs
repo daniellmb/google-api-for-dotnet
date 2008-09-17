@@ -180,7 +180,7 @@ namespace Google.API.Search
 
             GSearchCallback<GpatentResult> gsearch = (start, resultSize) => GSearch(keyword, start, resultSize, issuedOnly, filedOnly, sortBy);
             List<GpatentResult> results = SearchUtility.Search(gsearch, resultCount);
-            return results.ConvertAll<IPatentResult>(item => (IPatentResult)item);
+            return results.ConvertAll(item => (IPatentResult)item);
         }
     }
 }

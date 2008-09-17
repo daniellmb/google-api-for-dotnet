@@ -101,7 +101,7 @@ namespace Google.API.Search
         public string TbUrl { get; private set; }
 
         /// <summary>
-        /// If present, supplies the url of the flash version of the video that can be played inline on your page. To play this video simply create and &lt;embed&gt; element on your page using this value as the src attribute and using application/x-shockwave-flash as the type attribute. If you want the video to play right away, make sure to append &autoPlay=true to the url.
+        /// If present, supplies the url of the flash version of the video that can be played inline on your page. To play this video simply create and &lt;embed&gt; element on your page using this value as the src attribute and using application/x-shockwave-flash as the type attribute. If you want the video to play right away, make sure to append &autoPlay=is true to the url.
         /// </summary>
         [DataMember(Name = "playUrl")]
         public string PlayUrl { get; private set; }

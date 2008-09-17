@@ -76,7 +76,6 @@ namespace Google.API.Search
         /// Supplies the application filing date of the patent (rfc-822 format).
         /// </summary>
         [DataMember(Name = "applicationDate")]
-        //public DateTime ApplicationDate { get; private set; }
         public string ApplicationDateString { get; private set; }
 
         /// <summary>
@@ -159,7 +158,6 @@ namespace Google.API.Search
 
         DateTime IPatentResult.ApplicationDate
         {
-            //get { return ApplicationDate; }
             get
             {
                 return SearchUtility.RFC2822DateTimeParse(ApplicationDateString);

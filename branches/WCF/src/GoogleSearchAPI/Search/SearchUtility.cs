@@ -210,7 +210,7 @@ namespace Google.API.Search
         localonly = 0,
     }
 
-    internal delegate SearchData<T> GSearchCallback<T>(int start, ResultSize resultSize);
+    internal delegate ISearchData<T> GSearchCallback<T>(int start, ResultSize resultSize);
 
     internal static class SearchUtility
     {
@@ -241,7 +241,7 @@ namespace Google.API.Search
             int restCount = resultCount;
             while (restCount > 0)
             {
-                SearchData<T> searchData;
+                ISearchData<T> searchData;
                 try
                 {
                     if (restCount > 4)
@@ -253,9 +253,12 @@ namespace Google.API.Search
                         searchData = gsearch(start, ResultSize.small);
                     }
                 }
-                catch (GoogleAPIException)
+                catch (GoogleServiceException ex)
                 {
-                    return results;
+                    if (ex.ResponseStatus == ResponseStatusConstant.OutOfRangeStatus)
+                        return results;
+
+                    throw;
                 }
 
                 int count = searchData.Results.Length;

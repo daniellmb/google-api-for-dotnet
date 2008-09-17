@@ -260,7 +260,7 @@ namespace Google.API.Search
 
             GSearchCallback<GimageResult> gsearch = (start, resultSize) => GSearch(keyword, start, resultSize, safeLevel, imageSize, colorization, imageType, fileType, site);
             List<GimageResult> results = SearchUtility.Search(gsearch, resultCount);
-            return results.ConvertAll<IImageResult>(item => (IImageResult)item);
+            return results.ConvertAll(item => (IImageResult)item);
         }
     }
 }

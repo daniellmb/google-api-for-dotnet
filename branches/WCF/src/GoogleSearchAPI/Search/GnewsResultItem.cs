@@ -24,6 +24,7 @@
 
 using System;
 using System.Runtime.Serialization;
+using System.Text;
 
 namespace Google.API.Search
 {
@@ -74,7 +75,6 @@ namespace Google.API.Search
         /// Supplies the published date (rfc-822 format) of the news story referenced by this search result.
         /// </summary>
         [DataMember(Name = "publishedDate")]
-        //public DateTime PublishedDate { get; protected set; }
         public string PublishedDateString { get; protected set; }
 
         [DataMember(Name = "signedRedirectUrl")]
@@ -83,11 +83,19 @@ namespace Google.API.Search
         public override string ToString()
         {
             INewsResultItem result = this;
-            return string.Format("{0}" + Environment.NewLine + "[{1}, {2} - {3:d}]",
-                                 result.Title,
-                                 result.Publisher,
-                                 result.Location,
-                                 result.PublishedDate);
+            var sb = new StringBuilder();
+            if (!string.IsNullOrEmpty(result.Title))
+                sb.AppendLine(result.Title);
+
+            sb.Append(result.Publisher);
+            sb.Append(", ");
+            if (!string.IsNullOrEmpty(result.Location))
+            {
+                sb.Append(result.Location);
+                sb.Append(" - ");
+            }
+            sb.Append(result.PublishedDate.ToShortDateString());
+            return sb.ToString();
         }
 
         #region INewsResultItem Members
@@ -150,7 +158,6 @@ namespace Google.API.Search
 
         DateTime INewsResultItem.PublishedDate
         {
-            //get { return PublishedDate; }
             get
             {
                 return SearchUtility.RFC2822DateTimeParse(PublishedDateString);

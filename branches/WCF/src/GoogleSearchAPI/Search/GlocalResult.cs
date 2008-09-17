@@ -138,6 +138,15 @@ namespace Google.API.Search
         [DataMember(Name = "content")]
         public string Content { get; private set; }
 
+        [DataMember(Name = "addressLookupResult")]
+        public string AddressLookupResult { get; private set; }
+
+        [DataMember(Name = "postalCode")]
+        public string PostalCode { get; private set; }
+
+        [DataMember(Name = "addressLines")]
+        public string[] AddressLines { get; private set; }
+
         public override string ToString()
         {
             ILocalResult result = this;
@@ -153,12 +162,18 @@ namespace Google.API.Search
                 sb.AppendLine();
                 sb.Append(result.City);
                 if (!string.IsNullOrEmpty(result.Region))
+                {
                     sb.Append(", " + result.Region);
+                    if (!string.IsNullOrEmpty(result.PostalCode))
+                        sb.Append(" " + result.PostalCode);
+                }
             }
             else if (!string.IsNullOrEmpty(result.Region))
             {
                 sb.AppendLine();
                 sb.Append(result.Region);
+                if (!string.IsNullOrEmpty(result.PostalCode))
+                    sb.Append(" " + result.PostalCode);
             }
             if (PhoneNumbers != null)
             {
@@ -246,6 +261,11 @@ namespace Google.API.Search
         string ILocalResult.Content
         {
             get { return Content; }
+        }
+
+        string ILocalResult.PostalCode
+        {
+            get { return PostalCode; }
         }
 
         #endregion

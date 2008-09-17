@@ -145,7 +145,7 @@ namespace Google.API.Search
 
             GSearchCallback<GbookResult> gsearch = (start, resultSize) => GSearch(keyword, start, resultSize, fullViewOnly, library);
             List<GbookResult> results = SearchUtility.Search(gsearch, resultCount);
-            return results.ConvertAll<IBookResult>(item => (IBookResult)item);
+            return results.ConvertAll(item => (IBookResult)item);
         }
     }
 }

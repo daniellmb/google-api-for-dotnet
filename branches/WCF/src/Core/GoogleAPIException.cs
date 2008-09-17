@@ -30,6 +30,7 @@ namespace Google.API
     /// <summary>
     /// Google API exception.
     /// </summary>
+    [Serializable]
     public class GoogleAPIException : Exception
     {
         /// <summary>

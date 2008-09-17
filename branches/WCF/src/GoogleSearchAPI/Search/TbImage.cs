@@ -42,13 +42,9 @@ namespace Google.API.Search
         public override string ToString()
         {
             if (Url != null)
-            {
                 return Url;
-            }
-            else
-            {
-                return string.Empty;
-            }
+
+            return string.Empty;
         }
     }
 }

@@ -80,7 +80,6 @@ namespace Google.API.Search
         /// Supplies the published date (rfc-822 format) of the blog post referenced by this search result.
         /// </summary>
         [DataMember(Name = "publishedDate")]
-        //public DateTime PublishedDate { get; private set; }
         public string PublishedDateString { get; private set; }
 
         public override string ToString()
@@ -160,7 +159,6 @@ namespace Google.API.Search
 
         DateTime IBlogResult.PublishedDate
         {
-            //get { return PublishedDate; }
             get
             {
                 return SearchUtility.RFC2822DateTimeParse(PublishedDateString);

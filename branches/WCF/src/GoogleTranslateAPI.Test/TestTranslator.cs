@@ -33,7 +33,7 @@ namespace Google.API.Translate.Test
     {
         private static readonly ICollection<Language> s_Undetectable = new Language[]
             {
-                Language.Chinese_Simplified,
+                Language.ChineseSimplified,
                 Language.Croatian,
                 Language.Greek,
                 Language.Hindi,
@@ -62,7 +62,7 @@ namespace Google.API.Translate.Test
                 Print(language, translatedText);
 
                 string transbackText = Translator.Translate(translatedText, language, originalLanguage);
-                StringAssert.AreEqualIgnoringCase(originalText, transbackText, "[{0} -> {1}] {2} -> {3} != {4}: translate faild!",
+                StringAssert.AreEqualIgnoringCase(originalText, transbackText.Trim(), "[{0} -> {1}] {2} -> {3} != {4}: translate faild!",
                                 language, originalLanguage, translatedText, transbackText, originalText);
             }
         }
@@ -73,7 +73,7 @@ namespace Google.API.Translate.Test
             // TODO : The test case TranslateTestForHtml is not stable. There may add some space after being translated.
 
             Language from = Language.English;
-            Language to = Language.Chinese_Simplified;
+            Language to = Language.ChineseSimplified;
 
             string textTemplate =
                 "<html><head><title>{0} </title></head><body> <b>{1}</b> </body></html>";
@@ -89,7 +89,7 @@ namespace Google.API.Translate.Test
 
             string translatedText = Translator.Translate(text, from, to, TranslateFormat.html);
 
-            string expectedText = string.Format(textTemplate, translatedA, translatedB);
+            string expectedText = string.Format(textTemplate, translatedA.Trim(), translatedB.Trim());
 
             StringAssert.AreEqualIgnoringCase(expectedText, translatedText,
                                               string.Format("expected:\t{1}{0}actual:\t{2}", Environment.NewLine,

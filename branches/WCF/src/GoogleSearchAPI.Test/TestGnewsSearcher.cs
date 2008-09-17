@@ -63,6 +63,12 @@ namespace Google.API.Search.Test
             IList<INewsResult> results = GnewsSearcher.Search(keyword, count);
             Assert.IsNotNull(results);
             Assert.AreEqual(count, results.Count);
+            foreach (var result in results)
+            {
+                Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
         }
 
         [Test]
@@ -74,6 +80,12 @@ namespace Google.API.Search.Test
             IList<INewsResult> results = GnewsSearcher.Search(keyword, count, geo);
             Assert.IsNotNull(results);
             Assert.AreEqual(count, results.Count);
+            foreach (var result in results)
+            {
+                Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
         }
 
         [Test]
@@ -96,29 +108,65 @@ namespace Google.API.Search.Test
                 }
             }
             Assert.IsFalse(areSame);
+
+            Console.WriteLine("News by relevance");
+            Console.WriteLine("-----------------------------");
+            foreach (var result in resultsByRelevance)
+            {
+                Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
+
+            Console.WriteLine("News by date");
+            Console.WriteLine("-----------------------------");
+            foreach (var result in resultsByDate)
+            {
+                Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
         }
 
         [Test]
         public void SearchLocalTest()
         {
             int count = 16;
-            IList<INewsResult> results1 = GnewsSearcher.SearchLocal("Tokyo", count);
-            IList<INewsResult> results2 = GnewsSearcher.SearchLocal("Japan", count);
-            Assert.IsNotNull(results1);
-            Assert.IsNotNull(results2);
-            Assert.AreEqual(count, results1.Count);
-            Assert.AreEqual(count, results2.Count);
+            IList<INewsResult> resultsInTokyo = GnewsSearcher.SearchLocal("Tokyo", count);
+            IList<INewsResult> resultsInJapan = GnewsSearcher.SearchLocal("Japan", count);
+            Assert.IsNotNull(resultsInTokyo);
+            Assert.IsNotNull(resultsInJapan);
+            Assert.AreEqual(count, resultsInTokyo.Count);
+            Assert.AreEqual(count, resultsInJapan.Count);
 
             bool areSame = true;
-            for(int i = 0; i < results1.Count; ++i)
+            for(int i = 0; i < resultsInTokyo.Count; ++i)
             {
-                if(results1[i].ToString() != results2[i].ToString())
+                if(resultsInTokyo[i].ToString() != resultsInJapan[i].ToString())
                 {
                     areSame = false;
                     break;
                 }
             }
             Assert.IsFalse(areSame);
+
+            Console.WriteLine("News in Tokyo");
+            Console.WriteLine("-----------------------------");
+            foreach (var result in resultsInTokyo)
+            {
+                Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
+
+            Console.WriteLine("News in Japan");
+            Console.WriteLine("-----------------------------");
+            foreach (var result in resultsInJapan)
+            {
+                Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
         }
     }
 }

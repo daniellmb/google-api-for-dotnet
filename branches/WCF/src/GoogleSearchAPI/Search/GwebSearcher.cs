@@ -107,7 +107,7 @@ namespace Google.API.Search
         /// <example>
         /// This is the c# code example.
         /// <code>
-        /// IList&lt;IWebResult&gt; results = GwebSearcher.Search("Google API for .NET", 32, Language.Chinese_Simplified);
+        /// IList&lt;IWebResult&gt; results = GwebSearcher.Search("Google API for .NET", 32, Language.ChineseSimplified);
         /// foreach(IWebResult result in results)
         /// {
         ///     Console.WriteLine("{0} - {1}", result.Title, result.Content);
@@ -131,7 +131,7 @@ namespace Google.API.Search
         /// <example>
         /// This is the c# code example.
         /// <code>
-        /// IList&lt;IWebResult&gt; results = GwebSearcher.Search("Google API for .NET", 20, Language.Chinese_Simplified, SafeLevel.active);
+        /// IList&lt;IWebResult&gt; results = GwebSearcher.Search("Google API for .NET", 20, Language.ChineseSimplified, SafeLevel.active);
         /// foreach(IWebResult result in results)
         /// {
         ///     Console.WriteLine("{0} - {1}", result.Title, result.Content);
@@ -147,7 +147,7 @@ namespace Google.API.Search
 
             GSearchCallback<GwebResult> gsearch = (start, resultSize) => GSearch(keyword, start, resultSize, language, safeLevel);
             List<GwebResult> results = SearchUtility.Search(gsearch, resultCount);
-            return results.ConvertAll<IWebResult>(item => (IWebResult)item);            
+            return results.ConvertAll(item => (IWebResult)item);            
         }
     }
 }
