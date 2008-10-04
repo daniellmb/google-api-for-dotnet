@@ -41,10 +41,10 @@ namespace Google.API.Search
             public class Page
             {
                 [DataMember(Name = "start")]
-                public int Start { get; private set; }
+                public long Start { get; private set; }
 
                 [DataMember(Name = "label")]
-                public int Label { get; private set; }
+                public long Label { get; private set; }
 
                 public override string ToString()
                 {
@@ -56,10 +56,10 @@ namespace Google.API.Search
             public Page[] Pages { get; private set; }
 
             [DataMember(Name = "estimatedResultCount")]
-            public int EstimatedResultCount { get; private set; }
+            public long EstimatedResultCount { get; private set; }
 
             [DataMember(Name = "currentPageIndex")]
-            public int CurrentPageIndex { get; private set; }
+            public long CurrentPageIndex { get; private set; }
 
             [DataMember(Name = "moreResultsUrl")]
             public string MoreResultsUrl { get; private set; }

@@ -168,5 +168,13 @@ namespace Google.API.Search.Test
                 Console.WriteLine();
             }
         }
+
+        [Test]
+        public void SearchWithBigResultTest()
+        {
+            var results = GwebSearcher.Search("a", 50);
+            Assert.Greater(results.Count, 0);
+            Assert.LessOrEqual(results.Count, 50);
+        }
     }
 }
