@@ -14,7 +14,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
-[assembly: InternalsVisibleTo("Core.Test")]
+[assembly: InternalsVisibleTo("Core.Test, PublicKey=0024000004800000940000000602000000240000525341310004000001000100213e7a5763c60d310af4265a0cc8dd123677b6606385dc3f35c9f61221c5dddeaac6d23800a7cf7521f3e890458e44aabf5973bfcaced970ddfd23a1b7f297db5e5499e9dd121a26bed422efa0f89dad59056d87205f2773c46315dafe911c68f4056e75c5ca8754fc37bb48a8e4952db1e2b9afbc77f308f4283352593a52c7")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
