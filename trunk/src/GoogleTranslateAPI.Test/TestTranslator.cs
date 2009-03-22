@@ -35,9 +35,12 @@ namespace Google.API.Translate.Test
             {
                 Language.ChineseSimplified,
                 Language.Croatian,
+                Language.Czech,
+                Language.Filipino,
                 Language.Greek,
                 Language.Hindi,
                 Language.Norwegian,
+                Language.Portuguese,
             };
 
         [Test]
@@ -48,12 +51,24 @@ namespace Google.API.Translate.Test
 
             Print(originalLanguage, originalText);
 
+            ICollection<Language> skippedLanguages = new Language[]
+                                                         {
+                                                                 Language.Galician,
+                                                                 Language.Thai,
+                                                         };
+
             foreach (Language language in LanguageUtility.TranslatableCollection)
             {
                 if (language == originalLanguage)
                 {
                     continue;
                 }
+
+                if (skippedLanguages.Contains(language))
+                {
+                    continue;
+                }
+
                 string translatedText = Translator.Translate(originalText, originalLanguage, language);
                 Assert.AreNotEqual(originalText, translatedText,
                                    "[{0} -> {1}] {2} : translate failed! Because the result is same to the original one.",
