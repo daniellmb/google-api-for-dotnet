@@ -23,6 +23,8 @@
  */
 
 using System;
+using System.Net;
+using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Web;
 
@@ -64,6 +66,15 @@ namespace Google.API
             Uri address
             ) where TService : class
         {
+            return GetResponseData(request, address, @"http://code.google.com/p/google-api-for-dotnet/");
+        }
+
+        public static T GetResponseData<T, TService>(
+            RequestCallback<ResultObject<T>, TService> request,
+            Uri address,
+            string referrer
+            ) where TService : class
+        {
             if (request == null)
                 throw new ArgumentNullException("request");
 
@@ -73,7 +84,7 @@ namespace Google.API
             ResultObject<T> resultObject;
             try
             {
-                resultObject = GetResultObject(request, address, Binding);
+                resultObject = GetResultObject(request, address, Binding, referrer);
             }
             catch (Exception ex)
             {
@@ -87,15 +98,15 @@ namespace Google.API
         }
 
         private static T GetResultObject<TService, T>(
-            RequestCallback<T, TService> request,
-            Uri address,
-            Binding binding
-            ) where TService : class
+                RequestCallback<T, TService> request, Uri address, Binding binding, string referrer)
+                where TService : class
         {
             var channelFactory = new WebChannelFactory<TService>(binding, address);
             var client = channelFactory.CreateChannel();
-            using (client as IDisposable)
+            using (new OperationContextScope((IContextChannel)client))
             {
+                WebOperationContext.Current.OutgoingRequest.Headers.Add(HttpRequestHeader.Referer, referrer);
+
                 var resultObject = request(client);
                 return resultObject;
             }
