@@ -77,6 +77,8 @@
       <Link>ResultObject.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="GoogleSearchAPI.shfbproj" />
+    <None Include="Properties\AssemblyInfo.cs.template" />
     <Compile Include="Search\GblogResult.cs" />
     <Compile Include="Search\GblogSearcher.cs" />
     <Compile Include="Search\GbookResult.cs" />
@@ -122,4 +124,13 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PreBuildEvent>$(SolutionDir)..\thirdparty\TortoiseSVN\SubWCRev.exe $(SolutionDir).. $(ProjectDir)Properties\AssemblyInfo.cs.template $(ProjectDir)Properties\AssemblyInfo.cs</PreBuildEvent>
+    <PostBuildEvent>IF "$(ConfigurationName)"=="Debug" Goto Exit
+
+ECHO Building SHFB help file via MSBuild
+"$(SystemRoot)\Microsoft.NET\Framework\v3.5\MSBuild.exe" /p:CleanIntermediates=True /p:Configuration=Release "$(ProjectDir)GoogleSearchAPI.shfbproj"
+
+:Exit</PostBuildEvent>
+  </PropertyGroup>
 </Project>

@@ -58,6 +58,7 @@
     <Compile Include="Language.cs" />
     <Compile Include="MyWebContentTypeMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="Properties\AssemblyInfo.cs.template" />
     <Compile Include="RequestUtility.cs" />
     <Compile Include="ResultObject.cs" />
   </ItemGroup>
@@ -69,4 +70,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PreBuildEvent>$(SolutionDir)..\thirdparty\TortoiseSVN\SubWCRev.exe $(SolutionDir).. $(ProjectDir)Properties\AssemblyInfo.cs.template $(ProjectDir)Properties\AssemblyInfo.cs</PreBuildEvent>
+  </PropertyGroup>
 </Project>
