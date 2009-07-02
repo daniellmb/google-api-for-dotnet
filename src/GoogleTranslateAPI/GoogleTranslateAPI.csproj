@@ -77,6 +77,8 @@
       <Link>ResultObject.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="GoogleTranslateAPI.shfbproj" />
+    <None Include="Properties\AssemblyInfo.cs.template" />
     <Compile Include="Translate\DetectData.cs" />
     <Compile Include="Translate\ITranslateService.cs" />
     <Compile Include="Translate\LanguageUtility.cs" />
@@ -91,4 +93,13 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PreBuildEvent>$(SolutionDir)..\thirdparty\TortoiseSVN\SubWCRev.exe $(SolutionDir).. $(ProjectDir)Properties\AssemblyInfo.cs.template $(ProjectDir)Properties\AssemblyInfo.cs</PreBuildEvent>
+    <PostBuildEvent>IF "$(ConfigurationName)"=="Debug" Goto Exit
+
+ECHO Building SHFB help file via MSBuild
+"$(SystemRoot)\Microsoft.NET\Framework\v3.5\MSBuild.exe" /p:CleanIntermediates=True /p:Configuration=Release "$(ProjectDir)GoogleTranslateAPI.shfbproj"
+
+:Exit</PostBuildEvent>
+  </PropertyGroup>
 </Project>
