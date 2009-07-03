@@ -1,37 +1,39 @@
-﻿/**
- * GlocalResult.cs
- *
- * Copyright (C) 2008,  iron9light
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
-
-using System.Runtime.Serialization;
-using System.Text;
+﻿//-----------------------------------------------------------------------
+// <copyright file="GlocalResult.cs" company="iron9light">
+// Copyright (c) 2009 iron9light
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+// </copyright>
+// <author>iron9light@gmail.com</author>
+//-----------------------------------------------------------------------
 
 namespace Google.API.Search
 {
+    using System.Runtime.Serialization;
+    using System.Text;
+
     [DataContract]
     internal class GlocalResult : ILocalResult
     {
-        private static readonly int s_TbWidth = 150;
-        private static readonly int s_TbHeight = 100;
+        private static readonly int tbWidth = 150;
+
+        private static readonly int tbHeight = 100;
 
         /// <summary>
         /// Indicates the "type" of result.
@@ -157,6 +159,7 @@ namespace Google.API.Search
                 sb.AppendLine();
                 sb.Append(result.StreetAddress);
             }
+
             if (!string.IsNullOrEmpty(result.City))
             {
                 sb.AppendLine();
@@ -165,7 +168,9 @@ namespace Google.API.Search
                 {
                     sb.Append(", " + result.Region);
                     if (!string.IsNullOrEmpty(result.PostalCode))
+                    {
                         sb.Append(" " + result.PostalCode);
+                    }
                 }
             }
             else if (!string.IsNullOrEmpty(result.Region))
@@ -173,9 +178,12 @@ namespace Google.API.Search
                 sb.AppendLine();
                 sb.Append(result.Region);
                 if (!string.IsNullOrEmpty(result.PostalCode))
+                {
                     sb.Append(" " + result.PostalCode);
+                }
             }
-            if (PhoneNumbers != null)
+
+            if (this.PhoneNumbers != null)
             {
                 foreach (var phoneNumber in result.PhoneNumbers)
                 {
@@ -183,6 +191,7 @@ namespace Google.API.Search
                     sb.Append(phoneNumber);
                 }
             }
+
             return sb.ToString();
         }
 
@@ -190,82 +199,130 @@ namespace Google.API.Search
 
         string ILocalResult.Title
         {
-            get { return TitleNoFormatting; }
+            get
+            {
+                return this.TitleNoFormatting;
+            }
         }
 
         string ILocalResult.Url
         {
-            get { return Url; }
+            get
+            {
+                return this.Url;
+            }
         }
 
         float ILocalResult.Latitude
         {
-            get { return Latitude; }
+            get
+            {
+                return this.Latitude;
+            }
         }
 
         float ILocalResult.Longitude
         {
-            get { return Longitude; }
+            get
+            {
+                return this.Longitude;
+            }
         }
 
         string ILocalResult.StreetAddress
         {
-            get { return StreetAddress; }
+            get
+            {
+                return this.StreetAddress;
+            }
         }
 
         string ILocalResult.City
         {
-            get { return City; }
+            get
+            {
+                return this.City;
+            }
         }
 
         string ILocalResult.Region
         {
-            get { return Region; }
+            get
+            {
+                return this.Region;
+            }
         }
 
         string ILocalResult.Country
         {
-            get { return Country; }
+            get
+            {
+                return this.Country;
+            }
         }
 
         IPhoneNumber[] ILocalResult.PhoneNumbers
         {
-            get { return PhoneNumbers; }
+            get
+            {
+                return this.PhoneNumbers;
+            }
         }
 
         string ILocalResult.DirectionUrl
         {
-            get { return DirectionUrl; }
+            get
+            {
+                return this.DirectionUrl;
+            }
         }
 
         string ILocalResult.ToHereDirectionUrl
         {
-            get { return ToHereDirectionUrl; }
+            get
+            {
+                return this.ToHereDirectionUrl;
+            }
         }
 
         string ILocalResult.FromHereDirectionUrl
         {
-            get { return FromHereDirectionUrl; }
+            get
+            {
+                return this.FromHereDirectionUrl;
+            }
         }
 
         ITbImage ILocalResult.StaticMap
         {
-            get { return new TbImage(StaticMapUrl, s_TbWidth, s_TbHeight); }
+            get
+            {
+                return new TbImage(this.StaticMapUrl, tbWidth, tbHeight);
+            }
         }
 
         string ILocalResult.ListingType
         {
-            get { return ListingType; }
+            get
+            {
+                return this.ListingType;
+            }
         }
 
         string ILocalResult.Content
         {
-            get { return Content; }
+            get
+            {
+                return this.Content;
+            }
         }
 
         string ILocalResult.PostalCode
         {
-            get { return PostalCode; }
+            get
+            {
+                return this.PostalCode;
+            }
         }
 
         #endregion

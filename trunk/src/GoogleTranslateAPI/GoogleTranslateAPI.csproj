@@ -73,6 +73,9 @@
     <Compile Include="..\Core\RequestUtility.cs">
       <Link>RequestUtility.cs</Link>
     </Compile>
+    <Compile Include="..\Core\ResponseStatusConstant.cs">
+      <Link>ResponseStatusConstant.cs</Link>
+    </Compile>
     <Compile Include="..\Core\ResultObject.cs">
       <Link>ResultObject.cs</Link>
     </Compile>

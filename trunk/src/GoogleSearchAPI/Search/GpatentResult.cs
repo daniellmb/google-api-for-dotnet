@@ -1,40 +1,45 @@
-﻿/**
- * GpatentResult.cs
- *
- * Copyright (C) 2008,  iron9light
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
-
-using System;
-using System.Runtime.Serialization;
+﻿//-----------------------------------------------------------------------
+// <copyright file="GpatentResult.cs" company="iron9light">
+// Copyright (c) 2009 iron9light
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+// </copyright>
+// <author>iron9light@gmail.com</author>
+//-----------------------------------------------------------------------
 
 namespace Google.API.Search
 {
+    using System;
+    using System.Runtime.Serialization;
+
     [DataContract]
     internal class GpatentResult : IPatentResult
     {
-        private static readonly int s_TbWidth = 128;
-        private static readonly int s_TbHeight = 188;
-        private string m_PlainTitle;
-        private string m_PlainContent;
-        private string m_PlainAssignee;
+        private static readonly int tbWidth = 128;
+
+        private static readonly int tbHeight = 188;
+
+        private string plainTitle;
+
+        private string plainContent;
+
+        private string plainAssignee;
 
         /// <summary>
         /// Indicates the "type" of result.
@@ -121,16 +126,17 @@ namespace Google.API.Search
         {
             get
             {
-                if (TitleNoFormatting == null)
+                if (this.TitleNoFormatting == null)
                 {
                     return null;
                 }
 
-                if (m_PlainTitle == null)
+                if (this.plainTitle == null)
                 {
-                    m_PlainTitle = HttpUtility.HtmlDecode(TitleNoFormatting);
+                    this.plainTitle = HttpUtility.HtmlDecode(this.TitleNoFormatting);
                 }
-                return m_PlainTitle;
+
+                return this.plainTitle;
             }
         }
 
@@ -138,56 +144,67 @@ namespace Google.API.Search
         {
             get
             {
-                if (Content == null)
+                if (this.Content == null)
                 {
                     return null;
                 }
 
-                if (m_PlainContent == null)
+                if (this.plainContent == null)
                 {
-                    m_PlainContent = HttpUtility.RemoveHtmlTags(Content);
+                    this.plainContent = HttpUtility.RemoveHtmlTags(this.Content);
                 }
-                return m_PlainContent;
+
+                return this.plainContent;
             }
         }
 
         string IPatentResult.Url
         {
-            get { return UnescapedUrl; }
+            get
+            {
+                return this.UnescapedUrl;
+            }
         }
 
         DateTime IPatentResult.ApplicationDate
         {
             get
             {
-                return SearchUtility.RFC2822DateTimeParse(ApplicationDateString);
+                return SearchUtility.RFC2822DateTimeParse(this.ApplicationDateString);
             }
         }
 
         string IPatentResult.PatentNumber
         {
-            get { return PatentNumber; }
+            get
+            {
+                return this.PatentNumber;
+            }
         }
 
         string IPatentResult.PatentStatus
         {
-            get { return PatentStatus; }
+            get
+            {
+                return this.PatentStatus;
+            }
         }
 
         string IPatentResult.Assignee
         {
             get
             {
-                if(Assignee == null)
+                if (this.Assignee == null)
                 {
                     return null;
                 }
 
-                if(m_PlainAssignee == null)
+                if (this.plainAssignee == null)
                 {
-                    m_PlainAssignee = HttpUtility.HtmlDecode(Assignee);
+                    this.plainAssignee = HttpUtility.HtmlDecode(this.Assignee);
                 }
-                return m_PlainAssignee;
+
+                return this.plainAssignee;
             }
         }
 
@@ -195,7 +212,7 @@ namespace Google.API.Search
         {
             get
             {
-                return new TbImage(TbUrl, s_TbWidth, s_TbHeight);
+                return new TbImage(this.TbUrl, tbWidth, tbHeight);
             }
         }
 

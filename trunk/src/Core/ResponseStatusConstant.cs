@@ -1,5 +1,5 @@
-﻿//-----------------------------------------------------------------------
-// <copyright file="ResultObject.cs" company="iron9light">
+//-----------------------------------------------------------------------
+// <copyright file="ResponseStatusConstant.cs" company="iron9light">
 // Copyright (c) 2009 iron9light
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,18 +25,10 @@
 
 namespace Google.API
 {
-    using System.Runtime.Serialization;
-
-    [DataContract]
-    internal class ResultObject<T>
+    internal static class ResponseStatusConstant
     {
-        [DataMember(Name = "responseDetails")]
-        public string ResponseDetails { get; private set; }
+        public const int DefaultStatus = 200;
 
-        [DataMember(Name = "responseStatus")]
-        public int ResponseStatus { get; private set; }
-
-        [DataMember(Name = "responseData")]
-        public T ResponseData { get; private set; }
+        public const int OutOfRangeStatus = 400;
     }
 }

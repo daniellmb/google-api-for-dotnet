@@ -1,38 +1,41 @@
-﻿/**
- * GvideoResult.cs
- *
- * Copyright (C) 2008,  iron9light
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
-
-using System;
-using System.Runtime.Serialization;
+﻿//-----------------------------------------------------------------------
+// <copyright file="GvideoResult.cs" company="iron9light">
+// Copyright (c) 2009 iron9light
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+// </copyright>
+// <author>iron9light@gmail.com</author>
+//-----------------------------------------------------------------------
 
 namespace Google.API.Search
 {
+    using System;
+    using System.Runtime.Serialization;
+
     [DataContract]
     internal class GvideoResult : IVideoResult
     {
-        private string m_PlainTitle;
-        private string m_PlainContent;
-        private ITbImage m_TbImage;
+        private string plainTitle;
+
+        private string plainContent;
+
+        private ITbImage tbImage;
 
         /// <summary>
         /// Indicates the "type" of result.
@@ -113,8 +116,13 @@ namespace Google.API.Search
         {
             IVideoResult result = this;
             return
-                string.Format("{0}" + Environment.NewLine + "{1} seconds - {2:d} by {3}" + Environment.NewLine + "{4}",
-                              result.Title, result.Duration, result.PublishedDate, result.Publisher, result.Content);
+                string.Format(
+                    "{0}" + Environment.NewLine + "{1} seconds - {2:d} by {3}" + Environment.NewLine + "{4}",
+                    result.Title,
+                    result.Duration,
+                    result.PublishedDate,
+                    result.Publisher,
+                    result.Content);
         }
 
         #region IVideoResult Members
@@ -123,16 +131,17 @@ namespace Google.API.Search
         {
             get
             {
-                if (TitleNoFormatting == null)
+                if (this.TitleNoFormatting == null)
                 {
                     return null;
                 }
 
-                if (m_PlainTitle == null)
+                if (this.plainTitle == null)
                 {
-                    m_PlainTitle = HttpUtility.HtmlDecode(TitleNoFormatting);
+                    this.plainTitle = HttpUtility.HtmlDecode(this.TitleNoFormatting);
                 }
-                return m_PlainTitle;
+
+                return this.plainTitle;
             }
         }
 
@@ -140,62 +149,79 @@ namespace Google.API.Search
         {
             get
             {
-                if (Content == null)
+                if (this.Content == null)
                 {
                     return null;
                 }
 
-                if (m_PlainContent == null)
+                if (this.plainContent == null)
                 {
-                    m_PlainContent = HttpUtility.RemoveHtmlTags(Content);
+                    this.plainContent = HttpUtility.RemoveHtmlTags(this.Content);
                 }
-                return m_PlainContent;
+
+                return this.plainContent;
             }
         }
 
         string IVideoResult.Url
         {
-            get { return Url; }
+            get
+            {
+                return this.Url;
+            }
         }
 
         DateTime IVideoResult.PublishedDate
         {
             get
             {
-                return SearchUtility.RFC2822DateTimeParse(PublishedDateString);
+                return SearchUtility.RFC2822DateTimeParse(this.PublishedDateString);
             }
         }
 
         string IVideoResult.Publisher
         {
-            get { return Publisher; }
+            get
+            {
+                return this.Publisher;
+            }
         }
 
         int IVideoResult.Duration
         {
-            get { return Duration; }
+            get
+            {
+                return this.Duration;
+            }
         }
 
         ITbImage IVideoResult.TbImage
         {
             get
             {
-                if (m_TbImage == null)
+                if (this.tbImage == null)
                 {
-                    m_TbImage = new TbImage(TbUrl, TbWidth, TbHeight);
+                    this.tbImage = new TbImage(this.TbUrl, this.TbWidth, this.TbHeight);
                 }
-                return m_TbImage;
+
+                return this.tbImage;
             }
         }
 
         string IVideoResult.PlayUrl
         {
-            get { return PlayUrl; }
+            get
+            {
+                return this.PlayUrl;
+            }
         }
 
         string IVideoResult.VideoType
         {
-            get { return VideoType; }
+            get
+            {
+                return this.VideoType;
+            }
         }
 
         #endregion
