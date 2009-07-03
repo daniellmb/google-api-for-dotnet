@@ -1,107 +1,38 @@
-﻿/**
- * GlocalSearcher.cs
- *
- * Copyright (C) 2008,  iron9light
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
-
-using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
+﻿//-----------------------------------------------------------------------
+// <copyright file="GlocalSearcher.cs" company="iron9light">
+// Copyright (c) 2009 iron9light
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+// </copyright>
+// <author>iron9light@gmail.com</author>
+//-----------------------------------------------------------------------
 
 namespace Google.API.Search
 {
-    [DataContract]
-    internal class LocalSearchData : ISearchData<GlocalResult>
-    {
-        [DataContract]
-        public class Point
-        {
-            [DataMember(Name = "lat")]
-            public float Latitude { get; private set; }
-            [DataMember(Name = "lng")]
-            public float Longitude { get; private set; }
-        }
-
-        [DataContract]
-        public class ViewportObject
-        {
-            [DataMember(Name = "center")]
-            public Point center { get; private set; }
-
-            [DataMember(Name = "span")]
-            public Point span { get; private set; }
-
-            [DataMember(Name = "sw")]
-            public Point sw { get; private set; }
-
-            [DataMember(Name = "ne")]
-            public Point ne { get; private set; }
-        }
-
-        [DataMember(Name = "results")]
-        public GlocalResult[] Results { get; private set; }
-
-        [DataMember(Name = "viewport")]
-        public ViewportObject Viewport { get; private set; }
-    }
+    using System;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Utility class for Google Local Search service.
     /// </summary>
     public static class GlocalSearcher
     {
-        internal static LocalSearchData GSearch(
-            string keyword,
-            int start,
-            ResultSize resultSize,
-            float latitude,
-            float longitude,
-            float? width,
-            float? height,
-            LocalResultType resultType)
-        {
-            if (keyword == null)
-            {
-                throw new ArgumentNullException("keyword");
-            }
-
-            var local = latitude + "," + longitude;
-
-            string bounding = null;
-            if (width != null && height != null)
-                bounding = width + "," + longitude;
-
-            var responseData = SearchUtility.GetResponseData(
-                service => service.LocalSearch(
-                               keyword,
-                               resultSize.GetString(),
-                               start,
-                               local,
-                               bounding,
-                               resultType.GetString())
-                );
-
-            return responseData;
-        }
-
         /// <summary>
         /// Search local infos.
         /// </summary>
@@ -121,11 +52,7 @@ namespace Google.API.Search
         /// }
         /// </code>
         /// </example>
-        public static IList<ILocalResult> Search(
-            string keyword,
-            int resultCount,
-            float latitude,
-            float longitude)
+        public static IList<ILocalResult> Search(string keyword, int resultCount, float latitude, float longitude)
         {
             return Search(keyword, resultCount, latitude, longitude, null, null, new LocalResultType());
         }
@@ -151,11 +78,7 @@ namespace Google.API.Search
         /// </code>
         /// </example>
         public static IList<ILocalResult> Search(
-            string keyword,
-            int resultCount,
-            float latitude,
-            float longitude,
-            LocalResultType resultType)
+            string keyword, int resultCount, float latitude, float longitude, LocalResultType resultType)
         {
             return Search(keyword, resultCount, latitude, longitude, null, null, resultType);
         }
@@ -182,14 +105,10 @@ namespace Google.API.Search
         /// </code>
         /// </example>
         public static IList<ILocalResult> Search(
-            string keyword,
-            int resultCount,
-            float latitude,
-            float longitude,
-            float width,
-            float height)
+            string keyword, int resultCount, float latitude, float longitude, float width, float height)
         {
-            return Search(keyword, resultCount, latitude, longitude, (float?)width, (float?)height, new LocalResultType());
+            return Search(
+                keyword, resultCount, latitude, longitude, (float?)width, (float?)height, new LocalResultType());
         }
 
         /// <summary>
@@ -226,6 +145,37 @@ namespace Google.API.Search
             return Search(keyword, resultCount, latitude, longitude, (float?)width, (float?)height, resultType);
         }
 
+        internal static LocalSearchData GSearch(
+            string keyword,
+            int start,
+            ResultSize resultSize,
+            float latitude,
+            float longitude,
+            float? width,
+            float? height,
+            LocalResultType resultType)
+        {
+            if (keyword == null)
+            {
+                throw new ArgumentNullException("keyword");
+            }
+
+            var local = latitude + "," + longitude;
+
+            string bounding = null;
+            if (width != null && height != null)
+            {
+                bounding = width + "," + longitude;
+            }
+
+            var responseData =
+                SearchUtility.GetResponseData(
+                    service =>
+                    service.LocalSearch(keyword, resultSize.GetString(), start, local, bounding, resultType.GetString()));
+
+            return responseData;
+        }
+
         private static IList<ILocalResult> Search(
             string keyword,
             int resultCount,
@@ -236,17 +186,13 @@ namespace Google.API.Search
             LocalResultType resultType)
         {
             if (keyword == null)
+            {
                 throw new ArgumentNullException("keyword");
+            }
 
-            GSearchCallback<GlocalResult> gsearch = (start, resultSize) => GSearch(
-                                                                               keyword,
-                                                                               start,
-                                                                               resultSize,
-                                                                               latitude,
-                                                                               longitude,
-                                                                               width,
-                                                                               height,
-                                                                               resultType);
+            GSearchCallback<GlocalResult> gsearch =
+                (start, resultSize) =>
+                GSearch(keyword, start, resultSize, latitude, longitude, width, height, resultType);
 
             var results = SearchUtility.Search(gsearch, resultCount);
             return results.ConvertAll(item => (ILocalResult)item);

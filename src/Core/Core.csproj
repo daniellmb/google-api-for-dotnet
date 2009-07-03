@@ -60,6 +60,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="Properties\AssemblyInfo.cs.template" />
     <Compile Include="RequestUtility.cs" />
+    <Compile Include="ResponseStatusConstant.cs" />
     <Compile Include="ResultObject.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

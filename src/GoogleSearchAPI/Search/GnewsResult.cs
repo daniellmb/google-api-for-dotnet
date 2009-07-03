@@ -1,36 +1,37 @@
-﻿/**
- * GnewsResult.cs
- *
- * Copyright (C) 2008,  iron9light
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
-
-using System.Runtime.Serialization;
-using System.Text;
+﻿//-----------------------------------------------------------------------
+// <copyright file="GnewsResult.cs" company="iron9light">
+// Copyright (c) 2009 iron9light
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+// </copyright>
+// <author>iron9light@gmail.com</author>
+//-----------------------------------------------------------------------
 
 namespace Google.API.Search
 {
+    using System.Runtime.Serialization;
+    using System.Text;
+
     [DataContract]
     internal class GnewsResult : GnewsResultItem, INewsResult
     {
-        private string m_PlainContent;
+        private string plainContent;
 
         /// <summary>
         /// Indicates the "type" of result.
@@ -75,6 +76,7 @@ namespace Google.API.Search
                 sb.Append("[quote]");
                 sb.AppendLine(result.Author);
             }
+
             sb.AppendLine(base.ToString());
             sb.Append(result.Content);
 
@@ -85,44 +87,60 @@ namespace Google.API.Search
 
         string INewsResult.ClusterUrl
         {
-            get { return ClusterUrl; }
+            get
+            {
+                return this.ClusterUrl;
+            }
         }
 
         string INewsResult.Content
         {
             get
             {
-                if (Content == null)
+                if (this.Content == null)
                 {
                     return null;
                 }
 
-                if (m_PlainContent == null)
+                if (this.plainContent == null)
                 {
-                    m_PlainContent = HttpUtility.RemoveHtmlTags(Content);
+                    this.plainContent = HttpUtility.RemoveHtmlTags(this.Content);
                 }
-                return m_PlainContent;
+
+                return this.plainContent;
             }
         }
 
         INewsResultItem[] INewsResult.RelatedStories
         {
-            get { return RelatedStories; }
+            get
+            {
+                return this.RelatedStories;
+            }
         }
 
         INewsImage INewsResult.Image
         {
-            get { return Image; }
+            get
+            {
+                return this.Image;
+            }
         }
 
         string INewsResult.Author
         {
-            get { return Author; }
+            get
+            {
+                return this.Author;
+            }
         }
 
         bool INewsResult.IsQuote
         {
-            get { return GSearchResultClass == "GnewsSearch.quote"; }
+            get
+            {
+                return this.GSearchResultClass == "GnewsSearch.quote";
+            }
         }
 
         #endregion

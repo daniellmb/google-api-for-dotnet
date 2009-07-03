@@ -1,39 +1,42 @@
-﻿/**
- * GnewsResultItem.cs
- *
- * Copyright (C) 2008,  iron9light
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
-
-using System;
-using System.Runtime.Serialization;
-using System.Text;
+﻿//-----------------------------------------------------------------------
+// <copyright file="GnewsResultItem.cs" company="iron9light">
+// Copyright (c) 2009 iron9light
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+// </copyright>
+// <author>iron9light@gmail.com</author>
+//-----------------------------------------------------------------------
 
 namespace Google.API.Search
 {
+    using System;
+    using System.Runtime.Serialization;
+    using System.Text;
+
     [DataContract]
     internal class GnewsResultItem : INewsResultItem
     {
-        private string m_PlainTitle;
-        private string m_PlainPublisher;
-        private string m_PlainLocation;
+        private string plainTitle;
+
+        private string plainPublisher;
+
+        private string plainLocation;
 
         /// <summary>
         /// Supplies the title value of the result.
@@ -85,7 +88,9 @@ namespace Google.API.Search
             INewsResultItem result = this;
             var sb = new StringBuilder();
             if (!string.IsNullOrEmpty(result.Title))
+            {
                 sb.AppendLine(result.Title);
+            }
 
             sb.Append(result.Publisher);
             sb.Append(", ");
@@ -94,6 +99,7 @@ namespace Google.API.Search
                 sb.Append(result.Location);
                 sb.Append(" - ");
             }
+
             sb.Append(result.PublishedDate.ToShortDateString());
             return sb.ToString();
         }
@@ -102,23 +108,27 @@ namespace Google.API.Search
 
         string INewsResultItem.Url
         {
-            get { return UnescapedUrl; }
+            get
+            {
+                return this.UnescapedUrl;
+            }
         }
 
         string INewsResultItem.Title
         {
             get
             {
-                if(TitleNoFormatting == null)
+                if (this.TitleNoFormatting == null)
                 {
                     return null;
                 }
 
-                if (m_PlainTitle == null)
+                if (this.plainTitle == null)
                 {
-                    m_PlainTitle = HttpUtility.HtmlDecode(TitleNoFormatting);
+                    this.plainTitle = HttpUtility.HtmlDecode(this.TitleNoFormatting);
                 }
-                return m_PlainTitle;
+
+                return this.plainTitle;
             }
         }
 
@@ -126,16 +136,17 @@ namespace Google.API.Search
         {
             get
             {
-                if(Publisher == null)
+                if (this.Publisher == null)
                 {
                     return null;
                 }
 
-                if(m_PlainPublisher == null)
+                if (this.plainPublisher == null)
                 {
-                    m_PlainPublisher = HttpUtility.HtmlDecode(Publisher);
+                    this.plainPublisher = HttpUtility.HtmlDecode(this.Publisher);
                 }
-                return m_PlainPublisher;
+
+                return this.plainPublisher;
             }
         }
 
@@ -143,16 +154,17 @@ namespace Google.API.Search
         {
             get
             {
-                if(Location == null)
+                if (this.Location == null)
                 {
                     return null;
                 }
 
-                if(m_PlainLocation == null)
+                if (this.plainLocation == null)
                 {
-                    m_PlainLocation = HttpUtility.HtmlDecode(Location);
+                    this.plainLocation = HttpUtility.HtmlDecode(this.Location);
                 }
-                return m_PlainLocation;
+
+                return this.plainLocation;
             }
         }
 
@@ -160,7 +172,7 @@ namespace Google.API.Search
         {
             get
             {
-                return SearchUtility.RFC2822DateTimeParse(PublishedDateString);
+                return SearchUtility.RFC2822DateTimeParse(this.PublishedDateString);
             }
         }
 

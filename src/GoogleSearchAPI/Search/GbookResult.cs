@@ -22,17 +22,19 @@
  * THE SOFTWARE.
  */
 
-using System;
-using System.Runtime.Serialization;
-
 namespace Google.API.Search
 {
+    using System;
+    using System.Runtime.Serialization;
+
     [DataContract]
     internal class GbookResult : IBookResult
     {
-        private string m_PlainTitle;
-        private string m_PlainAuthors;
-        private ITbImage m_TbImage;
+        private string plainTitle;
+
+        private string plainAuthors;
+
+        private ITbImage tbImage;
 
         /// <summary>
         /// Indicates the "type" of result.
@@ -109,12 +111,13 @@ namespace Google.API.Search
         public override string ToString()
         {
             IBookResult result = this;
-            return string.Format("{0}" + Environment.NewLine + "by {1} - {2} - {3} pages" + Environment.NewLine + "{4}",
-                                 result.Title,
-                                 result.Authors,
-                                 result.PublishedYear >= 0 ? result.PublishedYear.ToString() : "unknown",
-                                 result.PageCount,
-                                 result.BookId);
+            return string.Format(
+                "{0}" + Environment.NewLine + "by {1} - {2} - {3} pages" + Environment.NewLine + "{4}",
+                result.Title,
+                result.Authors,
+                result.PublishedYear >= 0 ? result.PublishedYear.ToString() : "unknown",
+                result.PageCount,
+                result.BookId);
         }
 
         #region IBookResult Members
@@ -123,71 +126,85 @@ namespace Google.API.Search
         {
             get
             {
-                if (TitleNoFormatting == null)
+                if (this.TitleNoFormatting == null)
                 {
                     return null;
                 }
 
-                if (m_PlainTitle == null)
+                if (this.plainTitle == null)
                 {
-                    m_PlainTitle = HttpUtility.HtmlDecode(TitleNoFormatting);
+                    this.plainTitle = HttpUtility.HtmlDecode(this.TitleNoFormatting);
                 }
-                return m_PlainTitle;
+
+                return this.plainTitle;
             }
         }
 
         string IBookResult.Url
         {
-            get { return UnescapedUrl; }
+            get
+            {
+                return this.UnescapedUrl;
+            }
         }
 
         string IBookResult.Authors
         {
-            get 
-            { 
-                if(Authors == null)
+            get
+            {
+                if (this.Authors == null)
                 {
                     return null;
                 }
 
-                if(m_PlainAuthors == null)
+                if (this.plainAuthors == null)
                 {
-                    m_PlainAuthors = HttpUtility.RemoveHtmlTags(Authors);
+                    this.plainAuthors = HttpUtility.RemoveHtmlTags(this.Authors);
                 }
-                return m_PlainAuthors;
+
+                return this.plainAuthors;
             }
         }
 
         string IBookResult.BookId
         {
-            get { return BookId; }
+            get
+            {
+                return this.BookId;
+            }
         }
 
         int IBookResult.PublishedYear
         {
             get
             {
-                if (string.CompareOrdinal(PublishedYearString, "unknown") == 0)
+                if (string.CompareOrdinal(this.PublishedYearString, "unknown") == 0)
+                {
                     return -1;
+                }
 
-                return int.Parse(PublishedYearString);
+                return int.Parse(this.PublishedYearString);
             }
         }
 
         int IBookResult.PageCount
         {
-            get { return PageCount; }
+            get
+            {
+                return this.PageCount;
+            }
         }
 
         ITbImage IBookResult.TbImage
         {
             get
             {
-                if (m_TbImage == null)
+                if (this.tbImage == null)
                 {
-                    m_TbImage = new TbImage(TbUrl, TbWidth, TbHeight);
+                    this.tbImage = new TbImage(this.TbUrl, this.TbWidth, this.TbHeight);
                 }
-                return m_TbImage;
+
+                return this.tbImage;
             }
         }
 

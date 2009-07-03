@@ -1,5 +1,5 @@
-﻿//-----------------------------------------------------------------------
-// <copyright file="ResultObject.cs" company="iron9light">
+//-----------------------------------------------------------------------
+// <copyright file="LocalSearchData.cs" company="iron9light">
 // Copyright (c) 2009 iron9light
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,20 +23,43 @@
 // <author>iron9light@gmail.com</author>
 //-----------------------------------------------------------------------
 
-namespace Google.API
+namespace Google.API.Search
 {
     using System.Runtime.Serialization;
 
     [DataContract]
-    internal class ResultObject<T>
+    internal class LocalSearchData : ISearchData<GlocalResult>
     {
-        [DataMember(Name = "responseDetails")]
-        public string ResponseDetails { get; private set; }
+        [DataMember(Name = "results")]
+        public GlocalResult[] Results { get; private set; }
 
-        [DataMember(Name = "responseStatus")]
-        public int ResponseStatus { get; private set; }
+        [DataMember(Name = "viewport")]
+        public ViewportObject Viewport { get; private set; }
 
-        [DataMember(Name = "responseData")]
-        public T ResponseData { get; private set; }
+        [DataContract]
+        public class Point
+        {
+            [DataMember(Name = "lat")]
+            public float Latitude { get; private set; }
+
+            [DataMember(Name = "lng")]
+            public float Longitude { get; private set; }
+        }
+
+        [DataContract]
+        public class ViewportObject
+        {
+            [DataMember(Name = "center")]
+            public Point center { get; private set; }
+
+            [DataMember(Name = "span")]
+            public Point span { get; private set; }
+
+            [DataMember(Name = "sw")]
+            public Point sw { get; private set; }
+
+            [DataMember(Name = "ne")]
+            public Point ne { get; private set; }
+        }
     }
 }
