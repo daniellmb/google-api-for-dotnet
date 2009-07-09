@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7EA8C1B6-3810-4EC2-A55D-0687E38E7C64}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Google.API.Test</RootNamespace>
+    <AssemblyName>GoogleAPI.Test</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\GoogleAPI.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="nunit.framework, Version=2.5.0.9122, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\NUnit\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Core.Test\TestHttpUtility.cs">
+      <Link>TestHttpUtility.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleSearchAPI.Test\TestGblogSearcher.cs">
+      <Link>Search\TestGblogSearcher.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleSearchAPI.Test\TestGbookSearcher.cs">
+      <Link>Search\TestGbookSearcher.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleSearchAPI.Test\TestGimageSearcher.cs">
+      <Link>Search\TestGimageSearcher.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleSearchAPI.Test\TestGlocalSearcher.cs">
+      <Link>Search\TestGlocalSearcher.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleSearchAPI.Test\TestGnewsSearcher.cs">
+      <Link>Search\TestGnewsSearcher.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleSearchAPI.Test\TestGpatentSearcher.cs">
+      <Link>Search\TestGpatentSearcher.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleSearchAPI.Test\TestGvideoSearcher.cs">
+      <Link>Search\TestGvideoSearcher.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleSearchAPI.Test\TestGwebSearcher.cs">
+      <Link>Search\TestGwebSearcher.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleTranslateAPI.Test\TestTranslator.cs">
+      <Link>Translate\TestTranslator.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\AssemblyInfo.cs.template" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GoogleAPI\GoogleAPI.csproj">
+      <Project>{DD0C3D60-25E0-4183-9545-CB3ADE46EE16}</Project>
+      <Name>GoogleAPI</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PreBuildEvent>$(SolutionDir)..\thirdparty\TortoiseSVN\SubWCRev.exe $(SolutionDir).. $(ProjectDir)Properties\AssemblyInfo.cs.template $(ProjectDir)Properties\AssemblyInfo.cs</PreBuildEvent>
+  </PropertyGroup>
+</Project>
