@@ -55,6 +55,9 @@
     <Compile Include="..\Core\GoogleAPIException.cs">
       <Link>GoogleAPIException.cs</Link>
     </Compile>
+    <Compile Include="..\Core\GoogleClient.cs">
+      <Link>GoogleClient.cs</Link>
+    </Compile>
     <Compile Include="..\Core\GoogleServiceException.cs">
       <Link>GoogleServiceException.cs</Link>
     </Compile>
@@ -85,6 +88,7 @@
     <Compile Include="Translate\DetectData.cs" />
     <Compile Include="Translate\ITranslateService.cs" />
     <Compile Include="Translate\LanguageUtility.cs" />
+    <Compile Include="Translate\TranslateClient.cs" />
     <Compile Include="Translate\TranslateData.cs" />
     <Compile Include="Translate\Translator.cs" />
   </ItemGroup>

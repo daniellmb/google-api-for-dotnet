@@ -26,8 +26,10 @@
     </DocumentationSources>
     <NamespaceSummaries>
       <NamespaceSummaryItem name="Google.API" isDocumented="True">The &lt;b&gt;Google.API&lt;/b&gt; namespace provides some base utility classes.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Google.API.Translate" isDocumented="True">The &lt;b&gt;Google.API.Translate&lt;/b&gt; namespace provides classes that are used to translate.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="(global)" isDocumented="False" /></NamespaceSummaries>
+      <NamespaceSummaryItem name="Google.API.Translate" isDocumented="True">The &lt;b&gt;Google.API.Translate&lt;/b&gt; namespace provides classes that are used to translate.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="(global)" isDocumented="False" />
+    </NamespaceSummaries>
+    <VisibleItems>InheritedMembers, InheritedFrameworkMembers</VisibleItems>
   </PropertyGroup>
   <!-- There are no properties for these two groups but they need to appear in
        order for Visual Studio to perform the build. -->
