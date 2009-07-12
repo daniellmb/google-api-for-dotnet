@@ -23,7 +23,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\GoogleAPI.XML</DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -32,6 +33,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\GoogleAPI.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -59,6 +61,9 @@
   <ItemGroup>
     <Compile Include="..\Core\GoogleAPIException.cs">
       <Link>GoogleAPIException.cs</Link>
+    </Compile>
+    <Compile Include="..\Core\GoogleClient.cs">
+      <Link>GoogleClient.cs</Link>
     </Compile>
     <Compile Include="..\Core\GoogleServiceException.cs">
       <Link>GoogleServiceException.cs</Link>
@@ -203,6 +208,9 @@
     </Compile>
     <Compile Include="..\GoogleTranslateAPI\Translate\LanguageUtility.cs">
       <Link>Translate\LanguageUtility.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleTranslateAPI\Translate\TranslateClient.cs">
+      <Link>Translate\TranslateClient.cs</Link>
     </Compile>
     <Compile Include="..\GoogleTranslateAPI\Translate\TranslateData.cs">
       <Link>Translate\TranslateData.cs</Link>

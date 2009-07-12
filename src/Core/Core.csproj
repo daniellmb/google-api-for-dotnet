@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GoogleAPIException.cs" />
+    <Compile Include="GoogleClient.cs" />
     <Compile Include="GoogleServiceException.cs" />
     <Compile Include="HtmlEntities.cs" />
     <Compile Include="HttpUtility.cs" />

@@ -160,6 +160,7 @@ namespace Google.API.Translate
                     Language.Lithuanian,
                     Language.Maltese,
                     Language.Norwegian,
+                    Language.Persian,
                     Language.Polish,
                     Language.Portuguese,
                     Language.Romanian,

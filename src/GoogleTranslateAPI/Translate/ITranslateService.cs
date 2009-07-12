@@ -29,15 +29,18 @@ namespace Google.API.Translate
     using System.ServiceModel.Web;
 
     [ServiceContract]
-    internal interface ITranslateService
+    internal interface ILanguageService
     {
         [OperationContract]
-        [WebGet(UriTemplate = "/translate?v=1.0&q={query}&langpair={langpair}&format={format}",
+        [WebGet(
+            UriTemplate = "/translate?v=1.0&hl={acceptLanguage}&key={key}&q={query}&langpair={langpair}&format={format}",
             ResponseFormat = WebMessageFormat.Json)]
-        ResultObject<TranslateData> Translate(string query, string langpair, string format);
+        ResultObject<TranslateData> Translate(
+            string acceptLanguage, string key, string query, string langpair, string format);
 
         [OperationContract]
-        [WebGet(UriTemplate = "/detect?v=1.0&q={query}", ResponseFormat = WebMessageFormat.Json)]
-        ResultObject<DetectData> Detect(string query);
+        [WebGet(UriTemplate = "/detect?v=1.0&hl={acceptLanguage}&key={key}&q={query}",
+            ResponseFormat = WebMessageFormat.Json)]
+        ResultObject<DetectData> Detect(string acceptLanguage, string key, string query);
     }
 }

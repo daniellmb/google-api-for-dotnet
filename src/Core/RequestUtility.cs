@@ -33,7 +33,7 @@ namespace Google.API
 
     internal delegate T RequestCallback<T, TService>(TService service) where TService : class;
 
-    internal class RequestUtility
+    internal static class RequestUtility
     {
         private static Binding binding;
 
@@ -43,15 +43,7 @@ namespace Google.API
             {
                 if (binding == null)
                 {
-                    var customBinding = new CustomBinding();
-                    var webMessageEncodingBindingElement = new WebMessageEncodingBindingElement
-                        {
-                            ContentTypeMapper = new MyWebContentTypeMapper() 
-                        };
-                    var httpTransportBindingElement = new HttpTransportBindingElement { ManualAddressing = true };
-                    customBinding.Elements.Add(webMessageEncodingBindingElement);
-                    customBinding.Elements.Add(httpTransportBindingElement);
-                    binding = customBinding;
+                    binding = CreateBinding();
                 }
 
                 return binding;
@@ -73,6 +65,13 @@ namespace Google.API
         public static T GetResponseData<T, TService>(
             RequestCallback<ResultObject<T>, TService> request, Uri address, string referrer) where TService : class
         {
+            return GetResponseData(request, address, Binding, referrer);
+        }
+
+        public static T GetResponseData<T, TService>(
+            RequestCallback<ResultObject<T>, TService> request, Uri address, Binding binding, string referrer)
+            where TService : class
+        {
             if (request == null)
             {
                 throw new ArgumentNullException("request");
@@ -86,7 +85,7 @@ namespace Google.API
             ResultObject<T> resultObject;
             try
             {
-                resultObject = GetResultObject(request, address, Binding, referrer);
+                resultObject = GetResultObject(request, address, binding, referrer);
             }
             catch (Exception ex)
             {
@@ -99,6 +98,29 @@ namespace Google.API
             }
 
             return resultObject.ResponseData;
+        }
+
+        internal static Binding CreateBinding()
+        {
+            var customBinding = new CustomBinding();
+            var webMessageEncodingBindingElement = new WebMessageEncodingBindingElement
+                {
+                    ContentTypeMapper = new MyWebContentTypeMapper() 
+                };
+            var httpTransportBindingElement = new HttpTransportBindingElement { ManualAddressing = true };
+            customBinding.Elements.Add(webMessageEncodingBindingElement);
+            customBinding.Elements.Add(httpTransportBindingElement);
+            return customBinding;
+        }
+
+        internal static string GetString(this Enum value)
+        {
+            if (Enum.IsDefined(value.GetType(), value))
+            {
+                return null;
+            }
+
+            return value.ToString();
         }
 
         private static T GetResultObject<TService, T>(
