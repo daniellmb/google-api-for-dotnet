@@ -1,5 +1,5 @@
-﻿//-----------------------------------------------------------------------
-// <copyright file="GbookSearcher.cs" company="iron9light">
+//-----------------------------------------------------------------------
+// <copyright file="GbookSearchClient.cs" company="iron9light">
 // Copyright (c) 2009 iron9light
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,12 +25,10 @@
 
 namespace Google.API.Search
 {
+    using System;
     using System.Collections.Generic;
 
-    /// <summary>
-    /// Utility class for Google Book Search service.
-    /// </summary>
-    public static class GbookSearcher
+    public class GbookSearchClient : GSearchClient
     {
         /// <summary>
         /// Search books.
@@ -49,9 +47,9 @@ namespace Google.API.Search
         /// }
         /// </code>
         /// </example>
-        public static IList<IBookResult> Search(string keyword, int resultCount)
+        public IList<IBookResult> Search(string keyword, int resultCount)
         {
-            return Search(keyword, resultCount, false, null);
+            return this.Search(keyword, resultCount, false, null);
         }
 
         /// <summary>
@@ -72,9 +70,9 @@ namespace Google.API.Search
         /// }
         /// </code>
         /// </example>
-        public static IList<IBookResult> Search(string keyword, int resultCount, bool fullViewOnly)
+        public IList<IBookResult> Search(string keyword, int resultCount, bool fullViewOnly)
         {
-            return Search(keyword, resultCount, fullViewOnly, null);
+            return this.Search(keyword, resultCount, fullViewOnly, null);
         }
 
         /// <summary>
@@ -96,17 +94,32 @@ namespace Google.API.Search
         /// }
         /// </code>
         /// </example>
-        public static IList<IBookResult> Search(string keyword, int resultCount, bool fullViewOnly, string library)
+        public IList<IBookResult> Search(string keyword, int resultCount, bool fullViewOnly, string library)
         {
-            var client = new GbookSearchClient();
-            return client.Search(keyword, resultCount, fullViewOnly, library);
+            if (keyword == null)
+            {
+                throw new ArgumentNullException("keyword");
+            }
+
+            GSearchCallback<GbookResult> gsearch =
+                (start, resultSize) => this.GSearch(keyword, start, resultSize, fullViewOnly, library);
+            var results = SearchUtility.Search(gsearch, resultCount);
+            return results.ConvertAll(item => (IBookResult)item);
         }
 
-        internal static SearchData<GbookResult> GSearch(
+        internal SearchData<GbookResult> GSearch(
             string keyword, int start, ResultSize resultSize, bool fullViewOnly, string library)
         {
-            var client = new GbookSearchClient();
-            return client.GSearch(keyword, start, resultSize, fullViewOnly, library);
+            if (keyword == null)
+            {
+                throw new ArgumentNullException("keyword");
+            }
+
+            var responseData =
+                this.GetResponseData(
+                    service =>
+                    service.BookSearch(this.AcceptLanguage, this.ApiKey, keyword, resultSize.GetString(), start, fullViewOnly.GetString(), library));
+            return responseData;
         }
     }
 }

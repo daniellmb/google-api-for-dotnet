@@ -1,5 +1,5 @@
-﻿//-----------------------------------------------------------------------
-// <copyright file="GpatentSearcher.cs" company="iron9light">
+//-----------------------------------------------------------------------
+// <copyright file="GpatentSearchClient.cs" company="iron9light">
 // Copyright (c) 2009 iron9light
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,12 +25,10 @@
 
 namespace Google.API.Search
 {
+    using System;
     using System.Collections.Generic;
 
-    /// <summary>
-    /// Utility class for Google Patent Search service.
-    /// </summary>
-    public static class GpatentSearcher
+    public class GpatentSearchClient : GSearchClient
     {
         /// <summary>
         /// Search patents.
@@ -51,9 +49,9 @@ namespace Google.API.Search
         /// }
         /// </code>
         /// </example>
-        public static IList<IPatentResult> Search(string keyword, int resultCount)
+        public IList<IPatentResult> Search(string keyword, int resultCount)
         {
-            return Search(keyword, resultCount, false, false, new SortType());
+            return this.Search(keyword, resultCount, false, false, new SortType());
         }
 
         /// <summary>
@@ -76,9 +74,9 @@ namespace Google.API.Search
         /// }
         /// </code>
         /// </example>
-        public static IList<IPatentResult> Search(string keyword, int resultCount, SortType sortBy)
+        public IList<IPatentResult> Search(string keyword, int resultCount, SortType sortBy)
         {
-            return Search(keyword, resultCount, false, false, sortBy);
+            return this.Search(keyword, resultCount, false, false, sortBy);
         }
 
         /// <summary>
@@ -103,9 +101,9 @@ namespace Google.API.Search
         /// }
         /// </code>
         /// </example>
-        public static IList<IPatentResult> Search(string keyword, int resultCount, bool issuedOnly, bool filedOnly)
+        public IList<IPatentResult> Search(string keyword, int resultCount, bool issuedOnly, bool filedOnly)
         {
-            return Search(keyword, resultCount, issuedOnly, filedOnly, new SortType());
+            return this.Search(keyword, resultCount, issuedOnly, filedOnly, new SortType());
         }
 
         /// <summary>
@@ -131,18 +129,41 @@ namespace Google.API.Search
         /// }
         /// </code>
         /// </example>
-        public static IList<IPatentResult> Search(
+        public IList<IPatentResult> Search(
             string keyword, int resultCount, bool issuedOnly, bool filedOnly, SortType sortBy)
         {
-            var client = new GpatentSearchClient();
-            return client.Search(keyword, resultCount, issuedOnly, filedOnly, sortBy);
+            if (keyword == null)
+            {
+                throw new ArgumentNullException("keyword");
+            }
+
+            GSearchCallback<GpatentResult> gsearch =
+                (start, resultSize) => this.GSearch(keyword, start, resultSize, issuedOnly, filedOnly, sortBy);
+            var results = SearchUtility.Search(gsearch, resultCount);
+            return results.ConvertAll(item => (IPatentResult)item);
         }
 
-        internal static SearchData<GpatentResult> GSearch(
+        internal SearchData<GpatentResult> GSearch(
             string keyword, int start, ResultSize resultSize, bool issuedOnly, bool filedOnly, SortType sortBy)
         {
-            var client = new GpatentSearchClient();
-            return client.GSearch(keyword, start, resultSize, issuedOnly, filedOnly, sortBy);
+            if (keyword == null)
+            {
+                throw new ArgumentNullException("keyword");
+            }
+
+            var responseData =
+                this.GetResponseData(
+                    service =>
+                    service.PatentSearch(
+                        this.AcceptLanguage,
+                        this.ApiKey,
+                        keyword,
+                        resultSize.GetString(),
+                        start,
+                        issuedOnly.GetString(),
+                        filedOnly.GetString(),
+                        sortBy.GetString()));
+            return responseData;
         }
     }
 }

@@ -140,6 +140,23 @@ namespace Google.API.Search
         color,
     }
 
+    public enum ImageColor
+    {
+        all = 0,
+        black,
+        blue,
+        brown,
+        gray,
+        green,
+        orange,
+        pink,
+        purple,
+        red,
+        teal,
+        white,
+        yellow,
+    }
+
     /// <summary>
     /// The special type of image.
     /// </summary>
@@ -154,6 +171,21 @@ namespace Google.API.Search
         /// Images of faces.
         /// </summary>
         face,
+
+        /// <summary>
+        /// Photos.
+        /// </summary>
+        photo,
+
+        /// <summary>
+        /// Clipart images.
+        /// </summary>
+        clipart,
+
+        /// <summary>
+        /// Images of line drawings.
+        /// </summary>
+        lineart,
     }
 
     /// <summary>
@@ -293,24 +325,14 @@ namespace Google.API.Search
             return results;
         }
 
-        public static string GetString(this bool value)
-        {
-            if (value)
-            {
-                return "1";
-            }
-
-            return null;
-        }
-
         public static string GetString(this SafeLevel value)
         {
-            return GetStringIgnoreDefault(value);
+            return value.GetStringIgnoreDefault();
         }
 
         public static string GetString(this ResultSize value)
         {
-            return GetStringIgnoreDefault(value);
+            return value.GetStringIgnoreDefault();
         }
 
         public static string GetString(this SortType value)
@@ -328,27 +350,32 @@ namespace Google.API.Search
 
         public static string GetString(this ImageSize value)
         {
-            return GetStringIgnoreDefault(value);
+            return value.GetStringIgnoreDefault();
         }
 
         public static string GetString(this Colorization value)
         {
-            return GetStringIgnoreDefault(value);
+            return value.GetStringIgnoreDefault();
+        }
+
+        public static string GetString(this ImageColor value)
+        {
+            return value.GetStringIgnoreDefault();
         }
 
         public static string GetString(this ImageType value)
         {
-            return GetStringIgnoreDefault(value);
+            return value.GetStringIgnoreDefault();
         }
 
         public static string GetString(this FileType value)
         {
-            return GetStringIgnoreDefault(value);
+            return value.GetStringIgnoreDefault();
         }
 
         public static string GetString(this LocalResultType value)
         {
-            return GetStringIgnoreDefault(value);
+            return value.GetStringIgnoreDefault();
         }
 
         public static DateTime RFC2822DateTimeParse(string str)
@@ -551,16 +578,6 @@ namespace Google.API.Search
             }
 
             return dt;
-        }
-
-        private static string GetStringIgnoreDefault(Enum value)
-        {
-            if (Enum.IsDefined(value.GetType(), value))
-            {
-                return null;
-            }
-
-            return value.ToString();
         }
     }
 }

@@ -1,5 +1,5 @@
-﻿//-----------------------------------------------------------------------
-// <copyright file="GblogSearcher.cs" company="iron9light">
+//-----------------------------------------------------------------------
+// <copyright file="GvideoSearchClient.cs" company="iron9light">
 // Copyright (c) 2009 iron9light
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,15 +25,13 @@
 
 namespace Google.API.Search
 {
+    using System;
     using System.Collections.Generic;
 
-    /// <summary>
-    /// Utility class for Google Blog Search service.
-    /// </summary>
-    public static class GblogSearcher
+    public class GvideoSearchClient : GSearchClient
     {
         /// <summary>
-        /// Search blogs.
+        /// Search video.
         /// </summary>
         /// <param name="keyword">The keyword.</param>
         /// <param name="resultCount">The count of result itmes.</param>
@@ -42,20 +40,20 @@ namespace Google.API.Search
         /// <example>
         /// This is the c# code example.
         /// <code>
-        /// IList&lt;IBlogResult&gt; results = GblogSearcher.Search("Coldplay", 32);
-        /// foreach(IBlogResult result in results)
+        /// IList&lt;IVideoResult&gt; results = GvideoSearcher.Search("South Park", 32);
+        /// foreach(IVideoResult result in results)
         /// {
-        ///     Console.WriteLine("[{0} - {1:d} by {2}] {3} => {4}", result.Title, result.PublishedDate, result.Author, result.Content, result.BlogUrl);
+        ///     Console.WriteLine("[{0} - {1} seconds by {2}] {3} => {4}", result.Title, result.Duration, result.Publisher, result.Content, result.Url);
         /// }
         /// </code>
         /// </example>
-        public static IList<IBlogResult> Search(string keyword, int resultCount)
+        public IList<IVideoResult> Search(string keyword, int resultCount)
         {
-            return Search(keyword, resultCount, new SortType());
+            return this.Search(keyword, resultCount, new SortType());
         }
 
         /// <summary>
-        /// Search blogs.
+        /// Search video.
         /// </summary>
         /// <param name="keyword">The keyword.</param>
         /// <param name="resultCount">The count of result itmes.</param>
@@ -65,24 +63,39 @@ namespace Google.API.Search
         /// <example>
         /// This is the c# code example.
         /// <code>
-        /// IList&lt;IBlogResult&gt; results = GblogSearcher.Search("Coldplay", 32, SortType.relevance);
-        /// foreach(IBlogResult result in results)
+        /// IList&lt;IVideoResult&gt; results = GvideoSearcher.Search("Metal Gear Solid", 10, SortType.date);
+        /// foreach(IVideoResult result in results)
         /// {
-        ///     Console.WriteLine("[{0} - {1:d} by {2}] {3} => {4}", result.Title, result.PublishedDate, result.Author, result.Content, result.BlogUrl);
+        ///     Console.WriteLine("[{0} - {1} seconds by {2}] {3} => {4}", result.Title, result.Duration, result.Publisher, result.Content, result.Url);
         /// }
         /// </code>
         /// </example>
-        public static IList<IBlogResult> Search(string keyword, int resultCount, SortType sortBy)
+        public IList<IVideoResult> Search(string keyword, int resultCount, SortType sortBy)
         {
-            var client = new GblogSearchClient();
-            return client.Search(keyword, resultCount, sortBy);
+            if (keyword == null)
+            {
+                throw new ArgumentNullException("keyword");
+            }
+
+            GSearchCallback<GvideoResult> gsearch =
+                (start, resultSize) => this.GSearch(keyword, start, resultSize, sortBy);
+            var results = SearchUtility.Search(gsearch, resultCount);
+            return results.ConvertAll(item => (IVideoResult)item);
         }
 
-        internal static SearchData<GblogResult> GSearch(
-            string keyword, int start, ResultSize resultSize, SortType sortBy)
+        internal SearchData<GvideoResult> GSearch(string keyword, int start, ResultSize resultSize, SortType sortBy)
         {
-            var client = new GblogSearchClient();
-            return client.GSearch(keyword, start, resultSize, sortBy);
+            if (keyword == null)
+            {
+                throw new ArgumentNullException("keyword");
+            }
+
+            var responseData =
+                this.GetResponseData(
+                    service =>
+                    service.VideoSearch(
+                        this.AcceptLanguage, this.ApiKey, keyword, resultSize.GetString(), start, sortBy.GetString()));
+            return responseData;
         }
     }
 }

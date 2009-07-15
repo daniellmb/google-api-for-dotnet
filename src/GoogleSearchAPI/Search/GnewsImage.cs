@@ -30,17 +30,17 @@ namespace Google.API.Search
     [DataContract]
     internal class GnewsImage : INewsImage
     {
-        /////// <summary>
-        /////// supplies the title of the article associated with the image
-        /////// </summary>
-        ////[DataMember(Name = "title")]
-        ////public string Title { get; protected set; }
+        /// <summary>
+        /// supplies the title of the article associated with the image
+        /// </summary>
+        [DataMember(Name = "title")]
+        public string Title { get; protected set; }
 
-        /////// <summary>
-        /////// same as above but stripped of HTML formatting
-        /////// </summary>
-        ////[DataMember(Name = "titleNoFormatting")]
-        ////public string TitleNoFormatting { get; protected set; }
+        /// <summary>
+        /// same as above but stripped of HTML formatting
+        /// </summary>
+        [DataMember(Name = "titleNoFormatting")]
+        public string TitleNoFormatting { get; protected set; }
 
         /// <summary>
         /// supplies the URL of the image

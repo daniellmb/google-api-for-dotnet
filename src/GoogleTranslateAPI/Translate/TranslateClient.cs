@@ -199,7 +199,7 @@ namespace Google.API.Translate
             var responseData =
                 this.GetResponseData<TranslateData, ILanguageService>(
                     service =>
-                    service.Translate(this.AcceptLanguage, this.ApiKey, text, from + '|' + to, format.GetString()));
+                    service.Translate(this.AcceptLanguage, this.ApiKey, text, from + '|' + to, format.GetStringIgnoreDefault()));
 
             return responseData;
         }

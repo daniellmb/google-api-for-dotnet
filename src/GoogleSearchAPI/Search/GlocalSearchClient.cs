@@ -1,5 +1,5 @@
-﻿//-----------------------------------------------------------------------
-// <copyright file="GlocalSearcher.cs" company="iron9light">
+//-----------------------------------------------------------------------
+// <copyright file="GlocalSearchClient.cs" company="iron9light">
 // Copyright (c) 2009 iron9light
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,12 +25,10 @@
 
 namespace Google.API.Search
 {
+    using System;
     using System.Collections.Generic;
 
-    /// <summary>
-    /// Utility class for Google Local Search service.
-    /// </summary>
-    public static class GlocalSearcher
+    public class GlocalSearchClient : GSearchClient
     {
         /// <summary>
         /// Search local infos.
@@ -51,9 +49,9 @@ namespace Google.API.Search
         /// }
         /// </code>
         /// </example>
-        public static IList<ILocalResult> Search(string keyword, int resultCount, float latitude, float longitude)
+        public IList<ILocalResult> Search(string keyword, int resultCount, float latitude, float longitude)
         {
-            return Search(keyword, resultCount, latitude, longitude, new LocalResultType());
+            return this.Search(keyword, resultCount, latitude, longitude, null, null, new LocalResultType());
         }
 
         /// <summary>
@@ -76,11 +74,10 @@ namespace Google.API.Search
         /// }
         /// </code>
         /// </example>
-        public static IList<ILocalResult> Search(
+        public IList<ILocalResult> Search(
             string keyword, int resultCount, float latitude, float longitude, LocalResultType resultType)
         {
-            var client = new GlocalSearchClient();
-            return client.Search(keyword, resultCount, latitude, longitude, resultType);
+            return this.Search(keyword, resultCount, latitude, longitude, null, null, resultType);
         }
 
         /// <summary>
@@ -104,10 +101,11 @@ namespace Google.API.Search
         /// }
         /// </code>
         /// </example>
-        public static IList<ILocalResult> Search(
+        public IList<ILocalResult> Search(
             string keyword, int resultCount, float latitude, float longitude, float width, float height)
         {
-            return Search(keyword, resultCount, latitude, longitude, width, height, new LocalResultType());
+            return this.Search(
+                keyword, resultCount, latitude, longitude, (float?)width, (float?)height, new LocalResultType());
         }
 
         /// <summary>
@@ -132,7 +130,7 @@ namespace Google.API.Search
         /// }
         /// </code>
         /// </example>
-        public static IList<ILocalResult> Search(
+        public IList<ILocalResult> Search(
             string keyword,
             int resultCount,
             float latitude,
@@ -141,11 +139,10 @@ namespace Google.API.Search
             float height,
             LocalResultType resultType)
         {
-            var client = new GlocalSearchClient();
-            return client.Search(keyword, resultCount, latitude, longitude, width, height, resultType);
+            return this.Search(keyword, resultCount, latitude, longitude, (float?)width, (float?)height, resultType);
         }
 
-        internal static LocalSearchData GSearch(
+        internal LocalSearchData GSearch(
             string keyword,
             int start,
             ResultSize resultSize,
@@ -155,8 +152,55 @@ namespace Google.API.Search
             float? height,
             LocalResultType resultType)
         {
-            var client = new GlocalSearchClient();
-            return client.GSearch(keyword, start, resultSize, latitude, longitude, width, height, resultType);
+            if (keyword == null)
+            {
+                throw new ArgumentNullException("keyword");
+            }
+
+            var local = latitude + "," + longitude;
+
+            string bounding = null;
+            if (width != null && height != null)
+            {
+                bounding = width + "," + longitude;
+            }
+
+            var responseData =
+                this.GetResponseData(
+                    service =>
+                    service.LocalSearch(
+                        this.AcceptLanguage,
+                        this.ApiKey,
+                        keyword,
+                        resultSize.GetString(),
+                        start,
+                        local,
+                        bounding,
+                        resultType.GetString()));
+
+            return responseData;
+        }
+
+        private IList<ILocalResult> Search(
+            string keyword,
+            int resultCount,
+            float latitude,
+            float longitude,
+            float? width,
+            float? height,
+            LocalResultType resultType)
+        {
+            if (keyword == null)
+            {
+                throw new ArgumentNullException("keyword");
+            }
+
+            GSearchCallback<GlocalResult> gsearch =
+                (start, resultSize) =>
+                this.GSearch(keyword, start, resultSize, latitude, longitude, width, height, resultType);
+
+            var results = SearchUtility.Search(gsearch, resultCount);
+            return results.ConvertAll(item => (ILocalResult)item);
         }
     }
 }
