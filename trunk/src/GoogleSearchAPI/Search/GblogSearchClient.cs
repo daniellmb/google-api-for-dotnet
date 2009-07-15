@@ -1,5 +1,5 @@
-﻿//-----------------------------------------------------------------------
-// <copyright file="GblogSearcher.cs" company="iron9light">
+//-----------------------------------------------------------------------
+// <copyright file="GblogSearchClient.cs" company="iron9light">
 // Copyright (c) 2009 iron9light
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,12 +25,10 @@
 
 namespace Google.API.Search
 {
+    using System;
     using System.Collections.Generic;
 
-    /// <summary>
-    /// Utility class for Google Blog Search service.
-    /// </summary>
-    public static class GblogSearcher
+    public class GblogSearchClient : GSearchClient
     {
         /// <summary>
         /// Search blogs.
@@ -49,9 +47,9 @@ namespace Google.API.Search
         /// }
         /// </code>
         /// </example>
-        public static IList<IBlogResult> Search(string keyword, int resultCount)
+        public IList<IBlogResult> Search(string keyword, int resultCount)
         {
-            return Search(keyword, resultCount, new SortType());
+            return this.Search(keyword, resultCount, new SortType());
         }
 
         /// <summary>
@@ -72,17 +70,30 @@ namespace Google.API.Search
         /// }
         /// </code>
         /// </example>
-        public static IList<IBlogResult> Search(string keyword, int resultCount, SortType sortBy)
+        public IList<IBlogResult> Search(string keyword, int resultCount, SortType sortBy)
         {
-            var client = new GblogSearchClient();
-            return client.Search(keyword, resultCount, sortBy);
+            if (keyword == null)
+            {
+                throw new ArgumentNullException("keyword");
+            }
+
+            GSearchCallback<GblogResult> gsearch = (start, resultSize) => this.GSearch(keyword, start, resultSize, sortBy);
+            var results = SearchUtility.Search(gsearch, resultCount);
+            return results.ConvertAll(item => (IBlogResult)item);
         }
 
-        internal static SearchData<GblogResult> GSearch(
+        internal SearchData<GblogResult> GSearch(
             string keyword, int start, ResultSize resultSize, SortType sortBy)
         {
-            var client = new GblogSearchClient();
-            return client.GSearch(keyword, start, resultSize, sortBy);
+            if (keyword == null)
+            {
+                throw new ArgumentNullException("keyword");
+            }
+
+            var responseData =
+                this.GetResponseData(
+                    service => service.BlogSearch(this.AcceptLanguage, this.ApiKey, keyword, resultSize.GetString(), start, sortBy.GetString()));
+            return responseData;
         }
     }
 }

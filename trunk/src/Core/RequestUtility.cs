@@ -100,7 +100,7 @@ namespace Google.API
             return resultObject.ResponseData;
         }
 
-        internal static Binding CreateBinding()
+        public static Binding CreateBinding()
         {
             var customBinding = new CustomBinding();
             var webMessageEncodingBindingElement = new WebMessageEncodingBindingElement
@@ -113,7 +113,7 @@ namespace Google.API
             return customBinding;
         }
 
-        internal static string GetString(this Enum value)
+        public static string GetStringIgnoreDefault(this Enum value)
         {
             if (Enum.IsDefined(value.GetType(), value))
             {
@@ -121,6 +121,26 @@ namespace Google.API
             }
 
             return value.ToString();
+        }
+
+        public static string GetString(this bool value)
+        {
+            if (value)
+            {
+                return "1";
+            }
+
+            return null;
+        }
+
+        public static string GetStringWithTrueDefault(this bool value)
+        {
+            if (value)
+            {
+                return null;
+            }
+
+            return "0";
         }
 
         private static T GetResultObject<TService, T>(

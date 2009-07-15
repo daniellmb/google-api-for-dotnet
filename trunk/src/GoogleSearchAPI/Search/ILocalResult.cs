@@ -76,6 +76,11 @@ namespace Google.API.Search
         IPhoneNumber[] PhoneNumbers { get; }
 
         /// <summary>
+        /// Supplies an array consisting of the mailing address lines for this result.
+        /// </summary>
+        string[] AddressLines { get; }
+
+        /// <summary>
         /// Get a url that can be used to provide driving directions from the center of the set of search results to this search result.
         /// </summary>
         string DirectionUrl { get; }
@@ -105,9 +110,9 @@ namespace Google.API.Search
         /// </summary>
         string Content { get; }
 
-        /// <summary>
-        /// Get a postal code of this result.
-        /// </summary>
-        string PostalCode { get; }
+        /////// <summary>
+        /////// Get a postal code of this result.
+        /////// </summary>
+        ////string PostalCode { get; }
     }
 }

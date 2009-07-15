@@ -33,48 +33,63 @@ namespace Google.API.Search
     public interface IVideoResult
     {
         /// <summary>
-        /// Get the title of the video result.
+        /// Gets the title of the video result.
         /// </summary>
         string Title { get; }
 
         /// <summary>
-        /// Get a snippet style description of the video clip.
+        /// Gets a snippet style description of the video clip.
         /// </summary>
         string Content { get; }
 
         /// <summary>
-        /// Get the url of a playable version of the video result.
+        /// Gets the url of a playable version of the video result.
         /// </summary>
         string Url { get; }
 
         /// <summary>
-        /// Get the published date of the video.
+        /// Gets the published date of the video.
         /// </summary>
         DateTime PublishedDate { get; }
 
         /// <summary>
-        /// Get the name of the video's publisher.
+        /// Gets the name of the video's publisher.
         /// </summary>
         string Publisher { get; }
 
         /// <summary>
-        /// Get the approximate duration, in seconds, of the video.
+        /// Gets the approximate duration, in seconds, of the video.
         /// </summary>
         int Duration { get; }
 
         /// <summary>
-        /// Get a thumbnail image which visually represents the video.
+        /// Gets a thumbnail image which visually represents the video.
         /// </summary>
         ITbImage TbImage { get; }
 
         /// <summary>
-        /// Get the url of the flash version of the video that can be played inline on your page.
+        /// Gets the url of the flash version of the video that can be played inline on your page.
         /// </summary>
         string PlayUrl { get; }
 
         /// <summary>
-        /// Get the video type of the video result.
+        /// Gets the video type of the video result.
         /// </summary>
         string VideoType { get; }
+
+        /// <summary>
+        /// Gets the author. If present, this property supplies the YouTube user name of the author of the video.
+        /// </summary>
+        string Author { get; }
+
+        /// <summary>
+        /// Gets the view count. If present, this property supplies a count of the number of plays for this video. 
+        /// </summary>
+        int ViewCount { get; }
+
+        /// <summary>
+        /// Gets the rating. If present, this property supplies the rating of the video on a scale of 1 to 5. 
+        /// </summary>
+        float Rating { get; }
     }
 }

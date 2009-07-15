@@ -25,7 +25,6 @@
 
 namespace Google.API.Search
 {
-    using System;
     using System.Collections.Generic;
 
     /// <summary>
@@ -33,27 +32,6 @@ namespace Google.API.Search
     /// </summary>
     public static class GvideoSearcher
     {
-        ////private static int s_Timeout = 0;
-
-        /////// <summary>
-        /////// Get or set the length of time, in milliseconds, before the request times out.
-        /////// </summary>
-        ////public static int Timeout
-        ////{
-        ////    get
-        ////    {
-        ////        return s_Timeout;
-        ////    }
-        ////    set
-        ////    {
-        ////        if (s_Timeout < 0)
-        ////        {
-        ////            throw new ArgumentOutOfRangeException("value");
-        ////        }
-        ////        s_Timeout = value;
-        ////    }
-        ////}
-
         /// <summary>
         /// Search video.
         /// </summary>
@@ -96,28 +74,15 @@ namespace Google.API.Search
         /// </example>
         public static IList<IVideoResult> Search(string keyword, int resultCount, SortType sortBy)
         {
-            if (keyword == null)
-            {
-                throw new ArgumentNullException("keyword");
-            }
-
-            GSearchCallback<GvideoResult> gsearch = (start, resultSize) => GSearch(keyword, start, resultSize, sortBy);
-            var results = SearchUtility.Search(gsearch, resultCount);
-            return results.ConvertAll(item => (IVideoResult)item);
+            var client = new GvideoSearchClient();
+            return client.Search(keyword, resultCount, sortBy);
         }
 
         internal static SearchData<GvideoResult> GSearch(
             string keyword, int start, ResultSize resultSize, SortType sortBy)
         {
-            if (keyword == null)
-            {
-                throw new ArgumentNullException("keyword");
-            }
-
-            var responseData =
-                SearchUtility.GetResponseData(
-                    service => service.VideoSearch(keyword, resultSize.GetString(), start, sortBy.GetString()));
-            return responseData;
+            var client = new GvideoSearchClient();
+            return client.GSearch(keyword, start, resultSize, sortBy);
         }
     }
 }

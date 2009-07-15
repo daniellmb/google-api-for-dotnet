@@ -72,7 +72,7 @@ namespace Google.API.Search.Test
             var safeLevel = SafeLevel.active;
 
             var results = GimageSearcher.Search(
-                keyword, count, imageSize, colorization, imageType, fileType, searchSite, safeLevel);
+                keyword, count, safeLevel, imageSize, colorization, imageType, fileType, searchSite);
             Assert.IsNotNull(results);
             Assert.AreEqual(count, results.Count);
             foreach (var result in results)

@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------
-// <copyright file="INewsResultItem.cs" company="iron9light">
+// <copyright file="GSearchClient.cs" company="iron9light">
 // Copyright (c) 2009 iron9light
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -27,39 +27,23 @@ namespace Google.API.Search
 {
     using System;
 
-    /// <summary>
-    /// A story of news search result.
-    /// </summary>
-    public interface INewsResultItem
+    public abstract class GSearchClient : GoogleClient
     {
-        /// <summary>
-        /// Get the url.
-        /// </summary>
-        string Url { get; }
+        private static readonly string addressString = "http://ajax.googleapis.com/ajax/services/search";
 
-        /// <summary>
-        /// Get the title.
-        /// </summary>
-        string Title { get; }
+        private static readonly Uri address = new Uri(addressString);
 
-        /// <summary>
-        /// Get the name of the publisher of the news story.
-        /// </summary>
-        string Publisher { get; }
+        protected override Uri Address
+        {
+            get
+            {
+                return address;
+            }
+        }
 
-        /// <summary>
-        /// Get the location of the news story. This is a list of locations in most specific to least specific order where the components are seperated by ",". Note, there may only be one element in the list... A typical value for this property is "Edinburgh,Scotland,UK" or possibly "USA".
-        /// </summary>
-        string Location { get; }
-
-        /// <summary>
-        /// Get the published date of the news story referenced by this search result.
-        /// </summary>
-        DateTime PublishedDate { get; }
-
-        /// <summary>
-        /// Gets the language of the news story.
-        /// </summary>
-        string Language { get; }
+        internal T GetResponseData<T>(RequestCallback<ResultObject<T>, ISearchService> request)
+        {
+            return RequestUtility.GetResponseData(request, this.Address, this.Binding, this.Referrer);
+        }
     }
 }

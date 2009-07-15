@@ -1,5 +1,5 @@
-ï»¿//-----------------------------------------------------------------------
-// <copyright file="GimageSearcher.cs" company="iron9light">
+//-----------------------------------------------------------------------
+// <copyright file="GimageSearchClient.cs" company="iron9light">
 // Copyright (c) 2009 iron9light
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,12 +25,10 @@
 
 namespace Google.API.Search
 {
+    using System;
     using System.Collections.Generic;
 
-    /// <summary>
-    /// Utility class for Google Image Search service.
-    /// </summary>
-    public static class GimageSearcher
+    public class GimageSearchClient : GSearchClient
     {
         /// <summary>
         /// Search images.
@@ -54,9 +52,9 @@ namespace Google.API.Search
         /// }
         /// </code>
         /// </example>
-        public static IList<IImageResult> Search(string keyword, int resultCount)
+        public IList<IImageResult> Search(string keyword, int resultCount)
         {
-            return Search(
+            return this.Search(
                 keyword,
                 resultCount,
                 new SafeLevel(),
@@ -90,9 +88,9 @@ namespace Google.API.Search
         /// }
         /// </code>
         /// </example>
-        public static IList<IImageResult> Search(string keyword, int resultCount, string site)
+        public IList<IImageResult> Search(string keyword, int resultCount, string site)
         {
-            return Search(
+            return this.Search(
                 keyword,
                 resultCount,
                 new SafeLevel(),
@@ -136,7 +134,7 @@ namespace Google.API.Search
         /// }
         /// </code>
         /// </example>
-        public static IList<IImageResult> Search(
+        public IList<IImageResult> Search(
             string keyword,
             int resultCount,
             ImageSize imageSize,
@@ -144,7 +142,8 @@ namespace Google.API.Search
             ImageType imageType,
             FileType fileType)
         {
-            return Search(keyword, resultCount, new SafeLevel(), imageSize, colorization, imageType, fileType, null);
+            return this.Search(
+                keyword, resultCount, new SafeLevel(), imageSize, colorization, imageType, fileType, null);
         }
 
         /// <summary>
@@ -162,7 +161,7 @@ namespace Google.API.Search
         /// <example>
         /// This is the c# code example.
         /// <code>
-        /// string keyword = "é‡‘åŸŽæ­¦";
+        /// string keyword = "½ð³ÇÎä";
         /// int count = 25;
         /// ImageSize imageSize = ImageSize.all;
         /// Colorization colorization = Colorization.color;
@@ -182,7 +181,7 @@ namespace Google.API.Search
         /// }
         /// </code>
         /// </example>
-        public static IList<IImageResult> Search(
+        public IList<IImageResult> Search(
             string keyword,
             int resultCount,
             ImageSize imageSize,
@@ -191,7 +190,8 @@ namespace Google.API.Search
             FileType fileType,
             string site)
         {
-            return Search(keyword, resultCount, new SafeLevel(), imageSize, colorization, imageType, fileType, site);
+            return this.Search(
+                keyword, resultCount, new SafeLevel(), imageSize, colorization, imageType, fileType, site);
         }
 
         /// <summary>
@@ -231,7 +231,7 @@ namespace Google.API.Search
         /// }
         /// </code>
         /// </example>
-        public static IList<IImageResult> Search(
+        public IList<IImageResult> Search(
             string keyword,
             int resultCount,
             SafeLevel safeLevel,
@@ -241,34 +241,68 @@ namespace Google.API.Search
             FileType fileType,
             string site)
         {
-            var client = new GimageSearchClient();
-            return client.Search(
+            return this.Search(
                 keyword, resultCount, safeLevel, imageSize, colorization, new ImageColor(), imageType, fileType, site);
         }
 
-        internal static SearchData<GimageResult> GSearch(
+        public IList<IImageResult> Search(
+            string keyword,
+            int resultCount,
+            SafeLevel safeLevel,
+            ImageSize imageSize,
+            Colorization colorization,
+            ImageColor color,
+            ImageType imageType,
+            FileType fileType,
+            string site)
+        {
+            if (keyword == null)
+            {
+                throw new ArgumentNullException("keyword");
+            }
+
+            GSearchCallback<GimageResult> gsearch =
+                (start, resultSize) =>
+                this.GSearch(
+                    keyword, start, resultSize, safeLevel, imageSize, colorization, color, imageType, fileType, site);
+            var results = SearchUtility.Search(gsearch, resultCount);
+            return results.ConvertAll(item => (IImageResult)item);
+        }
+
+        internal SearchData<GimageResult> GSearch(
             string keyword,
             int start,
             ResultSize resultSize,
             SafeLevel safeLevel,
             ImageSize imageSize,
             Colorization colorization,
+            ImageColor color,
             ImageType imageType,
             FileType fileType,
             string searchSite)
         {
-            var client = new GimageSearchClient();
-            return client.GSearch(
-                keyword,
-                start,
-                resultSize,
-                safeLevel,
-                imageSize,
-                colorization,
-                new ImageColor(),
-                imageType,
-                fileType,
-                searchSite);
+            if (keyword == null)
+            {
+                throw new ArgumentNullException("keyword");
+            }
+
+            var responseData =
+                SearchUtility.GetResponseData(
+                    service =>
+                    service.ImageSearch(
+                        this.AcceptLanguage,
+                        this.ApiKey,
+                        keyword,
+                        resultSize.GetString(),
+                        start,
+                        safeLevel.GetString(),
+                        imageSize.GetString(),
+                        colorization.GetString(),
+                        color.GetString(),
+                        imageType.GetString(),
+                        fileType.GetString(),
+                        searchSite));
+            return responseData;
         }
     }
 }

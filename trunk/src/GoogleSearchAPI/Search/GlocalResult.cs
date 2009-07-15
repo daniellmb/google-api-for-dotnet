@@ -74,6 +74,9 @@ namespace Google.API.Search
         [DataMember(Name = "lng")]
         public float Longitude { get; private set; }
 
+        [DataMember(Name = "accuracy")]
+        public int Accuracy { get; private set; }
+
         /// <summary>
         /// Supplies the street address and number for the given result. Note:, in some cases, this property may be set to "" if the result has no known street address. address line. 
         /// </summary>
@@ -103,6 +106,12 @@ namespace Google.API.Search
         /// </summary>
         [DataMember(Name = "phoneNumbers")]
         public PhoneNumber[] PhoneNumbers { get; private set; }
+
+        /// <summary>
+        /// Supplies an array consisting of the mailing address lines for this result
+        /// </summary>
+        [DataMember(Name = "addressLines")]
+        public string[] AddressLines { get; private set; }
 
         /// <summary>
         /// Supplies a url that can be used to provide driving directions from the center of the set of search results to this search result. Note, in some cases this property may be missing or null.
@@ -140,14 +149,14 @@ namespace Google.API.Search
         [DataMember(Name = "content")]
         public string Content { get; private set; }
 
-        [DataMember(Name = "addressLookupResult")]
-        public string AddressLookupResult { get; private set; }
+        [DataMember(Name = "maxAge")]
+        public int MaxAge { get; private set; }
 
-        [DataMember(Name = "postalCode")]
-        public string PostalCode { get; private set; }
+        ////[DataMember(Name = "addressLookupResult")]
+        ////public string AddressLookupResult { get; private set; }
 
-        [DataMember(Name = "addressLines")]
-        public string[] AddressLines { get; private set; }
+        ////[DataMember(Name = "postalCode")]
+        ////public string PostalCode { get; private set; }
 
         public override string ToString()
         {
@@ -167,20 +176,20 @@ namespace Google.API.Search
                 if (!string.IsNullOrEmpty(result.Region))
                 {
                     sb.Append(", " + result.Region);
-                    if (!string.IsNullOrEmpty(result.PostalCode))
-                    {
-                        sb.Append(" " + result.PostalCode);
-                    }
+                    ////if (!string.IsNullOrEmpty(result.PostalCode))
+                    ////{
+                    ////    sb.Append(" " + result.PostalCode);
+                    ////}
                 }
             }
             else if (!string.IsNullOrEmpty(result.Region))
             {
                 sb.AppendLine();
                 sb.Append(result.Region);
-                if (!string.IsNullOrEmpty(result.PostalCode))
-                {
-                    sb.Append(" " + result.PostalCode);
-                }
+                ////if (!string.IsNullOrEmpty(result.PostalCode))
+                ////{
+                ////    sb.Append(" " + result.PostalCode);
+                ////}
             }
 
             if (this.PhoneNumbers != null)
@@ -269,6 +278,14 @@ namespace Google.API.Search
             }
         }
 
+        string[] ILocalResult.AddressLines
+        {
+            get
+            {
+                return this.AddressLines;
+            }
+        }
+
         string ILocalResult.DirectionUrl
         {
             get
@@ -317,13 +334,13 @@ namespace Google.API.Search
             }
         }
 
-        string ILocalResult.PostalCode
-        {
-            get
-            {
-                return this.PostalCode;
-            }
-        }
+        ////string ILocalResult.PostalCode
+        ////{
+        ////    get
+        ////    {
+        ////        return this.PostalCode;
+        ////    }
+        ////}
 
         #endregion
     }

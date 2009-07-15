@@ -55,6 +55,9 @@
     <Compile Include="..\Core\GoogleAPIException.cs">
       <Link>GoogleAPIException.cs</Link>
     </Compile>
+    <Compile Include="..\Core\GoogleClient.cs">
+      <Link>GoogleClient.cs</Link>
+    </Compile>
     <Compile Include="..\Core\GoogleServiceException.cs">
       <Link>GoogleServiceException.cs</Link>
     </Compile>
@@ -83,21 +86,29 @@
     <None Include="GoogleSearchAPI.shfbproj" />
     <None Include="Properties\AssemblyInfo.cs.template" />
     <Compile Include="Search\GblogResult.cs" />
+    <Compile Include="Search\GblogSearchClient.cs" />
     <Compile Include="Search\GblogSearcher.cs" />
     <Compile Include="Search\GbookResult.cs" />
+    <Compile Include="Search\GbookSearchClient.cs" />
     <Compile Include="Search\GbookSearcher.cs" />
     <Compile Include="Search\GimageResult.cs" />
+    <Compile Include="Search\GimageSearchClient.cs" />
     <Compile Include="Search\GimageSearcher.cs" />
     <Compile Include="Search\GlocalResult.cs" />
+    <Compile Include="Search\GlocalSearchClient.cs" />
     <Compile Include="Search\GlocalSearcher.cs" />
     <Compile Include="Search\GnewsImage.cs" />
+    <Compile Include="Search\GnewsSearchClient.cs" />
     <Compile Include="Search\GnewsSearcher.cs" />
     <Compile Include="Search\GnewsResult.cs" />
     <Compile Include="Search\GnewsResultItem.cs" />
     <Compile Include="Search\GpatentResult.cs" />
+    <Compile Include="Search\GpatentSearchClient.cs" />
     <Compile Include="Search\GpatentSearcher.cs" />
     <Compile Include="Search\GvideoResult.cs" />
+    <Compile Include="Search\GvideoSearchClient.cs" />
     <Compile Include="Search\GvideoSearcher.cs" />
+    <Compile Include="Search\GwebSearchClient.cs" />
     <Compile Include="Search\GwebSearcher.cs" />
     <Compile Include="Search\GwebResult.cs" />
     <Compile Include="Search\IBlogResult.cs" />
@@ -116,6 +127,7 @@
     <Compile Include="Search\LanguageUtility.cs" />
     <Compile Include="Search\LocalSearchData.cs" />
     <Compile Include="Search\PhoneNumber.cs" />
+    <Compile Include="Search\GSearchClient.cs" />
     <Compile Include="Search\SearchData.cs" />
     <Compile Include="Search\SearchUtility.cs" />
     <Compile Include="Search\TbImage.cs" />

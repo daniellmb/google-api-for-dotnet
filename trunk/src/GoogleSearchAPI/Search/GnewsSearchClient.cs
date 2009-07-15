@@ -1,5 +1,5 @@
-﻿//-----------------------------------------------------------------------
-// <copyright file="GnewsSearcher.cs" company="iron9light">
+//-----------------------------------------------------------------------
+// <copyright file="GnewsSearchClient.cs" company="iron9light">
 // Copyright (c) 2009 iron9light
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -28,10 +28,7 @@ namespace Google.API.Search
     using System;
     using System.Collections.Generic;
 
-    /// <summary>
-    /// Utility class for Google News Search service.
-    /// </summary>
-    public static class GnewsSearcher
+    public class GnewsSearchClient : GSearchClient
     {
         /// <summary>
         /// Search news.
@@ -50,9 +47,9 @@ namespace Google.API.Search
         /// }
         /// </code>
         /// </example>
-        public static IList<INewsResult> Search(string keyword, int resultCount)
+        public IList<INewsResult> Search(string keyword, int resultCount)
         {
-            return Search(keyword, resultCount, null, new SortType());
+            return this.Search(keyword, resultCount, null, new SortType());
         }
 
         /// <summary>
@@ -73,9 +70,9 @@ namespace Google.API.Search
         /// }
         /// </code>
         /// </example>
-        public static IList<INewsResult> Search(string keyword, int resultCount, SortType sortBy)
+        public IList<INewsResult> Search(string keyword, int resultCount, SortType sortBy)
         {
-            return Search(keyword, resultCount, null, sortBy);
+            return this.Search(keyword, resultCount, null, sortBy);
         }
 
         /// <summary>
@@ -96,9 +93,9 @@ namespace Google.API.Search
         /// }
         /// </code>
         /// </example>
-        public static IList<INewsResult> Search(string keyword, int resultCount, string geo)
+        public IList<INewsResult> Search(string keyword, int resultCount, string geo)
         {
-            return Search(keyword, resultCount, geo, new SortType());
+            return this.Search(keyword, resultCount, geo, new SortType());
         }
 
         /// <summary>
@@ -120,10 +117,22 @@ namespace Google.API.Search
         /// }
         /// </code>
         /// </example>
-        public static IList<INewsResult> Search(string keyword, int resultCount, string geo, SortType sortBy)
+        public IList<INewsResult> Search(string keyword, int resultCount, string geo, SortType sortBy)
         {
-            var client = new GnewsSearchClient();
-            return client.Search(keyword, resultCount, geo, sortBy);
+            return this.Search(keyword, resultCount, geo, sortBy, null, null, null);
+        }
+
+        public IList<INewsResult> Search(string keyword, int resultCount, string geo, SortType sortBy, string quoteId, string topic, string edition)
+        {
+            if (keyword == null && string.IsNullOrEmpty(geo))
+            {
+                throw new ArgumentNullException("keyword");
+            }
+
+            GSearchCallback<GnewsResult> gsearch =
+                (start, resultSize) => this.GSearch(keyword, start, resultSize, geo, sortBy, quoteId, topic, edition);
+            var results = SearchUtility.Search(gsearch, resultCount);
+            return results.ConvertAll(item => (INewsResult)item);
         }
 
         /// <summary>
@@ -143,9 +152,9 @@ namespace Google.API.Search
         /// }
         /// </code>
         /// </example>
-        public static IList<INewsResult> SearchLocal(string geo, int resultCount)
+        public IList<INewsResult> SearchLocal(string geo, int resultCount)
         {
-            return SearchLocal(geo, resultCount, new SortType());
+            return this.SearchLocal(geo, resultCount, new SortType());
         }
 
         /// <summary>
@@ -166,21 +175,28 @@ namespace Google.API.Search
         /// }
         /// </code>
         /// </example>
-        public static IList<INewsResult> SearchLocal(string geo, int resultCount, SortType sortBy)
+        public IList<INewsResult> SearchLocal(string geo, int resultCount, SortType sortBy)
         {
             if (geo == null)
             {
                 throw new ArgumentNullException("geo");
             }
 
-            return Search(null, resultCount, geo, sortBy);
+            return this.Search(null, resultCount, geo, sortBy);
         }
 
-        internal static SearchData<GnewsResult> GSearch(
-            string keyword, int start, ResultSize resultSize, string geo, SortType sortBy)
+        internal SearchData<GnewsResult> GSearch(
+            string keyword, int start, ResultSize resultSize, string geo, SortType sortBy, string quoteId, string topic, string edition)
         {
-            var client = new GnewsSearchClient();
-            return client.GSearch(keyword, start, resultSize, geo, sortBy, null, null, null);
+            if (keyword == null && string.IsNullOrEmpty(geo))
+            {
+                throw new ArgumentNullException("keyword");
+            }
+
+            var responseData =
+                this.GetResponseData(
+                    service => service.NewsSearch(this.AcceptLanguage, this.ApiKey, keyword, resultSize.ToString(), start, sortBy.GetString(), geo, quoteId, topic, edition));
+            return responseData;
         }
     }
 }

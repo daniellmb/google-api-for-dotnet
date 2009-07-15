@@ -83,6 +83,12 @@ namespace Google.API.Search
         [DataMember(Name = "signedRedirectUrl")]
         public string SignedRedirectUrl { get; private set; }
 
+        /// <summary>
+        /// This property is optional. When present, it indicates the language of the news story.
+        /// </summary>
+        [DataMember(Name = "language")]
+        public string Language { get; private set; }
+
         public override string ToString()
         {
             INewsResultItem result = this;
@@ -173,6 +179,14 @@ namespace Google.API.Search
             get
             {
                 return SearchUtility.RFC2822DateTimeParse(this.PublishedDateString);
+            }
+        }
+
+        string INewsResultItem.Language
+        {
+            get
+            {
+                return this.Language;
             }
         }
 

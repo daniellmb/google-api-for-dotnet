@@ -1,5 +1,5 @@
-﻿//-----------------------------------------------------------------------
-// <copyright file="GwebSearcher.cs" company="iron9light">
+//-----------------------------------------------------------------------
+// <copyright file="GwebSearchClient.cs" company="iron9light">
 // Copyright (c) 2009 iron9light
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,12 +25,10 @@
 
 namespace Google.API.Search
 {
+    using System;
     using System.Collections.Generic;
 
-    /// <summary>
-    /// Utility class for Google Web Search service.
-    /// </summary>
-    public static class GwebSearcher
+    public class GwebSearchClient : GSearchClient
     {
         /// <summary>
         /// Search.
@@ -49,9 +47,9 @@ namespace Google.API.Search
         /// }
         /// </code>
         /// </example>
-        public static IList<IWebResult> Search(string keyword, int resultCount)
+        public IList<IWebResult> Search(string keyword, int resultCount)
         {
-            return Search(keyword, resultCount, new Language(), new SafeLevel());
+            return this.Search(keyword, resultCount, new Language(), new SafeLevel());
         }
 
         /// <summary>
@@ -72,9 +70,9 @@ namespace Google.API.Search
         /// }
         /// </code>
         /// </example>
-        public static IList<IWebResult> Search(string keyword, int resultCount, Language language)
+        public IList<IWebResult> Search(string keyword, int resultCount, Language language)
         {
-            return Search(keyword, resultCount, language, new SafeLevel());
+            return this.Search(keyword, resultCount, language, new SafeLevel());
         }
 
         /// <summary>
@@ -96,17 +94,72 @@ namespace Google.API.Search
         /// }
         /// </code>
         /// </example>
-        public static IList<IWebResult> Search(string keyword, int resultCount, Language language, SafeLevel safeLevel)
+        public IList<IWebResult> Search(string keyword, int resultCount, Language language, SafeLevel safeLevel)
         {
-            var client = new GwebSearchClient();
-            return client.Search(keyword, resultCount, language, safeLevel);
+            return this.Search(keyword, resultCount, null, null, safeLevel, language, true);
         }
 
-        internal static SearchData<GwebResult> GSearch(
-            string keyword, int start, ResultSize resultSize, Language language, SafeLevel safeLevel)
+        public IList<IWebResult> Search(
+            string keyword,
+            int resultCount,
+            string customSearchId,
+            string customSearchReference,
+            SafeLevel safeLevel,
+            Language language,
+            bool duplicateFilter)
         {
-            var client = new GwebSearchClient();
-            return client.GSearch(keyword, start, resultSize, null, null, safeLevel, language, true);
+            if (keyword == null)
+            {
+                throw new ArgumentNullException("keyword");
+            }
+
+            GSearchCallback<GwebResult> gsearch =
+                (start, resultSize) =>
+                this.GSearch(
+                    keyword,
+                    start,
+                    resultSize,
+                    customSearchId,
+                    customSearchReference,
+                    safeLevel,
+                    language,
+                    duplicateFilter);
+            var results = SearchUtility.Search(gsearch, resultCount);
+            return results.ConvertAll(item => (IWebResult)item);
+        }
+
+        internal SearchData<GwebResult> GSearch(
+            string keyword,
+            int start,
+            ResultSize resultSize,
+            string customSearchId,
+            string customSearchReference,
+            SafeLevel safeLevel,
+            Language language,
+            bool duplicateFilter)
+        {
+            if (keyword == null)
+            {
+                throw new ArgumentNullException("keyword");
+            }
+
+            var languageCode = LanguageUtility.GetLanguageCode(language);
+
+            var responseData =
+                this.GetResponseData(
+                    service =>
+                    service.WebSearch(
+                        this.AcceptLanguage,
+                        this.ApiKey,
+                        keyword,
+                        resultSize.GetString(),
+                        start,
+                        customSearchId,
+                        customSearchReference,
+                        safeLevel.GetString(),
+                        languageCode,
+                        duplicateFilter.GetStringWithTrueDefault()));
+            return responseData;
         }
     }
 }

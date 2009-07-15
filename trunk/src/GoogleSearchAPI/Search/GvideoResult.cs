@@ -112,6 +112,24 @@ namespace Google.API.Search
         [DataMember(Name = "videoType")]
         public string VideoType { get; private set; }
 
+        /// <summary>
+        /// If present, this property supplies the YouTube user name of the author of the video.
+        /// </summary>
+        [DataMember(Name = "author")]
+        public string Author { get; private set; }
+
+        /// <summary>
+        /// If present, this property supplies a count of the number of plays for this video.
+        /// </summary>
+        [DataMember(Name = "viewCount")]
+        public int ViewCount { get; private set; }
+
+        /// <summary>
+        /// If present, this property supplies the rating of the video on a scale of 1 to 5.
+        /// </summary>
+        [DataMember(Name = "rating")]
+        public float Rating { get; private set; }
+
         public override string ToString()
         {
             IVideoResult result = this;
@@ -221,6 +239,30 @@ namespace Google.API.Search
             get
             {
                 return this.VideoType;
+            }
+        }
+
+        string IVideoResult.Author
+        {
+            get
+            {
+                return this.Author;
+            }
+        }
+
+        int IVideoResult.ViewCount
+        {
+            get
+            {
+                return this.ViewCount;
+            }
+        }
+
+        float IVideoResult.Rating
+        {
+            get
+            {
+                return this.Rating;
             }
         }
 
