@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="TestTranslator.cs" company="iron9light">
+// <copyright file="TestTranslateClient.cs" company="iron9light">
 // Copyright (c) 2009 iron9light
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -31,7 +31,7 @@ namespace Google.API.Translate.Test
     using NUnit.Framework;
 
     [TestFixture]
-    public class TestTranslator
+    public class TestTranslateClient
     {
         private static readonly ICollection<Language> undetectable = new[]
             {
@@ -44,6 +44,14 @@ namespace Google.API.Translate.Test
                 Language.Norwegian,
                 Language.Portuguese,
             };
+
+        private TranslateClient Client { get; set; }
+
+        [SetUp]
+        public void SetUp()
+        {
+            this.Client = new TranslateClient();
+        }
 
         [Test]
         public void TranslateTest()
@@ -67,7 +75,7 @@ namespace Google.API.Translate.Test
                     continue;
                 }
 
-                var translatedText = Translator.Translate(originalText, originalLanguage, language);
+                var translatedText = this.Client.Translate(originalText, originalLanguage, language);
                 Assert.AreNotEqual(
                     originalText,
                     translatedText,
@@ -78,7 +86,7 @@ namespace Google.API.Translate.Test
 
                 Print(language, translatedText);
 
-                var transbackText = Translator.Translate(translatedText, language, originalLanguage);
+                var transbackText = this.Client.Translate(translatedText, language, originalLanguage);
                 StringAssert.AreEqualIgnoringCase(
                     originalText,
                     transbackText.Trim(),
@@ -105,11 +113,11 @@ namespace Google.API.Translate.Test
 
             var text = string.Format(textTemplate, sentenceA, sentenceB);
 
-            var translatedA = Translator.Translate(sentenceA, from, to);
+            var translatedA = this.Client.Translate(sentenceA, from, to);
 
-            var translatedB = Translator.Translate(sentenceB, from, to);
+            var translatedB = this.Client.Translate(sentenceB, from, to);
 
-            var translatedText = Translator.Translate(text, from, to, TranslateFormat.html);
+            var translatedText = this.Client.Translate(text, from, to, TranslateFormat.html);
 
             var expectedText = string.Format(textTemplate, translatedA.Trim(), translatedB.Trim());
 
@@ -127,7 +135,7 @@ namespace Google.API.Translate.Test
             Language from;
             var to = Language.English;
 
-            var translated = Translator.TranslateAndDetect(text, to, out from);
+            var translated = this.Client.TranslateAndDetect(text, to, out from);
 
             Assert.AreEqual(Language.English, from);
             StringAssert.AreEqualIgnoringCase(text, translated);
@@ -153,7 +161,7 @@ namespace Google.API.Translate.Test
                     continue;
                 }
 
-                var translatedText = Translator.Translate(originalText, originalLanguage, language);
+                var translatedText = this.Client.Translate(originalText, originalLanguage, language);
                 Assert.AreNotEqual(
                     originalText,
                     translatedText,
@@ -164,7 +172,7 @@ namespace Google.API.Translate.Test
 
                 bool isReliable;
                 double confidence;
-                var detectedLanguage = Translator.Detect(translatedText, out isReliable, out confidence);
+                var detectedLanguage = this.Client.Detect(translatedText, out isReliable, out confidence);
 
                 var more = string.Format("isReliable : {0}, confidence : {1}", isReliable, confidence);
                 Print(language, translatedText, more);

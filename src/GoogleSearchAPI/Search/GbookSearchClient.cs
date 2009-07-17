@@ -27,7 +27,11 @@ namespace Google.API.Search
 {
     using System;
     using System.Collections.Generic;
+    using System.Runtime.InteropServices;
 
+    /// <summary>
+    /// The client for book search.
+    /// </summary>
     public class GbookSearchClient : GSearchClient
     {
         /// <summary>
@@ -94,7 +98,7 @@ namespace Google.API.Search
         /// }
         /// </code>
         /// </example>
-        public IList<IBookResult> Search(string keyword, int resultCount, bool fullViewOnly, string library)
+        public IList<IBookResult> Search(string keyword, int resultCount, [Optional] bool fullViewOnly, [Optional] string library)
         {
             if (keyword == null)
             {

@@ -32,6 +32,14 @@ namespace Google.API.Search.Test
     [TestFixture]
     public class TestGimageSearcher
     {
+        private GimageSearchClient Client { get; set; }
+
+        [SetUp]
+        public void SetUp()
+        {
+            this.Client = new GimageSearchClient();
+        }
+
         [Test]
         public void GSearchTest()
         {
@@ -40,13 +48,14 @@ namespace Google.API.Search.Test
             var resultSize = ResultSize.large;
             var imageSize = ImageSize.all;
             var colorization = Colorization.color;
+            var color = ImageColor.red;
             var imageType = ImageType.all;
             var fileType = FileType.jpg;
             string searchSite = null;
             var safeLevel = SafeLevel.off;
 
-            var searchData = GimageSearcher.GSearch(
-                keyword, start, resultSize, safeLevel, imageSize, colorization, imageType, fileType, searchSite);
+            var searchData = this.Client.GSearch(
+                keyword, start, resultSize, safeLevel, imageSize, colorization, color, imageType, fileType, searchSite);
             Assert.IsNotNull(searchData);
             Assert.IsNotNull(searchData.Results);
             Assert.Greater(searchData.Results.Length, 0);
@@ -71,7 +80,7 @@ namespace Google.API.Search.Test
             string searchSite = null;
             var safeLevel = SafeLevel.active;
 
-            var results = GimageSearcher.Search(
+            var results = this.Client.Search(
                 keyword, count, safeLevel, imageSize, colorization, imageType, fileType, searchSite);
             Assert.IsNotNull(results);
             Assert.AreEqual(count, results.Count);
@@ -89,7 +98,7 @@ namespace Google.API.Search.Test
             var keyword = "x game";
             var count = 10;
 
-            var results = GimageSearcher.Search(keyword, count);
+            var results = this.Client.Search(keyword, count);
             Assert.IsNotNull(results);
             Assert.AreEqual(count, results.Count);
             foreach (var result in results)
@@ -107,7 +116,7 @@ namespace Google.API.Search.Test
             var count = 6;
             var site = "yahoo.com";
 
-            var results = GimageSearcher.Search(keyword, count, site);
+            var results = this.Client.Search(keyword, count, site);
             Assert.IsNotNull(results);
             Assert.AreEqual(count, results.Count);
             foreach (var result in results)
@@ -128,7 +137,7 @@ namespace Google.API.Search.Test
             var imageType = ImageType.face;
             var fileType = FileType.gif;
 
-            var results = GimageSearcher.Search(keyword, count, imageSize, colorization, imageType, fileType);
+            var results = this.Client.Search(keyword, count, imageSize, colorization, imageType, fileType);
             Assert.IsNotNull(results);
             Assert.AreEqual(count, results.Count);
             foreach (var result in results)
@@ -150,7 +159,7 @@ namespace Google.API.Search.Test
             var fileType = FileType.jpg;
             var site = "sina.com";
 
-            var results = GimageSearcher.Search(keyword, count, imageSize, colorization, imageType, fileType, site);
+            var results = this.Client.Search(keyword, count, imageSize, colorization, imageType, fileType, site);
             Assert.IsNotNull(results);
             Assert.AreEqual(count, results.Count);
             foreach (var result in results)

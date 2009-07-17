@@ -44,7 +44,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="Properties\AssemblyInfo.cs.template" />
-    <Compile Include="TestTranslator.cs" />
+    <Compile Include="TestTranslateClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GoogleTranslateAPI\GoogleTranslateAPI.csproj">

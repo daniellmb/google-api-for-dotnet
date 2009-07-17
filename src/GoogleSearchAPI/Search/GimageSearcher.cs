@@ -25,11 +25,13 @@
 
 namespace Google.API.Search
 {
+    using System;
     using System.Collections.Generic;
 
     /// <summary>
     /// Utility class for Google Image Search service.
     /// </summary>
+    [Obsolete("Use GimageSearchClient instead.")]
     public static class GimageSearcher
     {
         /// <summary>

@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------
-// <copyright file="ITranslateService.cs" company="iron9light">
+// <copyright file="ILanguageService.cs" company="iron9light">
 // Copyright (c) 2009 iron9light
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy

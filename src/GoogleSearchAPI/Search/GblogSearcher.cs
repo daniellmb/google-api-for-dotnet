@@ -25,11 +25,13 @@
 
 namespace Google.API.Search
 {
+    using System;
     using System.Collections.Generic;
 
     /// <summary>
     /// Utility class for Google Blog Search service.
     /// </summary>
+    [Obsolete("Use GblogSearchClient instead.")]
     public static class GblogSearcher
     {
         /// <summary>

@@ -79,8 +79,8 @@
     <Compile Include="..\GoogleSearchAPI.Test\TestGwebSearcher.cs">
       <Link>Search\TestGwebSearcher.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleTranslateAPI.Test\TestTranslator.cs">
-      <Link>Translate\TestTranslator.cs</Link>
+    <Compile Include="..\GoogleTranslateAPI.Test\TestTranslateClient.cs">
+      <Link>Translate\TestTranslateClient.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

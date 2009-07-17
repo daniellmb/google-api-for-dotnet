@@ -25,25 +25,12 @@
 
 namespace Google.API.Translate
 {
-    /// <summary>
-    /// Translate format.
-    /// </summary>
-    public enum TranslateFormat
-    {
-        /// <summary>
-        /// Text format. Default value.
-        /// </summary>
-        text = 0,
-
-        /// <summary>
-        /// Html format.
-        /// </summary>
-        html,
-    }
+    using System;
 
     /// <summary>
     /// Utility class for translate and detect.
     /// </summary>
+    [Obsolete("Use TranslateClient instead.")]
     public static class Translator
     {
         /// <summary>

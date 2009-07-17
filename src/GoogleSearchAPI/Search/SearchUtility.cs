@@ -248,28 +248,6 @@ namespace Google.API.Search
 
     internal static class SearchUtility
     {
-        private static string addressString = "http://ajax.googleapis.com/ajax/services/search";
-
-        private static Uri address;
-
-        public static Uri Address
-        {
-            get
-            {
-                if (address == null)
-                {
-                    address = new Uri(addressString);
-                }
-
-                return address;
-            }
-        }
-
-        public static T GetResponseData<T>(RequestCallback<ResultObject<T>, ISearchService> service)
-        {
-            return RequestUtility.GetResponseData(service, Address);
-        }
-
         public static List<T> Search<T>(GSearchCallback<T> gsearch, int resultCount)
         {
             var start = 0;

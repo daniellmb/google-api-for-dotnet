@@ -32,6 +32,14 @@ namespace Google.API.Search.Test
     [TestFixture]
     public class TestGbookSearcher
     {
+        private GbookSearchClient Client { get; set; }
+
+        [SetUp]
+        public void SetUp()
+        {
+            this.Client = new GbookSearchClient();
+        }
+
         [Test]
         public void GSearchTest()
         {
@@ -41,7 +49,7 @@ namespace Google.API.Search.Test
             var fullViewOnly = false;
             string library = null;
 
-            var searchData = GbookSearcher.GSearch(keyword, start, resultSize, fullViewOnly, library);
+            var searchData = this.Client.GSearch(keyword, start, resultSize, fullViewOnly, library);
             Assert.IsNotNull(searchData);
             Assert.IsNotNull(searchData.Results);
             Assert.Greater(searchData.Results.Length, 0);
@@ -60,7 +68,7 @@ namespace Google.API.Search.Test
             var keyword = "cookbook";
             var count = 20;
 
-            var results = GbookSearcher.Search(keyword, count);
+            var results = this.Client.Search(keyword, count);
             Assert.IsNotNull(results);
             Assert.AreEqual(count, results.Count);
             foreach (var result in results)
@@ -78,7 +86,7 @@ namespace Google.API.Search.Test
             var count = 4;
             var isFullViewable = true;
 
-            var results = GbookSearcher.Search(keyword, count, isFullViewable);
+            var results = this.Client.Search(keyword, count, isFullViewable);
             Assert.IsNotNull(results);
             Assert.AreEqual(count, results.Count);
             foreach (var result in results)
@@ -97,7 +105,7 @@ namespace Google.API.Search.Test
             var isFullViewable = false;
             var library = "Madelena";
 
-            var results = GbookSearcher.Search(keyword, count, isFullViewable, library);
+            var results = this.Client.Search(keyword, count, isFullViewable, library);
             Assert.IsNotNull(results);
             Assert.AreEqual(0, results.Count);
             foreach (var result in results)

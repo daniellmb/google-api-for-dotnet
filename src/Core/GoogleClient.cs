@@ -32,7 +32,7 @@ namespace Google.API
     /// <summary>
     /// The abstract base class for all google service client classes.
     /// </summary>
-    public abstract class GoogleClient : IDefaultCommunicationTimeouts
+    public abstract class GoogleClient
     {
         protected GoogleClient()
         {

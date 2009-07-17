@@ -27,7 +27,11 @@ namespace Google.API.Search
 {
     using System;
     using System.Collections.Generic;
+    using System.Runtime.InteropServices;
 
+    /// <summary>
+    /// The client for patent search.
+    /// </summary>
     public class GpatentSearchClient : GSearchClient
     {
         /// <summary>
@@ -130,7 +134,11 @@ namespace Google.API.Search
         /// </code>
         /// </example>
         public IList<IPatentResult> Search(
-            string keyword, int resultCount, bool issuedOnly, bool filedOnly, SortType sortBy)
+            string keyword,
+            int resultCount,
+            [Optional] bool issuedOnly,
+            [Optional] bool filedOnly,
+            [Optional] SortType sortBy)
         {
             if (keyword == null)
             {

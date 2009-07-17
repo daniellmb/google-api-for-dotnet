@@ -32,6 +32,14 @@ namespace Google.API.Search.Test
     [TestFixture]
     public class TestGpatentSearcher
     {
+        private GpatentSearchClient Client { get; set; }
+
+        [SetUp]
+        public void SetUp()
+        {
+            this.Client = new GpatentSearchClient();
+        }
+
         [Test]
         public void GSearchTest()
         {
@@ -42,7 +50,7 @@ namespace Google.API.Search.Test
             var filedOnly = false;
             var sortBy = SortType.relevance;
 
-            var searchData = GpatentSearcher.GSearch(keyword, start, resultSize, issuedOnly, filedOnly, sortBy);
+            var searchData = this.Client.GSearch(keyword, start, resultSize, issuedOnly, filedOnly, sortBy);
             Assert.IsNotNull(searchData);
             Assert.IsNotNull(searchData.Results);
             Assert.Greater(searchData.Results.Length, 0);
@@ -60,7 +68,7 @@ namespace Google.API.Search.Test
         {
             var keyword = "Artificial Intelligence";
             var count = 10;
-            var results = GpatentSearcher.Search(keyword, count);
+            var results = this.Client.Search(keyword, count);
 
             Assert.IsNotNull(results);
             Assert.AreEqual(count, results.Count);
@@ -78,7 +86,7 @@ namespace Google.API.Search.Test
             var keyword = "encode";
             var count = 32;
             var sortBy = SortType.relevance;
-            var results = GpatentSearcher.Search(keyword, count, sortBy);
+            var results = this.Client.Search(keyword, count, sortBy);
 
             Assert.IsNotNull(results);
             Assert.AreEqual(count, results.Count);
@@ -97,7 +105,7 @@ namespace Google.API.Search.Test
             var count = 20;
             var issuedOnly = false;
             var filedOnly = true;
-            var results = GpatentSearcher.Search(keyword, count, issuedOnly, filedOnly);
+            var results = this.Client.Search(keyword, count, issuedOnly, filedOnly);
 
             Assert.IsNotNull(results);
             Assert.AreEqual(count, results.Count);
@@ -117,7 +125,7 @@ namespace Google.API.Search.Test
             var issuedOnly = true;
             var filedOnly = true;
             var sortBy = SortType.date;
-            var results = GpatentSearcher.Search(keyword, count, issuedOnly, filedOnly, sortBy);
+            var results = this.Client.Search(keyword, count, issuedOnly, filedOnly, sortBy);
 
             Assert.IsNotNull(results);
             Assert.AreEqual(count, results.Count);
