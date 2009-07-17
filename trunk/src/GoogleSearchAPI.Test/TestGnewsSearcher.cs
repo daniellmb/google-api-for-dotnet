@@ -32,6 +32,14 @@ namespace Google.API.Search.Test
     [TestFixture]
     public class TestGnewsSearcher
     {
+        private GnewsSearchClient Client { get; set; }
+
+        [SetUp]
+        public void SetUp()
+        {
+            this.Client = new GnewsSearchClient();
+        }
+
         [Test]
         public void GSearchTest()
         {
@@ -40,8 +48,11 @@ namespace Google.API.Search.Test
             var resultSize = new ResultSize();
             var geo = "Beijing China";
             var sortBy = new SortType();
+            string quoteId = null;
+            string topic = "b";
+            string edition = null;
 
-            var results = GnewsSearcher.GSearch(keyword, start, resultSize, geo, sortBy);
+            var results = this.Client.GSearch(keyword, start, resultSize, geo, sortBy, quoteId, topic, edition);
 
             Assert.IsNotNull(results);
             Assert.IsNotNull(results.Results);
@@ -60,7 +71,7 @@ namespace Google.API.Search.Test
         {
             var keyword = "NBA";
             var count = 15;
-            var results = GnewsSearcher.Search(keyword, count);
+            var results = this.Client.Search(keyword, count);
             Assert.IsNotNull(results);
             Assert.AreEqual(count, results.Count);
             foreach (var result in results)
@@ -77,7 +88,7 @@ namespace Google.API.Search.Test
             var keyword = "earthquake";
             var geo = "China";
             var count = 32;
-            var results = GnewsSearcher.Search(keyword, count, geo);
+            var results = this.Client.Search(keyword, count, geo);
             Assert.IsNotNull(results);
             Assert.AreEqual(count, results.Count);
             foreach (var result in results)
@@ -93,8 +104,8 @@ namespace Google.API.Search.Test
         {
             var keyword = "Obama";
             var count = 32;
-            var resultsByRelevance = GnewsSearcher.Search(keyword, count, SortType.relevance);
-            var resultsByDate = GnewsSearcher.Search(keyword, count, SortType.date);
+            var resultsByRelevance = this.Client.Search(keyword, count, SortType.relevance);
+            var resultsByDate = this.Client.Search(keyword, count, SortType.date);
             Assert.IsNotNull(resultsByRelevance);
             Assert.IsNotNull(resultsByDate);
             Assert.AreEqual(resultsByRelevance.Count, resultsByDate.Count);
@@ -133,8 +144,8 @@ namespace Google.API.Search.Test
         public void SearchLocalTest()
         {
             var count = 16;
-            var resultsInTokyo = GnewsSearcher.SearchLocal("Tokyo", count);
-            var resultsInJapan = GnewsSearcher.SearchLocal("Japan", count);
+            var resultsInTokyo = this.Client.SearchLocal("Tokyo", count);
+            var resultsInJapan = this.Client.SearchLocal("Japan", count);
             Assert.IsNotNull(resultsInTokyo);
             Assert.IsNotNull(resultsInJapan);
             Assert.AreEqual(count, resultsInTokyo.Count);
@@ -174,7 +185,7 @@ namespace Google.API.Search.Test
         [Test]
         public void SearchWithBigResultTest()
         {
-            var results = GwebSearcher.Search("a", 50);
+            var results = this.Client.Search("a", 50);
             Assert.Greater(results.Count, 0);
             Assert.LessOrEqual(results.Count, 50);
         }

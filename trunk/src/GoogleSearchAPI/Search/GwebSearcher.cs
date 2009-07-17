@@ -25,11 +25,13 @@
 
 namespace Google.API.Search
 {
+    using System;
     using System.Collections.Generic;
 
     /// <summary>
     /// Utility class for Google Web Search service.
     /// </summary>
+    [Obsolete("Use GwebSearchClient instead.")]
     public static class GwebSearcher
     {
         /// <summary>

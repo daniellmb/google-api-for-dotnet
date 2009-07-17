@@ -32,6 +32,14 @@ namespace Google.API.Search.Test
     [TestFixture]
     public class TestGwebSearcher
     {
+        private GwebSearchClient Client { get; set; }
+
+        [SetUp]
+        public void SetUp()
+        {
+            this.Client = new GwebSearchClient();
+        }
+
         [Test]
         public void GSearchTest()
         {
@@ -40,8 +48,9 @@ namespace Google.API.Search.Test
             var resultSize = ResultSize.small;
             var language = new Language();
             var safeLevel = SafeLevel.active;
+            var duplicateFilter = false;
 
-            var searchData = GwebSearcher.GSearch(keyword, start, resultSize, language, safeLevel);
+            var searchData = this.Client.GSearch(keyword, start, resultSize, null, null, safeLevel, language, duplicateFilter);
             Assert.IsNotNull(searchData);
             Assert.IsNotNull(searchData.Results);
             Assert.Greater(searchData.Results.Length, 0);
@@ -59,7 +68,7 @@ namespace Google.API.Search.Test
         public void SearchTest()
         {
             var count = 11;
-            var results = GwebSearcher.Search("Kobe bryant", count);
+            var results = this.Client.Search("Kobe bryant", count);
             Assert.IsNotNull(results);
             foreach (var result in results)
             {
@@ -80,7 +89,7 @@ namespace Google.API.Search.Test
         {
             var count = 50;
             var language = Language.Japanese;
-            var results = GwebSearcher.Search("Kobe bryant", count, language);
+            var results = this.Client.Search("Kobe bryant", count, language);
             Assert.IsNotNull(results);
             foreach (var result in results)
             {
@@ -98,7 +107,7 @@ namespace Google.API.Search.Test
             var language = Language.French;
             var safeLevel = SafeLevel.off;
 
-            var results = GwebSearcher.Search(keyword, count, language, safeLevel);
+            var results = this.Client.Search(keyword, count, language, safeLevel);
             Assert.IsNotNull(results);
             Assert.AreEqual(count, results.Count);
             foreach (var result in results)

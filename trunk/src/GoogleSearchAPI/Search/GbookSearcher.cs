@@ -25,11 +25,13 @@
 
 namespace Google.API.Search
 {
+    using System;
     using System.Collections.Generic;
 
     /// <summary>
     /// Utility class for Google Book Search service.
     /// </summary>
+    [Obsolete("Use GbookSearchClient instead.")]
     public static class GbookSearcher
     {
         /// <summary>

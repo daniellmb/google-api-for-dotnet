@@ -32,6 +32,14 @@ namespace Google.API.Search.Test
     [TestFixture]
     public class TestGlocalSearcher
     {
+        private GlocalSearchClient Client { get; set; }
+
+        [SetUp]
+        public void SetUp()
+        {
+            this.Client = new GlocalSearchClient();
+        }
+
         [Test]
         public void GSearchTest()
         {
@@ -44,7 +52,7 @@ namespace Google.API.Search.Test
             float? height = 0.1f;
             var resultType = LocalResultType.blended;
 
-            var searchData = GlocalSearcher.GSearch(
+            var searchData = this.Client.GSearch(
                 keyword, start, resultSize, latitude, longitude, width, height, resultType);
             Assert.IsNotNull(searchData);
             Assert.IsNotNull(searchData.Results);
@@ -65,7 +73,7 @@ namespace Google.API.Search.Test
             var count = 10;
             var latitude = -122.033558f;
             var longitude = 37.32366f;
-            var results = GlocalSearcher.Search(keyword, count, latitude, longitude);
+            var results = this.Client.Search(keyword, count, latitude, longitude);
             Assert.IsNotNull(results);
             ////Assert.AreEqual(count, results.Count);
             Assert.Greater(results.Count, 0);
@@ -86,7 +94,7 @@ namespace Google.API.Search.Test
             var latitude = -121.844237f;
             var longitude = 37.29234f;
             var resultType = LocalResultType.blended;
-            var results = GlocalSearcher.Search(keyword, count, latitude, longitude, resultType);
+            var results = this.Client.Search(keyword, count, latitude, longitude, resultType);
             Assert.IsNotNull(results);
             ////Assert.AreEqual(count, results.Count);
             Assert.Greater(results.Count, 0);
@@ -108,7 +116,7 @@ namespace Google.API.Search.Test
             var longitude = 48.85561f;
             var width = 10f;
             var height = 10f;
-            var results = GlocalSearcher.Search(keyword, count, latitude, longitude, width, height);
+            var results = this.Client.Search(keyword, count, latitude, longitude, width, height);
             Assert.IsNotNull(results);
             ////Assert.AreEqual(count, results.Count);
             Assert.Greater(results.Count, 0);
@@ -131,7 +139,7 @@ namespace Google.API.Search.Test
             var width = 10f;
             var height = 10f;
             var resultType = LocalResultType.kmlonly;
-            var results = GlocalSearcher.Search(keyword, count, latitude, longitude, width, height, resultType);
+            var results = this.Client.Search(keyword, count, latitude, longitude, width, height, resultType);
             Assert.IsNotNull(results);
             ////Assert.AreEqual(count, results.Count);
             Assert.Greater(results.Count, 0);

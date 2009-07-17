@@ -26,6 +26,23 @@
 namespace Google.API.Translate
 {
     using System;
+    using System.Runtime.InteropServices;
+
+    /// <summary>
+    /// Translate format.
+    /// </summary>
+    public enum TranslateFormat
+    {
+        /// <summary>
+        /// Text format. Default value.
+        /// </summary>
+        text = 0,
+
+        /// <summary>
+        /// Html format.
+        /// </summary>
+        html,
+    }
 
     /// <summary>
     /// The client for translate and detect.
@@ -56,8 +73,8 @@ namespace Google.API.Translate
         /// This is the c# code example.
         /// <code>
         /// string text = "Œ“œ≤ª∂≈‹≤Ω°£";
-        /// TranslateClient translateClient = new TranslateClient();
-        /// string translated = translateClient.Translate(text, Language.Chinese_Simplified, Language.English);
+        /// TranslateClient client = new TranslateClient();
+        /// string translated = client.Translate(text, Language.Chinese_Simplified, Language.English);
         /// Console.WriteLine(translated);
         /// // I like running.
         /// </code>
@@ -80,11 +97,11 @@ namespace Google.API.Translate
         /// This is the c# code example.
         /// <code>
         /// string text = GetYourHtmlString();
-        /// TranslateClient translateClient = new TranslateClient();
-        /// string translated = translateClient.Translate(text, Language.English, Language.French, TranslateFormat.html);
+        /// TranslateClient client = new TranslateClient();
+        /// string translated = client.Translate(text, Language.English, Language.French, TranslateFormat.html);
         /// </code>
         /// </example>
-        public string Translate(string text, Language from, Language to, TranslateFormat format)
+        public string Translate(string text, Language from, Language to, [Optional] TranslateFormat format)
         {
             if (from != Language.Unknown && !LanguageUtility.IsTranslatable(from))
             {
@@ -120,8 +137,8 @@ namespace Google.API.Translate
         /// <code>
         /// string text = "Je t'aime.";
         /// Language from;
-        /// TranslateClient translateClient = new TranslateClient();
-        /// string translated = translateClient.TranslateAndDetect(text, Language.English, out from);
+        /// TranslateClient client = new TranslateClient();
+        /// string translated = client.TranslateAndDetect(text, Language.English, out from);
         /// Console.WriteLine("\"{0}\" is \"{1}\" in {2}", text, translated, from);
         /// // "Je t'aime." is "I love you." in French.
         /// </code>
@@ -140,7 +157,7 @@ namespace Google.API.Translate
         /// <param name="from">The detected language of the original text.</param>
         /// <returns>The translate result.</returns>
         /// <exception cref="GoogleAPIException">Translate failed.</exception>
-        public string TranslateAndDetect(string text, Language to, TranslateFormat format, out Language from)
+        public string TranslateAndDetect(string text, Language to, [Optional] TranslateFormat format, out Language from)
         {
             if (!LanguageUtility.IsTranslatable(to))
             {
@@ -199,7 +216,8 @@ namespace Google.API.Translate
             var responseData =
                 this.GetResponseData<TranslateData, ILanguageService>(
                     service =>
-                    service.Translate(this.AcceptLanguage, this.ApiKey, text, from + '|' + to, format.GetStringIgnoreDefault()));
+                    service.Translate(
+                        this.AcceptLanguage, this.ApiKey, text, from + '|' + to, format.GetStringIgnoreDefault()));
 
             return responseData;
         }

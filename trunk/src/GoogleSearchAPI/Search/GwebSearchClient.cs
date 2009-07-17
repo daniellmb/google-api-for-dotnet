@@ -27,7 +27,11 @@ namespace Google.API.Search
 {
     using System;
     using System.Collections.Generic;
+    using System.Runtime.InteropServices;
 
+    /// <summary>
+    /// The client for web search.
+    /// </summary>
     public class GwebSearchClient : GSearchClient
     {
         /// <summary>
@@ -102,11 +106,11 @@ namespace Google.API.Search
         public IList<IWebResult> Search(
             string keyword,
             int resultCount,
-            string customSearchId,
-            string customSearchReference,
-            SafeLevel safeLevel,
-            Language language,
-            bool duplicateFilter)
+            [Optional] string customSearchId,
+            [Optional] string customSearchReference,
+            [Optional] SafeLevel safeLevel,
+            [Optional] Language language,
+            [Optional, DefaultParameterValue(true)] bool duplicateFilter)
         {
             if (keyword == null)
             {

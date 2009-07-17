@@ -25,11 +25,13 @@
 
 namespace Google.API.Search
 {
+    using System;
     using System.Collections.Generic;
 
     /// <summary>
     /// Utility class for Google Patent Search service.
     /// </summary>
+    [Obsolete("Use GpatentSearchClient instead.")]
     public static class GpatentSearcher
     {
         /// <summary>

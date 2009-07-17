@@ -27,7 +27,11 @@ namespace Google.API.Search
 {
     using System;
     using System.Collections.Generic;
+    using System.Runtime.InteropServices;
 
+    /// <summary>
+    /// The client for local search.
+    /// </summary>
     public class GlocalSearchClient : GSearchClient
     {
         /// <summary>
@@ -148,9 +152,9 @@ namespace Google.API.Search
             ResultSize resultSize,
             float latitude,
             float longitude,
-            float? width,
-            float? height,
-            LocalResultType resultType)
+            [Optional] float? width,
+            [Optional] float? height,
+            [Optional] LocalResultType resultType)
         {
             if (keyword == null)
             {

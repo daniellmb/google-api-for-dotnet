@@ -35,39 +35,6 @@ namespace Google.API
 
     internal static class RequestUtility
     {
-        private static Binding binding;
-
-        public static Binding Binding
-        {
-            get
-            {
-                if (binding == null)
-                {
-                    binding = CreateBinding();
-                }
-
-                return binding;
-            }
-        }
-
-        public static T GetResponseData<T, TService>(RequestCallback<ResultObject<T>, TService> request, string address)
-            where TService : class
-        {
-            return GetResponseData(request, new Uri(address));
-        }
-
-        public static T GetResponseData<T, TService>(RequestCallback<ResultObject<T>, TService> request, Uri address)
-            where TService : class
-        {
-            return GetResponseData(request, address, @"http://code.google.com/p/google-api-for-dotnet/");
-        }
-
-        public static T GetResponseData<T, TService>(
-            RequestCallback<ResultObject<T>, TService> request, Uri address, string referrer) where TService : class
-        {
-            return GetResponseData(request, address, Binding, referrer);
-        }
-
         public static T GetResponseData<T, TService>(
             RequestCallback<ResultObject<T>, TService> request, Uri address, Binding binding, string referrer)
             where TService : class

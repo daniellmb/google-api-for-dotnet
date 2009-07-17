@@ -32,6 +32,14 @@ namespace Google.API.Search.Test
     [TestFixture]
     public class TestGvideoSearcher
     {
+        private GvideoSearchClient Client { get; set; }
+
+        [SetUp]
+        public void SetUp()
+        {
+            this.Client = new GvideoSearchClient();
+        }
+
         [Test]
         public void GSearchTest()
         {
@@ -40,7 +48,7 @@ namespace Google.API.Search.Test
             var resultSize = ResultSize.large;
             var sortBy = SortType.relevance;
 
-            var searchData = GvideoSearcher.GSearch(keyword, start, resultSize, sortBy);
+            var searchData = this.Client.GSearch(keyword, start, resultSize, sortBy);
             Assert.IsNotNull(searchData);
             Assert.IsNotNull(searchData.Results);
             Assert.Greater(searchData.Results.Length, 0);
@@ -58,7 +66,7 @@ namespace Google.API.Search.Test
         {
             var keyword = "Metal Gear Solid";
             var count = 8;
-            var results = GvideoSearcher.Search(keyword, count);
+            var results = this.Client.Search(keyword, count);
             Assert.IsNotNull(results);
             Assert.AreEqual(count, results.Count);
             foreach (var result in results)
@@ -75,7 +83,7 @@ namespace Google.API.Search.Test
             var keyword = "and1";
             var count = 32;
             var sortBy = SortType.date;
-            var results = GvideoSearcher.Search(keyword, count, sortBy);
+            var results = this.Client.Search(keyword, count, sortBy);
             Assert.IsNotNull(results);
             Assert.AreEqual(count, results.Count);
             foreach (var result in results)

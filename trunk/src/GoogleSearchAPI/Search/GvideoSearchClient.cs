@@ -27,7 +27,11 @@ namespace Google.API.Search
 {
     using System;
     using System.Collections.Generic;
+    using System.Runtime.InteropServices;
 
+    /// <summary>
+    /// The client for video search.
+    /// </summary>
     public class GvideoSearchClient : GSearchClient
     {
         /// <summary>
@@ -70,7 +74,7 @@ namespace Google.API.Search
         /// }
         /// </code>
         /// </example>
-        public IList<IVideoResult> Search(string keyword, int resultCount, SortType sortBy)
+        public IList<IVideoResult> Search(string keyword, int resultCount, [Optional] SortType sortBy)
         {
             if (keyword == null)
             {

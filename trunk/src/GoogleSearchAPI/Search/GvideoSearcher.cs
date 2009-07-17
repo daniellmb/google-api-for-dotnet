@@ -25,11 +25,13 @@
 
 namespace Google.API.Search
 {
+    using System;
     using System.Collections.Generic;
 
     /// <summary>
     /// Utility class for Google Video Search service.
     /// </summary>
+    [Obsolete("Use GvideoSearchClient instead.")]
     public static class GvideoSearcher
     {
         /// <summary>

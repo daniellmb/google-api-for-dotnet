@@ -25,11 +25,13 @@
 
 namespace Google.API.Search
 {
+    using System;
     using System.Collections.Generic;
 
     /// <summary>
     /// Utility class for Google Local Search service.
     /// </summary>
+    [Obsolete("Use GlocalSearchClient instead.")]
     public static class GlocalSearcher
     {
         /// <summary>

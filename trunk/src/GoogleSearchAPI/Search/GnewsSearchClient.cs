@@ -27,7 +27,11 @@ namespace Google.API.Search
 {
     using System;
     using System.Collections.Generic;
+    using System.Runtime.InteropServices;
 
+    /// <summary>
+    /// The client for news search.
+    /// </summary>
     public class GnewsSearchClient : GSearchClient
     {
         /// <summary>
@@ -122,7 +126,14 @@ namespace Google.API.Search
             return this.Search(keyword, resultCount, geo, sortBy, null, null, null);
         }
 
-        public IList<INewsResult> Search(string keyword, int resultCount, string geo, SortType sortBy, string quoteId, string topic, string edition)
+        public IList<INewsResult> Search(
+            string keyword,
+            int resultCount,
+            [Optional] string geo,
+            [Optional] SortType sortBy,
+            [Optional] string quoteId,
+            [Optional] string topic,
+            [Optional] string edition)
         {
             if (keyword == null && string.IsNullOrEmpty(geo))
             {
@@ -186,16 +197,34 @@ namespace Google.API.Search
         }
 
         internal SearchData<GnewsResult> GSearch(
-            string keyword, int start, ResultSize resultSize, string geo, SortType sortBy, string quoteId, string topic, string edition)
+            string keyword,
+            int start,
+            ResultSize resultSize,
+            string geo,
+            SortType sortBy,
+            string quoteId,
+            string topic,
+            string edition)
         {
-            if (keyword == null && string.IsNullOrEmpty(geo))
+            if (keyword == null && string.IsNullOrEmpty(geo) && string.IsNullOrEmpty(topic))
             {
                 throw new ArgumentNullException("keyword");
             }
 
             var responseData =
                 this.GetResponseData(
-                    service => service.NewsSearch(this.AcceptLanguage, this.ApiKey, keyword, resultSize.ToString(), start, sortBy.GetString(), geo, quoteId, topic, edition));
+                    service =>
+                    service.NewsSearch(
+                        this.AcceptLanguage,
+                        this.ApiKey,
+                        keyword,
+                        resultSize.ToString(),
+                        start,
+                        sortBy.GetString(),
+                        geo,
+                        quoteId,
+                        topic,
+                        edition));
             return responseData;
         }
     }

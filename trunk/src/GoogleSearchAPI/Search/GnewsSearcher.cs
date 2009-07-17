@@ -31,6 +31,7 @@ namespace Google.API.Search
     /// <summary>
     /// Utility class for Google News Search service.
     /// </summary>
+    [Obsolete("Use GnewsSearchClient instead.")]
     public static class GnewsSearcher
     {
         /// <summary>
