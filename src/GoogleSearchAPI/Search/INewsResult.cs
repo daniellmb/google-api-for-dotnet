@@ -31,32 +31,32 @@ namespace Google.API.Search
     public interface INewsResult : INewsResultItem
     {
         /// <summary>
-        /// Get the URL points to a landing page that points to all of the related stories. When a news result has a set of related stories, this URL is available and non-null. Otherwise, it is null.
+        /// Gets the URL points to a landing page that points to all of the related stories. When a news result has a set of related stories, this URL is available and non-null. Otherwise, it is null.
         /// </summary>
         string ClusterUrl { get; }
 
         /// <summary>
-        /// Get a snippet of content from the news story associated with this search result.
+        /// Gets a snippet of content from the news story associated with this search result.
         /// </summary>
         string Content { get; }
 
         /// <summary>
-        /// Get a set of closely related stories. If there is no related story it will return null.
+        /// Gets a set of closely related stories. If there is no related story it will return null.
         /// </summary>
         INewsResultItem[] RelatedStories { get; }
 
         /// <summary>
-        /// Get a image that represents the cluster of news articles related to this result. If there is no good image for this result it will return null.
+        /// Gets a image that represents the cluster of news articles related to this result. If there is no good image for this result it will return null.
         /// </summary>
         INewsImage Image { get; }
 
         /// <summary>
-        /// Get the name of the person that the quote is attributed to. Note, you can get the author only when this is a quote. 
+        /// Gets the name of the person that the quote is attributed to. Note, you can get the author only when this is a quote. 
         /// </summary>
         string Author { get; }
 
         /// <summary>
-        /// Get whether it is a quote or a normal news.
+        /// Gets whether it is a quote or a normal news.
         /// </summary>
         bool IsQuote { get; }
     }

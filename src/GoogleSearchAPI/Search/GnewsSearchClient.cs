@@ -41,16 +41,6 @@ namespace Google.API.Search
         /// <param name="resultCount">The count of result itmes.</param>
         /// <returns>The result items.</returns>
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
-        /// <example>
-        /// This is the c# code example.
-        /// <code>
-        /// IList&lt;INewsResult&gt; results = GnewsSearcher.Search("Olympic", 16);
-        /// foreach(INewsResult result in results)
-        /// {
-        ///     Console.WriteLine("[{0}, {1} - {2:d}]{3}", result.Publisher, result.Location, result.PublishedDate, result.Title);
-        /// }
-        /// </code>
-        /// </example>
         public IList<INewsResult> Search(string keyword, int resultCount)
         {
             return this.Search(keyword, resultCount, null, new SortType());
@@ -64,16 +54,6 @@ namespace Google.API.Search
         /// <param name="sortBy">The way to order results.</param>
         /// <returns>The result items.</returns>
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
-        /// <example>
-        /// This is the c# code example.
-        /// <code>
-        /// IList&lt;INewsResult&gt; results = GnewsSearcher.Search("Olympic", 16, SortType.date);
-        /// foreach(INewsResult result in results)
-        /// {
-        ///     Console.WriteLine("[{0}, {1} - {2:d}]{3}", result.Publisher, result.Location, result.PublishedDate, result.Title);
-        /// }
-        /// </code>
-        /// </example>
         public IList<INewsResult> Search(string keyword, int resultCount, SortType sortBy)
         {
             return this.Search(keyword, resultCount, null, sortBy);
@@ -87,16 +67,6 @@ namespace Google.API.Search
         /// <param name="geo">A particular location of the news. You must supply either a city, state, country, or zip code as in "Santa Barbara" or "British Columbia" or "Peru" or "93108".</param>
         /// <returns>The result items.</returns>
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
-        /// <example>
-        /// This is the c# code example.
-        /// <code>
-        /// IList&lt;INewsResult&gt; results = GnewsSearcher.Search("Olympic", 16, "Beijing China");
-        /// foreach(INewsResult result in results)
-        /// {
-        ///     Console.WriteLine("[{0}, {1} - {2:d}]{3}", result.Publisher, result.Location, result.PublishedDate, result.Title);
-        /// }
-        /// </code>
-        /// </example>
         public IList<INewsResult> Search(string keyword, int resultCount, string geo)
         {
             return this.Search(keyword, resultCount, geo, new SortType());
@@ -111,21 +81,23 @@ namespace Google.API.Search
         /// <param name="sortBy">The way to order results.</param>
         /// <returns>The result items.</returns>
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
-        /// <example>
-        /// This is the c# code example.
-        /// <code>
-        /// IList&lt;INewsResult&gt; results = GnewsSearcher.Search("Olympic", 16, "Beijing China", SortType.date);
-        /// foreach(INewsResult result in results)
-        /// {
-        ///     Console.WriteLine("[{0}, {1} - {2:d}]{3}", result.Publisher, result.Location, result.PublishedDate, result.Title);
-        /// }
-        /// </code>
-        /// </example>
         public IList<INewsResult> Search(string keyword, int resultCount, string geo, SortType sortBy)
         {
             return this.Search(keyword, resultCount, geo, sortBy, null, null, null);
         }
 
+        /// <summary>
+        /// Search news.
+        /// </summary>
+        /// <param name="keyword">The keyword.</param>
+        /// <param name="resultCount">The count of result itmes.</param>
+        /// <param name="geo">A particular location of the news. You must supply either a city, state, country, or zip code as in "Santa Barbara" or "British Columbia" or "Peru" or "93108".</param>
+        /// <param name="sortBy">The way to order results.</param>
+        /// <param name="quoteId">This optional argument tells the news search system to scope search results to include only quote typed results.</param>
+        /// <param name="topic">This optional argument tells the news search system to scope search results to a particular topic.</param>
+        /// <param name="edition">This optional argument tells the news search system which edition of news to pull results from.</param>
+        /// <returns>The result items.</returns>
+        /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
         public IList<INewsResult> Search(
             string keyword,
             int resultCount,
@@ -153,16 +125,6 @@ namespace Google.API.Search
         /// <param name="resultCount">The count of result itmes.</param>
         /// <returns>The result items.</returns>
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
-        /// <example>
-        /// This is the c# code example.
-        /// <code>
-        /// IList&lt;INewsResult&gt; results = GnewsSearcher.SearchLocal("Tokyo", 16);
-        /// foreach(INewsResult result in results)
-        /// {
-        ///     Console.WriteLine("[{0}, {1} - {2:d}]{3}", result.Publisher, result.Location, result.PublishedDate, result.Title);
-        /// }
-        /// </code>
-        /// </example>
         public IList<INewsResult> SearchLocal(string geo, int resultCount)
         {
             return this.SearchLocal(geo, resultCount, new SortType());
@@ -176,16 +138,6 @@ namespace Google.API.Search
         /// <param name="sortBy">The way to order results.</param>
         /// <returns>The result items.</returns>
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
-        /// <example>
-        /// This is the c# code example.
-        /// <code>
-        /// IList&lt;INewsResult&gt; results = GnewsSearcher.Search("Tokyo", 16, SortType.date);
-        /// foreach(INewsResult result in results)
-        /// {
-        ///     Console.WriteLine("[{0}, {1} - {2:d}]{3}", result.Publisher, result.Location, result.PublishedDate, result.Title);
-        /// }
-        /// </code>
-        /// </example>
         public IList<INewsResult> SearchLocal(string geo, int resultCount, SortType sortBy)
         {
             if (geo == null)

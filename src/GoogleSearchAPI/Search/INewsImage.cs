@@ -31,22 +31,22 @@ namespace Google.API.Search
     public interface INewsImage
     {
         /// <summary>
-        /// Get the the URL of the result.
+        /// Gets the the URL of the result.
         /// </summary>
         string Url { get; }
 
         /// <summary>
-        /// Get the URL of the page containing the image.
+        /// Gets the URL of the page containing the image.
         /// </summary>
         string OriginalContextUrl { get; }
 
         /// <summary>
-        /// Get the name of the publisher of the image.
+        /// Gets the name of the publisher of the image.
         /// </summary>
         string Publisher { get; }
 
         /// <summary>
-        /// Get a thumbnail image.
+        /// Gets a thumbnail image.
         /// </summary>
         ITbImage TbImage { get; }
     }

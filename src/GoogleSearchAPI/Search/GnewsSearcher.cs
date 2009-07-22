@@ -176,12 +176,5 @@ namespace Google.API.Search
 
             return Search(null, resultCount, geo, sortBy);
         }
-
-        internal static SearchData<GnewsResult> GSearch(
-            string keyword, int start, ResultSize resultSize, string geo, SortType sortBy)
-        {
-            var client = new GnewsSearchClient();
-            return client.GSearch(keyword, start, resultSize, geo, sortBy, null, null, null);
-        }
     }
 }

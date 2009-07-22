@@ -31,47 +31,47 @@ namespace Google.API.Search
     public interface ILocalResult
     {
         /// <summary>
-        /// Get the title.
+        /// Gets the title.
         /// </summary>
         string Title { get; }
 
         /// <summary>
-        /// Get the the URL of the result.
+        /// Gets the the URL of the result.
         /// </summary>
         string Url { get; }
 
         /// <summary>
-        /// Get the latitude value of the result.
+        /// Gets the latitude value of the result.
         /// </summary>
         float Latitude { get; }
 
         /// <summary>
-        /// Get the longitude value of the result.
+        /// Gets the longitude value of the result.
         /// </summary>
         float Longitude { get; }
 
         /// <summary>
-        /// Get the street address and number for the given result.
+        /// Gets the street address and number for the given result.
         /// </summary>
         string StreetAddress { get; }
 
         /// <summary>
-        /// Get the city name for the result.
+        /// Gets the city name for the result.
         /// </summary>
         string City { get; }
 
         /// <summary>
-        /// Get the region name for the result (e.g., in the us, this is typically a state abbreviation, in other regions it might be a province, etc.).
+        /// Gets the region name for the result (e.g., in the us, this is typically a state abbreviation, in other regions it might be a province, etc.).
         /// </summary>
         string Region { get; }
 
         /// <summary>
-        /// Get the country name for the result.
+        /// Gets the country name for the result.
         /// </summary>
         string Country { get; }
 
         /// <summary>
-        /// Get an array of phone numbers.
+        /// Gets an array of phone numbers.
         /// </summary>
         IPhoneNumber[] PhoneNumbers { get; }
 
@@ -81,27 +81,27 @@ namespace Google.API.Search
         string[] AddressLines { get; }
 
         /// <summary>
-        /// Get a url that can be used to provide driving directions from the center of the set of search results to this search result.
+        /// Gets a url that can be used to provide driving directions from the center of the set of search results to this search result.
         /// </summary>
         string DirectionUrl { get; }
 
         /// <summary>
-        /// Get a url that can be used to provide driving directions from a user specified location to this search result.
+        /// Gets a url that can be used to provide driving directions from a user specified location to this search result.
         /// </summary>
         string ToHereDirectionUrl { get; }
 
         /// <summary>
-        /// Get a url that can be used to provide driving directions from this search result to a user specified location.
+        /// Gets a url that can be used to provide driving directions from this search result to a user specified location.
         /// </summary>
         string FromHereDirectionUrl { get; }
 
         /// <summary>
-        /// Get a static map image representation of the current result.
+        /// Gets a static map image representation of the current result.
         /// </summary>
         ITbImage StaticMap { get; }
 
         /// <summary>
-        /// Get the type of this result which can either be "local" in the case of a local business listing or geocode result, or "kml" in the case of a KML listing.
+        /// Gets the type of this result which can either be "local" in the case of a local business listing or geocode result, or "kml" in the case of a KML listing.
         /// </summary>
         string ListingType { get; }
 
@@ -111,7 +111,7 @@ namespace Google.API.Search
         string Content { get; }
 
         /////// <summary>
-        /////// Get a postal code of this result.
+        /////// Gets a postal code of this result.
         /////// </summary>
         ////string PostalCode { get; }
     }

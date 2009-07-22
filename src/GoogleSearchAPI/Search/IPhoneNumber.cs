@@ -31,12 +31,12 @@ namespace Google.API.Search
     public interface IPhoneNumber
     {
         /// <summary>
-        /// Get the of this phone number. It can be one of "main", "fax", "mobile", "data", or "".
+        /// Gets the of this phone number. It can be one of "main", "fax", "mobile", "data", or "".
         /// </summary>
         string Type { get; }
 
         /// <summary>
-        /// Get the phone number.
+        /// Gets the phone number.
         /// </summary>
         string Number { get; }
     }

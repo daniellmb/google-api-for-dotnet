@@ -79,12 +79,5 @@ namespace Google.API.Search
             var client = new GvideoSearchClient();
             return client.Search(keyword, resultCount, sortBy);
         }
-
-        internal static SearchData<GvideoResult> GSearch(
-            string keyword, int start, ResultSize resultSize, SortType sortBy)
-        {
-            var client = new GvideoSearchClient();
-            return client.GSearch(keyword, start, resultSize, sortBy);
-        }
     }
 }

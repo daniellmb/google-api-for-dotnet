@@ -31,27 +31,27 @@ namespace Google.API.Search
     public interface IWebResult
     {
         /// <summary>
-        /// Get the url.
+        /// Gets the url.
         /// </summary>
         string Url { get; }
 
         /// <summary>
-        /// Get a shortened version of the URL associated with the result.
+        /// Gets a shortened version of the URL associated with the result.
         /// </summary>
         string VisibleUrl { get; }
 
         /// <summary>
-        /// Get a url to google's cached version of the page responsible for producting this result. This property may be null indicating that there is no cache, and it might be out of date in cases where the search result has been saved and in the mean time, the cache has gone stale. For best results, this property should not be persisted.
+        /// Gets a url to google's cached version of the page responsible for producting this result. This property may be null indicating that there is no cache, and it might be out of date in cases where the search result has been saved and in the mean time, the cache has gone stale. For best results, this property should not be persisted.
         /// </summary>
         string CacheUrl { get; }
 
         /// <summary>
-        /// Get the title.
+        /// Gets the title.
         /// </summary>
         string Title { get; }
 
         /// <summary>
-        /// Get a brief snippet of information from the page associated with the search result.
+        /// Gets a brief snippet of information from the page associated with the search result.
         /// </summary>
         string Content { get; }
     }

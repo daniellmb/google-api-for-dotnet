@@ -26,7 +26,6 @@
 namespace Google.API
 {
     using System;
-    using System.ServiceModel;
     using System.ServiceModel.Channels;
 
     /// <summary>
@@ -42,19 +41,22 @@ namespace Google.API
         }
 
         /// <summary>
-        /// This optional argument supplies the host language of the application making the request. If this argument is not present then the system will choose a value based on the value of the <b>Accept-Language</b> http header. If this header is not present, a value of <b>en</b> is assumed.
+        /// This optional argument supplies the host language of the application making the request.
+        /// If this argument is not present then the system will choose a value based on the value of the <b>Accept-Language</b> http header. If this header is not present, a value of <b>en</b> is assumed.
         /// </summary>
         /// <value>The accept language.</value>
         public string AcceptLanguage { get; set; }
 
         /// <summary>
-        /// This optional argument supplies the application's key. If specified, it must be a valid key associated with your site which is validated against the passed referer header. The advantage of supplying a key is so that we can identify and contact you should something go wrong with your application. Without a key, we will still take the same appropriate measures on our side, but we will not be able to contact you. It is definitely best for you to pass a key.
+        /// This optional argument supplies the application's key.
+        /// If specified, it must be a valid key associated with your site which is validated against the passed referer header. The advantage of supplying a key is so that we can identify and contact you should something go wrong with your application. Without a key, we will still take the same appropriate measures on our side, but we will not be able to contact you. It is definitely best for you to pass a key.
         /// </summary>
         /// <value>The API key.</value>
         public string ApiKey { get; set; }
 
         /// <summary>
-        /// Gets or sets the http referrer header. Applications MUST always include a valid and accurate http referer header in their requests. The default value is <a href ="http://code.google.com/p/google-api-for-dotnet/">http://code.google.com/p/google-api-for-dotnet/</a>.
+        /// Gets or sets the http referrer header. Applications MUST always include a valid and accurate http referer header in their requests.
+        /// The default value is <a href ="http://code.google.com/p/google-api-for-dotnet/">http://code.google.com/p/google-api-for-dotnet/</a>.
         /// </summary>
         /// <value>The referrer.</value>
         public string Referrer { get; set; }

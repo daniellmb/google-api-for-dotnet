@@ -31,47 +31,47 @@ namespace Google.API.Search
     public interface IImageResult
     {
         /// <summary>
-        /// Get a hashcode of the image.
+        /// Gets a hashcode of the image.
         /// </summary>
         string ImageId { get; }
 
         /// <summary>
-        /// Get the title of the image.
+        /// Gets the title of the image.
         /// </summary>
         string Title { get; }
 
         /// <summary>
-        /// Get the the URL of the result.
+        /// Gets the the URL of the result.
         /// </summary>
         string Url { get; }
 
         /// <summary>
-        /// Get a shortened version of the URL associated with the result.
+        /// Gets a shortened version of the URL associated with the result.
         /// </summary>
         string VisibleUrl { get; }
 
         /// <summary>
-        /// Get the URL of the page containing the image.
+        /// Gets the URL of the page containing the image.
         /// </summary>
         string OriginalContextUrl { get; }
 
         /// <summary>
-        /// Get the width of the image in pixels.
+        /// Gets the width of the image in pixels.
         /// </summary>
         int Width { get; }
 
         /// <summary>
-        /// Get the height of the image in pixels.
+        /// Gets the height of the image in pixels.
         /// </summary>
         int Height { get; }
 
         /// <summary>
-        /// Get a thumbnail image.
+        /// Gets a thumbnail image.
         /// </summary>
         ITbImage TbImage { get; }
 
         /// <summary>
-        /// Get a brief snippet of information from the page associated with the search result.
+        /// Gets a brief snippet of information from the page associated with the search result.
         /// </summary>
         string Content { get; }
     }
