@@ -41,16 +41,6 @@ namespace Google.API.Search
         /// <param name="resultCount">The count of result itmes.</param>
         /// <returns>The result items.</returns>
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
-        /// <example>
-        /// This is the c# code example.
-        /// <code>
-        /// IList&lt;IBookResult&gt; results = GbookSearcher.Search("Grimm's Fairy Tales", 10);
-        /// foreach(IBookResult result in results)
-        /// {
-        ///     Console.WriteLine("{0} [by {1} - {2} - {3} pages] {4}", result.Title, result.Authors, result.PublishedYear, result.PageCount, result.BookId);
-        /// }
-        /// </code>
-        /// </example>
         public IList<IBookResult> Search(string keyword, int resultCount)
         {
             return this.Search(keyword, resultCount, false, null);
@@ -64,16 +54,6 @@ namespace Google.API.Search
         /// <param name="fullViewOnly">Whether to restrict the search to "full view" books.</param>
         /// <returns>The result items.</returns>
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
-        /// <example>
-        /// This is the c# code example.
-        /// <code>
-        /// IList&lt;IBookResult&gt; results = GbookSearcher.Search("love", 4, true);
-        /// foreach(IBookResult result in results)
-        /// {
-        ///     Console.WriteLine("{0} [by {1} - {2} - {3} pages] {4}", result.Title, result.Authors, result.PublishedYear, result.PageCount, result.BookId);
-        /// }
-        /// </code>
-        /// </example>
         public IList<IBookResult> Search(string keyword, int resultCount, bool fullViewOnly)
         {
             return this.Search(keyword, resultCount, fullViewOnly, null);
@@ -88,16 +68,6 @@ namespace Google.API.Search
         /// <param name="library">The specified user-defined library. If it not null, the search will restrict the search to this library.</param>
         /// <returns>The result items.</returns>
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
-        /// <example>
-        /// This is the c# code example.
-        /// <code>
-        /// IList&lt;IBookResult&gt; results = GbookSearcher.Search("Cookbook", 32, fales, null);
-        /// foreach(IBookResult result in results)
-        /// {
-        ///     Console.WriteLine("{0} [by {1} - {2} - {3} pages] {4}", result.Title, result.Authors, result.PublishedYear, result.PageCount, result.BookId);
-        /// }
-        /// </code>
-        /// </example>
         public IList<IBookResult> Search(string keyword, int resultCount, [Optional] bool fullViewOnly, [Optional] string library)
         {
             if (keyword == null)

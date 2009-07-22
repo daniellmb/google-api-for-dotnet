@@ -146,19 +146,5 @@ namespace Google.API.Search
             var client = new GlocalSearchClient();
             return client.Search(keyword, resultCount, latitude, longitude, width, height, resultType);
         }
-
-        internal static LocalSearchData GSearch(
-            string keyword,
-            int start,
-            ResultSize resultSize,
-            float latitude,
-            float longitude,
-            float? width,
-            float? height,
-            LocalResultType resultType)
-        {
-            var client = new GlocalSearchClient();
-            return client.GSearch(keyword, start, resultSize, latitude, longitude, width, height, resultType);
-        }
     }
 }

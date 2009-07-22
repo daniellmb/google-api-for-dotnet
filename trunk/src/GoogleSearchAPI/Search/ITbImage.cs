@@ -31,17 +31,17 @@ namespace Google.API.Search
     public interface ITbImage
     {
         /// <summary>
-        /// Get the url of the thumbnail image.
+        /// Gets the url of the thumbnail image.
         /// </summary>
         string Url { get; }
 
         /// <summary>
-        /// Get the width of the thumbnail image.
+        /// Gets the width of the thumbnail image.
         /// </summary>
         int Width { get; }
 
         /// <summary>
-        /// Get the height of the thumbnail image.
+        /// Gets the height of the thumbnail image.
         /// </summary>
         int Height { get; }
     }

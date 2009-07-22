@@ -139,12 +139,5 @@ namespace Google.API.Search
             var client = new GpatentSearchClient();
             return client.Search(keyword, resultCount, issuedOnly, filedOnly, sortBy);
         }
-
-        internal static SearchData<GpatentResult> GSearch(
-            string keyword, int start, ResultSize resultSize, bool issuedOnly, bool filedOnly, SortType sortBy)
-        {
-            var client = new GpatentSearchClient();
-            return client.GSearch(keyword, start, resultSize, issuedOnly, filedOnly, sortBy);
-        }
     }
 }

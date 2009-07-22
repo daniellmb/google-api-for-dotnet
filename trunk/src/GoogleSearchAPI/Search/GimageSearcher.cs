@@ -247,30 +247,5 @@ namespace Google.API.Search
             return client.Search(
                 keyword, resultCount, safeLevel, imageSize, colorization, new ImageColor(), imageType, fileType, site);
         }
-
-        internal static SearchData<GimageResult> GSearch(
-            string keyword,
-            int start,
-            ResultSize resultSize,
-            SafeLevel safeLevel,
-            ImageSize imageSize,
-            Colorization colorization,
-            ImageType imageType,
-            FileType fileType,
-            string searchSite)
-        {
-            var client = new GimageSearchClient();
-            return client.GSearch(
-                keyword,
-                start,
-                resultSize,
-                safeLevel,
-                imageSize,
-                colorization,
-                new ImageColor(),
-                imageType,
-                fileType,
-                searchSite);
-        }
     }
 }

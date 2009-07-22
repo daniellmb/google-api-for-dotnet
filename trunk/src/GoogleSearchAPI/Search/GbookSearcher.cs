@@ -103,12 +103,5 @@ namespace Google.API.Search
             var client = new GbookSearchClient();
             return client.Search(keyword, resultCount, fullViewOnly, library);
         }
-
-        internal static SearchData<GbookResult> GSearch(
-            string keyword, int start, ResultSize resultSize, bool fullViewOnly, string library)
-        {
-            var client = new GbookSearchClient();
-            return client.GSearch(keyword, start, resultSize, fullViewOnly, library);
-        }
     }
 }

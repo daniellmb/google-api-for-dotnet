@@ -33,27 +33,27 @@ namespace Google.API.Search
     public interface INewsResultItem
     {
         /// <summary>
-        /// Get the url.
+        /// Gets the url.
         /// </summary>
         string Url { get; }
 
         /// <summary>
-        /// Get the title.
+        /// Gets the title.
         /// </summary>
         string Title { get; }
 
         /// <summary>
-        /// Get the name of the publisher of the news story.
+        /// Gets the name of the publisher of the news story.
         /// </summary>
         string Publisher { get; }
 
         /// <summary>
-        /// Get the location of the news story. This is a list of locations in most specific to least specific order where the components are seperated by ",". Note, there may only be one element in the list... A typical value for this property is "Edinburgh,Scotland,UK" or possibly "USA".
+        /// Gets the location of the news story. This is a list of locations in most specific to least specific order where the components are seperated by ",". Note, there may only be one element in the list... A typical value for this property is "Edinburgh,Scotland,UK" or possibly "USA".
         /// </summary>
         string Location { get; }
 
         /// <summary>
-        /// Get the published date of the news story referenced by this search result.
+        /// Gets the published date of the news story referenced by this search result.
         /// </summary>
         DateTime PublishedDate { get; }
 

@@ -33,42 +33,42 @@ namespace Google.API.Search
     public interface IPatentResult
     {
         /// <summary>
-        /// Get the title of the result.
+        /// Gets the title of the result.
         /// </summary>
         string Title { get; }
 
         /// <summary>
-        /// Get a snippet style description of the patent.
+        /// Gets a snippet style description of the patent.
         /// </summary>
         string Content { get; }
 
         /// <summary>
-        /// Get the URL of the result.
+        /// Gets the URL of the result.
         /// </summary>
         string Url { get; }
 
         /// <summary>
-        /// Get the application filing date of the patent.
+        /// Gets the application filing date of the patent.
         /// </summary>
         DateTime ApplicationDate { get; }
 
         /// <summary>
-        /// Get the patent number for issued patents, and the application number for filed, but not yet issued patents.
+        /// Gets the patent number for issued patents, and the application number for filed, but not yet issued patents.
         /// </summary>
         string PatentNumber { get; }
 
         /// <summary>
-        /// Get the status of the patent which can either be "filed" for filed, but not yet issued patents, or "issued" for issued patents.
+        /// Gets the status of the patent which can either be "filed" for filed, but not yet issued patents, or "issued" for issued patents.
         /// </summary>
         string PatentStatus { get; }
 
         /// <summary>
-        /// Get the assignee of the patent.
+        /// Gets the assignee of the patent.
         /// </summary>
         string Assignee { get; }
 
         /// <summary>
-        /// Get a thumbnail image which visually represents the patent.
+        /// Gets a thumbnail image which visually represents the patent.
         /// </summary>
         ITbImage TbImage { get; }
     }

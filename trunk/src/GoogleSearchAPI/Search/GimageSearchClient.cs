@@ -41,21 +41,6 @@ namespace Google.API.Search
         /// <param name="resultCount">The count of result itmes.</param>
         /// <returns>The result itmes.</returns>
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
-        /// <example>
-        /// This is the c# code example.
-        /// <code>
-        /// IList&lt;IImageResult&gt; results = GimageSearcher.Search("bra", 6);
-        /// foreach(IImageResult result in results)
-        /// {
-        ///     return string.Format("{0}" + Environment.NewLine + "{1} x {2} - {3}" + Environment.NewLine + "{4}",
-        ///                          result.Content,
-        ///                          result.Width,
-        ///                          result.Height,
-        ///                          result.Title,
-        ///                          result.VisibleUrl);
-        /// }
-        /// </code>
-        /// </example>
         public IList<IImageResult> Search(string keyword, int resultCount)
         {
             return this.Search(
@@ -77,21 +62,6 @@ namespace Google.API.Search
         /// <param name="site">The specified domain. It will restrict the search to images within this domain.e.g., <c>photobucket.com</c>.</param>
         /// <returns>The result itmes.</returns>
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
-        /// <example>
-        /// This is the c# code example.
-        /// <code>
-        /// IList&lt;IImageResult&gt; results = GimageSearcher.Search("iPhone", 6, "yahoo.com");
-        /// foreach(IImageResult result in results)
-        /// {
-        ///     return string.Format("{0}" + Environment.NewLine + "{1} x {2} - {3}" + Environment.NewLine + "{4}",
-        ///                          result.Content,
-        ///                          result.Width,
-        ///                          result.Height,
-        ///                          result.Title,
-        ///                          result.VisibleUrl);
-        /// }
-        /// </code>
-        /// </example>
         public IList<IImageResult> Search(string keyword, int resultCount, string site)
         {
             return this.Search(
@@ -116,28 +86,6 @@ namespace Google.API.Search
         /// <param name="fileType">The specified file type of image.</param>
         /// <returns>The result itmes.</returns>
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
-        /// <example>
-        /// This is the c# code example.
-        /// <code>
-        /// string keyword = "American Idol";
-        /// int count = 32;
-        /// ImageSize imageSize = ImageSize.medium;
-        /// Colorization colorization = Colorization.gray;
-        /// ImageType imageType = ImageType.face;
-        /// FileType fileType = FileType.gif;
-        ///
-        /// IList&lt;IImageResult&gt; results = GimageSearcher.Search(keyword, count, imageSize, colorization, imageType, fileType);
-        /// foreach(IImageResult result in results)
-        /// {
-        ///     return string.Format("{0}" + Environment.NewLine + "{1} x {2} - {3}" + Environment.NewLine + "{4}",
-        ///                          result.Content,
-        ///                          result.Width,
-        ///                          result.Height,
-        ///                          result.Title,
-        ///                          result.VisibleUrl);
-        /// }
-        /// </code>
-        /// </example>
         public IList<IImageResult> Search(
             string keyword,
             int resultCount,
@@ -162,29 +110,6 @@ namespace Google.API.Search
         /// <param name="site">The specified domain. It will restrict the search to images within this domain.e.g., <c>photobucket.com</c>.</param>
         /// <returns>The result itmes.</returns>
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
-        /// <example>
-        /// This is the c# code example.
-        /// <code>
-        /// string keyword = "½ð³ÇÎä";
-        /// int count = 25;
-        /// ImageSize imageSize = ImageSize.all;
-        /// Colorization colorization = Colorization.color;
-        /// ImageType imageType = ImageType.all;
-        /// FileType fileType = FileType.jpg;
-        /// string site = "sina.com";
-        ///
-        /// IList&lt;IImageResult&gt; results = GimageSearcher.Search(keyword, count, imageSize, colorization, imageType, fileType, site);
-        /// foreach(IImageResult result in results)
-        /// {
-        ///     return string.Format("{0}" + Environment.NewLine + "{1} x {2} - {3}" + Environment.NewLine + "{4}",
-        ///                          result.Content,
-        ///                          result.Width,
-        ///                          result.Height,
-        ///                          result.Title,
-        ///                          result.VisibleUrl);
-        /// }
-        /// </code>
-        /// </example>
         public IList<IImageResult> Search(
             string keyword,
             int resultCount,
@@ -211,30 +136,6 @@ namespace Google.API.Search
         /// <param name="site">The specified domain. It will restrict the search to images within this domain.e.g., <c>photobucket.com</c>.</param>
         /// <returns>The result itmes.</returns>
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
-        /// <example>
-        /// This is the c# code example.
-        /// <code>
-        /// string keyword = "Virgin Islands";
-        /// int count = 15;
-        /// ImageSize imageSize = ImageSize.xxlarge;
-        /// Colorization colorization = Colorization.all;
-        /// ImageType imageType = ImageType.all;
-        /// FileType fileType = FileType.bmp;
-        /// string site = null;
-        /// SafeLevel safeLevel = SafeLevel.active;
-        ///
-        /// IList&lt;IImageResult&gt; results = GimageSearcher.Search(keyword, count, imageSize, colorization, imageType, fileType, site, safeLevel);
-        /// foreach(IImageResult result in results)
-        /// {
-        ///     return string.Format("{0}" + Environment.NewLine + "{1} x {2} - {3}" + Environment.NewLine + "{4}",
-        ///                          result.Content,
-        ///                          result.Width,
-        ///                          result.Height,
-        ///                          result.Title,
-        ///                          result.VisibleUrl);
-        /// }
-        /// </code>
-        /// </example>
         public IList<IImageResult> Search(
             string keyword,
             int resultCount,
@@ -249,6 +150,20 @@ namespace Google.API.Search
                 keyword, resultCount, safeLevel, imageSize, colorization, new ImageColor(), imageType, fileType, site);
         }
 
+        /// <summary>
+        /// Search images.
+        /// </summary>
+        /// <param name="keyword">The keyword.</param>
+        /// <param name="resultCount">The count of result itmes.</param>
+        /// <param name="safeLevel">The search safety level.</param>
+        /// <param name="imageSize">The size of image.</param>
+        /// <param name="colorization">The specified colorization of image.</param>
+        /// <param name="color">The specified color of image.</param>
+        /// <param name="imageType">The special type of image.</param>
+        /// <param name="fileType">The specified file type of image.</param>
+        /// <param name="site">The specified domain. It will restrict the search to images within this domain.e.g., <c>photobucket.com</c>.</param>
+        /// <returns>The result itmes.</returns>
+        /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
         public IList<IImageResult> Search(
             string keyword,
             int resultCount,

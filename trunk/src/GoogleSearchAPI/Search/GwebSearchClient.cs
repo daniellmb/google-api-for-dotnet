@@ -41,16 +41,6 @@ namespace Google.API.Search
         /// <param name="resultCount">The count of result itmes.</param>
         /// <returns>The result items.</returns>
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
-        /// <example>
-        /// This is the c# code example.
-        /// <code>
-        /// IList&lt;IWebResult&gt; results = GwebSearcher.Search("Google API for .NET", 8);
-        /// foreach(IWebResult result in results)
-        /// {
-        ///     Console.WriteLine("{0} - {1}", result.Title, result.Content);
-        /// }
-        /// </code>
-        /// </example>
         public IList<IWebResult> Search(string keyword, int resultCount)
         {
             return this.Search(keyword, resultCount, new Language(), new SafeLevel());
@@ -64,16 +54,6 @@ namespace Google.API.Search
         /// <param name="language">The language you want to search.</param>
         /// <returns>The result itmes.</returns>
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
-        /// <example>
-        /// This is the c# code example.
-        /// <code>
-        /// IList&lt;IWebResult&gt; results = GwebSearcher.Search("Google API for .NET", 32, Language.ChineseSimplified);
-        /// foreach(IWebResult result in results)
-        /// {
-        ///     Console.WriteLine("{0} - {1}", result.Title, result.Content);
-        /// }
-        /// </code>
-        /// </example>
         public IList<IWebResult> Search(string keyword, int resultCount, Language language)
         {
             return this.Search(keyword, resultCount, language, new SafeLevel());
@@ -88,21 +68,23 @@ namespace Google.API.Search
         /// <param name="safeLevel">The search safety level.</param>
         /// <returns>The result itmes.</returns>
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
-        /// <example>
-        /// This is the c# code example.
-        /// <code>
-        /// IList&lt;IWebResult&gt; results = GwebSearcher.Search("Google API for .NET", 20, Language.ChineseSimplified, SafeLevel.active);
-        /// foreach(IWebResult result in results)
-        /// {
-        ///     Console.WriteLine("{0} - {1}", result.Title, result.Content);
-        /// }
-        /// </code>
-        /// </example>
         public IList<IWebResult> Search(string keyword, int resultCount, Language language, SafeLevel safeLevel)
         {
             return this.Search(keyword, resultCount, null, null, safeLevel, language, true);
         }
 
+        /// <summary>
+        /// Search.
+        /// </summary>
+        /// <param name="keyword">The keyword.</param>
+        /// <param name="resultCount">The count of result itmes.</param>
+        /// <param name="customSearchId">This optional argument supplies the unique id for the Custom Search Engine that should be used for this request.</param>
+        /// <param name="customSearchReference">This optional argument supplies the url of a linked Custom Search Engine specification that should be used to satisfy this request.</param>
+        /// <param name="safeLevel">The search safety level.</param>
+        /// <param name="language">The language you want to search.</param>
+        /// <param name="duplicateFilter">This optional argument controls turning on or off the duplicate content filter. Default value is true.</param>
+        /// <returns>The result itmes.</returns>
+        /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
         public IList<IWebResult> Search(
             string keyword,
             int resultCount,

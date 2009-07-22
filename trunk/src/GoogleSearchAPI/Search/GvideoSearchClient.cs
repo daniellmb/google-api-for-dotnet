@@ -41,16 +41,6 @@ namespace Google.API.Search
         /// <param name="resultCount">The count of result itmes.</param>
         /// <returns>The result items.</returns>
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
-        /// <example>
-        /// This is the c# code example.
-        /// <code>
-        /// IList&lt;IVideoResult&gt; results = GvideoSearcher.Search("South Park", 32);
-        /// foreach(IVideoResult result in results)
-        /// {
-        ///     Console.WriteLine("[{0} - {1} seconds by {2}] {3} => {4}", result.Title, result.Duration, result.Publisher, result.Content, result.Url);
-        /// }
-        /// </code>
-        /// </example>
         public IList<IVideoResult> Search(string keyword, int resultCount)
         {
             return this.Search(keyword, resultCount, new SortType());
@@ -64,16 +54,6 @@ namespace Google.API.Search
         /// <param name="sortBy">The way to order results.</param>
         /// <returns>The result items.</returns>
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
-        /// <example>
-        /// This is the c# code example.
-        /// <code>
-        /// IList&lt;IVideoResult&gt; results = GvideoSearcher.Search("Metal Gear Solid", 10, SortType.date);
-        /// foreach(IVideoResult result in results)
-        /// {
-        ///     Console.WriteLine("[{0} - {1} seconds by {2}] {3} => {4}", result.Title, result.Duration, result.Publisher, result.Content, result.Url);
-        /// }
-        /// </code>
-        /// </example>
         public IList<IVideoResult> Search(string keyword, int resultCount, [Optional] SortType sortBy)
         {
             if (keyword == null)

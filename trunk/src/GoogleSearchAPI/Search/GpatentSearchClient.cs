@@ -43,16 +43,6 @@ namespace Google.API.Search
         /// <remarks>
         /// Now, the max count of items Google given is <b>32</b>.
         /// </remarks>
-        /// <example>
-        /// This is the c# code example.
-        /// <code>
-        /// IList&lt;IPatentResult&gt; results = GpatentSearcher.Search("auto", 10);
-        /// foreach(IPatentResult result in results)
-        /// {
-        ///     Console.WriteLine("[{0} - US Pat. {1} - filed {2:d} - {3}] {4}", result.Title, result.PatentNumber, result.ApplicationDate, result.Assignee, result.Content);
-        /// }
-        /// </code>
-        /// </example>
         public IList<IPatentResult> Search(string keyword, int resultCount)
         {
             return this.Search(keyword, resultCount, false, false, new SortType());
@@ -68,16 +58,6 @@ namespace Google.API.Search
         /// <remarks>
         /// Now, the max count of items Google given is <b>32</b>.
         /// </remarks>
-        /// <example>
-        /// This is the c# code example.
-        /// <code>
-        /// IList&lt;IPatentResult&gt; results = GpatentSearcher.Search("encode", 32, SortType.relevance);
-        /// foreach(IPatentResult result in results)
-        /// {
-        ///     Console.WriteLine("[{0} - US Pat. {1} - filed {2:d} - {3}] {4}", result.Title, result.PatentNumber, result.ApplicationDate, result.Assignee, result.Content);
-        /// }
-        /// </code>
-        /// </example>
         public IList<IPatentResult> Search(string keyword, int resultCount, SortType sortBy)
         {
             return this.Search(keyword, resultCount, false, false, sortBy);
@@ -95,16 +75,6 @@ namespace Google.API.Search
         /// When both issuedOnly and filedOnly are true, it equals to both are false.
         /// Now, the max count of items Google given is <b>32</b>.
         /// </remarks>
-        /// <example>
-        /// This is the c# code example.
-        /// <code>
-        /// IList&lt;IPatentResult&gt; results = GpatentSearcher.Search("Wifi", 20, true, false);
-        /// foreach(IPatentResult result in results)
-        /// {
-        ///     Console.WriteLine("[{0} - US Pat. {1} - filed {2:d} - {3}] {4}", result.Title, result.PatentNumber, result.ApplicationDate, result.Assignee, result.Content);
-        /// }
-        /// </code>
-        /// </example>
         public IList<IPatentResult> Search(string keyword, int resultCount, bool issuedOnly, bool filedOnly)
         {
             return this.Search(keyword, resultCount, issuedOnly, filedOnly, new SortType());
@@ -123,16 +93,6 @@ namespace Google.API.Search
         /// When both issuedOnly and filedOnly are true, it equals to both are false.
         /// Now, the max count of items Google given is <b>32</b>.
         /// </remarks>
-        /// <example>
-        /// This is the c# code example.
-        /// <code>
-        /// IList&lt;IPatentResult&gt; results = GpatentSearcher.Search("search engine", 30, true, false, SortType.date);
-        /// foreach(IPatentResult result in results)
-        /// {
-        ///     Console.WriteLine("[{0} - US Pat. {1} - filed {2:d} - {3}] {4}", result.Title, result.PatentNumber, result.ApplicationDate, result.Assignee, result.Content);
-        /// }
-        /// </code>
-        /// </example>
         public IList<IPatentResult> Search(
             string keyword,
             int resultCount,

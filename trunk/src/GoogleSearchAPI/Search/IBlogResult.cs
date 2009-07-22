@@ -33,32 +33,32 @@ namespace Google.API.Search
     public interface IBlogResult
     {
         /// <summary>
-        /// Get the title.
+        /// Gets the title.
         /// </summary>
         string Title { get; }
 
         /// <summary>
-        /// Get the URL to the blog post referenced in this search result.
+        /// Gets the URL to the blog post referenced in this search result.
         /// </summary>
         string PostUrl { get; }
 
         /// <summary>
-        /// Get a snippet of content from the blog post associated with this search result.
+        /// Gets a snippet of content from the blog post associated with this search result.
         /// </summary>
         string Content { get; }
 
         /// <summary>
-        /// Get the name of the author that wrote the blog post.
+        /// Gets the name of the author that wrote the blog post.
         /// </summary>
         string Author { get; }
 
         /// <summary>
-        /// Get the URL of the blog which contains the post. 
+        /// Gets the URL of the blog which contains the post. 
         /// </summary>
         string BlogUrl { get; }
 
         /// <summary>
-        /// Get the published date of the blog post referenced by this search result.
+        /// Gets the published date of the blog post referenced by this search result.
         /// </summary>
         DateTime PublishedDate { get; }
     }

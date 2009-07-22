@@ -31,27 +31,27 @@ namespace Google.API.Search
     public interface IBookResult
     {
         /// <summary>
-        /// Get the title of the book.
+        /// Gets the title of the book.
         /// </summary>
         string Title { get; }
 
         /// <summary>
-        /// Get the URL of the result.
+        /// Gets the URL of the result.
         /// </summary>
         string Url { get; }
 
         /// <summary>
-        /// Get the list of authors of the book.
+        /// Gets the list of authors of the book.
         /// </summary>
         string Authors { get; }
 
         /// <summary>
-        /// Get the identifier associated with the book. This is typically an ISBN.
+        /// Gets the identifier associated with the book. This is typically an ISBN.
         /// </summary>
         string BookId { get; }
 
         /// <summary>
-        /// Get the year that the book was published.
+        /// Gets the year that the book was published.
         /// </summary>
         /// <remarks>
         /// If the published year is unknown, it will return -1.
@@ -59,12 +59,12 @@ namespace Google.API.Search
         int PublishedYear { get; }
 
         /// <summary>
-        /// Get the number of pages contained within the book.
+        /// Gets the number of pages contained within the book.
         /// </summary>
         int PageCount { get; }
 
         /// <summary>
-        /// Get a thumbnail image of the books cover.
+        /// Gets a thumbnail image of the books cover.
         /// </summary>
         ITbImage TbImage { get; }
     }

@@ -41,16 +41,6 @@ namespace Google.API.Search
         /// <param name="resultCount">The count of result itmes.</param>
         /// <returns>The result items.</returns>
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
-        /// <example>
-        /// This is the c# code example.
-        /// <code>
-        /// IList&lt;IBlogResult&gt; results = GblogSearcher.Search("Coldplay", 32);
-        /// foreach(IBlogResult result in results)
-        /// {
-        ///     Console.WriteLine("[{0} - {1:d} by {2}] {3} => {4}", result.Title, result.PublishedDate, result.Author, result.Content, result.BlogUrl);
-        /// }
-        /// </code>
-        /// </example>
         public IList<IBlogResult> Search(string keyword, int resultCount)
         {
             return this.Search(keyword, resultCount, new SortType());
@@ -64,16 +54,6 @@ namespace Google.API.Search
         /// <param name="sortBy">The way to order results.</param>
         /// <returns>The result items.</returns>
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
-        /// <example>
-        /// This is the c# code example.
-        /// <code>
-        /// IList&lt;IBlogResult&gt; results = GblogSearcher.Search("Coldplay", 32, SortType.relevance);
-        /// foreach(IBlogResult result in results)
-        /// {
-        ///     Console.WriteLine("[{0} - {1:d} by {2}] {3} => {4}", result.Title, result.PublishedDate, result.Author, result.Content, result.BlogUrl);
-        /// }
-        /// </code>
-        /// </example>
         public IList<IBlogResult> Search(string keyword, int resultCount, [Optional] SortType sortBy)
         {
             if (keyword == null)
