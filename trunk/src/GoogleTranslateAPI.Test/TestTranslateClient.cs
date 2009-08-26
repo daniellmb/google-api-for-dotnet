@@ -27,6 +27,8 @@ namespace Google.API.Translate.Test
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
+    using System.Net;
 
     using NUnit.Framework;
 
@@ -188,6 +190,25 @@ namespace Google.API.Translate.Test
             }
         }
 
+        [Test, Ignore]
+        public void TranslateLongText()
+        {
+            var from = Language.English;
+            var to = Language.ChineseSimplified;
+
+            var text = this.GetText();
+
+            Console.WriteLine("Text length: {0}", text.Length);
+            Console.WriteLine();
+
+            var translated = this.Client.Translate(text, from, to, TranslateFormat.html);
+
+            Console.WriteLine("Translated text length: {0}", translated.Length);
+            Console.WriteLine();
+
+            Console.WriteLine(translated);
+        }
+
         private static bool IsUndetectable(Language language)
         {
             return undetectable.Contains(language);
@@ -201,6 +222,22 @@ namespace Google.API.Translate.Test
         private static void Print(Language language, string text)
         {
             Console.WriteLine("[{0}]\t{1}", language, text);
+        }
+
+        private string GetText()
+        {
+            var request = WebRequest.Create(@"http://en.wikipedia.org/wiki/Human");
+            using (var response = request.GetResponse())
+            {
+                using (var stream = response.GetResponseStream())
+                {
+                    using (var reader = new StreamReader(stream))
+                    {
+                        var text = reader.ReadToEnd();
+                        return text;
+                    }
+                }
+            }
         }
     }
 }
