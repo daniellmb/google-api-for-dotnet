@@ -80,6 +80,7 @@ namespace Google.API.Translate
             languageCodeDict[Language.Icelandic] = "is";
             languageCodeDict[Language.Indonesian] = "id";
             languageCodeDict[Language.Inuktitut] = "iu";
+            languageCodeDict[Language.Irish] = "ga";
             languageCodeDict[Language.Italian] = "it";
             languageCodeDict[Language.Japanese] = "ja";
             languageCodeDict[Language.Kannada] = "kn";
@@ -128,11 +129,15 @@ namespace Google.API.Translate
             languageCodeDict[Language.Uzbek] = "uz";
             languageCodeDict[Language.Uighur] = "ug";
             languageCodeDict[Language.Vietnamese] = "vi";
+            languageCodeDict[Language.Welsh] = "cy";
+            languageCodeDict[Language.Yiddish] = "yi";
 
             translatableList = new[]
                 {
+                    Language.Afrikaans,
                     Language.Albanian,
                     Language.Arabic,
+                    Language.Belarusian,
                     Language.Bulgarian,
                     Language.ChineseSimplified,
                     Language.ChineseTraditional,
@@ -152,12 +157,15 @@ namespace Google.API.Translate
                     Language.Hebrew,
                     Language.Hindi,
                     Language.Hungarian,
+                    Language.Icelandic,
                     Language.Indonesian,
+                    Language.Irish,
                     Language.Italian,
                     Language.Japanese,
                     Language.Korean,
                     Language.Latvian,
                     Language.Lithuanian,
+                    Language.Macedonian,
                     Language.Malay,
                     Language.Maltese,
                     Language.Norwegian,
@@ -170,11 +178,14 @@ namespace Google.API.Translate
                     Language.Serbian,
                     Language.Slovak,
                     Language.Slovenian,
+                    Language.Swahili,
                     Language.Swedish,
                     Language.Thai,
                     Language.Turkish,
                     Language.Ukrainian,
                     Language.Vietnamese,
+                    Language.Welsh,
+                    Language.Yiddish,
                 };
         }
 
