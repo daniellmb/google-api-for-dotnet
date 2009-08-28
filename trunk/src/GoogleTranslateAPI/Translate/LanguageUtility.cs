@@ -158,6 +158,7 @@ namespace Google.API.Translate
                     Language.Korean,
                     Language.Latvian,
                     Language.Lithuanian,
+                    Language.Malay,
                     Language.Maltese,
                     Language.Norwegian,
                     Language.Persian,
