@@ -236,6 +236,11 @@ namespace Google.API
         Inuktitut,
 
         /// <summary>
+        /// Irish.
+        /// </summary>
+        Irish,
+
+        /// <summary>
         /// Italian.
         /// </summary>
         Italian,
@@ -474,5 +479,15 @@ namespace Google.API
         /// Vietnamese.
         /// </summary>
         Vietnamese,
+
+        /// <summary>
+        /// Welsh.
+        /// </summary>
+        Welsh,
+
+        /// <summary>
+        /// Yiddish.
+        /// </summary>
+        Yiddish,
     }
 }

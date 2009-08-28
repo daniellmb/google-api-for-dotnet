@@ -43,8 +43,11 @@ namespace Google.API.Translate.Test
                 Language.Filipino,
                 Language.Greek,
                 Language.Hindi,
+                Language.Irish,
                 Language.Norwegian,
                 Language.Portuguese,
+                Language.Welsh,
+                Language.Yiddish,
             };
 
         private TranslateClient Client { get; set; }
@@ -59,7 +62,7 @@ namespace Google.API.Translate.Test
         public void TranslateTest()
         {
             var originalLanguage = Language.English;
-            var originalText = "cat";
+            var originalText = "dog";
 
             Print(originalLanguage, originalText);
 
