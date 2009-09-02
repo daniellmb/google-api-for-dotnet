@@ -51,6 +51,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enumeration.cs" />
+    <Compile Include="Enumeration.Generic.cs" />
     <Compile Include="GoogleAPIException.cs" />
     <Compile Include="GoogleClient.cs" />
     <Compile Include="GoogleServiceException.cs" />

@@ -68,7 +68,7 @@ namespace Google.API.Translate.Test
 
             ICollection<Language> skippedLanguages = new[] { Language.Galician, Language.Thai, };
 
-            foreach (var language in LanguageUtility.TranslatableCollection)
+            foreach (var language in Language.TranslatableCollection)
             {
                 if (language == originalLanguage)
                 {
@@ -122,7 +122,7 @@ namespace Google.API.Translate.Test
 
             var translatedB = this.Client.Translate(sentenceB, from, to);
 
-            var translatedText = this.Client.Translate(text, from, to, TranslateFormat.html);
+            var translatedText = this.Client.Translate(text, from, to, TranslateFormat.Html);
 
             var expectedText = string.Format(textTemplate, translatedA.Trim(), translatedB.Trim());
 
@@ -137,12 +137,12 @@ namespace Google.API.Translate.Test
         {
             var text = "I love this game.";
 
-            Language from;
+            string from;
             var to = Language.English;
 
             var translated = this.Client.TranslateAndDetect(text, to, out from);
 
-            Assert.AreEqual(Language.English, from);
+            Assert.AreEqual((string)Language.English, from);
             StringAssert.AreEqualIgnoringCase(text, translated);
         }
 
@@ -154,7 +154,7 @@ namespace Google.API.Translate.Test
 
             Print(originalLanguage, originalText);
 
-            foreach (var language in LanguageUtility.TranslatableCollection)
+            foreach (var language in Language.TranslatableCollection)
             {
                 if (language == originalLanguage)
                 {
@@ -177,7 +177,7 @@ namespace Google.API.Translate.Test
 
                 bool isReliable;
                 double confidence;
-                var detectedLanguage = this.Client.Detect(translatedText, out isReliable, out confidence);
+                Language detectedLanguage = this.Client.Detect(translatedText, out isReliable, out confidence);
 
                 var more = string.Format("isReliable : {0}, confidence : {1}", isReliable, confidence);
                 Print(language, translatedText, more);
@@ -204,7 +204,7 @@ namespace Google.API.Translate.Test
             Console.WriteLine("Text length: {0}", text.Length);
             Console.WriteLine();
 
-            var translated = this.Client.Translate(text, from, to, TranslateFormat.html);
+            var translated = this.Client.Translate(text, from, to, TranslateFormat.Html);
 
             Console.WriteLine("Translated text length: {0}", translated.Length);
             Console.WriteLine();
