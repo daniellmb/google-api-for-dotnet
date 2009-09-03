@@ -234,11 +234,6 @@ namespace Google.API.Translate
                 throw new ArgumentNullException("text");
             }
 
-            if (from == null)
-            {
-                throw new ArgumentNullException("from");
-            }
-
             if (to == null)
             {
                 throw new ArgumentNullException("to");

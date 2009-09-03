@@ -66,7 +66,7 @@ namespace Google.API.Translate.Test
 
             Print(originalLanguage, originalText);
 
-            ICollection<Language> skippedLanguages = new[] { Language.Galician, Language.Thai, };
+            ICollection<Language> skippedLanguages = new[] { Language.Thai, };
 
             foreach (var language in Language.TranslatableCollection)
             {
