@@ -45,7 +45,7 @@ namespace Google.API.Search
         /// </remarks>
         public IList<IPatentResult> Search(string keyword, int resultCount)
         {
-            return this.Search(keyword, resultCount, false, false, new SortType());
+            return this.Search(keyword, resultCount, false, false, SortType.GetDefault());
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace Google.API.Search
         /// <remarks>
         /// Now, the max count of items Google given is <b>32</b>.
         /// </remarks>
-        public IList<IPatentResult> Search(string keyword, int resultCount, SortType sortBy)
+        public IList<IPatentResult> Search(string keyword, int resultCount, string sortBy)
         {
             return this.Search(keyword, resultCount, false, false, sortBy);
         }
@@ -77,7 +77,7 @@ namespace Google.API.Search
         /// </remarks>
         public IList<IPatentResult> Search(string keyword, int resultCount, bool issuedOnly, bool filedOnly)
         {
-            return this.Search(keyword, resultCount, issuedOnly, filedOnly, new SortType());
+            return this.Search(keyword, resultCount, issuedOnly, filedOnly, SortType.GetDefault());
         }
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace Google.API.Search
             int resultCount,
             [Optional] bool issuedOnly,
             [Optional] bool filedOnly,
-            [Optional] SortType sortBy)
+            [Optional] string sortBy)
         {
             if (keyword == null)
             {
@@ -112,7 +112,7 @@ namespace Google.API.Search
         }
 
         internal SearchData<GpatentResult> GSearch(
-            string keyword, int start, ResultSize resultSize, bool issuedOnly, bool filedOnly, SortType sortBy)
+            string keyword, int start, string resultSize, bool issuedOnly, bool filedOnly, string sortBy)
         {
             if (keyword == null)
             {
@@ -126,11 +126,11 @@ namespace Google.API.Search
                         this.AcceptLanguage,
                         this.ApiKey,
                         keyword,
-                        resultSize.GetString(),
+                        resultSize,
                         start,
                         issuedOnly.GetString(),
                         filedOnly.GetString(),
-                        sortBy.GetString()));
+                        sortBy));
             return responseData;
         }
     }

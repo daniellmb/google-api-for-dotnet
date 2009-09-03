@@ -80,9 +80,6 @@
     <Compile Include="..\Core\HttpUtility.cs">
       <Link>HttpUtility.cs</Link>
     </Compile>
-    <Compile Include="..\Core\Language.cs">
-      <Link>Language.cs</Link>
-    </Compile>
     <Compile Include="..\Core\MyWebContentTypeMapper.cs">
       <Link>MyWebContentTypeMapper.cs</Link>
     </Compile>
@@ -94,6 +91,12 @@
     </Compile>
     <Compile Include="..\Core\ResultObject.cs">
       <Link>ResultObject.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleSearchAPI\Search\Colorization.cs">
+      <Link>Search\Colorization.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleSearchAPI\Search\DuplicateFilter.cs">
+      <Link>Search\DuplicateFilter.cs</Link>
     </Compile>
     <Compile Include="..\GoogleSearchAPI\Search\GblogResult.cs">
       <Link>Search\GblogResult.cs</Link>
@@ -188,6 +191,18 @@
     <Compile Include="..\GoogleSearchAPI\Search\ILocalResult.cs">
       <Link>Search\ILocalResult.cs</Link>
     </Compile>
+    <Compile Include="..\GoogleSearchAPI\Search\ImageColor.cs">
+      <Link>Search\ImageColor.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleSearchAPI\Search\ImageFileType.cs">
+      <Link>Search\ImageFileType.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleSearchAPI\Search\ImageSize.cs">
+      <Link>Search\ImageSize.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleSearchAPI\Search\ImageType.cs">
+      <Link>Search\ImageType.cs</Link>
+    </Compile>
     <Compile Include="..\GoogleSearchAPI\Search\INewsImage.cs">
       <Link>Search\INewsImage.cs</Link>
     </Compile>
@@ -215,20 +230,38 @@
     <Compile Include="..\GoogleSearchAPI\Search\IWebResult.cs">
       <Link>Search\IWebResult.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleSearchAPI\Search\LanguageUtility.cs">
-      <Link>Search\LanguageUtility.cs</Link>
+    <Compile Include="..\GoogleSearchAPI\Search\Language.cs">
+      <Link>Search\Language.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleSearchAPI\Search\LocalResultType.cs">
+      <Link>Search\LocalResultType.cs</Link>
     </Compile>
     <Compile Include="..\GoogleSearchAPI\Search\LocalSearchData.cs">
       <Link>Search\LocalSearchData.cs</Link>
     </Compile>
+    <Compile Include="..\GoogleSearchAPI\Search\NewsEdition.cs">
+      <Link>Search\NewsEdition.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleSearchAPI\Search\NewsTopic.cs">
+      <Link>Search\NewsTopic.cs</Link>
+    </Compile>
     <Compile Include="..\GoogleSearchAPI\Search\PhoneNumber.cs">
       <Link>Search\PhoneNumber.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleSearchAPI\Search\ResultSize.cs">
+      <Link>Search\ResultSize.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleSearchAPI\Search\SafeLevel.cs">
+      <Link>Search\SafeLevel.cs</Link>
     </Compile>
     <Compile Include="..\GoogleSearchAPI\Search\SearchData.cs">
       <Link>Search\SearchData.cs</Link>
     </Compile>
     <Compile Include="..\GoogleSearchAPI\Search\SearchUtility.cs">
       <Link>Search\SearchUtility.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleSearchAPI\Search\SortType.cs">
+      <Link>Search\SortType.cs</Link>
     </Compile>
     <Compile Include="..\GoogleSearchAPI\Search\TbImage.cs">
       <Link>Search\TbImage.cs</Link>

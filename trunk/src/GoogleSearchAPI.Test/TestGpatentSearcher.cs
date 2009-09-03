@@ -45,10 +45,10 @@ namespace Google.API.Search.Test
         {
             var keyword = "search engine";
             var start = 0;
-            var resultSize = ResultSize.small;
+            var resultSize = ResultSize.Small;
             var issuedOnly = true;
             var filedOnly = false;
-            var sortBy = SortType.relevance;
+            var sortBy = SortType.Relevance;
 
             var searchData = this.Client.GSearch(keyword, start, resultSize, issuedOnly, filedOnly, sortBy);
             Assert.IsNotNull(searchData);
@@ -85,7 +85,7 @@ namespace Google.API.Search.Test
         {
             var keyword = "encode";
             var count = 32;
-            var sortBy = SortType.relevance;
+            var sortBy = SortType.Relevance;
             var results = this.Client.Search(keyword, count, sortBy);
 
             Assert.IsNotNull(results);
@@ -124,7 +124,7 @@ namespace Google.API.Search.Test
             var count = 30;
             var issuedOnly = true;
             var filedOnly = true;
-            var sortBy = SortType.date;
+            var sortBy = SortType.Date;
             var results = this.Client.Search(keyword, count, issuedOnly, filedOnly, sortBy);
 
             Assert.IsNotNull(results);

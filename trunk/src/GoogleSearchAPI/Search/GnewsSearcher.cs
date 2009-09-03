@@ -53,7 +53,7 @@ namespace Google.API.Search
         /// </example>
         public static IList<INewsResult> Search(string keyword, int resultCount)
         {
-            return Search(keyword, resultCount, null, new SortType());
+            return Search(keyword, resultCount, null, SortType.GetDefault());
         }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace Google.API.Search
         /// </example>
         public static IList<INewsResult> Search(string keyword, int resultCount, string geo)
         {
-            return Search(keyword, resultCount, geo, new SortType());
+            return Search(keyword, resultCount, geo, SortType.GetDefault());
         }
 
         /// <summary>
@@ -146,7 +146,7 @@ namespace Google.API.Search
         /// </example>
         public static IList<INewsResult> SearchLocal(string geo, int resultCount)
         {
-            return SearchLocal(geo, resultCount, new SortType());
+            return SearchLocal(geo, resultCount, SortType.GetDefault());
         }
 
         /// <summary>

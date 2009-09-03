@@ -45,7 +45,7 @@ namespace Google.API.Search
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
         public IList<ILocalResult> Search(string keyword, int resultCount, float latitude, float longitude)
         {
-            return this.Search(keyword, resultCount, latitude, longitude, null, null, new LocalResultType());
+            return this.Search(keyword, resultCount, latitude, longitude, null, null, LocalResultType.GetDefault());
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace Google.API.Search
         /// <returns>The result items.</returns>
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
         public IList<ILocalResult> Search(
-            string keyword, int resultCount, float latitude, float longitude, LocalResultType resultType)
+            string keyword, int resultCount, float latitude, float longitude, string resultType)
         {
             return this.Search(keyword, resultCount, latitude, longitude, null, null, resultType);
         }
@@ -79,7 +79,7 @@ namespace Google.API.Search
             string keyword, int resultCount, float latitude, float longitude, float width, float height)
         {
             return this.Search(
-                keyword, resultCount, latitude, longitude, (float?)width, (float?)height, new LocalResultType());
+                keyword, resultCount, latitude, longitude, (float?)width, (float?)height, LocalResultType.GetDefault());
         }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace Google.API.Search
             float longitude,
             float width,
             float height,
-            LocalResultType resultType)
+            string resultType)
         {
             return this.Search(keyword, resultCount, latitude, longitude, (float?)width, (float?)height, resultType);
         }
@@ -109,12 +109,12 @@ namespace Google.API.Search
         internal LocalSearchData GSearch(
             string keyword,
             int start,
-            ResultSize resultSize,
+            string resultSize,
             float latitude,
             float longitude,
             [Optional] float? width,
             [Optional] float? height,
-            [Optional] LocalResultType resultType)
+            [Optional] string resultType)
         {
             if (keyword == null)
             {
@@ -136,11 +136,11 @@ namespace Google.API.Search
                         this.AcceptLanguage,
                         this.ApiKey,
                         keyword,
-                        resultSize.GetString(),
+                        resultSize,
                         start,
                         local,
                         bounding,
-                        resultType.GetString()));
+                        resultType));
 
             return responseData;
         }
@@ -152,7 +152,7 @@ namespace Google.API.Search
             float longitude,
             float? width,
             float? height,
-            LocalResultType resultType)
+            string resultType)
         {
             if (keyword == null)
             {

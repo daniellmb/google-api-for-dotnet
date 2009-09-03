@@ -82,7 +82,7 @@ namespace Google.API.Search
         /// Supplies the year that the book was published.
         /// </summary>
         [DataMember(Name = "publishedYear")]
-        public string PublishedYearString { get; private set; }
+        public string PublishedYear { get; private set; }
 
         /// <summary>
         /// Supplies the number of pages contained within the book.
@@ -115,7 +115,7 @@ namespace Google.API.Search
                 "{0}" + Environment.NewLine + "by {1} - {2} - {3} pages" + Environment.NewLine + "{4}",
                 result.Title,
                 result.Authors,
-                result.PublishedYear >= 0 ? result.PublishedYear.ToString() : "unknown",
+                result.PublishedYear,
                 result.PageCount,
                 result.BookId);
         }
@@ -174,16 +174,11 @@ namespace Google.API.Search
             }
         }
 
-        int IBookResult.PublishedYear
+        string IBookResult.PublishedYear
         {
             get
             {
-                if (string.CompareOrdinal(this.PublishedYearString, "unknown") == 0)
-                {
-                    return -1;
-                }
-
-                return int.Parse(this.PublishedYearString);
+                return this.PublishedYear;
             }
         }
 

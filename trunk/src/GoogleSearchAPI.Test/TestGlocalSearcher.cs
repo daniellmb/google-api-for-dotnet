@@ -45,12 +45,12 @@ namespace Google.API.Search.Test
         {
             var keyword = "white house";
             var start = 0;
-            var resultSize = ResultSize.large;
+            var resultSize = ResultSize.Large;
             var latitude = -77.036667f;
             var longitude = 38.895000f;
             float? width = 0.1f;
             float? height = 0.1f;
-            var resultType = LocalResultType.blended;
+            var resultType = LocalResultType.Blended;
 
             var searchData = this.Client.GSearch(
                 keyword, start, resultSize, latitude, longitude, width, height, resultType);
@@ -93,7 +93,7 @@ namespace Google.API.Search.Test
             var count = 6;
             var latitude = -121.844237f;
             var longitude = 37.29234f;
-            var resultType = LocalResultType.blended;
+            var resultType = LocalResultType.Blended;
             var results = this.Client.Search(keyword, count, latitude, longitude, resultType);
             Assert.IsNotNull(results);
             ////Assert.AreEqual(count, results.Count);
@@ -138,7 +138,7 @@ namespace Google.API.Search.Test
             var longitude = 34.098889f;
             var width = 10f;
             var height = 10f;
-            var resultType = LocalResultType.kmlonly;
+            var resultType = LocalResultType.Kmlonly;
             var results = this.Client.Search(keyword, count, latitude, longitude, width, height, resultType);
             Assert.IsNotNull(results);
             ////Assert.AreEqual(count, results.Count);

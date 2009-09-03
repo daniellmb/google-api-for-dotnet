@@ -45,14 +45,14 @@ namespace Google.API.Search.Test
         {
             var keyword = "bra";
             var start = 4;
-            var resultSize = ResultSize.large;
-            var imageSize = ImageSize.all;
-            var colorization = Colorization.color;
-            var color = ImageColor.red;
-            var imageType = ImageType.all;
-            var fileType = FileType.jpg;
+            var resultSize = ResultSize.Large;
+            var imageSize = ImageSize.All;
+            var colorization = Colorization.Color;
+            var color = ImageColor.Red;
+            var imageType = ImageType.All;
+            var fileType = ImageFileType.Jpg;
             string searchSite = null;
-            var safeLevel = SafeLevel.off;
+            var safeLevel = SafeLevel.Off;
 
             var searchData = this.Client.GSearch(
                 keyword, start, resultSize, safeLevel, imageSize, colorization, color, imageType, fileType, searchSite);
@@ -73,12 +73,12 @@ namespace Google.API.Search.Test
         {
             var keyword = "Virgin Islands";
             var count = 15;
-            var imageSize = ImageSize.xxlarge;
-            var colorization = Colorization.all;
-            var imageType = ImageType.all;
-            var fileType = FileType.bmp;
+            var imageSize = ImageSize.Xxlarge;
+            var colorization = Colorization.All;
+            var imageType = ImageType.All;
+            var fileType = ImageFileType.Bmp;
             string searchSite = null;
-            var safeLevel = SafeLevel.active;
+            var safeLevel = SafeLevel.Active;
 
             var results = this.Client.Search(
                 keyword, count, safeLevel, imageSize, colorization, imageType, fileType, searchSite);
@@ -132,10 +132,10 @@ namespace Google.API.Search.Test
         {
             var keyword = "American Idol";
             var count = 32;
-            var imageSize = ImageSize.medium;
-            var colorization = Colorization.gray;
-            var imageType = ImageType.face;
-            var fileType = FileType.gif;
+            var imageSize = ImageSize.Medium;
+            var colorization = Colorization.Gray;
+            var imageType = ImageType.Face;
+            var fileType = ImageFileType.Gif;
 
             var results = this.Client.Search(keyword, count, imageSize, colorization, imageType, fileType);
             Assert.IsNotNull(results);
@@ -153,10 +153,10 @@ namespace Google.API.Search.Test
         {
             var keyword = "金城武";
             var count = 25;
-            var imageSize = ImageSize.all;
-            var colorization = Colorization.color;
-            var imageType = ImageType.all;
-            var fileType = FileType.jpg;
+            var imageSize = ImageSize.All;
+            var colorization = Colorization.Color;
+            var imageType = ImageType.All;
+            var fileType = ImageFileType.Jpg;
             var site = "sina.com";
 
             var results = this.Client.Search(keyword, count, imageSize, colorization, imageType, fileType, site);

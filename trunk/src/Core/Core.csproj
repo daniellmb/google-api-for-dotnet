@@ -58,7 +58,6 @@
     <Compile Include="GoogleServiceException.cs" />
     <Compile Include="HtmlEntities.cs" />
     <Compile Include="HttpUtility.cs" />
-    <Compile Include="Language.cs" />
     <Compile Include="MyWebContentTypeMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="Properties\AssemblyInfo.cs.template" />

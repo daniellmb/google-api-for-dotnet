@@ -45,7 +45,7 @@ namespace Google.API.Search.Test
         {
             var keyword = "Grimm's Fairy Tales";
             var start = 0;
-            var resultSize = ResultSize.large;
+            var resultSize = ResultSize.Large;
             var fullViewOnly = false;
             string library = null;
 

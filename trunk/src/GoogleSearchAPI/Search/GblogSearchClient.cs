@@ -43,7 +43,7 @@ namespace Google.API.Search
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
         public IList<IBlogResult> Search(string keyword, int resultCount)
         {
-            return this.Search(keyword, resultCount, new SortType());
+            return this.Search(keyword, resultCount, SortType.GetDefault());
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Google.API.Search
         /// <param name="sortBy">The way to order results.</param>
         /// <returns>The result items.</returns>
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
-        public IList<IBlogResult> Search(string keyword, int resultCount, [Optional] SortType sortBy)
+        public IList<IBlogResult> Search(string keyword, int resultCount, [Optional] string sortBy)
         {
             if (keyword == null)
             {
@@ -67,7 +67,7 @@ namespace Google.API.Search
         }
 
         internal SearchData<GblogResult> GSearch(
-            string keyword, int start, ResultSize resultSize, SortType sortBy)
+            string keyword, int start, string resultSize, string sortBy)
         {
             if (keyword == null)
             {
@@ -76,7 +76,7 @@ namespace Google.API.Search
 
             var responseData =
                 this.GetResponseData(
-                    service => service.BlogSearch(this.AcceptLanguage, this.ApiKey, keyword, resultSize.GetString(), start, sortBy.GetString()));
+                    service => service.BlogSearch(this.AcceptLanguage, this.ApiKey, keyword, resultSize, start, sortBy));
             return responseData;
         }
     }

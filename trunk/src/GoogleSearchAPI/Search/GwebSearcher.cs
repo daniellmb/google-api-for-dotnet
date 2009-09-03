@@ -53,7 +53,7 @@ namespace Google.API.Search
         /// </example>
         public static IList<IWebResult> Search(string keyword, int resultCount)
         {
-            return Search(keyword, resultCount, new Language(), new SafeLevel());
+            return Search(keyword, resultCount, Language.GetDefault(), SafeLevel.GetDefault());
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace Google.API.Search
         /// </example>
         public static IList<IWebResult> Search(string keyword, int resultCount, Language language)
         {
-            return Search(keyword, resultCount, language, new SafeLevel());
+            return Search(keyword, resultCount, language, SafeLevel.GetDefault());
         }
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace Google.API.Search
             string keyword, int start, ResultSize resultSize, Language language, SafeLevel safeLevel)
         {
             var client = new GwebSearchClient();
-            return client.GSearch(keyword, start, resultSize, null, null, safeLevel, language, true);
+            return client.GSearch(keyword, start, resultSize, null, null, safeLevel, language, DuplicateFilter.GetDefault());
         }
     }
 }

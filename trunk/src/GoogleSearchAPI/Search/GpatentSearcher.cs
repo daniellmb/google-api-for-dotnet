@@ -55,7 +55,7 @@ namespace Google.API.Search
         /// </example>
         public static IList<IPatentResult> Search(string keyword, int resultCount)
         {
-            return Search(keyword, resultCount, false, false, new SortType());
+            return Search(keyword, resultCount, false, false, SortType.GetDefault());
         }
 
         /// <summary>
@@ -107,7 +107,7 @@ namespace Google.API.Search
         /// </example>
         public static IList<IPatentResult> Search(string keyword, int resultCount, bool issuedOnly, bool filedOnly)
         {
-            return Search(keyword, resultCount, issuedOnly, filedOnly, new SortType());
+            return Search(keyword, resultCount, issuedOnly, filedOnly, SortType.GetDefault());
         }
 
         /// <summary>

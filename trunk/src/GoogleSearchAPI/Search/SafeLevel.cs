@@ -1,5 +1,5 @@
-﻿//-----------------------------------------------------------------------
-// <copyright file="IBookResult.cs" company="iron9light">
+//-----------------------------------------------------------------------
+// <copyright file="SafeLevel.cs" company="iron9light">
 // Copyright (c) 2009 iron9light
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -26,43 +26,48 @@
 namespace Google.API.Search
 {
     /// <summary>
-    /// Book search result.
+    /// The search safety level.
     /// </summary>
-    public interface IBookResult
+    public sealed class SafeLevel : Enumeration<SafeLevel>
     {
         /// <summary>
-        /// Gets the title of the book.
+        /// Disables safe search filtering.
         /// </summary>
-        string Title { get; }
+        public static readonly SafeLevel Off = new SafeLevel("Off", "off");
 
         /// <summary>
-        /// Gets the URL of the result.
+        /// Enables moderate safe search filtering. Default value.
         /// </summary>
-        string Url { get; }
+        public static readonly SafeLevel Moderate = new SafeLevel("Moderate", "moderate", true);
 
         /// <summary>
-        /// Gets the list of authors of the book.
+        /// Enables the highest level of safe search filtering.
         /// </summary>
-        string Authors { get; }
+        public static readonly SafeLevel Active = new SafeLevel("Active", "active");
+
+        private SafeLevel(string value)
+            : base(value)
+        {
+        }
+
+        private SafeLevel(string name, string value)
+            : base(name, value)
+        {
+        }
+
+        private SafeLevel(string name, string value, bool isDefault)
+            : base(name, value, isDefault)
+        {
+        }
 
         /// <summary>
-        /// Gets the identifier associated with the book. This is typically an ISBN.
+        /// Performs an implicit conversion from <see cref="System.String"/> to <see cref="SafeLevel"/>.
         /// </summary>
-        string BookId { get; }
-
-        /// <summary>
-        /// Gets the year that the book was published.
-        /// </summary>
-        string PublishedYear { get; }
-
-        /// <summary>
-        /// Gets the number of pages contained within the book.
-        /// </summary>
-        int PageCount { get; }
-
-        /// <summary>
-        /// Gets a thumbnail image of the books cover.
-        /// </summary>
-        ITbImage TbImage { get; }
+        /// <param name="value">The value.</param>
+        /// <returns>The result of the conversion.</returns>
+        public static implicit operator SafeLevel(string value)
+        {
+            return Convert(value, s => new SafeLevel(s));
+        }
     }
 }

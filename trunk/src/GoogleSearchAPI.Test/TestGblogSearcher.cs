@@ -45,8 +45,8 @@ namespace Google.API.Search.Test
         {
             var keyword = "lesbian";
             var start = 0;
-            var resultSize = ResultSize.large;
-            var sortBy = SortType.relevance;
+            var resultSize = ResultSize.Large;
+            var sortBy = SortType.Relevance;
 
             var searchData = this.Client.GSearch(keyword, start, resultSize, sortBy);
             Assert.IsNotNull(searchData);
@@ -84,7 +84,7 @@ namespace Google.API.Search.Test
         {
             var keyword = "iron9light";
             var count = 3;
-            var sortBy = SortType.date;
+            var sortBy = SortType.Date;
             var results = this.Client.Search(keyword, count, sortBy);
             Assert.IsNotNull(results);
             ////Assert.AreEqual(count, results.Count);

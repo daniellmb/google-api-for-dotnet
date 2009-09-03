@@ -82,7 +82,7 @@ namespace Google.API.Search
         }
 
         internal SearchData<GbookResult> GSearch(
-            string keyword, int start, ResultSize resultSize, bool fullViewOnly, string library)
+            string keyword, int start, string resultSize, bool fullViewOnly, string library)
         {
             if (keyword == null)
             {
@@ -92,7 +92,7 @@ namespace Google.API.Search
             var responseData =
                 this.GetResponseData(
                     service =>
-                    service.BookSearch(this.AcceptLanguage, this.ApiKey, keyword, resultSize.GetString(), start, fullViewOnly.GetString(), library));
+                    service.BookSearch(this.AcceptLanguage, this.ApiKey, keyword, resultSize, start, fullViewOnly.GetString(), library));
             return responseData;
         }
     }

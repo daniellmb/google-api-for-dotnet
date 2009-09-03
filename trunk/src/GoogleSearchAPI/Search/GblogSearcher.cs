@@ -53,7 +53,7 @@ namespace Google.API.Search
         /// </example>
         public static IList<IBlogResult> Search(string keyword, int resultCount)
         {
-            return Search(keyword, resultCount, new SortType());
+            return Search(keyword, resultCount, SortType.GetDefault());
         }
 
         /// <summary>

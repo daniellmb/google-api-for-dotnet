@@ -55,7 +55,7 @@ namespace Google.API.Search
         /// </example>
         public static IList<ILocalResult> Search(string keyword, int resultCount, float latitude, float longitude)
         {
-            return Search(keyword, resultCount, latitude, longitude, new LocalResultType());
+            return Search(keyword, resultCount, latitude, longitude, LocalResultType.GetDefault());
         }
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace Google.API.Search
         public static IList<ILocalResult> Search(
             string keyword, int resultCount, float latitude, float longitude, float width, float height)
         {
-            return Search(keyword, resultCount, latitude, longitude, width, height, new LocalResultType());
+            return Search(keyword, resultCount, latitude, longitude, width, height, LocalResultType.GetDefault());
         }
 
         /// <summary>

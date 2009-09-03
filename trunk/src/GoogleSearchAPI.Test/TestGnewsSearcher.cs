@@ -45,12 +45,12 @@ namespace Google.API.Search.Test
         {
             var keyword = "Olympic";
             var start = 0;
-            var resultSize = new ResultSize();
+            var resultSize = ResultSize.GetDefault();
             var geo = "Beijing China";
-            var sortBy = new SortType();
+            var sortBy = SortType.GetDefault();
             string quoteId = null;
-            string topic = "b";
-            string edition = null;
+            var topic = NewsTopic.Business;
+            var edition = NewsEdition.GetDefault();
 
             var results = this.Client.GSearch(keyword, start, resultSize, geo, sortBy, quoteId, topic, edition);
 
@@ -88,7 +88,7 @@ namespace Google.API.Search.Test
             var keyword = "earthquake";
             var geo = "China";
             var count = 32;
-            var results = this.Client.Search(keyword, count, geo);
+            var results = this.Client.Search(keyword, count, geo, SortType.GetDefault());
             Assert.IsNotNull(results);
             Assert.AreEqual(count, results.Count);
             foreach (var result in results)
@@ -104,8 +104,8 @@ namespace Google.API.Search.Test
         {
             var keyword = "Obama";
             var count = 32;
-            var resultsByRelevance = this.Client.Search(keyword, count, SortType.relevance);
-            var resultsByDate = this.Client.Search(keyword, count, SortType.date);
+            var resultsByRelevance = this.Client.Search(keyword, count, null, SortType.Relevance);
+            var resultsByDate = this.Client.Search(keyword, count, null, SortType.Date);
             Assert.IsNotNull(resultsByRelevance);
             Assert.IsNotNull(resultsByDate);
             Assert.AreEqual(resultsByRelevance.Count, resultsByDate.Count);
