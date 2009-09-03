@@ -43,7 +43,7 @@ namespace Google.API.Search
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
         public IList<IWebResult> Search(string keyword, int resultCount)
         {
-            return this.Search(keyword, resultCount, new Language(), new SafeLevel());
+            return this.Search(keyword, resultCount, Language.GetDefault(), SafeLevel.GetDefault());
         }
 
         /// <summary>
@@ -54,9 +54,9 @@ namespace Google.API.Search
         /// <param name="language">The language you want to search.</param>
         /// <returns>The result itmes.</returns>
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
-        public IList<IWebResult> Search(string keyword, int resultCount, Language language)
+        public IList<IWebResult> Search(string keyword, int resultCount, string language)
         {
-            return this.Search(keyword, resultCount, language, new SafeLevel());
+            return this.Search(keyword, resultCount, language, SafeLevel.GetDefault());
         }
 
         /// <summary>
@@ -68,9 +68,9 @@ namespace Google.API.Search
         /// <param name="safeLevel">The search safety level.</param>
         /// <returns>The result itmes.</returns>
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
-        public IList<IWebResult> Search(string keyword, int resultCount, Language language, SafeLevel safeLevel)
+        public IList<IWebResult> Search(string keyword, int resultCount, string language, string safeLevel)
         {
-            return this.Search(keyword, resultCount, null, null, safeLevel, language, true);
+            return this.Search(keyword, resultCount, null, null, safeLevel, language, DuplicateFilter.GetDefault());
         }
 
         /// <summary>
@@ -90,9 +90,9 @@ namespace Google.API.Search
             int resultCount,
             [Optional] string customSearchId,
             [Optional] string customSearchReference,
-            [Optional] SafeLevel safeLevel,
-            [Optional] Language language,
-            [Optional, DefaultParameterValue(true)] bool duplicateFilter)
+            [Optional] string safeLevel,
+            [Optional] string language,
+            [Optional] string duplicateFilter)
         {
             if (keyword == null)
             {
@@ -117,19 +117,17 @@ namespace Google.API.Search
         internal SearchData<GwebResult> GSearch(
             string keyword,
             int start,
-            ResultSize resultSize,
+            string resultSize,
             string customSearchId,
             string customSearchReference,
-            SafeLevel safeLevel,
-            Language language,
-            bool duplicateFilter)
+            string safeLevel,
+            string language,
+            string duplicateFilter)
         {
             if (keyword == null)
             {
                 throw new ArgumentNullException("keyword");
             }
-
-            var languageCode = LanguageUtility.GetLanguageCode(language);
 
             var responseData =
                 this.GetResponseData(
@@ -138,13 +136,13 @@ namespace Google.API.Search
                         this.AcceptLanguage,
                         this.ApiKey,
                         keyword,
-                        resultSize.GetString(),
+                        resultSize,
                         start,
                         customSearchId,
                         customSearchReference,
-                        safeLevel.GetString(),
-                        languageCode,
-                        duplicateFilter.GetStringWithTrueDefault()));
+                        safeLevel,
+                        language,
+                        duplicateFilter));
             return responseData;
         }
     }

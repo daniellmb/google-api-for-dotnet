@@ -80,16 +80,6 @@ namespace Google.API
             return customBinding;
         }
 
-        public static string GetStringIgnoreDefault(this Enum value)
-        {
-            if (Enum.IsDefined(value.GetType(), value))
-            {
-                return null;
-            }
-
-            return value.ToString();
-        }
-
         public static string GetString(this bool value)
         {
             if (value)
@@ -98,16 +88,6 @@ namespace Google.API
             }
 
             return null;
-        }
-
-        public static string GetStringWithTrueDefault(this bool value)
-        {
-            if (value)
-            {
-                return null;
-            }
-
-            return "0";
         }
 
         private static T GetResultObject<TService, T>(

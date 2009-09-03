@@ -1,5 +1,5 @@
-﻿//-----------------------------------------------------------------------
-// <copyright file="IBookResult.cs" company="iron9light">
+//-----------------------------------------------------------------------
+// <copyright file="LocalResultType.cs" company="iron9light">
 // Copyright (c) 2009 iron9light
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -26,43 +26,48 @@
 namespace Google.API.Search
 {
     /// <summary>
-    /// Book search result.
+    /// The result type of GlocalSearch.
     /// </summary>
-    public interface IBookResult
+    public sealed class LocalResultType : Enumeration<LocalResultType>
     {
         /// <summary>
-        /// Gets the title of the book.
+        /// Request KML, Local Business Listings, and Geocode results.
         /// </summary>
-        string Title { get; }
+        public static readonly LocalResultType Blended = new LocalResultType("Blended", "blended");
 
         /// <summary>
-        /// Gets the URL of the result.
+        /// Request KML and Geocode results.
         /// </summary>
-        string Url { get; }
+        public static readonly LocalResultType Kmlonly = new LocalResultType("Kmlonly", "kmlonly");
 
         /// <summary>
-        /// Gets the list of authors of the book.
+        /// Request Local Business Listings and Geocode results.
         /// </summary>
-        string Authors { get; }
+        public static readonly LocalResultType Localonly = new LocalResultType("Localonly", "localonly", true);
+
+        private LocalResultType(string value)
+            : base(value)
+        {
+        }
+
+        private LocalResultType(string name, string value)
+            : base(name, value)
+        {
+        }
+
+        private LocalResultType(string name, string value, bool isDefault)
+            : base(name, value, isDefault)
+        {
+        }
 
         /// <summary>
-        /// Gets the identifier associated with the book. This is typically an ISBN.
+        /// Performs an implicit conversion from <see cref="System.String"/> to <see cref="LocalResultType"/>.
         /// </summary>
-        string BookId { get; }
-
-        /// <summary>
-        /// Gets the year that the book was published.
-        /// </summary>
-        string PublishedYear { get; }
-
-        /// <summary>
-        /// Gets the number of pages contained within the book.
-        /// </summary>
-        int PageCount { get; }
-
-        /// <summary>
-        /// Gets a thumbnail image of the books cover.
-        /// </summary>
-        ITbImage TbImage { get; }
+        /// <param name="value">The value.</param>
+        /// <returns>The result of the conversion.</returns>
+        public static implicit operator LocalResultType(string value)
+        {
+            return Convert(value, s => new LocalResultType(s));
+        }
     }
 }

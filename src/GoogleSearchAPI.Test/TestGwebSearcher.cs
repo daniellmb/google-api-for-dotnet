@@ -45,10 +45,10 @@ namespace Google.API.Search.Test
         {
             var keyword = "Google Translate API .NET";
             var start = 1;
-            var resultSize = ResultSize.small;
-            var language = new Language();
-            var safeLevel = SafeLevel.active;
-            var duplicateFilter = false;
+            var resultSize = ResultSize.Small;
+            var language = Language.GetDefault();
+            var safeLevel = SafeLevel.Active;
+            var duplicateFilter = DuplicateFilter.Off;
 
             var searchData = this.Client.GSearch(keyword, start, resultSize, null, null, safeLevel, language, duplicateFilter);
             Assert.IsNotNull(searchData);
@@ -105,7 +105,7 @@ namespace Google.API.Search.Test
             var keyword = "Disney";
             var count = 25;
             var language = Language.French;
-            var safeLevel = SafeLevel.off;
+            var safeLevel = SafeLevel.Off;
 
             var results = this.Client.Search(keyword, count, language, safeLevel);
             Assert.IsNotNull(results);

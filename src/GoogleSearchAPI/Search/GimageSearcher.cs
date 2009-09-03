@@ -61,11 +61,11 @@ namespace Google.API.Search
             return Search(
                 keyword,
                 resultCount,
-                new SafeLevel(),
-                new ImageSize(),
-                new Colorization(),
-                new ImageType(),
-                new FileType(),
+                SafeLevel.GetDefault(),
+                ImageSize.GetDefault(),
+                Colorization.GetDefault(),
+                ImageType.GetDefault(),
+                ImageFileType.GetDefault(),
                 null);
         }
 
@@ -97,11 +97,11 @@ namespace Google.API.Search
             return Search(
                 keyword,
                 resultCount,
-                new SafeLevel(),
-                new ImageSize(),
-                new Colorization(),
-                new ImageType(),
-                new FileType(),
+                SafeLevel.GetDefault(),
+                ImageSize.GetDefault(),
+                Colorization.GetDefault(),
+                ImageType.GetDefault(),
+                ImageFileType.GetDefault(),
                 site);
         }
 
@@ -113,7 +113,7 @@ namespace Google.API.Search
         /// <param name="imageSize">The size of image.</param>
         /// <param name="colorization">The specified colorization of image.</param>
         /// <param name="imageType">The special type of image.</param>
-        /// <param name="fileType">The specified file type of image.</param>
+        /// <param name="imageFileType">The specified file type of image.</param>
         /// <returns>The result itmes.</returns>
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
         /// <example>
@@ -124,9 +124,9 @@ namespace Google.API.Search
         /// ImageSize imageSize = ImageSize.medium;
         /// Colorization colorization = Colorization.gray;
         /// ImageType imageType = ImageType.face;
-        /// FileType fileType = FileType.gif;
+        /// ImageFileType imageFileType = ImageFileType.gif;
         ///
-        /// IList&lt;IImageResult&gt; results = GimageSearcher.Search(keyword, count, imageSize, colorization, imageType, fileType);
+        /// IList&lt;IImageResult&gt; results = GimageSearcher.Search(keyword, count, imageSize, colorization, imageType, imageFileType);
         /// foreach(IImageResult result in results)
         /// {
         ///     return string.Format("{0}" + Environment.NewLine + "{1} x {2} - {3}" + Environment.NewLine + "{4}",
@@ -144,9 +144,9 @@ namespace Google.API.Search
             ImageSize imageSize,
             Colorization colorization,
             ImageType imageType,
-            FileType fileType)
+            ImageFileType imageFileType)
         {
-            return Search(keyword, resultCount, new SafeLevel(), imageSize, colorization, imageType, fileType, null);
+            return Search(keyword, resultCount, SafeLevel.GetDefault(), imageSize, colorization, imageType, imageFileType, null);
         }
 
         /// <summary>
@@ -157,7 +157,7 @@ namespace Google.API.Search
         /// <param name="imageSize">The size of image.</param>
         /// <param name="colorization">The specified colorization of image.</param>
         /// <param name="imageType">The special type of image.</param>
-        /// <param name="fileType">The specified file type of image.</param>
+        /// <param name="imageFileType">The specified file type of image.</param>
         /// <param name="site">The specified domain. It will restrict the search to images within this domain.e.g., <c>photobucket.com</c>.</param>
         /// <returns>The result itmes.</returns>
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
@@ -169,10 +169,10 @@ namespace Google.API.Search
         /// ImageSize imageSize = ImageSize.all;
         /// Colorization colorization = Colorization.color;
         /// ImageType imageType = ImageType.all;
-        /// FileType fileType = FileType.jpg;
+        /// ImageFileType imageFileType = ImageFileType.jpg;
         /// string site = "sina.com";
         ///
-        /// IList&lt;IImageResult&gt; results = GimageSearcher.Search(keyword, count, imageSize, colorization, imageType, fileType, site);
+        /// IList&lt;IImageResult&gt; results = GimageSearcher.Search(keyword, count, imageSize, colorization, imageType, imageFileType, site);
         /// foreach(IImageResult result in results)
         /// {
         ///     return string.Format("{0}" + Environment.NewLine + "{1} x {2} - {3}" + Environment.NewLine + "{4}",
@@ -190,10 +190,10 @@ namespace Google.API.Search
             ImageSize imageSize,
             Colorization colorization,
             ImageType imageType,
-            FileType fileType,
+            ImageFileType imageFileType,
             string site)
         {
-            return Search(keyword, resultCount, new SafeLevel(), imageSize, colorization, imageType, fileType, site);
+            return Search(keyword, resultCount, SafeLevel.GetDefault(), imageSize, colorization, imageType, imageFileType, site);
         }
 
         /// <summary>
@@ -205,7 +205,7 @@ namespace Google.API.Search
         /// <param name="imageSize">The size of image.</param>
         /// <param name="colorization">The specified colorization of image.</param>
         /// <param name="imageType">The special type of image.</param>
-        /// <param name="fileType">The specified file type of image.</param>
+        /// <param name="imageFileType">The specified file type of image.</param>
         /// <param name="site">The specified domain. It will restrict the search to images within this domain.e.g., <c>photobucket.com</c>.</param>
         /// <returns>The result itmes.</returns>
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
@@ -217,11 +217,11 @@ namespace Google.API.Search
         /// ImageSize imageSize = ImageSize.xxlarge;
         /// Colorization colorization = Colorization.all;
         /// ImageType imageType = ImageType.all;
-        /// FileType fileType = FileType.bmp;
+        /// ImageFileType imageFileType = ImageFileType.bmp;
         /// string site = null;
         /// SafeLevel safeLevel = SafeLevel.active;
         ///
-        /// IList&lt;IImageResult&gt; results = GimageSearcher.Search(keyword, count, imageSize, colorization, imageType, fileType, site, safeLevel);
+        /// IList&lt;IImageResult&gt; results = GimageSearcher.Search(keyword, count, imageSize, colorization, imageType, imageFileType, site, safeLevel);
         /// foreach(IImageResult result in results)
         /// {
         ///     return string.Format("{0}" + Environment.NewLine + "{1} x {2} - {3}" + Environment.NewLine + "{4}",
@@ -240,12 +240,12 @@ namespace Google.API.Search
             ImageSize imageSize,
             Colorization colorization,
             ImageType imageType,
-            FileType fileType,
+            ImageFileType imageFileType,
             string site)
         {
             var client = new GimageSearchClient();
             return client.Search(
-                keyword, resultCount, safeLevel, imageSize, colorization, new ImageColor(), imageType, fileType, site);
+                keyword, resultCount, safeLevel, imageSize, colorization, ImageColor.GetDefault(), imageType, imageFileType, site);
         }
     }
 }

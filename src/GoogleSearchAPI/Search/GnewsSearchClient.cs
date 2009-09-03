@@ -43,33 +43,7 @@ namespace Google.API.Search
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
         public IList<INewsResult> Search(string keyword, int resultCount)
         {
-            return this.Search(keyword, resultCount, null, new SortType());
-        }
-
-        /// <summary>
-        /// Search news.
-        /// </summary>
-        /// <param name="keyword">The keyword.</param>
-        /// <param name="resultCount">The count of result itmes.</param>
-        /// <param name="sortBy">The way to order results.</param>
-        /// <returns>The result items.</returns>
-        /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
-        public IList<INewsResult> Search(string keyword, int resultCount, SortType sortBy)
-        {
-            return this.Search(keyword, resultCount, null, sortBy);
-        }
-
-        /// <summary>
-        /// Search news.
-        /// </summary>
-        /// <param name="keyword">The keyword.</param>
-        /// <param name="resultCount">The count of result itmes.</param>
-        /// <param name="geo">A particular location of the news. You must supply either a city, state, country, or zip code as in "Santa Barbara" or "British Columbia" or "Peru" or "93108".</param>
-        /// <returns>The result items.</returns>
-        /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
-        public IList<INewsResult> Search(string keyword, int resultCount, string geo)
-        {
-            return this.Search(keyword, resultCount, geo, new SortType());
+            return this.Search(keyword, resultCount, null, SortType.GetDefault());
         }
 
         /// <summary>
@@ -81,7 +55,7 @@ namespace Google.API.Search
         /// <param name="sortBy">The way to order results.</param>
         /// <returns>The result items.</returns>
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
-        public IList<INewsResult> Search(string keyword, int resultCount, string geo, SortType sortBy)
+        public IList<INewsResult> Search(string keyword, int resultCount, string geo, string sortBy)
         {
             return this.Search(keyword, resultCount, geo, sortBy, null, null, null);
         }
@@ -102,7 +76,7 @@ namespace Google.API.Search
             string keyword,
             int resultCount,
             [Optional] string geo,
-            [Optional] SortType sortBy,
+            [Optional] string sortBy,
             [Optional] string quoteId,
             [Optional] string topic,
             [Optional] string edition)
@@ -127,7 +101,7 @@ namespace Google.API.Search
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
         public IList<INewsResult> SearchLocal(string geo, int resultCount)
         {
-            return this.SearchLocal(geo, resultCount, new SortType());
+            return this.SearchLocal(geo, resultCount, SortType.GetDefault());
         }
 
         /// <summary>
@@ -138,7 +112,7 @@ namespace Google.API.Search
         /// <param name="sortBy">The way to order results.</param>
         /// <returns>The result items.</returns>
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
-        public IList<INewsResult> SearchLocal(string geo, int resultCount, SortType sortBy)
+        public IList<INewsResult> SearchLocal(string geo, int resultCount, [Optional] string sortBy)
         {
             if (geo == null)
             {
@@ -148,12 +122,65 @@ namespace Google.API.Search
             return this.Search(null, resultCount, geo, sortBy);
         }
 
+        /// <summary>
+        /// Search the latest local news.
+        /// </summary>
+        /// <param name="geo">A particular location of the news. You must supply either a city, state, country, or zip code as in "Santa Barbara" or "British Columbia" or "Peru" or "93108".</param>
+        /// <param name="resultCount">The count of result itmes.</param>
+        /// <param name="sortBy">The way to order results.</param>
+        /// <returns>The result items.</returns>
+        /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
+        public IList<INewsResult> SearchLocal(
+            string geo,
+            int resultCount,
+            [Optional] string sortBy,
+            [Optional] string quoteId,
+            [Optional] string topic,
+            [Optional] string edition)
+        {
+            // Todo: SearchLocal.
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Search the latest local news.
+        /// </summary>
+        /// <param name="topic">This optional argument tells the news search system to scope search results to a particular topic.</param>
+        /// <param name="resultCount">The count of result itmes.</param>
+        /// <returns>The result items.</returns>
+        /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
+        public IList<INewsResult> SearchTopic(string topic, int resultCount)
+        {
+            // Todo: SearchTopic.
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Search the latest local news.
+        /// </summary>
+        /// <param name="topic">This optional argument tells the news search system to scope search results to a particular topic.</param>
+        /// <param name="resultCount">The count of result itmes.</param>
+        /// <param name="sortBy">The way to order results.</param>
+        /// <returns>The result items.</returns>
+        /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
+        public IList<INewsResult> SearchTopic(
+            string topic,
+            int resultCount,
+            [Optional] string geo,
+            [Optional] string sortBy,
+            [Optional] string quoteId,
+            [Optional] string edition)
+        {
+            // Todo: SearchTopic.
+            throw new NotImplementedException();
+        }
+
         internal SearchData<GnewsResult> GSearch(
             string keyword,
             int start,
-            ResultSize resultSize,
+            string resultSize,
             string geo,
-            SortType sortBy,
+            string sortBy,
             string quoteId,
             string topic,
             string edition)
@@ -170,9 +197,9 @@ namespace Google.API.Search
                         this.AcceptLanguage,
                         this.ApiKey,
                         keyword,
-                        resultSize.ToString(),
+                        resultSize,
                         start,
-                        sortBy.GetString(),
+                        sortBy,
                         geo,
                         quoteId,
                         topic,

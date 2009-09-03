@@ -1,5 +1,5 @@
-﻿//-----------------------------------------------------------------------
-// <copyright file="IBookResult.cs" company="iron9light">
+//-----------------------------------------------------------------------
+// <copyright file="ImageFileType.cs" company="iron9light">
 // Copyright (c) 2009 iron9light
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -26,43 +26,58 @@
 namespace Google.API.Search
 {
     /// <summary>
-    /// Book search result.
+    /// The specified file type of image.
     /// </summary>
-    public interface IBookResult
+    public sealed class ImageFileType : Enumeration<ImageFileType>
     {
         /// <summary>
-        /// Gets the title of the book.
+        /// All types. Default value.
         /// </summary>
-        string Title { get; }
+        public static readonly ImageFileType All = new ImageFileType("All", string.Empty, true);
 
         /// <summary>
-        /// Gets the URL of the result.
+        /// The jpg images.
         /// </summary>
-        string Url { get; }
+        public static readonly ImageFileType Jpg = new ImageFileType("Jpg", "jpg");
 
         /// <summary>
-        /// Gets the list of authors of the book.
+        /// The png images.
         /// </summary>
-        string Authors { get; }
+        public static readonly ImageFileType Png = new ImageFileType("Png", "png");
 
         /// <summary>
-        /// Gets the identifier associated with the book. This is typically an ISBN.
+        /// The gif images.
         /// </summary>
-        string BookId { get; }
+        public static readonly ImageFileType Gif = new ImageFileType("Gif", "gif");
 
         /// <summary>
-        /// Gets the year that the book was published.
+        /// The bmp images.
         /// </summary>
-        string PublishedYear { get; }
+        public static readonly ImageFileType Bmp = new ImageFileType("Bmp", "bmp");
+
+        private ImageFileType(string value)
+            : base(value)
+        {
+        }
+
+        private ImageFileType(string name, string value)
+            : base(name, value)
+        {
+        }
+
+        private ImageFileType(string name, string value, bool isDefault)
+            : base(name, value, isDefault)
+        {
+        }
 
         /// <summary>
-        /// Gets the number of pages contained within the book.
+        /// Performs an implicit conversion from <see cref="System.String"/> to <see cref="ImageFileType"/>.
         /// </summary>
-        int PageCount { get; }
-
-        /// <summary>
-        /// Gets a thumbnail image of the books cover.
-        /// </summary>
-        ITbImage TbImage { get; }
+        /// <param name="value">The value.</param>
+        /// <returns>The result of the conversion.</returns>
+        public static implicit operator ImageFileType(string value)
+        {
+            return Convert(value, s => new ImageFileType(s));
+        }
     }
 }

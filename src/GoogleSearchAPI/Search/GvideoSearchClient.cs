@@ -43,7 +43,7 @@ namespace Google.API.Search
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
         public IList<IVideoResult> Search(string keyword, int resultCount)
         {
-            return this.Search(keyword, resultCount, new SortType());
+            return this.Search(keyword, resultCount, SortType.GetDefault());
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Google.API.Search
         /// <param name="sortBy">The way to order results.</param>
         /// <returns>The result items.</returns>
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
-        public IList<IVideoResult> Search(string keyword, int resultCount, [Optional] SortType sortBy)
+        public IList<IVideoResult> Search(string keyword, int resultCount, [Optional] string sortBy)
         {
             if (keyword == null)
             {
@@ -67,7 +67,7 @@ namespace Google.API.Search
             return results.ConvertAll(item => (IVideoResult)item);
         }
 
-        internal SearchData<GvideoResult> GSearch(string keyword, int start, ResultSize resultSize, SortType sortBy)
+        internal SearchData<GvideoResult> GSearch(string keyword, int start, string resultSize, string sortBy)
         {
             if (keyword == null)
             {
@@ -78,7 +78,7 @@ namespace Google.API.Search
                 this.GetResponseData(
                     service =>
                     service.VideoSearch(
-                        this.AcceptLanguage, this.ApiKey, keyword, resultSize.GetString(), start, sortBy.GetString()));
+                        this.AcceptLanguage, this.ApiKey, keyword, resultSize, start, sortBy));
             return responseData;
         }
     }

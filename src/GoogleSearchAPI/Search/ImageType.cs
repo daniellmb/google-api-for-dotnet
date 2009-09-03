@@ -1,5 +1,5 @@
-﻿//-----------------------------------------------------------------------
-// <copyright file="IBookResult.cs" company="iron9light">
+//-----------------------------------------------------------------------
+// <copyright file="ImageType.cs" company="iron9light">
 // Copyright (c) 2009 iron9light
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -26,43 +26,63 @@
 namespace Google.API.Search
 {
     /// <summary>
-    /// Book search result.
+    /// The special type of image.
     /// </summary>
-    public interface IBookResult
+    public sealed class ImageType : Enumeration<ImageType>
     {
         /// <summary>
-        /// Gets the title of the book.
+        /// All types. Default value.
         /// </summary>
-        string Title { get; }
+        public static readonly ImageType All = new ImageType("All", string.Empty, true);
 
         /// <summary>
-        /// Gets the URL of the result.
+        /// Images of news.
         /// </summary>
-        string Url { get; }
+        public static readonly ImageType News = new ImageType("News", "news");
 
         /// <summary>
-        /// Gets the list of authors of the book.
+        /// Images of faces.
         /// </summary>
-        string Authors { get; }
+        public static readonly ImageType Face = new ImageType("Face", "face");
 
         /// <summary>
-        /// Gets the identifier associated with the book. This is typically an ISBN.
+        /// Photos.
         /// </summary>
-        string BookId { get; }
+        public static readonly ImageType Photo = new ImageType("Photo", "photo");
 
         /// <summary>
-        /// Gets the year that the book was published.
+        /// Clipart images.
         /// </summary>
-        string PublishedYear { get; }
+        public static readonly ImageType Clipart = new ImageType("Clipart", "clipart");
 
         /// <summary>
-        /// Gets the number of pages contained within the book.
+        /// Images of line drawings.
         /// </summary>
-        int PageCount { get; }
+        public static readonly ImageType Lineart = new ImageType("Lineart", "lineart");
+
+        private ImageType(string value)
+            : base(value)
+        {
+        }
+
+        private ImageType(string name, string value)
+            : base(name, value)
+        {
+        }
+
+        private ImageType(string name, string value, bool isDefault)
+            : base(name, value, isDefault)
+        {
+        }
 
         /// <summary>
-        /// Gets a thumbnail image of the books cover.
+        /// Performs an implicit conversion from <see cref="System.String"/> to <see cref="Google.API.Search.ImageType"/>.
         /// </summary>
-        ITbImage TbImage { get; }
+        /// <param name="value">The value.</param>
+        /// <returns>The result of the conversion.</returns>
+        public static implicit operator ImageType(string value)
+        {
+            return Convert(value, s => new ImageType(s));
+        }
     }
 }

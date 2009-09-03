@@ -52,6 +52,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Core\Enumeration.cs">
+      <Link>Enumeration.cs</Link>
+    </Compile>
+    <Compile Include="..\Core\Enumeration.Generic.cs">
+      <Link>Enumeration.Generic.cs</Link>
+    </Compile>
     <Compile Include="..\Core\GoogleAPIException.cs">
       <Link>GoogleAPIException.cs</Link>
     </Compile>
@@ -66,9 +72,6 @@
     </Compile>
     <Compile Include="..\Core\HttpUtility.cs">
       <Link>HttpUtility.cs</Link>
-    </Compile>
-    <Compile Include="..\Core\Language.cs">
-      <Link>Language.cs</Link>
     </Compile>
     <Compile Include="..\Core\MyWebContentTypeMapper.cs">
       <Link>MyWebContentTypeMapper.cs</Link>
@@ -85,6 +88,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="GoogleSearchAPI.shfbproj" />
     <None Include="Properties\AssemblyInfo.cs.template" />
+    <Compile Include="Search\Colorization.cs" />
+    <Compile Include="Search\DuplicateFilter.cs" />
+    <Compile Include="Search\ImageFileType.cs" />
     <Compile Include="Search\GblogResult.cs" />
     <Compile Include="Search\GblogSearchClient.cs" />
     <Compile Include="Search\GblogSearcher.cs" />
@@ -115,6 +121,9 @@
     <Compile Include="Search\IBookResult.cs" />
     <Compile Include="Search\IImageResult.cs" />
     <Compile Include="Search\ILocalResult.cs" />
+    <Compile Include="Search\ImageColor.cs" />
+    <Compile Include="Search\ImageSize.cs" />
+    <Compile Include="Search\ImageType.cs" />
     <Compile Include="Search\INewsImage.cs" />
     <Compile Include="Search\INewsResult.cs" />
     <Compile Include="Search\INewsResultItem.cs" />
@@ -124,12 +133,18 @@
     <Compile Include="Search\ITbImage.cs" />
     <Compile Include="Search\IVideoResult.cs" />
     <Compile Include="Search\IWebResult.cs" />
-    <Compile Include="Search\LanguageUtility.cs" />
+    <Compile Include="Search\Language.cs" />
+    <Compile Include="Search\LocalResultType.cs" />
     <Compile Include="Search\LocalSearchData.cs" />
+    <Compile Include="Search\NewsEdition.cs" />
+    <Compile Include="Search\NewsTopic.cs" />
     <Compile Include="Search\PhoneNumber.cs" />
     <Compile Include="Search\GSearchClient.cs" />
+    <Compile Include="Search\ResultSize.cs" />
+    <Compile Include="Search\SafeLevel.cs" />
     <Compile Include="Search\SearchData.cs" />
     <Compile Include="Search\SearchUtility.cs" />
+    <Compile Include="Search\SortType.cs" />
     <Compile Include="Search\TbImage.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

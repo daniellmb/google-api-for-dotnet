@@ -46,11 +46,11 @@ namespace Google.API.Search
             return this.Search(
                 keyword,
                 resultCount,
-                new SafeLevel(),
-                new ImageSize(),
-                new Colorization(),
-                new ImageType(),
-                new FileType(),
+                SafeLevel.GetDefault(),
+                ImageSize.GetDefault(),
+                Colorization.GetDefault(),
+                ImageType.GetDefault(),
+                ImageFileType.GetDefault(),
                 null);
         }
 
@@ -67,11 +67,11 @@ namespace Google.API.Search
             return this.Search(
                 keyword,
                 resultCount,
-                new SafeLevel(),
-                new ImageSize(),
-                new Colorization(),
-                new ImageType(),
-                new FileType(),
+                SafeLevel.GetDefault(),
+                ImageSize.GetDefault(),
+                Colorization.GetDefault(),
+                ImageType.GetDefault(),
+                ImageFileType.GetDefault(),
                 site);
         }
 
@@ -89,13 +89,13 @@ namespace Google.API.Search
         public IList<IImageResult> Search(
             string keyword,
             int resultCount,
-            ImageSize imageSize,
-            Colorization colorization,
-            ImageType imageType,
-            FileType fileType)
+            string imageSize,
+            string colorization,
+            string imageType,
+            string fileType)
         {
             return this.Search(
-                keyword, resultCount, new SafeLevel(), imageSize, colorization, imageType, fileType, null);
+                keyword, resultCount, SafeLevel.GetDefault(), imageSize, colorization, imageType, fileType, null);
         }
 
         /// <summary>
@@ -113,14 +113,14 @@ namespace Google.API.Search
         public IList<IImageResult> Search(
             string keyword,
             int resultCount,
-            ImageSize imageSize,
-            Colorization colorization,
-            ImageType imageType,
-            FileType fileType,
+            string imageSize,
+            string colorization,
+            string imageType,
+            string fileType,
             string site)
         {
             return this.Search(
-                keyword, resultCount, new SafeLevel(), imageSize, colorization, imageType, fileType, site);
+                keyword, resultCount, SafeLevel.GetDefault(), imageSize, colorization, imageType, fileType, site);
         }
 
         /// <summary>
@@ -139,15 +139,15 @@ namespace Google.API.Search
         public IList<IImageResult> Search(
             string keyword,
             int resultCount,
-            SafeLevel safeLevel,
-            ImageSize imageSize,
-            Colorization colorization,
-            ImageType imageType,
-            FileType fileType,
+            string safeLevel,
+            string imageSize,
+            string colorization,
+            string imageType,
+            string fileType,
             string site)
         {
             return this.Search(
-                keyword, resultCount, safeLevel, imageSize, colorization, new ImageColor(), imageType, fileType, site);
+                keyword, resultCount, safeLevel, imageSize, colorization, ImageColor.GetDefault(), imageType, fileType, site);
         }
 
         /// <summary>
@@ -167,12 +167,12 @@ namespace Google.API.Search
         public IList<IImageResult> Search(
             string keyword,
             int resultCount,
-            [Optional] SafeLevel safeLevel,
-            [Optional] ImageSize imageSize,
-            [Optional] Colorization colorization,
-            [Optional] ImageColor color,
-            [Optional] ImageType imageType,
-            [Optional] FileType fileType,
+            [Optional] string safeLevel,
+            [Optional] string imageSize,
+            [Optional] string colorization,
+            [Optional] string color,
+            [Optional] string imageType,
+            [Optional] string fileType,
             string site)
         {
             if (keyword == null)
@@ -191,13 +191,13 @@ namespace Google.API.Search
         internal SearchData<GimageResult> GSearch(
             string keyword,
             int start,
-            ResultSize resultSize,
-            SafeLevel safeLevel,
-            ImageSize imageSize,
-            Colorization colorization,
-            ImageColor color,
-            ImageType imageType,
-            FileType fileType,
+            string resultSize,
+            string safeLevel,
+            string imageSize,
+            string colorization,
+            string color,
+            string imageType,
+            string fileType,
             string searchSite)
         {
             if (keyword == null)
@@ -212,14 +212,14 @@ namespace Google.API.Search
                         this.AcceptLanguage,
                         this.ApiKey,
                         keyword,
-                        resultSize.GetString(),
+                        resultSize,
                         start,
-                        safeLevel.GetString(),
-                        imageSize.GetString(),
-                        colorization.GetString(),
-                        color.GetString(),
-                        imageType.GetString(),
-                        fileType.GetString(),
+                        safeLevel,
+                        imageSize,
+                        colorization,
+                        color,
+                        imageType,
+                        fileType,
                         searchSite));
             return responseData;
         }
