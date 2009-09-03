@@ -30,6 +30,16 @@ namespace Google.API.Translate
     /// </summary>
     public sealed class TranslateFormat : Enumeration<TranslateFormat>
     {
+        /// <summary>
+        /// Text format. Default value.
+        /// </summary>
+        public static readonly TranslateFormat Text = new TranslateFormat("Text", "text", true);
+
+        /// <summary>
+        /// Html format.
+        /// </summary>
+        public static readonly TranslateFormat Html = new TranslateFormat("Html", "html");
+
         private TranslateFormat(string value)
             : base(value)
         {
@@ -45,19 +55,14 @@ namespace Google.API.Translate
         {
         }
 
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="System.String"/> to <see cref="Google.API.Translate.TranslateFormat"/>.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>The result of the conversion.</returns>
         public static implicit operator TranslateFormat(string value)
         {
             return Convert(value, s => new TranslateFormat(s));
         }
-
-        /// <summary>
-        /// Text format. Default value.
-        /// </summary>
-        public static readonly TranslateFormat Text = new TranslateFormat("Text", "text", true);
-
-        /// <summary>
-        /// Html format.
-        /// </summary>
-        public static readonly TranslateFormat Html = new TranslateFormat("Html", "html");
     }
 }

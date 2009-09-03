@@ -59,6 +59,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Core\Enumeration.cs">
+      <Link>Enumeration.cs</Link>
+    </Compile>
+    <Compile Include="..\Core\Enumeration.Generic.cs">
+      <Link>Enumeration.Generic.cs</Link>
+    </Compile>
     <Compile Include="..\Core\GoogleAPIException.cs">
       <Link>GoogleAPIException.cs</Link>
     </Compile>
@@ -233,14 +239,17 @@
     <Compile Include="..\GoogleTranslateAPI\Translate\ILanguageService.cs">
       <Link>Translate\ILanguageService.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleTranslateAPI\Translate\LanguageUtility.cs">
-      <Link>Translate\LanguageUtility.cs</Link>
+    <Compile Include="..\GoogleTranslateAPI\Translate\Language.cs">
+      <Link>Translate\Language.cs</Link>
     </Compile>
     <Compile Include="..\GoogleTranslateAPI\Translate\TranslateClient.cs">
       <Link>Translate\TranslateClient.cs</Link>
     </Compile>
     <Compile Include="..\GoogleTranslateAPI\Translate\TranslateData.cs">
       <Link>Translate\TranslateData.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleTranslateAPI\Translate\TranslateFormat.cs">
+      <Link>Translate\TranslateFormat.cs</Link>
     </Compile>
     <Compile Include="..\GoogleTranslateAPI\Translate\Translator.cs">
       <Link>Translate\Translator.cs</Link>

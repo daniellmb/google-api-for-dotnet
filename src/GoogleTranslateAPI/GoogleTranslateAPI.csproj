@@ -91,7 +91,6 @@
     <Compile Include="Translate\DetectData.cs" />
     <Compile Include="Translate\ILanguageService.cs" />
     <Compile Include="Translate\Language.cs" />
-    <Compile Include="Translate\LanguageUtility.cs" />
     <Compile Include="Translate\TranslateClient.cs" />
     <Compile Include="Translate\TranslateData.cs" />
     <Compile Include="Translate\TranslateFormat.cs" />
