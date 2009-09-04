@@ -173,7 +173,7 @@ namespace Google.API.Search
             [Optional] string color,
             [Optional] string imageType,
             [Optional] string fileType,
-            string site)
+            [Optional] string site)
         {
             if (keyword == null)
             {

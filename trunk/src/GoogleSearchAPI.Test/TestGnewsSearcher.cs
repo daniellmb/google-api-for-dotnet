@@ -183,6 +183,48 @@ namespace Google.API.Search.Test
         }
 
         [Test]
+        public void SearchTopicTest()
+        {
+            var count = 16;
+            var resultsOfSports = this.Client.SearchTopic(NewsTopic.Sports, count);
+            var resultsOfTechnology = this.Client.SearchTopic(NewsTopic.Technology, count);
+            Assert.IsNotNull(resultsOfSports);
+            Assert.IsNotNull(resultsOfTechnology);
+            Assert.AreEqual(count, resultsOfSports.Count);
+            Assert.AreEqual(count, resultsOfTechnology.Count);
+
+            var areSame = true;
+            for (var i = 0; i < resultsOfSports.Count; ++i)
+            {
+                if (resultsOfSports[i].ToString() != resultsOfTechnology[i].ToString())
+                {
+                    areSame = false;
+                    break;
+                }
+            }
+
+            Assert.IsFalse(areSame);
+
+            Console.WriteLine("News of sports");
+            Console.WriteLine("-----------------------------");
+            foreach (var result in resultsOfSports)
+            {
+                Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
+
+            Console.WriteLine("News of technology");
+            Console.WriteLine("-----------------------------");
+            foreach (var result in resultsOfTechnology)
+            {
+                Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
+        }
+
+        [Test]
         public void SearchWithBigResultTest()
         {
             var results = this.Client.Search("a", 50);
