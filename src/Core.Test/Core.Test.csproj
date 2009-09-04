@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="Properties\AssemblyInfo.cs.template" />
+    <Compile Include="TestEnumeration.cs" />
     <Compile Include="TestHttpUtility.cs" />
   </ItemGroup>
   <ItemGroup>
