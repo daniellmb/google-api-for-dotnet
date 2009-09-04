@@ -59,7 +59,7 @@ namespace Google.API.Search
         /// <returns>The result items.</returns>
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
         public IList<ILocalResult> Search(
-            string keyword, int resultCount, float latitude, float longitude, string resultType)
+            string keyword, int resultCount, float latitude, float longitude, [Optional] string resultType)
         {
             return this.Search(keyword, resultCount, latitude, longitude, null, null, resultType);
         }
@@ -101,7 +101,7 @@ namespace Google.API.Search
             float longitude,
             float width,
             float height,
-            string resultType)
+            [Optional] string resultType)
         {
             return this.Search(keyword, resultCount, latitude, longitude, (float?)width, (float?)height, resultType);
         }
