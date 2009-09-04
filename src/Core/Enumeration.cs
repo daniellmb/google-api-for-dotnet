@@ -25,6 +25,8 @@
 
 namespace Google.API
 {
+    using System.Diagnostics;
+
     /// <summary>
     /// The enumeration. For parameters of Google APIs.
     /// </summary>
@@ -170,6 +172,8 @@ namespace Google.API
         /// </returns>
         public override int GetHashCode()
         {
+            Debug.Assert(this.Value != null, "Value cannot be null.");
+
             return this.Value.GetHashCode();
         }
     }

@@ -27,6 +27,7 @@ namespace Google.API
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using System.Reflection;
 
@@ -145,11 +146,11 @@ namespace Google.API
                         type.GetFields(
                         BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly | BindingFlags.GetField)
                     where fieldInfo.FieldType.IsAssignableFrom(type)
-                    select fieldInfo.GetValue(null);
+                    select fieldInfo.GetValue(null) as T;
 
-                foreach (var x in enums)
+                foreach (var @enum in enums)
                 {
-                    var @enum = x as T;
+                    Debug.Assert(@enum != null, "enum cannot be null.");
 
                     dictionary[@enum.Value] = @enum;
 
