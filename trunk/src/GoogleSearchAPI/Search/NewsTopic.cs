@@ -38,7 +38,7 @@ namespace Google.API.Search
         /// <summary>
         /// The Headlines.
         /// </summary>
-        public static readonly NewsTopic Headlines = new NewsTopic("Headlines", "h", true);
+        public static readonly NewsTopic Headlines = new NewsTopic("Headlines", "h");
 
         /// <summary>
         /// The World.
