@@ -71,7 +71,7 @@ namespace Google.API.Search
         /// <example>
         /// This is the c# code example.
         /// <code>
-        /// IList&lt;IPatentResult&gt; results = GpatentSearcher.Search("encode", 32, SortType.relevance);
+        /// IList&lt;IPatentResult&gt; results = GpatentSearcher.Search("encode", 32, SortType.Relevance);
         /// foreach(IPatentResult result in results)
         /// {
         ///     Console.WriteLine("[{0} - US Pat. {1} - filed {2:d} - {3}] {4}", result.Title, result.PatentNumber, result.ApplicationDate, result.Assignee, result.Content);
@@ -126,7 +126,7 @@ namespace Google.API.Search
         /// <example>
         /// This is the c# code example.
         /// <code>
-        /// IList&lt;IPatentResult&gt; results = GpatentSearcher.Search("search engine", 30, true, false, SortType.date);
+        /// IList&lt;IPatentResult&gt; results = GpatentSearcher.Search("search engine", 30, true, false, SortType.Date);
         /// foreach(IPatentResult result in results)
         /// {
         ///     Console.WriteLine("[{0} - US Pat. {1} - filed {2:d} - {3}] {4}", result.Title, result.PatentNumber, result.ApplicationDate, result.Assignee, result.Content);

@@ -45,7 +45,7 @@ namespace Google.API.Translate
         /// This is the c# code example.
         /// <code>
         /// string text = "我喜欢跑步。";
-        /// string translated = Translator.Translate(text, Language.Chinese_Simplified, Language.English);
+        /// string translated = Translator.Translate(text, Language.ChineseSimplified, Language.English);
         /// Console.WriteLine(translated);
         /// // I like running.
         /// </code>
@@ -69,7 +69,7 @@ namespace Google.API.Translate
         /// This is the c# code example.
         /// <code>
         /// string text = GetYourHtmlString();
-        /// string translated = Translator.Translate(text, Language.English, Language.French, TranslateFormat.html);
+        /// string translated = Translator.Translate(text, Language.English, Language.French, TranslateFormat.Html);
         /// </code>
         /// </example>
         public static string Translate(string text, Language from, Language to, TranslateFormat format)

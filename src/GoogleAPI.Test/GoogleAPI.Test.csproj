@@ -52,8 +52,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Core.Test\TestEnumeration.cs">
+      <Link>TestEnumeration.cs</Link>
+    </Compile>
     <Compile Include="..\Core.Test\TestHttpUtility.cs">
       <Link>TestHttpUtility.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleSearchAPI.Test\TestColorization.cs">
+      <Link>Search\TestColorization.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleSearchAPI.Test\TestDuplicateFilter.cs">
+      <Link>Search\TestDuplicateFilter.cs</Link>
     </Compile>
     <Compile Include="..\GoogleSearchAPI.Test\TestGblogSearcher.cs">
       <Link>Search\TestGblogSearcher.cs</Link>
@@ -79,8 +88,47 @@
     <Compile Include="..\GoogleSearchAPI.Test\TestGwebSearcher.cs">
       <Link>Search\TestGwebSearcher.cs</Link>
     </Compile>
+    <Compile Include="..\GoogleSearchAPI.Test\TestImageColor.cs">
+      <Link>Search\TestImageColor.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleSearchAPI.Test\TestImageFileType.cs">
+      <Link>Search\TestImageFileType.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleSearchAPI.Test\TestImageSize.cs">
+      <Link>Search\TestImageSize.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleSearchAPI.Test\TestImageType.cs">
+      <Link>Search\TestImageType.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleSearchAPI.Test\TestLanguage.cs">
+      <Link>Search\TestLanguage.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleSearchAPI.Test\TestLocalResultType.cs">
+      <Link>Search\TestLocalResultType.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleSearchAPI.Test\TestNewsEdition.cs">
+      <Link>Search\TestNewsEdition.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleSearchAPI.Test\TestNewsTopic.cs">
+      <Link>Search\TestNewsTopic.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleSearchAPI.Test\TestResultSize.cs">
+      <Link>Search\TestResultSize.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleSearchAPI.Test\TestSafeLevel.cs">
+      <Link>Search\TestSafeLevel.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleSearchAPI.Test\TestSortType.cs">
+      <Link>Search\TestSortType.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleTranslateAPI.Test\TestLanguage.cs">
+      <Link>Translate\TestLanguage.cs</Link>
+    </Compile>
     <Compile Include="..\GoogleTranslateAPI.Test\TestTranslateClient.cs">
       <Link>Translate\TestTranslateClient.cs</Link>
+    </Compile>
+    <Compile Include="..\GoogleTranslateAPI.Test\TestTranslateFormat.cs">
+      <Link>Translate\TestTranslateFormat.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
