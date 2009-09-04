@@ -91,7 +91,7 @@ namespace Google.API.Search
         /// <example>
         /// This is the c# code example.
         /// <code>
-        /// IList&lt;IWebResult&gt; results = GwebSearcher.Search("Google API for .NET", 20, Language.ChineseSimplified, SafeLevel.active);
+        /// IList&lt;IWebResult&gt; results = GwebSearcher.Search("Google API for .NET", 20, Language.ChineseSimplified, SafeLevel.Active);
         /// foreach(IWebResult result in results)
         /// {
         ///     Console.WriteLine("{0} - {1}", result.Title, result.Content);

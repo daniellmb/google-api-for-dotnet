@@ -71,7 +71,7 @@ namespace Google.API.Search
         /// <example>
         /// This is the c# code example.
         /// <code>
-        /// IList&lt;ILocalResult&gt; results = GlocalSearcher.Search("white house", 4, -77.036667f, 38.895000f, LocalResultType.localonly);
+        /// IList&lt;ILocalResult&gt; results = GlocalSearcher.Search("white house", 4, -77.036667f, 38.895000f, LocalResultType.Localonly);
         /// foreach(ILocalResult result in results)
         /// {
         ///     Console.WriteLine("{0} at {1}, {2}", result.Title, result.StreetAddress, result.Region);
@@ -127,7 +127,7 @@ namespace Google.API.Search
         /// <example>
         /// This is the c# code example.
         /// <code>
-        /// IList&lt;ILocalResult&gt; results = GlocalSearcher.Search("white house", 4, -77.036667f, 38.895000f, 1.0f, 0.5f, LocalResultType.blended);
+        /// IList&lt;ILocalResult&gt; results = GlocalSearcher.Search("white house", 4, -77.036667f, 38.895000f, 1.0f, 0.5f, LocalResultType.Blended);
         /// foreach(ILocalResult result in results)
         /// {
         ///     Console.WriteLine("{0} at {1}, {2}", result.Title, result.StreetAddress, result.Region);

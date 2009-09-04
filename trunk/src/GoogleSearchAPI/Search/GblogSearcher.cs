@@ -67,7 +67,7 @@ namespace Google.API.Search
         /// <example>
         /// This is the c# code example.
         /// <code>
-        /// IList&lt;IBlogResult&gt; results = GblogSearcher.Search("Coldplay", 32, SortType.relevance);
+        /// IList&lt;IBlogResult&gt; results = GblogSearcher.Search("Coldplay", 32, SortType.Relevance);
         /// foreach(IBlogResult result in results)
         /// {
         ///     Console.WriteLine("[{0} - {1:d} by {2}] {3} => {4}", result.Title, result.PublishedDate, result.Author, result.Content, result.BlogUrl);

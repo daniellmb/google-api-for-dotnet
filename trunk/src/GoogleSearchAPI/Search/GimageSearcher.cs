@@ -121,10 +121,10 @@ namespace Google.API.Search
         /// <code>
         /// string keyword = "American Idol";
         /// int count = 32;
-        /// ImageSize imageSize = ImageSize.medium;
-        /// Colorization colorization = Colorization.gray;
-        /// ImageType imageType = ImageType.face;
-        /// ImageFileType imageFileType = ImageFileType.gif;
+        /// ImageSize imageSize = ImageSize.Medium;
+        /// Colorization colorization = Colorization.Gray;
+        /// ImageType imageType = ImageType.Face;
+        /// ImageFileType imageFileType = ImageFileType.Gif;
         ///
         /// IList&lt;IImageResult&gt; results = GimageSearcher.Search(keyword, count, imageSize, colorization, imageType, imageFileType);
         /// foreach(IImageResult result in results)
@@ -166,10 +166,10 @@ namespace Google.API.Search
         /// <code>
         /// string keyword = "金城武";
         /// int count = 25;
-        /// ImageSize imageSize = ImageSize.all;
-        /// Colorization colorization = Colorization.color;
-        /// ImageType imageType = ImageType.all;
-        /// ImageFileType imageFileType = ImageFileType.jpg;
+        /// ImageSize imageSize = ImageSize.All;
+        /// Colorization colorization = Colorization.Color;
+        /// ImageType imageType = ImageType.All;
+        /// ImageFileType imageFileType = ImageFileType.Jpg;
         /// string site = "sina.com";
         ///
         /// IList&lt;IImageResult&gt; results = GimageSearcher.Search(keyword, count, imageSize, colorization, imageType, imageFileType, site);
@@ -214,14 +214,14 @@ namespace Google.API.Search
         /// <code>
         /// string keyword = "Virgin Islands";
         /// int count = 15;
-        /// ImageSize imageSize = ImageSize.xxlarge;
-        /// Colorization colorization = Colorization.all;
-        /// ImageType imageType = ImageType.all;
-        /// ImageFileType imageFileType = ImageFileType.bmp;
+        /// ImageSize imageSize = ImageSize.Xxlarge;
+        /// Colorization colorization = Colorization.All;
+        /// ImageType imageType = ImageType.All;
+        /// ImageFileType imageFileType = ImageFileType.Bmp;
         /// string site = null;
-        /// SafeLevel safeLevel = SafeLevel.active;
+        /// SafeLevel safeLevel = SafeLevel.Active;
         ///
-        /// IList&lt;IImageResult&gt; results = GimageSearcher.Search(keyword, count, imageSize, colorization, imageType, imageFileType, site, safeLevel);
+        /// IList&lt;IImageResult&gt; results = GimageSearcher.Search(keyword, count, safeLevel, imageSize, colorization, imageType, imageFileType, site);
         /// foreach(IImageResult result in results)
         /// {
         ///     return string.Format("{0}" + Environment.NewLine + "{1} x {2} - {3}" + Environment.NewLine + "{4}",
