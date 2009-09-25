@@ -32,6 +32,12 @@ namespace Google.API.Search
     /// <summary>
     /// The client for web search.
     /// </summary>
+    /// <remarks>
+    /// You can use public static fields of <see cref="SafeLevel"/>, <see cref="Language"/> and <see cref="DuplicateFilter"/> as your parameters.
+    /// </remarks>
+    /// <seealso cref="SafeLevel"/>
+    /// <seealso cref="Language"/>
+    /// <seealso cref="DuplicateFilter"/>
     public class GwebSearchClient : GSearchClient
     {
         /// <summary>
