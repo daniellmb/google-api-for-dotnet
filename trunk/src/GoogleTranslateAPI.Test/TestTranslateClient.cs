@@ -55,7 +55,7 @@ namespace Google.API.Translate.Test
         [SetUp]
         public void SetUp()
         {
-            this.Client = new TranslateClient();
+            this.Client = new TranslateClient(@"http://code.google.com/p/google-api-for-dotnet/");
         }
 
         [Test]

@@ -94,7 +94,6 @@
     <Compile Include="Translate\TranslateClient.cs" />
     <Compile Include="Translate\TranslateData.cs" />
     <Compile Include="Translate\TranslateFormat.cs" />
-    <Compile Include="Translate\Translator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

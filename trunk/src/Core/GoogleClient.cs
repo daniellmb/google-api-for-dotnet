@@ -33,9 +33,9 @@ namespace Google.API
     /// </summary>
     public abstract class GoogleClient
     {
-        protected GoogleClient()
+        protected GoogleClient(string referrer)
         {
-            this.Referrer = @"http://code.google.com/p/google-api-for-dotnet/";
+            this.Referrer = referrer;
 
             this.Binding = RequestUtility.CreateBinding();
         }
@@ -55,10 +55,10 @@ namespace Google.API
         public string ApiKey { get; set; }
 
         /// <summary>
-        /// Gets or sets the http referrer header. Applications MUST always include a valid and accurate http referer header in their requests.
-        /// The default value is <a href ="http://code.google.com/p/google-api-for-dotnet/">http://code.google.com/p/google-api-for-dotnet/</a>.
+        /// Gets or sets the http referrer header.
         /// </summary>
         /// <value>The referrer.</value>
+        /// <remarks>Applications MUST always include a valid and accurate http referer header in their requests.</remarks>
         public string Referrer { get; set; }
 
         /// <summary>

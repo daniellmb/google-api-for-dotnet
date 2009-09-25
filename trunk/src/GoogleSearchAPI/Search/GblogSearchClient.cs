@@ -35,6 +35,16 @@ namespace Google.API.Search
     public class GblogSearchClient : GSearchClient
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="GblogSearchClient"/> class.
+        /// </summary>
+        /// <param name="referrer">The http referrer header.</param>
+        /// <remarks>Applications MUST always include a valid and accurate http referer header in their requests.</remarks>
+        public GblogSearchClient(string referrer)
+            : base(referrer)
+        {
+        }
+
+        /// <summary>
         /// Search blogs.
         /// </summary>
         /// <param name="keyword">The keyword.</param>

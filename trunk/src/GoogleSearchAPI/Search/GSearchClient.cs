@@ -33,6 +33,11 @@ namespace Google.API.Search
 
         private static readonly Uri address = new Uri(addressString);
 
+        protected GSearchClient(string referrer)
+            : base(referrer)
+        {
+        }
+
         protected override Uri Address
         {
             get
