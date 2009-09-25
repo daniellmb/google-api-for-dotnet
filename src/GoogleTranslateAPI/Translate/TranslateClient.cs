@@ -37,6 +37,16 @@ namespace Google.API.Translate
 
         private static readonly Uri address = new Uri(addressString);
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TranslateClient"/> class.
+        /// </summary>
+        /// <param name="referrer">The http referrer header.</param>
+        /// <remarks>Applications MUST always include a valid and accurate http referer header in their requests.</remarks>
+        public TranslateClient(string referrer)
+            : base(referrer)
+        {
+        }
+
         protected override Uri Address
         {
             get

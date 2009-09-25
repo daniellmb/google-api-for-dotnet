@@ -37,7 +37,7 @@ namespace Google.API.Search.Test
         [SetUp]
         public void SetUp()
         {
-            this.Client = new GvideoSearchClient();
+            this.Client = new GvideoSearchClient(@"http://code.google.com/p/google-api-for-dotnet/");
         }
 
         [Test]

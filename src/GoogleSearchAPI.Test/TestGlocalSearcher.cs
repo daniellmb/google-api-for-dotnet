@@ -37,7 +37,7 @@ namespace Google.API.Search.Test
         [SetUp]
         public void SetUp()
         {
-            this.Client = new GlocalSearchClient();
+            this.Client = new GlocalSearchClient(@"http://code.google.com/p/google-api-for-dotnet/");
         }
 
         [Test]

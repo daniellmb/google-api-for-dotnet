@@ -35,6 +35,16 @@ namespace Google.API.Search
     public class GlocalSearchClient : GSearchClient
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="GlocalSearchClient"/> class.
+        /// </summary>
+        /// <param name="referrer">The http referrer header.</param>
+        /// <remarks>Applications MUST always include a valid and accurate http referer header in their requests.</remarks>
+        public GlocalSearchClient(string referrer)
+            : base(referrer)
+        {
+        }
+
+        /// <summary>
         /// Search local infos.
         /// </summary>
         /// <param name="keyword">The keyword.</param>

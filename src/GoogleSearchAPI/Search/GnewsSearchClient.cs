@@ -35,6 +35,16 @@ namespace Google.API.Search
     public class GnewsSearchClient : GSearchClient
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="GnewsSearchClient"/> class.
+        /// </summary>
+        /// <param name="referrer">The http referrer header.</param>
+        /// <remarks>Applications MUST always include a valid and accurate http referer header in their requests.</remarks>
+        public GnewsSearchClient(string referrer)
+            : base(referrer)
+        {
+        }
+
+        /// <summary>
         /// Search news.
         /// </summary>
         /// <param name="keyword">The keyword.</param>
