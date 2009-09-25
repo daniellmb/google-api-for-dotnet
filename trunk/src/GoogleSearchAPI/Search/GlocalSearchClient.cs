@@ -32,6 +32,10 @@ namespace Google.API.Search
     /// <summary>
     /// The client for local search.
     /// </summary>
+    /// <remarks>
+    /// You can use public static fields of <see cref="LocalResultType"/> as your parameter.
+    /// </remarks>
+    /// <seealso cref="LocalResultType"/>
     public class GlocalSearchClient : GSearchClient
     {
         /// <summary>

@@ -32,6 +32,10 @@ namespace Google.API.Search
     /// <summary>
     /// The client for blog search.
     /// </summary>
+    /// <remarks>
+    /// You can use public static fields of <see cref="SortType"/> as your parameter.
+    /// </remarks>
+    /// <seealso cref="SortType"/>
     public class GblogSearchClient : GSearchClient
     {
         /// <summary>

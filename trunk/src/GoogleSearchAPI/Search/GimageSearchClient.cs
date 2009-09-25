@@ -32,6 +32,15 @@ namespace Google.API.Search
     /// <summary>
     /// The client for image search.
     /// </summary>
+    /// <remarks>
+    /// You can use public static fields of <see cref="SafeLevel"/>, <see cref="ImageSize"/>, <see cref="Colorization"/>, <see cref="ImageColor"/>, <see cref="ImageType"/> and <see cref="ImageFileType"/> as your parameters.
+    /// </remarks>
+    /// <seealso cref="SafeLevel"/>
+    /// <seealso cref="ImageSize"/>
+    /// <seealso cref="Colorization"/>
+    /// <seealso cref="ImageColor"/>
+    /// <seealso cref="ImageType"/>
+    /// <seealso cref="ImageFileType"/>
     public class GimageSearchClient : GSearchClient
     {
         /// <summary>

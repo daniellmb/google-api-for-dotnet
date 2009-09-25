@@ -31,6 +31,11 @@ namespace Google.API.Translate
     /// <summary>
     /// The client for translate and detect.
     /// </summary>
+    /// <remarks>
+    /// You can use public static fields of <see cref="Language"/> and <see cref="TranslateFormat"/> as your parameters.
+    /// </remarks>
+    /// <seealso cref="Language"/>
+    /// <seealso cref="TranslateFormat"/>
     public class TranslateClient : GoogleClient
     {
         private static readonly string addressString = "http://ajax.googleapis.com/ajax/services/language";
@@ -67,7 +72,7 @@ namespace Google.API.Translate
         /// This is the c# code example.
         /// <code>
         /// string text = "Œ“œ≤ª∂≈‹≤Ω°£";
-        /// TranslateClient client = new TranslateClient();
+        /// TranslateClient client = new TranslateClient(/* Enter the URL of your site here */);
         /// string translated = client.Translate(text, Language.ChineseSimplified, Language.English);
         /// Console.WriteLine(translated);
         /// // I like running.
@@ -91,7 +96,7 @@ namespace Google.API.Translate
         /// This is the c# code example.
         /// <code>
         /// string text = GetYourHtmlString();
-        /// TranslateClient client = new TranslateClient();
+        /// TranslateClient client = new TranslateClient(/* Enter the URL of your site here */);
         /// string translated = client.Translate(text, Language.English, Language.French, TranslateFormat.Html);
         /// </code>
         /// </example>
@@ -120,7 +125,7 @@ namespace Google.API.Translate
         /// <code>
         /// string text = "Je t'aime.";
         /// string from;
-        /// TranslateClient client = new TranslateClient();
+        /// TranslateClient client = new TranslateClient(/* Enter the URL of your site here */);
         /// string translated = client.TranslateAndDetect(text, Language.English, out from);
         /// Language fromLanguage = from;
         /// Console.WriteLine("\"{0}\" is \"{1}\" in {2}", text, translated, fromLanguage);

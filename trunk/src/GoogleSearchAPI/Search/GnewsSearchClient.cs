@@ -32,6 +32,12 @@ namespace Google.API.Search
     /// <summary>
     /// The client for news search.
     /// </summary>
+    /// <remarks>
+    /// You can use public static fields of <see cref="SortType"/>, <see cref="NewsTopic"/> and <see cref="NewsEdition"/> as your parameters.
+    /// </remarks>
+    /// <seealso cref="SortType"/>
+    /// <seealso cref="NewsTopic"/>
+    /// <seealso cref="NewsEdition"/>
     public class GnewsSearchClient : GSearchClient
     {
         /// <summary>
