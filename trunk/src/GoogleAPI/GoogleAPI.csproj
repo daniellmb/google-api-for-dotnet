@@ -104,17 +104,11 @@
     <Compile Include="..\GoogleSearchAPI\Search\GblogSearchClient.cs">
       <Link>Search\GblogSearchClient.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleSearchAPI\Search\GblogSearcher.cs">
-      <Link>Search\GblogSearcher.cs</Link>
-    </Compile>
     <Compile Include="..\GoogleSearchAPI\Search\GbookResult.cs">
       <Link>Search\GbookResult.cs</Link>
     </Compile>
     <Compile Include="..\GoogleSearchAPI\Search\GbookSearchClient.cs">
       <Link>Search\GbookSearchClient.cs</Link>
-    </Compile>
-    <Compile Include="..\GoogleSearchAPI\Search\GbookSearcher.cs">
-      <Link>Search\GbookSearcher.cs</Link>
     </Compile>
     <Compile Include="..\GoogleSearchAPI\Search\GimageResult.cs">
       <Link>Search\GimageResult.cs</Link>
@@ -122,17 +116,11 @@
     <Compile Include="..\GoogleSearchAPI\Search\GimageSearchClient.cs">
       <Link>Search\GimageSearchClient.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleSearchAPI\Search\GimageSearcher.cs">
-      <Link>Search\GimageSearcher.cs</Link>
-    </Compile>
     <Compile Include="..\GoogleSearchAPI\Search\GlocalResult.cs">
       <Link>Search\GlocalResult.cs</Link>
     </Compile>
     <Compile Include="..\GoogleSearchAPI\Search\GlocalSearchClient.cs">
       <Link>Search\GlocalSearchClient.cs</Link>
-    </Compile>
-    <Compile Include="..\GoogleSearchAPI\Search\GlocalSearcher.cs">
-      <Link>Search\GlocalSearcher.cs</Link>
     </Compile>
     <Compile Include="..\GoogleSearchAPI\Search\GnewsImage.cs">
       <Link>Search\GnewsImage.cs</Link>
@@ -146,17 +134,11 @@
     <Compile Include="..\GoogleSearchAPI\Search\GnewsSearchClient.cs">
       <Link>Search\GnewsSearchClient.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleSearchAPI\Search\GnewsSearcher.cs">
-      <Link>Search\GnewsSearcher.cs</Link>
-    </Compile>
     <Compile Include="..\GoogleSearchAPI\Search\GpatentResult.cs">
       <Link>Search\GpatentResult.cs</Link>
     </Compile>
     <Compile Include="..\GoogleSearchAPI\Search\GpatentSearchClient.cs">
       <Link>Search\GpatentSearchClient.cs</Link>
-    </Compile>
-    <Compile Include="..\GoogleSearchAPI\Search\GpatentSearcher.cs">
-      <Link>Search\GpatentSearcher.cs</Link>
     </Compile>
     <Compile Include="..\GoogleSearchAPI\Search\GSearchClient.cs">
       <Link>Search\GSearchClient.cs</Link>
@@ -167,17 +149,11 @@
     <Compile Include="..\GoogleSearchAPI\Search\GvideoSearchClient.cs">
       <Link>Search\GvideoSearchClient.cs</Link>
     </Compile>
-    <Compile Include="..\GoogleSearchAPI\Search\GvideoSearcher.cs">
-      <Link>Search\GvideoSearcher.cs</Link>
-    </Compile>
     <Compile Include="..\GoogleSearchAPI\Search\GwebResult.cs">
       <Link>Search\GwebResult.cs</Link>
     </Compile>
     <Compile Include="..\GoogleSearchAPI\Search\GwebSearchClient.cs">
       <Link>Search\GwebSearchClient.cs</Link>
-    </Compile>
-    <Compile Include="..\GoogleSearchAPI\Search\GwebSearcher.cs">
-      <Link>Search\GwebSearcher.cs</Link>
     </Compile>
     <Compile Include="..\GoogleSearchAPI\Search\IBlogResult.cs">
       <Link>Search\IBlogResult.cs</Link>
@@ -283,9 +259,6 @@
     </Compile>
     <Compile Include="..\GoogleTranslateAPI\Translate\TranslateFormat.cs">
       <Link>Translate\TranslateFormat.cs</Link>
-    </Compile>
-    <Compile Include="..\GoogleTranslateAPI\Translate\Translator.cs">
-      <Link>Translate\Translator.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="GoogleAPI.shfbproj" />
