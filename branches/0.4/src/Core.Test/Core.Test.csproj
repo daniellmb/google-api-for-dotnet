@@ -8,11 +8,11 @@
     <ProjectGuid>{72A1957A-A8B3-45CC-AA4A-4B61A4750F46}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Core.Test</RootNamespace>
+    <RootNamespace>Google.API.Test</RootNamespace>
     <AssemblyName>Core.Test</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkSubset>Client</TargetFrameworkSubset>
+    <TargetFrameworkSubset>Full</TargetFrameworkSubset>
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>..\GoogleAPI.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
@@ -42,6 +42,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -53,6 +54,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestEnumeration.cs" />
+    <Compile Include="TestHttpUtility.cs" />
     <None Include="Properties\AssemblyInfo.cs.template" />
   </ItemGroup>
   <ItemGroup>
