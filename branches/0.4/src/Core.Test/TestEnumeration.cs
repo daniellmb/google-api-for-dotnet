@@ -96,42 +96,4 @@ namespace Google.API.Test
             Assert.That(Enums.Select(@enum => @enum.Name), Is.Unique);
         }
     }
-
-#if PocketPC
-    internal class PredicateConstraint<T> : NUnit.Framework.Constraints.Constraint
-    {
-        // Fields
-        private readonly System.Predicate<T> predicate;
-
-        // Methods
-        public PredicateConstraint(System.Predicate<T> predicate)
-        {
-            this.predicate = predicate;
-        }
-
-        public override bool Matches(object actual)
-        {
-            base.actual = actual;
-            if (!(actual is T))
-            {
-                throw new System.ArgumentException("The actual value is not of type " + typeof(T).Name, "actual");
-            }
-            return this.predicate((T)actual);
-        }
-
-        public override void WriteDescriptionTo(NUnit.Framework.Constraints.MessageWriter writer)
-        {
-            writer.WritePredicate("value matching");
-            writer.Write(this.predicate.Method.Name.StartsWith("<") ? "lambda expression" : this.predicate.Method.Name);
-        }
-    }
-
-    static class Helper
-    {
-        public static NUnit.Framework.Constraints.Constraint Matches<T>(this NUnit.Framework.Constraints.ConstraintExpression expression, System.Predicate<T> predicate)
-        {
-            return expression.Append(new PredicateConstraint<T>(predicate));
-        }
-    }
-#endif
 }
