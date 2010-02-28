@@ -32,12 +32,13 @@ namespace Google.API
     /// </summary>
     internal class HtmlEntities
     {
-        private static readonly object lookupLockObject = new object();
+        private static readonly object LookupLockObject = new object();
 
         /// <summary>
         /// The list is from http://www.w3.org/TR/REC-html40/sgml/entities.html
         /// </summary>
-        private static readonly string[] EntitiesList = new[] {
+        private static readonly string[] EntitiesList = new[] 
+                                                              {
                                                                  "\x0022-quot", 
                                                                  "\x0026-amp",
                                                                  "\x003c-lt", 
@@ -303,7 +304,7 @@ namespace Google.API
             if (entitiesLookupTable == null)
             {
                 // populate hashtable on demand 
-                lock (lookupLockObject)
+                lock (LookupLockObject)
                 {
                     if (entitiesLookupTable == null)
                     {

@@ -43,10 +43,24 @@ namespace Google.API
         private static readonly Regex HtmlTagRegex = new Regex(HtmlTagPattern, RegexOptions.Compiled);
 #endif
 
-        #region System.Web.HttpUtility
+        /// <summary>
+        /// Capture the text content from a html formatted string.
+        /// </summary>
+        /// <param name="s">The html formatted string.</param>
+        /// <returns>The plane text.</returns>
+        public static string RemoveHtmlTags(string s)
+        {
+            if (s == null)
+            {
+                throw new ArgumentNullException("s");
+            }
 
-        // The code under this region is provided by Microsoft .NET reference source project.
-        // http://referencesource.microsoft.com/
+            var tagRemovedS = HtmlTagRegex.Replace(s, string.Empty);
+            var text = HtmlDecode(tagRemovedS);
+            return text;
+        }
+
+        #region System.Web.HttpUtility
 
         /// <summary>
         /// Converts a string that has been HTML-encoded for HTTP transmission into a decoded string.
@@ -82,7 +96,7 @@ namespace Google.API
 
         private static readonly char[] EntityEndingChars = new[] { ';', '&' };
 
-        public static void HtmlDecode(string s, TextWriter output)
+        private static void HtmlDecode(string s, TextWriter output)
         {
             if (s == null)
             {
@@ -163,22 +177,5 @@ namespace Google.API
         }
 
         #endregion
-
-        /// <summary>
-        /// Capture the text content from a html formatted string.
-        /// </summary>
-        /// <param name="s">The html formatted string.</param>
-        /// <returns>The plane text.</returns>
-        public static string RemoveHtmlTags(string s)
-        {
-            if (s == null)
-            {
-                throw new ArgumentNullException("s");
-            }
-
-            var tagRemovedS = HtmlTagRegex.Replace(s, string.Empty);
-            var text = HtmlDecode(tagRemovedS);
-            return text;
-        }
     }
 }

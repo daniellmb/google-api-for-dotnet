@@ -1,5 +1,5 @@
-﻿//-----------------------------------------------------------------------
-// <copyright file="GoogleServiceException.cs" company="iron9light">
+//-----------------------------------------------------------------------
+// <copyright file="ResponseStatusConstant.cs" company="iron9light">
 // Copyright (c) 2010 iron9light
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,41 +25,10 @@
 
 namespace Google.API
 {
-#if !SILVERLIGHT
-    using System;
-#if !PocketPC
-    using System.Runtime.Serialization;
-#endif
-
-    [Serializable]
-#endif
-    internal class GoogleServiceException : GoogleAPIException
+    internal static class ResponseStatusConstant
     {
-        public GoogleServiceException(int responseStatus, string responseDetails)
-        {
-            this.ResponseStatus = responseStatus;
-            this.ResponseDetails = responseDetails;
-        }
+        public const int DefaultStatus = 200;
 
-        public string ResponseDetails { get; private set; }
-
-        public int ResponseStatus { get; private set; }
-
-        public override string Message
-        {
-            get
-            {
-                return string.Format("[response status:{0}]{1}", this.ResponseStatus, this.ResponseDetails);
-            }
-        }
-
-#if !SILVERLIGHT && !PocketPC
-        public override void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            base.GetObjectData(info, context);
-            info.AddValue("ResponseStatus", this.ResponseStatus);
-            info.AddValue("ResponseDetails", this.ResponseDetails);
-        }
-#endif
+        public const int OutOfRangeStatus = 400;
     }
 }

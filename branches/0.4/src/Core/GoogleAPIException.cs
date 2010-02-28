@@ -26,7 +26,7 @@
 namespace Google.API
 {
     using System;
-#if !SILVERLIGHT
+#if !SILVERLIGHT && !PocketPC
     using System.Runtime.Serialization;
 #endif
 

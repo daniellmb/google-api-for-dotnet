@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="GoogleServiceException.cs" company="iron9light">
+// <copyright file="DeserializeException.cs" company="iron9light">
 // Copyright (c) 2010 iron9light
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,31 +25,42 @@
 
 namespace Google.API
 {
-#if !SILVERLIGHT
     using System;
-#if !PocketPC
+#if !SILVERLIGHT && !PocketPC
     using System.Runtime.Serialization;
 #endif
 
+#if !SILVERLIGHT
     [Serializable]
 #endif
-    internal class GoogleServiceException : GoogleAPIException
+    internal class DeserializeException : GoogleAPIException
     {
-        public GoogleServiceException(int responseStatus, string responseDetails)
+        public DeserializeException(Type objectType, string objectString)
         {
-            this.ResponseStatus = responseStatus;
-            this.ResponseDetails = responseDetails;
+            this.ObjectType = objectType;
+            this.ObjectString = objectString;
         }
 
-        public string ResponseDetails { get; private set; }
+        public DeserializeException(Type objectType, string objectString, Exception innerException)
+            : base(null, innerException)
+        {
+            this.ObjectType = objectType;
+            this.ObjectString = objectString;
+        }
 
-        public int ResponseStatus { get; private set; }
+        public Type ObjectType { get; private set; }
+
+        public string ObjectString { get; private set; }
 
         public override string Message
         {
             get
             {
-                return string.Format("[response status:{0}]{1}", this.ResponseStatus, this.ResponseDetails);
+                return string.Format(
+                    "Deserialize Failed.{0}Type:{1}{0}String:{2}",
+                    Environment.NewLine,
+                    this.ObjectType,
+                    this.ObjectString);
             }
         }
 
@@ -57,8 +68,8 @@ namespace Google.API
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
-            info.AddValue("ResponseStatus", this.ResponseStatus);
-            info.AddValue("ResponseDetails", this.ResponseDetails);
+            info.AddValue("ObjectType", this.ObjectType);
+            info.AddValue("ObjectString", this.ObjectString);
         }
 #endif
     }
