@@ -27,7 +27,6 @@ namespace Google.API.Search
 {
     using System;
     using System.Collections.Generic;
-    using System.Runtime.InteropServices;
 
     /// <summary>
     /// The client for book search.
@@ -78,7 +77,7 @@ namespace Google.API.Search
         /// <param name="library">The specified user-defined library. If it not null, the search will restrict the search to this library.</param>
         /// <returns>The result items.</returns>
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
-        public IList<IBookResult> Search(string keyword, int resultCount, [Optional] bool fullViewOnly, [Optional] string library)
+        public IList<IBookResult> Search(string keyword, int resultCount, bool fullViewOnly, string library)
         {
             if (keyword == null)
             {

@@ -27,7 +27,6 @@ namespace Google.API.Search
 {
     using System;
     using System.Collections.Generic;
-    using System.Runtime.InteropServices;
 
     /// <summary>
     /// The client for image search.
@@ -186,13 +185,13 @@ namespace Google.API.Search
         public IList<IImageResult> Search(
             string keyword,
             int resultCount,
-            [Optional] string safeLevel,
-            [Optional] string imageSize,
-            [Optional] string colorization,
-            [Optional] string color,
-            [Optional] string imageType,
-            [Optional] string fileType,
-            [Optional] string site)
+            string safeLevel,
+            string imageSize,
+            string colorization,
+            string color,
+            string imageType,
+            string fileType,
+            string site)
         {
             if (keyword == null)
             {
