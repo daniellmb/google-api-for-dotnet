@@ -27,7 +27,6 @@ namespace Google.API.Search
 {
     using System;
     using System.Collections.Generic;
-    using System.Runtime.InteropServices;
 
     /// <summary>
     /// The client for video search.
@@ -68,7 +67,7 @@ namespace Google.API.Search
         /// <param name="sortBy">The way to order results.</param>
         /// <returns>The result items.</returns>
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
-        public IList<IVideoResult> Search(string keyword, int resultCount, [Optional] string sortBy)
+        public IList<IVideoResult> Search(string keyword, int resultCount, string sortBy)
         {
             if (keyword == null)
             {

@@ -26,7 +26,6 @@
 namespace Google.API.Translate
 {
     using System;
-    using System.Runtime.InteropServices;
 
     /// <summary>
     /// The client for translate and detect.
@@ -78,7 +77,7 @@ namespace Google.API.Translate
         /// // I like running.
         /// </code>
         /// </example>
-        public string Translate(string text, [Optional, DefaultParameterValue("")] string from, string to)
+        public string Translate(string text, string from, string to)
         {
             return this.Translate(text, from, to, TranslateFormat.GetDefault());
         }
@@ -100,7 +99,7 @@ namespace Google.API.Translate
         /// string translated = client.Translate(text, Language.English, Language.French, TranslateFormat.Html);
         /// </code>
         /// </example>
-        public string Translate(string text, [Optional, DefaultParameterValue("")] string from, string to, [Optional] string format)
+        public string Translate(string text, string from, string to, string format)
         {
             var result = this.NativeTranslate(text, from, to, format);
 
@@ -146,7 +145,7 @@ namespace Google.API.Translate
         /// <param name="from">The detected language of the original text.</param>
         /// <returns>The translate result.</returns>
         /// <exception cref="GoogleAPIException">Translate failed.</exception>
-        public string TranslateAndDetect(string text, string to, [Optional] string format, out string from)
+        public string TranslateAndDetect(string text, string to, string format, out string from)
         {
             var result = this.NativeTranslate(
                 text, Language.Unknown, to, format);

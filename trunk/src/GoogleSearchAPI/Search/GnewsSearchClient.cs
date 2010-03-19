@@ -27,7 +27,6 @@ namespace Google.API.Search
 {
     using System;
     using System.Collections.Generic;
-    using System.Runtime.InteropServices;
 
     /// <summary>
     /// The client for news search.
@@ -91,11 +90,11 @@ namespace Google.API.Search
         public IList<INewsResult> Search(
             string keyword,
             int resultCount,
-            [Optional] string geo,
-            [Optional] string sortBy,
-            [Optional] string quoteId,
-            [Optional] string topic,
-            [Optional] string edition)
+            string geo,
+            string sortBy,
+            string quoteId,
+            string topic,
+            string edition)
         {
             if (keyword == null && string.IsNullOrEmpty(geo) && string.IsNullOrEmpty(topic))
             {
@@ -128,7 +127,7 @@ namespace Google.API.Search
         /// <param name="sortBy">The way to order results.</param>
         /// <returns>The result items.</returns>
         /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
-        public IList<INewsResult> SearchLocal(string geo, int resultCount, [Optional] string sortBy)
+        public IList<INewsResult> SearchLocal(string geo, int resultCount, string sortBy)
         {
             return this.SearchLocal(geo, resultCount, sortBy, null, NewsTopic.GetDefault(), NewsEdition.GetDefault());
         }
@@ -147,10 +146,10 @@ namespace Google.API.Search
         public IList<INewsResult> SearchLocal(
             string geo,
             int resultCount,
-            [Optional] string sortBy,
-            [Optional] string quoteId,
-            [Optional] string topic,
-            [Optional] string edition)
+            string sortBy,
+            string quoteId,
+            string topic,
+            string edition)
         {
             if (geo == null)
             {
@@ -185,9 +184,9 @@ namespace Google.API.Search
         public IList<INewsResult> SearchTopic(
             string topic,
             int resultCount,
-            [Optional] string sortBy,
-            [Optional] string quoteId,
-            [Optional] string edition)
+            string sortBy,
+            string quoteId,
+            string edition)
         {
             if (topic == null)
             {
