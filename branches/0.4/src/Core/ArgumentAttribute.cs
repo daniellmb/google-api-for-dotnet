@@ -41,7 +41,6 @@ namespace Google.API
             this.Name = name;
             this.Optional = true;
             this.DefaultValue = null;
-            this.NeedEncode = false;
             this.IsPostContent = false;
         }
 
@@ -67,7 +66,6 @@ namespace Google.API
             }
 
             this.DefaultValue = defaultValue;
-            this.NeedEncode = false;
             this.IsPostContent = false;
         }
 
