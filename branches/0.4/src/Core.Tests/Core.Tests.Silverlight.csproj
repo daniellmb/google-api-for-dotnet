@@ -68,9 +68,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MockEnum.cs" />
+    <Compile Include="MockRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestEnumeration.cs" />
     <Compile Include="TestHttpUtility.cs" />
+    <Compile Include="TestMockEnum.cs" />
+    <Compile Include="TestRequestBase.cs" />
     <None Include="Properties\AssemblyInfo.cs.template" />
   </ItemGroup>
   <ItemGroup>

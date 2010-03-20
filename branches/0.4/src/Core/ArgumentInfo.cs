@@ -46,7 +46,7 @@ namespace Google.API
             this.defaultValue = defaultValue;
         }
 
-        public string GetString(RequestBase request)
+        public string GetString(RequestBase request, bool encodeNeeded)
         {
             var value = MethodBase.GetMethodFromHandle(this.getMethod).Invoke(request, null);
 
@@ -67,6 +67,11 @@ namespace Google.API
             if (string.IsNullOrEmpty(valueString) && this.optional)
             {
                 return null;
+            }
+
+            if (encodeNeeded)
+            {
+                valueString = HttpUtility.UrlEncode(valueString);
             }
 
             return this.name + "=" + valueString;

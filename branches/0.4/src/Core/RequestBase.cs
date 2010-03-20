@@ -148,26 +148,26 @@ namespace Google.API
 
         private string GetUrlString()
         {
-            var argString = this.GetArgString(this.UrlArgInfos);
+            var argString = this.GetArgString(this.UrlArgInfos, true);
 
             if (string.IsNullOrEmpty(argString))
             {
                 return this.BaseAddress;
             }
 
-            return this.BaseAddress + "?" + HttpUtility.UrlEncode(argString);
+            return this.BaseAddress + "?" + argString;
         }
 
         private string GetPostContent()
         {
-            return this.GetArgString(this.PostArgInfos);
+            return this.GetArgString(this.PostArgInfos, false);
         }
 
-        private string GetArgString(IEnumerable<ArgumentInfo> argInfos)
+        private string GetArgString(IEnumerable<ArgumentInfo> argInfos, bool encodeNeeded)
         {
             var valueStrings = from s in
                                    (from argInfo in argInfos
-                                    select argInfo.GetString(this))
+                                    select argInfo.GetString(this, encodeNeeded))
                                where !string.IsNullOrEmpty(s)
                                select s;
             var argString = string.Join("&", valueStrings.ToArray());
