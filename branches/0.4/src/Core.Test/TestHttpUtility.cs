@@ -55,6 +55,15 @@ namespace Google.API.Test
             var decodedBackS = HttpUtility.RemoveHtmlTags(encodedS);
             Assert.AreEqual(s, decodedBackS);
         }
+
+        [Test]
+        public void UrlEncodeTest()
+        {
+            var s = @"!!@#$@$%Y#$^%$^$%&&&*?+{S_|";
+            var encodedS = HttpUtility.UrlEncode(s);
+            var expectedEncodedS = System.Web.HttpUtility.UrlEncode(s);
+            Assert.AreEqual(expectedEncodedS, encodedS);
+        }
 #endif
     }
 }
