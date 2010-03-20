@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Net20", "Core\Core.Net20.csproj", "{D456526B-3DA4-444E-B75C-81A8F042AA22}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Test.Net20", "Core.Test\Core.Test.Net20.csproj", "{87AEA941-AD3F-4FC1-9E6C-43869E3890D7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Tests.Net20", "Core.Tests\Core.Tests.Net20.csproj", "{87AEA941-AD3F-4FC1-9E6C-43869E3890D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

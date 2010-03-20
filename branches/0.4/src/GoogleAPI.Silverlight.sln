@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Silverlight", "Core\Core.Silverlight.csproj", "{D7F70B0C-FD97-4277-BFE4-9123F8E40DC8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Test.Silverlight", "Core.Test\Core.Test.Silverlight.csproj", "{B0DDA1B4-C374-4F5C-AA2C-C95948EDD743}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Tests.Silverlight", "Core.Tests\Core.Tests.Silverlight.csproj", "{B0DDA1B4-C374-4F5C-AA2C-C95948EDD743}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

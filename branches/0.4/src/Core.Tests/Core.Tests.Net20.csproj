@@ -8,8 +8,8 @@
     <ProjectGuid>{87AEA941-AD3F-4FC1-9E6C-43869E3890D7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Google.API.Test</RootNamespace>
-    <AssemblyName>Core.Test.Net20</AssemblyName>
+    <RootNamespace>Google.API.Tests</RootNamespace>
+    <AssemblyName>Core.Tests.Net20</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SignAssembly>false</SignAssembly>
