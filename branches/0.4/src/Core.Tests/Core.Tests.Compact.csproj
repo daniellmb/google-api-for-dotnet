@@ -4,7 +4,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{26A1962F-37C4-417C-89AD-BC17F55A8BB7}</ProjectGuid>
+    <ProjectGuid>{72A1957A-A8B3-45CC-AA4A-4B61A4750F46}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Google.API.Tests</RootNamespace>
@@ -75,7 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.Compact.csproj">
-      <Project>{F0A7C586-57E0-4380-A063-5E721C0A7B0F}</Project>
+      <Project>{8DBE9C0C-E8C1-4C4A-A770-7C44E43E010B}</Project>
       <Name>Core.Compact</Name>
     </ProjectReference>
   </ItemGroup>

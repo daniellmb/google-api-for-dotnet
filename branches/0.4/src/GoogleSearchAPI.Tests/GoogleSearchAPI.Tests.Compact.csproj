@@ -4,11 +4,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{8DBE9C0C-E8C1-4C4A-A770-7C44E43E010B}</ProjectGuid>
+    <ProjectGuid>{77520C9E-495F-401A-9CA6-597F135B4D77}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Google.API</RootNamespace>
-    <AssemblyName>Core.Compact</AssemblyName>
+    <RootNamespace>Google.API.Search.Tests</RootNamespace>
+    <AssemblyName>GoogleSearchAPI.Tests.Compact</AssemblyName>
     <ProjectTypeGuids>{4D628B5B-2FBC-4AA6-8C16-197242AEB884};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <PlatformFamilyName>PocketPC</PlatformFamilyName>
     <PlatformID>b2c48bd2-963d-4549-9169-1fa021dce484</PlatformID>
@@ -33,7 +33,8 @@
     <FileAlignment>512</FileAlignment>
     <WarningLevel>4</WarningLevel>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
-    <DocumentationFile>bin\Debug\Core.Compact.XML</DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -46,13 +47,14 @@
     <FileAlignment>512</FileAlignment>
     <WarningLevel>4</WarningLevel>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
-    <DocumentationFile>bin\Release\Core.Compact.XML</DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
-    <Reference Include="Newtonsoft.Json.Compact, Version=3.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+    <Reference Include="NUnitLite, Version=0.6.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\Json.NET\Compact\Newtonsoft.Json.Compact.dll</HintPath>
+      <HintPath>..\..\lib\NUnit\Compact\NUnitLite.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -62,23 +64,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArgumentAttribute.cs" />
-    <Compile Include="ArgumentInfo.cs" />
-    <Compile Include="ArgumentInfoProvider.cs" />
-    <Compile Include="DeserializeException.cs" />
-    <Compile Include="Enumeration.cs" />
-    <Compile Include="Enumeration.Generic.cs" />
-    <Compile Include="GoogleAPIException.cs" />
-    <Compile Include="GoogleServiceException.cs" />
-    <Compile Include="HtmlEntities.cs" />
-    <Compile Include="HttpUtility.cs" />
-    <Compile Include="IRequestInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RequestBase.cs" />
-    <Compile Include="RequestUtility.cs" />
-    <Compile Include="ResponseStatusConstant.cs" />
-    <Compile Include="ResultObject.cs" />
     <None Include="Properties\AssemblyInfo.cs.template" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core.Tests\Core.Tests.Compact.csproj">
+      <Project>{72A1957A-A8B3-45CC-AA4A-4B61A4750F46}</Project>
+      <Name>Core.Tests.Compact</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Core.Compact.csproj">
+      <Project>{8DBE9C0C-E8C1-4C4A-A770-7C44E43E010B}</Project>
+      <Name>Core.Compact</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GoogleSearchAPI\GoogleSearchAPI.Compact.csproj">
+      <Project>{E9F8B4E2-76C7-4F69-876D-4C1DAADDC5C3}</Project>
+      <Name>GoogleSearchAPI.Compact</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CompactFramework.CSharp.targets" />
   <ProjectExtensions>
