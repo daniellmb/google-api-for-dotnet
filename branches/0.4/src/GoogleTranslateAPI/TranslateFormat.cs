@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------
-// <copyright file="MockRequest.cs" company="iron9light">
+// <copyright file="TranslateFormat.cs" company="iron9light">
 // Copyright (c) 2010 iron9light
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,41 +23,46 @@
 // <author>iron9light@gmail.com</author>
 //-----------------------------------------------------------------------
 
-namespace Google.API.Tests
+namespace Google.API.Translate
 {
-    internal class MockRequest : RequestBase
+    /// <summary>
+    /// Translate format.
+    /// </summary>
+    public sealed class TranslateFormat : Enumeration<TranslateFormat>
     {
-        private readonly string baseAddress;
+        /// <summary>
+        /// Text format. Default value.
+        /// </summary>
+        public static readonly TranslateFormat Text = new TranslateFormat("Text", "text", true);
 
-        public MockRequest(string baseAddress)
+        /// <summary>
+        /// Html format.
+        /// </summary>
+        public static readonly TranslateFormat Html = new TranslateFormat("Html", "html");
+
+        private TranslateFormat(string value)
+            : base(value)
         {
-            this.baseAddress = baseAddress;
         }
 
-        [Argument("a", "default")]
-        public string ArgA { get; set; }
-
-        [Argument("b", Optional = false)]
-        public int ArgB { get; set; }
-
-        [Argument("c")]
-        public bool ArgC { get; set; }
-
-        [Argument("d")]
-        public bool ArgD { get; set; }
-
-        [Argument("e", IsPostContent = true)]
-        public object ArgE { get; set; }
-
-        [Argument("f")]
-        public string ArgF { get; set; }
-
-        [Argument("g")]
-        public string ArgG { get; set; }
-
-        protected override string BaseAddress
+        private TranslateFormat(string name, string value)
+            : base(name, value)
         {
-            get { return this.baseAddress; }
+        }
+
+        private TranslateFormat(string name, string value, bool isDefault)
+            : base(name, value, isDefault)
+        {
+        }
+
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="System.String"/> to <see cref="Google.API.Translate.TranslateFormat"/>.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>The result of the conversion.</returns>
+        public static implicit operator TranslateFormat(string value)
+        {
+            return Convert(value, s => new TranslateFormat(s));
         }
     }
 }

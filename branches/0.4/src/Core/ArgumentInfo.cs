@@ -79,6 +79,11 @@ namespace Google.API
 
         private static string GetValueString(object value)
         {
+            if (value == null)
+            {
+                return null;
+            }
+
             if (value.Equals(true))
             {
                 return "1";

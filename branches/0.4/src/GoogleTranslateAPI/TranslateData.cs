@@ -1,6 +1,6 @@
-//-----------------------------------------------------------------------
-// <copyright file="MockRequest.cs" company="iron9light">
-// Copyright (c) 2010 iron9light
+﻿//-----------------------------------------------------------------------
+// <copyright file="TranslateData.cs" company="iron9light">
+// Copyright (c) 2009 iron9light
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,41 +23,23 @@
 // <author>iron9light@gmail.com</author>
 //-----------------------------------------------------------------------
 
-namespace Google.API.Tests
+namespace Google.API.Translate
 {
-    internal class MockRequest : RequestBase
+    using Newtonsoft.Json;
+
+    [JsonObject]
+    internal class TranslateData
     {
-        private readonly string baseAddress;
+        /// <summary>
+        /// Gets the translated text.
+        /// </summary>
+        [JsonProperty("translatedText")]
+        public string TranslatedText { get; private set; }
 
-        public MockRequest(string baseAddress)
-        {
-            this.baseAddress = baseAddress;
-        }
-
-        [Argument("a", "default")]
-        public string ArgA { get; set; }
-
-        [Argument("b", Optional = false)]
-        public int ArgB { get; set; }
-
-        [Argument("c")]
-        public bool ArgC { get; set; }
-
-        [Argument("d")]
-        public bool ArgD { get; set; }
-
-        [Argument("e", IsPostContent = true)]
-        public object ArgE { get; set; }
-
-        [Argument("f")]
-        public string ArgF { get; set; }
-
-        [Argument("g")]
-        public string ArgG { get; set; }
-
-        protected override string BaseAddress
-        {
-            get { return this.baseAddress; }
-        }
+        /// <summary>
+        /// Gets the source language.
+        /// </summary>
+        [JsonProperty("detectedSourceLanguage")]
+        public string DetectedSourceLanguage { get; private set; }
     }
 }

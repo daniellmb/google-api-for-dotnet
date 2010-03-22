@@ -33,7 +33,7 @@ namespace Google.API
 
     using Newtonsoft.Json;
 
-    internal class RequestUtility
+    internal static class RequestUtility
     {
         private static readonly Encoding Encoding = Encoding.UTF8;
 
@@ -44,15 +44,13 @@ namespace Google.API
                 throw new ArgumentNullException("requestInfo");
             }
 
-            var webRequest = WebRequest.Create(requestInfo.Url);
+            var webRequest = (HttpWebRequest)WebRequest.Create(requestInfo.Url);
 
-#if PocketPC
-            webRequest.Headers["Referer"] = requestInfo.Referrer;
-#else
+#if SILVERLIGHT
             webRequest.Headers[HttpRequestHeader.Referer] = requestInfo.Referrer;
+#else
+            webRequest.Referer = requestInfo.Referrer;
 #endif
-
-            var postBytes = new byte[0];
 
             if (!string.IsNullOrEmpty(requestInfo.PostContent))
             {
@@ -62,18 +60,18 @@ namespace Google.API
                 webRequest.Method = WebRequestMethods.Http.Post;
 #endif
 
-                postBytes = Encoding.GetBytes(requestInfo.PostContent);
+                var postBytes = Encoding.GetBytes(requestInfo.PostContent);
 
 #if SILVERLIGHT
                 webRequest.Headers[HttpRequestHeader.ContentLength] = postBytes.Length.ToString();
 #else
                 webRequest.ContentLength = postBytes.Length;
 #endif
+
+                var requestStream = GetRequestStream(webRequest, requestInfo.OpenTimeout);
+
+                WriteRequestStream(requestStream, postBytes, requestInfo.SendTimeout);
             }
-
-            var requestStream = GetRequestStream(webRequest, requestInfo.OpenTimeout);
-
-            WriteRequestStream(requestStream, postBytes, requestInfo.SendTimeout);
 
             string resultString = GetResultString(webRequest, requestInfo);
 
@@ -150,15 +148,9 @@ namespace Google.API
 
         private static T Invoke<T>(Func<AsyncCallback, object, IAsyncResult> beginInvoke, Func<IAsyncResult, T> endInvoke, TimeSpan timeout)
         {
-            Thread threadToKill = null;
+            Thread threadToKill = Thread.CurrentThread;
 
-            Func<IAsyncResult> wrappedFunc = () =>
-                {
-                    threadToKill = Thread.CurrentThread;
-                    return beginInvoke(null, null);
-                };
-
-            var asyncResult = wrappedFunc.BeginInvoke(null, null);
+            var asyncResult = beginInvoke(null, null);
 #if PocketPC
             if (!asyncResult.AsyncWaitHandle.WaitOne((int)timeout.TotalMilliseconds, false))
 #else

@@ -43,15 +43,6 @@ namespace Google.API
 
         #endregion
 
-        #region Constructors
-
-        protected RequestBase(string referrer)
-        {
-            this.Referrer = referrer;
-        }
-
-        #endregion
-
         #region Properties
 
         public string Referrer { get; set; }

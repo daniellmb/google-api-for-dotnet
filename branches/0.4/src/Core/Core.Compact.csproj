@@ -69,6 +69,8 @@
     <Compile Include="Enumeration.cs" />
     <Compile Include="Enumeration.Generic.cs" />
     <Compile Include="GoogleAPIException.cs" />
+    <Compile Include="GoogleClient.cs" />
+    <Compile Include="GoogleRequest.cs" />
     <Compile Include="GoogleServiceException.cs" />
     <Compile Include="HtmlEntities.cs" />
     <Compile Include="HttpUtility.cs" />
