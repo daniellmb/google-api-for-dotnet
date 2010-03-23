@@ -37,7 +37,7 @@ namespace Google.API
     {
         private static readonly Encoding Encoding = Encoding.UTF8;
 
-        public static T GetResponseData<T>(IRequestInfo requestInfo)
+        internal static T GetResponseData2<T>(IRequestInfo requestInfo)
         {
             if (requestInfo == null)
             {
@@ -162,6 +162,110 @@ namespace Google.API
             }
 
             return endInvoke(asyncResult);
+        }
+
+        public static IAsyncResult BeginGetResponseData(IRequestInfo requestInfo, AsyncCallback callback, object state)
+        {
+            if (requestInfo == null)
+            {
+                throw new ArgumentNullException("requestInfo");
+            }
+
+            var webRequest = (HttpWebRequest)WebRequest.Create(requestInfo.Url);
+
+#if SILVERLIGHT
+            webRequest.Headers[HttpRequestHeader.Referer] = requestInfo.Referrer;
+#else
+            webRequest.Referer = requestInfo.Referrer;
+#endif
+
+            var myAsyncResult = new MyAsyncResult(webRequest, state);
+
+            var innerAsyncResult = webRequest.BeginGetResponse(
+                asyncResult =>
+                    {
+                        myAsyncResult.InnerAsyncResult = asyncResult;
+
+                        if (callback != null)
+                        {
+                            callback(myAsyncResult);
+                        }
+                    },
+                null);
+
+            myAsyncResult.InnerAsyncResult = innerAsyncResult;
+
+            return myAsyncResult;
+        }
+
+        public static T EndGetResponseData<T>(IAsyncResult asyncResult)
+        {
+            var resultString = ((MyAsyncResult)asyncResult).Value;
+
+            return Deserialize<T>(resultString);
+        }
+
+        public static T GetResponseData<T>(IRequestInfo requestInfo)
+        {
+            var asyncResult = BeginGetResponseData(requestInfo, null, null);
+            return EndGetResponseData<T>(asyncResult);
+        }
+
+        private class MyAsyncResult : IAsyncResult
+        {
+            private readonly WebRequest webRequest;
+
+            public MyAsyncResult(WebRequest webRequest, object state)
+            {
+                this.webRequest = webRequest;
+                this.AsyncState = state;
+            }
+
+            public string Value
+            {
+                get
+                {
+                    using (var webResponse = this.webRequest.EndGetResponse(this.InnerAsyncResult))
+                    {
+                        using (var reader = new StreamReader(webResponse.GetResponseStream(), Encoding))
+                        {
+                            return reader.ReadToEnd();
+                        }
+                    }
+                }
+            }
+
+            public IAsyncResult InnerAsyncResult { private get; set; }
+
+            #region IAsyncResult Members
+
+            public object AsyncState { get; private set; }
+
+            public WaitHandle AsyncWaitHandle
+            {
+                get 
+                {
+                    return this.InnerAsyncResult.AsyncWaitHandle;
+                }
+            }
+
+            public bool CompletedSynchronously
+            {
+                get
+                {
+                    return this.InnerAsyncResult.CompletedSynchronously;
+                }
+            }
+
+            public bool IsCompleted
+            {
+                get
+                {
+                    return this.InnerAsyncResult.IsCompleted;
+                }
+            }
+
+            #endregion
         }
     }
 }

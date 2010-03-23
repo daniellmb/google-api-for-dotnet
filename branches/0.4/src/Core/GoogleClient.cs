@@ -95,7 +95,26 @@ namespace Google.API
         /// <returns>The <see cref="System.TimeSpan"/> that specifies the interval of time to wait for the receive method to time out.</returns>
         public TimeSpan ReceiveTimeout { get; set; }
 
+        internal IAsyncResult BeginGetResponseData(GoogleRequest request, AsyncCallback callback, object state)
+        {
+            this.SetValueTo(request);
+
+            return RequestUtility.BeginGetResponseData(request, callback, state);
+        }
+
+        internal T EndGetResponseData<T>(IAsyncResult asyncResult)
+        {
+            return RequestUtility.EndGetResponseData<T>(asyncResult);
+        }
+
         internal T GetResponseData<T>(GoogleRequest request)
+        {
+            this.SetValueTo(request);
+
+            return RequestUtility.GetResponseData<T>(request);
+        }
+
+        private void SetValueTo(GoogleRequest request)
         {
             request.Referrer = this.Referrer;
 
@@ -107,8 +126,6 @@ namespace Google.API
             request.UserIP = this.UserIP;
             request.HostLanguage = this.AcceptLanguage;
             request.APIKey = this.ApiKey;
-
-            return RequestUtility.GetResponseData<T>(request);
         }
     }
 }

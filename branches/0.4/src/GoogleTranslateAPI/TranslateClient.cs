@@ -198,5 +198,170 @@ namespace Google.API.Translate
 
             return responseData;
         }
+
+        public IAsyncResult BeginTranslate(string text, string from, string to, string format, AsyncCallback callback, object state)
+        {
+            var asyncResult = this.BeginNativeTranslate(text, from, to, format, callback, state);
+            return new TranslateAsyncResult(asyncResult, format);
+        }
+
+        public string EndTranslate(IAsyncResult asyncResult)
+        {
+            var translateAsyncResult = (TranslateAsyncResult)asyncResult;
+
+            var result = this.EndNativeTranslate(translateAsyncResult.InnerAsyncResult);
+
+            var format = translateAsyncResult.Format;
+
+            if (TranslateFormat.Text.Equals(format))
+            {
+                return HttpUtility.HtmlDecode(result.TranslatedText);
+            }
+
+            return result.TranslatedText;
+        }
+
+        public IAsyncResult TranslateAndDetect(string text, string to, string format, AsyncCallback callback, object state)
+        {
+            var asyncResult = this.BeginNativeTranslate(text, Language.Unknown, to, format, callback, state);
+            return new TranslateAsyncResult(asyncResult, format);
+        }
+
+        public string TranslateAndDetect(IAsyncResult asyncResult, out string from)
+        {
+            var translateAsyncResult = (TranslateAsyncResult)asyncResult;
+
+            var result = this.EndNativeTranslate(translateAsyncResult.InnerAsyncResult);
+
+            from = result.DetectedSourceLanguage;
+
+            var format = translateAsyncResult.Format;
+
+            if (TranslateFormat.Text.Equals(format))
+            {
+                return HttpUtility.HtmlDecode(result.TranslatedText);
+            }
+
+            return result.TranslatedText;
+        }
+
+        public IAsyncResult BeginDetect(string text, AsyncCallback callback, object state)
+        {
+            return this.BeginNativeDetect(text, callback, state);
+        }
+
+        public string EndDetect(IAsyncResult asyncResult, out bool isReliable, out double confidence)
+        {
+            var result = this.EndNativeDetect(asyncResult);
+
+            var language = result.LanguageCode;
+            isReliable = result.IsReliable;
+            confidence = result.Confidence;
+            return language;
+        }
+
+        internal IAsyncResult BeginNativeTranslate(string text, string from, string to, string format, AsyncCallback callback, object state)
+        {
+            if (text == null)
+            {
+                throw new ArgumentNullException("text");
+            }
+
+            if (to == null)
+            {
+                throw new ArgumentNullException("to");
+            }
+
+            var request = new TranslateRequest { Query = text, From = from, To = to, Format = format };
+
+            return this.BeginGetResponseData(request, callback, state);
+        }
+
+        internal TranslateData EndNativeTranslate(IAsyncResult asyncResult)
+        {
+            return this.EndGetResponseData<TranslateData>(asyncResult);
+        }
+
+        internal IAsyncResult BeginNativeDetect(string text, AsyncCallback callback, object state)
+        {
+            if (text == null)
+            {
+                throw new ArgumentNullException("text");
+            }
+
+            var request = new DetectRequest { Query = text };
+
+            return this.BeginGetResponseData(request, callback, state);
+        }
+
+        internal DetectData EndNativeDetect(IAsyncResult asyncResult)
+        {
+            return this.EndGetResponseData<DetectData>(asyncResult);
+        }
+
+        private class TranslateAsyncResult : IAsyncResult
+        {
+            private readonly IAsyncResult innerAsyncResult;
+
+            private readonly string format;
+
+            public TranslateAsyncResult(IAsyncResult asyncResult, string format)
+            {
+                this.innerAsyncResult = asyncResult;
+                this.format = format;
+            }
+
+            public IAsyncResult InnerAsyncResult
+            {
+                get
+                {
+                    return this.innerAsyncResult;
+                }
+            }
+
+            public string Format
+            {
+                get
+                {
+                    return this.format;
+                }
+            }
+
+            #region IAsyncResult Members
+
+            public object AsyncState
+            {
+                get
+                {
+                    return this.InnerAsyncResult.AsyncState;
+                }
+            }
+
+            public System.Threading.WaitHandle AsyncWaitHandle
+            {
+                get
+                {
+                    return this.InnerAsyncResult.AsyncWaitHandle;
+                }
+            }
+
+            public bool CompletedSynchronously
+            {
+                get 
+                {
+                    return this.InnerAsyncResult.CompletedSynchronously;
+                }
+            }
+
+            public bool IsCompleted
+            {
+                get 
+                {
+                    return this.InnerAsyncResult.IsCompleted;
+                }
+            }
+
+            #endregion
+        }
     }
 }
