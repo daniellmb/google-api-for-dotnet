@@ -47,6 +47,7 @@ namespace Google.API.Translate
         {
         }
 
+#if !SILVERLIGHT
         /// <summary>
         /// Translate the text from <paramref name="from"/> to <paramref name="to"/>.
         /// </summary>
@@ -198,6 +199,12 @@ namespace Google.API.Translate
 
             return responseData;
         }
+#endif
+
+        public IAsyncResult BeginTranslate(string text, string from, string to, AsyncCallback callback, object state)
+        {
+            return this.BeginTranslate(text, from, to, TranslateFormat.GetDefault(), callback, state);
+        }
 
         public IAsyncResult BeginTranslate(string text, string from, string to, string format, AsyncCallback callback, object state)
         {
@@ -221,13 +228,18 @@ namespace Google.API.Translate
             return result.TranslatedText;
         }
 
-        public IAsyncResult TranslateAndDetect(string text, string to, string format, AsyncCallback callback, object state)
+        public IAsyncResult BeginTranslateAndDetect(string text, string to, AsyncCallback callback, object state)
+        {
+            return this.BeginTranslateAndDetect(text, to, TranslateFormat.GetDefault(), callback, state);
+        }
+
+        public IAsyncResult BeginTranslateAndDetect(string text, string to, string format, AsyncCallback callback, object state)
         {
             var asyncResult = this.BeginNativeTranslate(text, Language.Unknown, to, format, callback, state);
             return new TranslateAsyncResult(asyncResult, format);
         }
 
-        public string TranslateAndDetect(IAsyncResult asyncResult, out string from)
+        public string EndTranslateAndDetect(IAsyncResult asyncResult, out string from)
         {
             var translateAsyncResult = (TranslateAsyncResult)asyncResult;
 

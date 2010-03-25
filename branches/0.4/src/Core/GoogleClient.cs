@@ -107,12 +107,14 @@ namespace Google.API
             return RequestUtility.EndGetResponseData<T>(asyncResult);
         }
 
+#if !SILVERLIGHT
         internal T GetResponseData<T>(GoogleRequest request)
         {
             this.SetValueTo(request);
 
             return RequestUtility.GetResponseData<T>(request);
         }
+#endif
 
         private void SetValueTo(GoogleRequest request)
         {

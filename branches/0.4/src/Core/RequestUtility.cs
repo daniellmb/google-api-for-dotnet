@@ -205,11 +205,13 @@ namespace Google.API
             return Deserialize<T>(resultString);
         }
 
+#if !SILVERLIGHT
         public static T GetResponseData<T>(IRequestInfo requestInfo)
         {
             var asyncResult = BeginGetResponseData(requestInfo, null, null);
             return EndGetResponseData<T>(asyncResult);
         }
+#endif
 
         private class MyAsyncResult : IAsyncResult
         {

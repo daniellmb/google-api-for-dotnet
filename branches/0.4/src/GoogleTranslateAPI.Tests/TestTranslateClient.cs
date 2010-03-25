@@ -58,6 +58,7 @@ namespace Google.API.Translate.Test
             this.Client = new TranslateClient(@"http://code.google.com/p/google-api-for-dotnet/");
         }
 
+#if !SILVERLIGHT
         [Test]
         public void TranslateTest()
         {
@@ -211,6 +212,7 @@ namespace Google.API.Translate.Test
 
         ////    Console.WriteLine(translated);
         ////}
+#endif
 
         private static bool IsUndetectable(Language language)
         {
@@ -242,5 +244,117 @@ namespace Google.API.Translate.Test
         ////        }
         ////    }
         ////}
+
+        [Test]
+        public void AsyncTranslateTest()
+        {
+            var originalLanguage = Language.English;
+            var originalText = "dog";
+
+            Print(originalLanguage, originalText);
+
+            ICollection<Language> skippedLanguages = new[] { Language.Thai, };
+
+            foreach (var language in Language.TranslatableCollection)
+            {
+                if (language == originalLanguage)
+                {
+                    continue;
+                }
+
+                if (skippedLanguages.Contains(language))
+                {
+                    continue;
+                }
+
+                var asyncResult = this.Client.BeginTranslate(originalText, originalLanguage, language, null, null);
+                var translatedText = this.Client.EndTranslate(asyncResult);
+                Assert.AreNotEqual(
+                    originalText,
+                    translatedText,
+                    "[{0} -> {1}] {2} : translate failed! Because the result is same to the original one.",
+                    originalLanguage,
+                    language,
+                    originalText);
+
+                Print(language, translatedText);
+
+                asyncResult = this.Client.BeginTranslate(translatedText, language, originalLanguage, null, null);
+                var transbackText = this.Client.EndTranslate(asyncResult);
+                StringAssert.AreEqualIgnoringCase(
+                    originalText,
+                    transbackText.Trim(),
+                    "[{0} -> {1}] {2} -> {3} != {4}: translate faild!",
+                    language,
+                    originalLanguage,
+                    translatedText,
+                    transbackText,
+                    originalText);
+            }
+        }
+
+        [Test]
+        public void AsyncTranslateAndDetectTest()
+        {
+            var text = "I love this game.";
+
+            string from;
+            var to = Language.English;
+
+            var asyncResult = this.Client.BeginTranslateAndDetect(text, to, null, null);
+            var translated = this.Client.EndTranslateAndDetect(asyncResult, out from);
+
+            Assert.AreEqual((string)Language.English, from);
+            StringAssert.AreEqualIgnoringCase(text, translated);
+        }
+
+        [Test]
+        public void AsyncDetectTest()
+        {
+            var originalLanguage = Language.English;
+            var originalText = "This is an apple. I love apple. I eat apple everyday.";
+
+            Print(originalLanguage, originalText);
+
+            foreach (var language in Language.TranslatableCollection)
+            {
+                if (language == originalLanguage)
+                {
+                    continue;
+                }
+
+                if (IsUndetectable(language))
+                {
+                    continue;
+                }
+
+                var asyncResult = this.Client.BeginTranslate(originalText, originalLanguage, language, null, null);
+                var translatedText = this.Client.EndTranslate(asyncResult);
+                Assert.AreNotEqual(
+                    originalText,
+                    translatedText,
+                    "[{0} -> {1}] {2} : translate failed! Because the result is same to the original one.",
+                    originalLanguage,
+                    language,
+                    originalText);
+
+                bool isReliable;
+                double confidence;
+                asyncResult = this.Client.BeginDetect(translatedText, null, null);
+                Language detectedLanguage = this.Client.EndDetect(asyncResult, out isReliable, out confidence);
+
+                var more = string.Format("isReliable : {0}, confidence : {1}", isReliable, confidence);
+                Print(language, translatedText, more);
+
+                Assert.AreEqual(
+                    language,
+                    detectedLanguage,
+                    "[{0} != {1}] {2} ({3}): detect failed!",
+                    detectedLanguage,
+                    language,
+                    translatedText,
+                    more);
+            }
+        }
     }
 }
