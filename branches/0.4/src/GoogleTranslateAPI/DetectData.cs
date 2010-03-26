@@ -34,18 +34,18 @@ namespace Google.API.Translate
         /// Gets the detected language.
         /// </summary>
         [JsonProperty("language")]
-        public string LanguageCode { get; private set; }
+        public string LanguageCode { get; internal set; }
 
         /// <summary>
         /// Gets a value indicating whether the reliability of the detect.
         /// </summary>
         [JsonProperty("isReliable")]
-        public bool IsReliable { get; private set; }
+        public bool IsReliable { get; internal set; }
 
         /// <summary>
         /// Gets the confidence level of the detect.
         /// </summary>
         [JsonProperty("confidence")]
-        public double Confidence { get; private set; }
+        public double Confidence { get; internal set; }
     }
 }

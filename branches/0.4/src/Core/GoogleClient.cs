@@ -33,9 +33,14 @@ namespace Google.API
     /// </summary>
     public abstract class GoogleClient
     {
+#if SILVERLIGHT
+        protected GoogleClient()
+        {
+#else
         protected GoogleClient(string referrer)
         {
             this.Referrer = referrer;
+#endif
 
             this.OpenTimeout = new TimeSpan(0, 1, 0);
             this.CloseTimeout = new TimeSpan(0, 1, 0);
@@ -118,7 +123,9 @@ namespace Google.API
 
         private void SetValueTo(GoogleRequest request)
         {
+#if !SILVERLIGHT
             request.Referrer = this.Referrer;
+#endif
 
             request.OpenTimeout = this.OpenTimeout;
             request.CloseTimeout = this.CloseTimeout;

@@ -37,6 +37,7 @@ namespace Google.API.Translate
     /// <seealso cref="TranslateFormat"/>
     public class TranslateClient : GoogleClient
     {
+#if !SILVERLIGHT
         /// <summary>
         /// Initializes a new instance of the <see cref="TranslateClient"/> class.
         /// </summary>
@@ -47,7 +48,6 @@ namespace Google.API.Translate
         {
         }
 
-#if !SILVERLIGHT
         /// <summary>
         /// Translate the text from <paramref name="from"/> to <paramref name="to"/>.
         /// </summary>
@@ -201,17 +201,57 @@ namespace Google.API.Translate
         }
 #endif
 
+        /// <summary>
+        /// Begins an asynchronous request for translating the text from <paramref name="from"/> to <paramref name="to"/>.
+        /// </summary>
+        /// <param name="text">The content to translate.</param>
+        /// <param name="from">The language of the original text. You can set it as <c>Language.Unknown</c> to the auto detect it.</param>
+        /// <param name="to">The target language you want to translate to.</param>
+        /// <param name="callback">The <see cref="AsyncCallback"/> delegate.</param>
+        /// <param name="state">An object containing state information for this asynchronous request.</param>
+        /// <returns>The translate result.</returns>
         public IAsyncResult BeginTranslate(string text, string from, string to, AsyncCallback callback, object state)
         {
             return this.BeginTranslate(text, from, to, TranslateFormat.GetDefault(), callback, state);
         }
 
+        /// <summary>
+        /// Begins an asynchronous request for translating the text from <paramref name="from"/> to <paramref name="to"/>.
+        /// </summary>
+        /// <param name="text">The content to translate.</param>
+        /// <param name="from">The language of the original text. You can set it as <c>Language.Unknown</c> to the auto detect it.</param>
+        /// <param name="to">The target language you want to translate to.</param>
+        /// <param name="format">The format of the text.</param>
+        /// <param name="callback">The <see cref="AsyncCallback"/> delegate.</param>
+        /// <param name="state">An object containing state information for this asynchronous request.</param>
+        /// <returns>An <see cref="IAsyncResult"/> that references the asynchronous request.</returns>
         public IAsyncResult BeginTranslate(string text, string from, string to, string format, AsyncCallback callback, object state)
         {
-            var asyncResult = this.BeginNativeTranslate(text, from, to, format, callback, state);
-            return new TranslateAsyncResult(asyncResult, format);
+            var translateAsyncResult = new TranslateAsyncResult(format);
+            var innerAsyncResult = this.BeginNativeTranslate(
+                text,
+                from,
+                to,
+                format,
+                asyncResult =>
+                    {
+                        translateAsyncResult.InnerAsyncResult = asyncResult;
+                        if (callback != null)
+                        {
+                            callback(translateAsyncResult);
+                        }
+                    },
+                state);
+
+            translateAsyncResult.InnerAsyncResult = innerAsyncResult;
+            return translateAsyncResult;
         }
 
+        /// <summary>
+        /// returns a translate result.
+        /// </summary>
+        /// <param name="asyncResult">An <see cref="IAsyncResult"/> that references a pending request for a response.</param>
+        /// <returns>The translate result.</returns>
         public string EndTranslate(IAsyncResult asyncResult)
         {
             var translateAsyncResult = (TranslateAsyncResult)asyncResult;
@@ -228,17 +268,56 @@ namespace Google.API.Translate
             return result.TranslatedText;
         }
 
+        /// <summary>
+        /// Begins an asynchronous request for translating the text to <paramref name="to"/> and auto detect which language the text is from.
+        /// </summary>
+        /// <param name="text">The content to translate.</param>
+        /// <param name="to">The target language you want to translate to.</param>
+        /// <param name="callback">The <see cref="AsyncCallback"/> delegate.</param>
+        /// <param name="state">An object containing state information for this asynchronous request.</param>
+        /// <returns>An <see cref="IAsyncResult"/> that references the asynchronous request.</returns>
         public IAsyncResult BeginTranslateAndDetect(string text, string to, AsyncCallback callback, object state)
         {
             return this.BeginTranslateAndDetect(text, to, TranslateFormat.GetDefault(), callback, state);
         }
 
+        /// <summary>
+        /// Begins an asynchronous request for translating the text to <paramref name="to"/> and auto detect which language the text is from.
+        /// </summary>
+        /// <param name="text">The content to translate.</param>
+        /// <param name="to">The target language you want to translate to.</param>
+        /// <param name="format">The format of the text.</param>
+        /// <param name="callback">The <see cref="AsyncCallback"/> delegate.</param>
+        /// <param name="state">An object containing state information for this asynchronous request.</param>
+        /// <returns>An <see cref="IAsyncResult"/> that references the asynchronous request.</returns>
         public IAsyncResult BeginTranslateAndDetect(string text, string to, string format, AsyncCallback callback, object state)
         {
-            var asyncResult = this.BeginNativeTranslate(text, Language.Unknown, to, format, callback, state);
-            return new TranslateAsyncResult(asyncResult, format);
+            var translateAsyncResult = new TranslateAsyncResult(format);
+            var innerAsyncResult = this.BeginNativeTranslate(
+                text,
+                Language.Unknown,
+                to,
+                format,
+                asyncResult =>
+                {
+                    translateAsyncResult.InnerAsyncResult = asyncResult;
+                    if (callback != null)
+                    {
+                        callback(translateAsyncResult);
+                    }
+                },
+                state);
+
+            translateAsyncResult.InnerAsyncResult = innerAsyncResult;
+            return translateAsyncResult;
         }
 
+        /// <summary>
+        /// returns a translate result.
+        /// </summary>
+        /// <param name="asyncResult">An <see cref="IAsyncResult"/> that references a pending request for a response.</param>
+        /// <param name="from">The detected language of the original text.</param>
+        /// <returns>The translate result.</returns>
         public string EndTranslateAndDetect(IAsyncResult asyncResult, out string from)
         {
             var translateAsyncResult = (TranslateAsyncResult)asyncResult;
@@ -257,11 +336,24 @@ namespace Google.API.Translate
             return result.TranslatedText;
         }
 
+        /// <summary>
+        /// Begins an asynchronous request for detect the language for this text.
+        /// </summary>
+        /// <param name="text">The text you want to test.</param>
+        /// <param name="callback">The <see cref="AsyncCallback"/> delegate.</param>
+        /// <param name="state">An object containing state information for this asynchronous request.</param>
+        /// <returns>An <see cref="IAsyncResult"/> that references the asynchronous request.</returns>
         public IAsyncResult BeginDetect(string text, AsyncCallback callback, object state)
         {
             return this.BeginNativeDetect(text, callback, state);
         }
 
+        /// <summary>
+        /// returns the detected language.
+        /// </summary>
+        /// <param name="isReliable">Whether the result is reliable</param>
+        /// <param name="confidence">The confidence percent of the result.</param>
+        /// <returns>The detected language.</returns>
         public string EndDetect(IAsyncResult asyncResult, out bool isReliable, out double confidence)
         {
             var result = this.EndNativeDetect(asyncResult);
@@ -313,23 +405,14 @@ namespace Google.API.Translate
 
         private class TranslateAsyncResult : IAsyncResult
         {
-            private readonly IAsyncResult innerAsyncResult;
-
             private readonly string format;
 
-            public TranslateAsyncResult(IAsyncResult asyncResult, string format)
+            public TranslateAsyncResult(string format)
             {
-                this.innerAsyncResult = asyncResult;
                 this.format = format;
             }
 
-            public IAsyncResult InnerAsyncResult
-            {
-                get
-                {
-                    return this.innerAsyncResult;
-                }
-            }
+            public IAsyncResult InnerAsyncResult { get; set; }
 
             public string Format
             {

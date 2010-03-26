@@ -46,9 +46,7 @@ namespace Google.API
 
             var webRequest = (HttpWebRequest)WebRequest.Create(requestInfo.Url);
 
-#if SILVERLIGHT
-            webRequest.Headers[HttpRequestHeader.Referer] = requestInfo.Referrer;
-#else
+#if !SILVERLIGHT
             webRequest.Referer = requestInfo.Referrer;
 #endif
 
@@ -173,9 +171,7 @@ namespace Google.API
 
             var webRequest = (HttpWebRequest)WebRequest.Create(requestInfo.Url);
 
-#if SILVERLIGHT
-            webRequest.Headers[HttpRequestHeader.Referer] = requestInfo.Referrer;
-#else
+#if !SILVERLIGHT
             webRequest.Referer = requestInfo.Referrer;
 #endif
 

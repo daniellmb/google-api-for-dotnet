@@ -43,7 +43,7 @@ namespace Google.API.Translate
         }
 
         [Argument("langpair")]
-        private string LanguagePair
+        internal string LanguagePair
         {
             get
             {

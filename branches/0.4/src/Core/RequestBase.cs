@@ -45,7 +45,9 @@ namespace Google.API
 
         #region Properties
 
+#if !SILVERLIGHT
         public string Referrer { get; set; }
+#endif
 
         /// <summary>
         /// Gets or sets the interval of time after which the open method, invoked by a communication object, times out.

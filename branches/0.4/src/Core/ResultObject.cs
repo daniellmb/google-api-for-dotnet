@@ -31,12 +31,12 @@ namespace Google.API
     internal class ResultObject<T>
     {
         [JsonProperty("responseDetails")]
-        public string ResponseDetails { get; private set; }
+        public string ResponseDetails { get; internal set; }
 
         [JsonProperty("responseStatus")]
-        public int ResponseStatus { get; private set; }
+        public int ResponseStatus { get; internal set; }
 
         [JsonProperty("responseData")]
-        public T ResponseData { get; private set; }
+        public T ResponseData { get; internal set; }
     }
 }

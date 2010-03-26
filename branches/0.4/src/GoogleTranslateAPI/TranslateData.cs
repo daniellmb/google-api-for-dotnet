@@ -34,12 +34,12 @@ namespace Google.API.Translate
         /// Gets the translated text.
         /// </summary>
         [JsonProperty("translatedText")]
-        public string TranslatedText { get; private set; }
+        public string TranslatedText { get; internal set; }
 
         /// <summary>
         /// Gets the source language.
         /// </summary>
         [JsonProperty("detectedSourceLanguage")]
-        public string DetectedSourceLanguage { get; private set; }
+        public string DetectedSourceLanguage { get; internal set; }
     }
 }

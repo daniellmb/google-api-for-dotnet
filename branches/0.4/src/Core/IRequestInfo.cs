@@ -33,7 +33,9 @@ namespace Google.API
 
         string PostContent { get; }
 
+#if !SILVERLIGHT
         string Referrer { get; }
+#endif
 
         /// <summary>
         /// Gets the interval of time after which the open method, invoked by a communication object, times out.

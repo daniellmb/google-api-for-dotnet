@@ -29,6 +29,7 @@ namespace Google.API.Translate.Test
     using System.Collections.Generic;
     using System.IO;
     using System.Net;
+    using System.Threading;
 
     using NUnit.Framework;
 
@@ -55,7 +56,11 @@ namespace Google.API.Translate.Test
         [SetUp]
         public void SetUp()
         {
+#if SILVERLIGHT
+            this.Client = new TranslateClient();
+#else
             this.Client = new TranslateClient(@"http://code.google.com/p/google-api-for-dotnet/");
+#endif
         }
 
 #if !SILVERLIGHT
@@ -267,8 +272,20 @@ namespace Google.API.Translate.Test
                     continue;
                 }
 
-                var asyncResult = this.Client.BeginTranslate(originalText, originalLanguage, language, null, null);
-                var translatedText = this.Client.EndTranslate(asyncResult);
+                var resetEvent = new ManualResetEvent(false);
+                string translatedText = null;
+                this.Client.BeginTranslate(
+                    originalText,
+                    originalLanguage,
+                    language,
+                    ar =>
+                        {
+                            translatedText = this.Client.EndTranslate(ar);
+                            resetEvent.Set();
+                        },
+                    null);
+                resetEvent.WaitOne();
+
                 Assert.AreNotEqual(
                     originalText,
                     translatedText,
@@ -279,8 +296,20 @@ namespace Google.API.Translate.Test
 
                 Print(language, translatedText);
 
-                asyncResult = this.Client.BeginTranslate(translatedText, language, originalLanguage, null, null);
-                var transbackText = this.Client.EndTranslate(asyncResult);
+                resetEvent.Reset();
+                string transbackText = null;
+                this.Client.BeginTranslate(
+                    translatedText,
+                    language,
+                    originalLanguage,
+                    ar =>
+                        {
+                            transbackText = this.Client.EndTranslate(ar);
+                            resetEvent.Set();
+                        },
+                    null);
+                resetEvent.WaitOne();
+
                 StringAssert.AreEqualIgnoringCase(
                     originalText,
                     transbackText.Trim(),
@@ -298,11 +327,21 @@ namespace Google.API.Translate.Test
         {
             var text = "I love this game.";
 
-            string from;
+            string from = null;
             var to = Language.English;
 
-            var asyncResult = this.Client.BeginTranslateAndDetect(text, to, null, null);
-            var translated = this.Client.EndTranslateAndDetect(asyncResult, out from);
+            var resetEvent = new ManualResetEvent(false);
+            string translated = null;
+            this.Client.BeginTranslateAndDetect(
+                text,
+                to,
+                ar =>
+                    {
+                        translated = this.Client.EndTranslateAndDetect(ar, out from);
+                        resetEvent.Set();
+                    },
+                null);
+            resetEvent.WaitOne();
 
             Assert.AreEqual((string)Language.English, from);
             StringAssert.AreEqualIgnoringCase(text, translated);
@@ -328,8 +367,19 @@ namespace Google.API.Translate.Test
                     continue;
                 }
 
-                var asyncResult = this.Client.BeginTranslate(originalText, originalLanguage, language, null, null);
-                var translatedText = this.Client.EndTranslate(asyncResult);
+                var resetEvent = new ManualResetEvent(false);
+                string translatedText = null;
+                var asyncResult = this.Client.BeginTranslate(
+                    originalText,
+                    originalLanguage,
+                    language,
+                    ar =>
+                        {
+                            translatedText = this.Client.EndTranslate(ar);
+                            resetEvent.Set();
+                        },
+                    null);
+                resetEvent.WaitOne();
                 Assert.AreNotEqual(
                     originalText,
                     translatedText,
@@ -338,10 +388,19 @@ namespace Google.API.Translate.Test
                     language,
                     originalText);
 
-                bool isReliable;
-                double confidence;
-                asyncResult = this.Client.BeginDetect(translatedText, null, null);
-                Language detectedLanguage = this.Client.EndDetect(asyncResult, out isReliable, out confidence);
+                resetEvent.Reset();
+                bool isReliable = default(bool);
+                double confidence = default(double);
+                Language detectedLanguage = null;
+                this.Client.BeginDetect(
+                    translatedText,
+                    ar =>
+                        {
+                            detectedLanguage = this.Client.EndDetect(ar, out isReliable, out confidence);
+                            resetEvent.Set();
+                        },
+                    null);
+                resetEvent.WaitOne(); 
 
                 var more = string.Format("isReliable : {0}, confidence : {1}", isReliable, confidence);
                 Print(language, translatedText, more);
