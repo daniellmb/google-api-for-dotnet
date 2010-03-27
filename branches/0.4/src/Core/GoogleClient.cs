@@ -123,7 +123,7 @@ namespace Google.API
         }
 #endif
 
-        private void SetValueTo(GoogleRequest request)
+        internal void SetValueTo(GoogleRequest request)
         {
 #if !SILVERLIGHT
             request.Referrer = this.Referrer;

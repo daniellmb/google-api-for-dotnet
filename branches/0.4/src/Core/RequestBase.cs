@@ -137,6 +137,12 @@ namespace Google.API
 
         #region Methods
 
+        public void Reset()
+        {
+            this.urlString = null;
+            this.postContent = null;
+        }
+
         public override string ToString()
         {
             return this.Url;
