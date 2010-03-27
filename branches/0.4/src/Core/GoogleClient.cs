@@ -69,12 +69,14 @@ namespace Google.API
         /// <value>The API key.</value>
         public string ApiKey { get; set; }
 
+#if !SILVERLIGHT
         /// <summary>
         /// Gets or sets the http referrer header.
         /// </summary>
         /// <value>The referrer.</value>
         /// <remarks>Applications MUST always include a valid and accurate http referer header in their requests.</remarks>
         public string Referrer { get; set; }
+#endif
 
         /// <summary>
         /// Gets or sets the interval of time after which the open method, invoked by a communication object, times out.

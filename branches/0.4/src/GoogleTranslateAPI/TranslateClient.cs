@@ -351,6 +351,7 @@ namespace Google.API.Translate
         /// <summary>
         /// returns the detected language.
         /// </summary>
+        /// <param name="asyncResult">An <see cref="IAsyncResult"/> that references a pending request for a response.</param>
         /// <param name="isReliable">Whether the result is reliable</param>
         /// <param name="confidence">The confidence percent of the result.</param>
         /// <returns>The detected language.</returns>
