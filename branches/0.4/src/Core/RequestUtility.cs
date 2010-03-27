@@ -37,7 +37,107 @@ namespace Google.API
     {
         private static readonly Encoding Encoding = Encoding.UTF8;
 
-        internal static T GetResponseData2<T>(IRequestInfo requestInfo)
+////        internal static T GetResponseData2<T>(IRequestInfo requestInfo)
+////        {
+////            if (requestInfo == null)
+////            {
+////                throw new ArgumentNullException("requestInfo");
+////            }
+
+////            var webRequest = (HttpWebRequest)WebRequest.Create(requestInfo.Url);
+
+////#if !SILVERLIGHT
+////            webRequest.Referer = requestInfo.Referrer;
+////#endif
+
+////            if (!string.IsNullOrEmpty(requestInfo.PostContent))
+////            {
+////#if PocketPC || SILVERLIGHT
+////                webRequest.Method = "POST";
+////#else
+////                webRequest.Method = WebRequestMethods.Http.Post;
+////#endif
+
+////                var postBytes = Encoding.GetBytes(requestInfo.PostContent);
+
+////#if SILVERLIGHT
+////                webRequest.Headers[HttpRequestHeader.ContentLength] = postBytes.Length.ToString();
+////#else
+////                webRequest.ContentLength = postBytes.Length;
+////#endif
+
+////                var requestStream = GetRequestStream(webRequest, requestInfo.OpenTimeout);
+
+////                WriteRequestStream(requestStream, postBytes, requestInfo.SendTimeout);
+////            }
+
+////            string resultString = GetResultString(webRequest, requestInfo);
+
+////            return Deserialize<T>(resultString);
+////        }
+
+////        private static Stream GetRequestStream(WebRequest webRequest, TimeSpan timeout)
+////        {
+////            return Invoke<Stream>(webRequest.BeginGetRequestStream, webRequest.EndGetRequestStream, timeout);
+////        }
+
+////        private static void WriteRequestStream(Stream stream, byte[] postBytes, TimeSpan timeout)
+////        {
+////            using (stream)
+////            {
+////                stream.WriteTimeout = (int)timeout.TotalMilliseconds;
+////                stream.Write(postBytes, 0, postBytes.Length);
+////            }
+////        }
+
+////        private static string GetResultString(WebRequest webRequest, IRequestInfo requestInfo)
+////        {
+////            try
+////            {
+////                // HACK: Not sure it should be OpenTimeout, CloseTimeout or ReceiveTimeout.
+////                using (var webResponse = GetResponse(webRequest, requestInfo.OpenTimeout))
+////                {
+////                    using (var reader = new StreamReader(webResponse.GetResponseStream(), Encoding))
+////                    {
+////                        reader.BaseStream.ReadTimeout = (int)requestInfo.ReceiveTimeout.TotalMilliseconds;
+////                        return reader.ReadToEnd();
+////                    }
+////                }
+////            }
+////            catch (WebException ex)
+////            {
+////                throw new GoogleAPIException("Failed to get response.", ex);
+////            }
+////            catch (IOException ex)
+////            {
+////                throw new GoogleAPIException("Cannot read the response stream.", ex);
+////            }
+////        }
+
+////        private static WebResponse GetResponse(WebRequest webRequest, TimeSpan timeout)
+////        {
+////            return Invoke<WebResponse>(webRequest.BeginGetResponse, webRequest.EndGetResponse, timeout);
+////        }
+
+////        private static T Invoke<T>(Func<AsyncCallback, object, IAsyncResult> beginInvoke, Func<IAsyncResult, T> endInvoke, TimeSpan timeout)
+////        {
+////            Thread threadToKill = Thread.CurrentThread;
+
+////            var asyncResult = beginInvoke(null, null);
+////#if PocketPC
+////            if (!asyncResult.AsyncWaitHandle.WaitOne((int)timeout.TotalMilliseconds, false))
+////#else
+////            if (!asyncResult.AsyncWaitHandle.WaitOne(timeout))
+////#endif
+////            {
+////                threadToKill.Abort();
+////                throw new TimeoutException();
+////            }
+
+////            return endInvoke(asyncResult);
+////        }
+
+        public static IAsyncResult BeginGetResponseData(IRequestInfo requestInfo, AsyncCallback callback, object state)
         {
             if (requestInfo == null)
             {
@@ -50,74 +150,57 @@ namespace Google.API
             webRequest.Referer = requestInfo.Referrer;
 #endif
 
-            if (!string.IsNullOrEmpty(requestInfo.PostContent))
-            {
-#if PocketPC || SILVERLIGHT
-                webRequest.Method = "POST";
-#else
-                webRequest.Method = WebRequestMethods.Http.Post;
-#endif
+            var getResponseAsyncResult = new GetResponseAsyncResult(webRequest, state);
 
-                var postBytes = Encoding.GetBytes(requestInfo.PostContent);
+            var innerAsyncResult = webRequest.BeginGetResponse(
+                asyncResult =>
+                    {
+                        getResponseAsyncResult.InnerAsyncResult = asyncResult;
 
-#if SILVERLIGHT
-                webRequest.Headers[HttpRequestHeader.ContentLength] = postBytes.Length.ToString();
-#else
-                webRequest.ContentLength = postBytes.Length;
-#endif
+                        if (callback != null)
+                        {
+                            callback(getResponseAsyncResult);
+                        }
+                    },
+                null);
 
-                var requestStream = GetRequestStream(webRequest, requestInfo.OpenTimeout);
+            getResponseAsyncResult.InnerAsyncResult = innerAsyncResult;
 
-                WriteRequestStream(requestStream, postBytes, requestInfo.SendTimeout);
-            }
+            return getResponseAsyncResult;
+        }
 
-            string resultString = GetResultString(webRequest, requestInfo);
+        public static T EndGetResponseData<T>(IAsyncResult asyncResult)
+        {
+            var resultString = ((GetResponseAsyncResult)asyncResult).Value;
 
             return Deserialize<T>(resultString);
         }
 
-        private static Stream GetRequestStream(WebRequest webRequest, TimeSpan timeout)
+#if !SILVERLIGHT
+        public static T GetResponseData<T>(IRequestInfo requestInfo)
         {
-            return Invoke<Stream>(webRequest.BeginGetRequestStream, webRequest.EndGetRequestStream, timeout);
-        }
-
-        private static void WriteRequestStream(Stream stream, byte[] postBytes, TimeSpan timeout)
-        {
-            using (stream)
+            if (requestInfo == null)
             {
-                stream.WriteTimeout = (int)timeout.TotalMilliseconds;
-                stream.Write(postBytes, 0, postBytes.Length);
+                throw new ArgumentNullException("requestInfo");
             }
-        }
 
-        private static string GetResultString(WebRequest webRequest, IRequestInfo requestInfo)
-        {
-            try
+            var webRequest = (HttpWebRequest)WebRequest.Create(requestInfo.Url);
+
+#if !SILVERLIGHT
+            webRequest.Referer = requestInfo.Referrer;
+#endif
+            string resultString;
+            using (var webResponse = webRequest.GetResponse())
             {
-                // HACK: Not sure it should be OpenTimeout, CloseTimeout or ReceiveTimeout.
-                using (var webResponse = GetResponse(webRequest, requestInfo.OpenTimeout))
+                using (var reader = new StreamReader(webResponse.GetResponseStream(), Encoding))
                 {
-                    using (var reader = new StreamReader(webResponse.GetResponseStream(), Encoding))
-                    {
-                        reader.BaseStream.ReadTimeout = (int)requestInfo.ReceiveTimeout.TotalMilliseconds;
-                        return reader.ReadToEnd();
-                    }
+                    resultString = reader.ReadToEnd();
                 }
             }
-            catch (WebException ex)
-            {
-                throw new GoogleAPIException("Failed to get response.", ex);
-            }
-            catch (IOException ex)
-            {
-                throw new GoogleAPIException("Cannot read the response stream.", ex);
-            }
-        }
 
-        private static WebResponse GetResponse(WebRequest webRequest, TimeSpan timeout)
-        {
-            return Invoke<WebResponse>(webRequest.BeginGetResponse, webRequest.EndGetResponse, timeout);
+            return Deserialize<T>(resultString);
         }
+#endif
 
         private static T Deserialize<T>(string text)
         {
@@ -139,81 +222,11 @@ namespace Google.API
             return resultObject.ResponseData;
         }
 
-        ////private static T Invoke<T>(Func<T> func, TimeSpan timeout)
-        ////{
-        ////    return Invoke<T>(func.BeginInvoke, func.EndInvoke, timeout);
-        ////}
-
-        private static T Invoke<T>(Func<AsyncCallback, object, IAsyncResult> beginInvoke, Func<IAsyncResult, T> endInvoke, TimeSpan timeout)
-        {
-            Thread threadToKill = Thread.CurrentThread;
-
-            var asyncResult = beginInvoke(null, null);
-#if PocketPC
-            if (!asyncResult.AsyncWaitHandle.WaitOne((int)timeout.TotalMilliseconds, false))
-#else
-            if (!asyncResult.AsyncWaitHandle.WaitOne(timeout))
-#endif
-            {
-                threadToKill.Abort();
-                throw new TimeoutException();
-            }
-
-            return endInvoke(asyncResult);
-        }
-
-        public static IAsyncResult BeginGetResponseData(IRequestInfo requestInfo, AsyncCallback callback, object state)
-        {
-            if (requestInfo == null)
-            {
-                throw new ArgumentNullException("requestInfo");
-            }
-
-            var webRequest = (HttpWebRequest)WebRequest.Create(requestInfo.Url);
-
-#if !SILVERLIGHT
-            webRequest.Referer = requestInfo.Referrer;
-#endif
-
-            var myAsyncResult = new MyAsyncResult(webRequest, state);
-
-            var innerAsyncResult = webRequest.BeginGetResponse(
-                asyncResult =>
-                    {
-                        myAsyncResult.InnerAsyncResult = asyncResult;
-
-                        if (callback != null)
-                        {
-                            callback(myAsyncResult);
-                        }
-                    },
-                null);
-
-            myAsyncResult.InnerAsyncResult = innerAsyncResult;
-
-            return myAsyncResult;
-        }
-
-        public static T EndGetResponseData<T>(IAsyncResult asyncResult)
-        {
-            var resultString = ((MyAsyncResult)asyncResult).Value;
-
-            return Deserialize<T>(resultString);
-        }
-
-#if !SILVERLIGHT
-        public static T GetResponseData<T>(IRequestInfo requestInfo)
-        {
-            var asyncResult = BeginGetResponseData(requestInfo, null, null);
-            return EndGetResponseData<T>(asyncResult);
-        }
-#endif
-
-        private class MyAsyncResult : IAsyncResult
+        private class GetResponseAsyncResult : IAsyncResult
         {
             private readonly WebRequest webRequest;
 
-            public MyAsyncResult(WebRequest webRequest, object state)
+            public GetResponseAsyncResult(WebRequest webRequest, object state)
             {
                 this.webRequest = webRequest;
                 this.AsyncState = state;
