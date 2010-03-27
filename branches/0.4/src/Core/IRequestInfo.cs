@@ -29,8 +29,14 @@ namespace Google.API
 
     internal interface IRequestInfo
     {
+        /// <summary>
+        /// Gets the url string.
+        /// </summary>
         string Url { get; }
 
+        /// <summary>
+        /// Gets the post content.
+        /// </summary>
         string PostContent { get; }
 
 #if !SILVERLIGHT

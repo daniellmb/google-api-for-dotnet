@@ -89,6 +89,9 @@ namespace Google.API
             }
         }
 
+        /// <summary>
+        /// Gets the post content.
+        /// </summary>
         public string PostContent
         {
             get
