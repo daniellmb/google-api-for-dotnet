@@ -23,11 +23,11 @@
 // <author>iron9light@gmail.com</author>
 //-----------------------------------------------------------------------
 
-namespace Google.API.Translate.Test
+namespace Google.API.Translate.Tests
 {
-    using NUnit.Framework;
+    using API.Tests;
 
-    using Tests;
+    using NUnit.Framework;
 
     [TestFixture]
     [Category("Enumeration")]

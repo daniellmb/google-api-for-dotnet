@@ -23,7 +23,7 @@
 // <author>iron9light@gmail.com</author>
 //-----------------------------------------------------------------------
 
-namespace Google.API.Translate.Test
+namespace Google.API.Translate.Tests
 {
     using System;
     using System.Collections.Generic;
