@@ -27,6 +27,8 @@ namespace Google.API.Search
 {
     using System;
 
+    using Converters;
+
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
 
@@ -75,7 +77,7 @@ namespace Google.API.Search
         /// Supplies the published date of the video (rfc-822 format).
         /// </summary>
         [JsonProperty("published")]
-        [JsonConverter(typeof(IsoDateTimeConverter))]
+        [JsonConverter(typeof(RFC822DateTimeConverter))]
         public DateTime PublishedDate { get; private set; }
 
         /// <summary>

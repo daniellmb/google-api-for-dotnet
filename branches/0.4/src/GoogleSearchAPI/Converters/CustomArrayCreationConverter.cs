@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------
-// <copyright file="HtmlFormatConverter.cs" company="iron9light">
+// <copyright file="CustomArrayCreationConverter.cs" company="iron9light">
 // Copyright (c) 2010 iron9light
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,13 +23,31 @@
 // <author>iron9light@gmail.com</author>
 //-----------------------------------------------------------------------
 
-namespace Google.API.Search
+namespace Google.API.Search.Converters
 {
-    internal class HtmlFormatConverter : StringProcessConverter
+    using System;
+    using System.Collections.Generic;
+
+    using Newtonsoft.Json;
+
+    internal class CustomArrayCreationConverter<TInterface, T> : JsonConverter
+        where T : TInterface
     {
-        protected override string Processe(string s)
+        public override bool CanConvert(Type objectType)
         {
-            return HttpUtility.HtmlDecode(s);
+            return typeof(TInterface[]).IsAssignableFrom(objectType);
+        }
+
+        public override object ReadJson(JsonReader reader, Type objectType, JsonSerializer serializer)
+        {
+            var list = new List<T>();
+            serializer.Populate(reader, list);
+            return list.ConvertAll(item => (TInterface)item).ToArray();
+        }
+
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            throw new NotSupportedException();
         }
     }
 }

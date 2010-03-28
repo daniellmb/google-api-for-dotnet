@@ -27,6 +27,8 @@ namespace Google.API.Search
 {
     using System;
 
+    using Converters;
+
     using Newtonsoft.Json;
 
     [JsonObject]
@@ -123,14 +125,13 @@ namespace Google.API.Search
 
         public override string ToString()
         {
-            IImageResult result = this;
             return string.Format(
                 "{0}" + Environment.NewLine + "{1} x {2} - {3}" + Environment.NewLine + "{4}",
-                result.Content,
-                result.Width,
-                result.Height,
-                result.Title,
-                result.VisibleUrl);
+                this.Content,
+                this.Width,
+                this.Height,
+                this.Title,
+                this.VisibleUrl);
         }
 
         #region IImageResult Members

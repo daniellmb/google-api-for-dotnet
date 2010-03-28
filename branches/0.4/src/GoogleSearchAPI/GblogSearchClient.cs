@@ -74,8 +74,7 @@ namespace Google.API.Search
                 throw new ArgumentNullException("keyword");
             }
 
-            // TODO: Not Implemented.
-            var request = (GoogleSearchRequest)null;
+            var request = new GblogSearchRequest { Query = keyword, SortBy = sortBy };
             return this.Search<GblogResult, IBlogResult>(request, resultCount);
         }
     }

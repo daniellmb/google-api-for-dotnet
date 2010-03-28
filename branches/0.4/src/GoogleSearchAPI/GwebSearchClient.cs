@@ -114,8 +114,16 @@ namespace Google.API.Search
                 throw new ArgumentNullException("keyword");
             }
 
-            // TODO: Not Implemented.
-            var request = (GoogleSearchRequest)null;
+            // TODO: Supporting new argument: country.
+            var request = new GwebSearchRequest
+                {
+                    Query = keyword,
+                    CustomSearchId = customSearchId,
+                    CustomSearchReference = customSearchReference,
+                    SafeLevel = safeLevel,
+                    Language = language,
+                    DuplicateFilter = duplicateFilter
+                };
             return this.Search<GwebResult, IWebResult>(request, resultCount);
         }
     }

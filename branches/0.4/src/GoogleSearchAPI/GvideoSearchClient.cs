@@ -74,8 +74,7 @@ namespace Google.API.Search
                 throw new ArgumentNullException("keyword");
             }
 
-            // TODO: Not Implemented.
-            var request = (GoogleSearchRequest)null;
+            var request = new GvideoSearchRequest { Query = keyword, SortBy = sortBy };
             return this.Search<GvideoResult, IVideoResult>(request, resultCount);
         }
     }

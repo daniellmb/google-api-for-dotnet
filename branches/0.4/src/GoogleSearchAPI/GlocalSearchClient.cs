@@ -133,8 +133,15 @@ namespace Google.API.Search
                 throw new ArgumentNullException("keyword");
             }
 
-            // TODO: Not Implemented.
-            var request = (GoogleSearchRequest)null;
+            var request = new GlocalSearchRequest
+                {
+                    Query = keyword,
+                    Latitude = latitude,
+                    Longitude = longitude,
+                    Width = width,
+                    Height = height,
+                    ResultType = resultType
+                };
             return this.Search<GlocalResult, ILocalResult>(request, resultCount);
         }
     }

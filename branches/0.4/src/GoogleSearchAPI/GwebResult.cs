@@ -27,6 +27,8 @@ namespace Google.API.Search
 {
     using System;
 
+    using Converters;
+
     using Newtonsoft.Json;
 
     [JsonObject]

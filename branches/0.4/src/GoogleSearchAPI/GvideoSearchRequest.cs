@@ -1,5 +1,5 @@
-//-----------------------------------------------------------------------
-// <copyright file="StringProcessConverter.cs" company="iron9light">
+﻿//-----------------------------------------------------------------------
+// <copyright file="GvideoSearchRequest.cs" company="iron9light">
 // Copyright (c) 2010 iron9light
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,42 +25,17 @@
 
 namespace Google.API.Search
 {
-    using System;
-    using System.Globalization;
-
-    using Newtonsoft.Json;
-
-    internal abstract class StringProcessConverter : JsonConverter
+    internal class GvideoSearchRequest : GoogleSearchRequest
     {
-        public override bool CanConvert(Type objectType)
+        /// <summary>
+        /// This optional argument tells the video search system how to order results. Results may be ordered by relevance (which is the default), or by date. To select ordering by relevance, do not supply this argument. To select ordering by date, set scoring as scoring=d. 
+        /// </summary>
+        [Argument("scoring")]
+        public string SortBy { get; set; }
+
+        protected override string BaseAddress
         {
-            return typeof(string).IsAssignableFrom(objectType);
+            get { return "http://ajax.googleapis.com/ajax/services/search/video"; }
         }
-
-        public override object ReadJson(JsonReader reader, Type objectType, JsonSerializer serializer)
-        {
-            if (reader.TokenType == JsonToken.Null)
-            {
-                return null;
-            }
-
-            if (reader.TokenType == JsonToken.String)
-            {
-                return this.Processe(reader.Value.ToString());
-            }
-
-            throw new Exception(
-                string.Format(
-                    CultureInfo.InvariantCulture,
-                    "Unexpected token when parsing string. Expected String, got {0}.",
-                    reader.TokenType));
-        }
-
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-        {
-            throw new NotSupportedException();
-        }
-
-        protected abstract string Processe(string s);
     }
 }

@@ -27,6 +27,8 @@ namespace Google.API.Search
 {
     using System;
 
+    using Converters;
+
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
 
@@ -82,7 +84,7 @@ namespace Google.API.Search
         /// Supplies the published date (rfc-822 format) of the blog post referenced by this search result.
         /// </summary>
         [JsonProperty("publishedDate")]
-        [JsonConverter(typeof(IsoDateTimeConverter))]
+        [JsonConverter(typeof(RFC822DateTimeConverter))]
         public DateTime PublishedDate { get; private set; }
 
         public override string ToString()

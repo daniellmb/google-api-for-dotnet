@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------
-// <copyright file="HtmlTagConverter.cs" company="iron9light">
+// <copyright file="StringProcessConverter.cs" company="iron9light">
 // Copyright (c) 2010 iron9light
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,13 +23,44 @@
 // <author>iron9light@gmail.com</author>
 //-----------------------------------------------------------------------
 
-namespace Google.API.Search
+namespace Google.API.Search.Converters
 {
-    internal class HtmlTagConverter : StringProcessConverter
+    using System;
+    using System.Globalization;
+
+    using Newtonsoft.Json;
+
+    internal abstract class StringProcessConverter : JsonConverter
     {
-        protected override string Processe(string s)
+        public override bool CanConvert(Type objectType)
         {
-            return HttpUtility.RemoveHtmlTags(s);
+            return typeof(string).IsAssignableFrom(objectType);
         }
+
+        public override object ReadJson(JsonReader reader, Type objectType, JsonSerializer serializer)
+        {
+            if (reader.TokenType == JsonToken.Null)
+            {
+                return null;
+            }
+
+            if (reader.TokenType == JsonToken.String)
+            {
+                return this.Processe(reader.Value.ToString());
+            }
+
+            throw new Exception(
+                string.Format(
+                    CultureInfo.InvariantCulture,
+                    "Unexpected token when parsing string. Expected String, got {0}.",
+                    reader.TokenType));
+        }
+
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            throw new NotSupportedException();
+        }
+
+        protected abstract string Processe(string s);
     }
 }

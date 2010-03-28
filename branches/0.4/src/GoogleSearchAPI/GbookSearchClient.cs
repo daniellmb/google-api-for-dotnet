@@ -84,8 +84,7 @@ namespace Google.API.Search
                 throw new ArgumentNullException("keyword");
             }
 
-            // TODO: Not Implemented.
-            var request = (GoogleSearchRequest)null;
+            var request = new GbookSearchRequest { Query = keyword, FullViewOnly = fullViewOnly, Library = library };
             return this.Search<GbookResult, IBookResult>(request, resultCount);
         }
     }

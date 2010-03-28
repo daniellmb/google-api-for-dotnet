@@ -118,8 +118,10 @@ namespace Google.API.Search
                 throw new ArgumentNullException("keyword");
             }
 
-            // TODO: Not Implemented.
-            var request = (GoogleSearchRequest)null;
+            var request = new GpatentSearchRequest
+                {
+                    Query = keyword, IssuedOnly = issuedOnly, FiledOnly = filedOnly, SortBy = sortBy 
+                };
             return this.Search<GpatentResult, IPatentResult>(request, resultCount);
         }
     }

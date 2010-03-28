@@ -101,8 +101,10 @@ namespace Google.API.Search
                 throw new ArgumentNullException("keyword");
             }
 
-            // TODO: Not Implemented.
-            var request = (GoogleSearchRequest)null;
+            var request = new GnewsSearchRequest
+                {
+                    Query = keyword, Geo = geo, SortBy = sortBy, QuoteId = quoteId, Topic = topic, Edition = edition 
+                };
             return this.Search<GnewsResult, INewsResult>(request, resultCount);
         }
 

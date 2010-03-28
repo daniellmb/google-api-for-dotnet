@@ -198,8 +198,17 @@ namespace Google.API.Search
                 throw new ArgumentNullException("keyword");
             }
 
-            // TODO: Not Implemented.
-            var request = (GoogleSearchRequest)null;
+            var request = new GimageSearchRequest
+                {
+                    Query = keyword,
+                    SafeLevel = safeLevel,
+                    ImageSize = imageSize,
+                    Colorization = colorization,
+                    ImageColor = color,
+                    ImageType = imageType,
+                    FileType = fileType,
+                    Site = site
+                };
             return this.Search<GimageResult, IImageResult>(request, resultCount);
         }
     }

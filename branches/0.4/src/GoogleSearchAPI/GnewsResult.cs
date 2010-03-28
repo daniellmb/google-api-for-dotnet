@@ -25,7 +25,10 @@
 
 namespace Google.API.Search
 {
+    using System;
     using System.Text;
+
+    using Converters;
 
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
@@ -100,18 +103,14 @@ namespace Google.API.Search
 
         internal class NewsImageConverter : CustomCreationConverter<INewsImage>
         {
-            public override INewsImage Create(System.Type objectType)
+            public override INewsImage Create(Type objectType)
             {
                 return new GnewsImage();
             }
         }
 
-        internal class NewsResultItemConverter : CustomCreationConverter<INewsResultItem>
+        internal class NewsResultItemConverter : CustomArrayCreationConverter<INewsResultItem, GnewsResultItem>
         {
-            public override INewsResultItem Create(System.Type objectType)
-            {
-                return new GnewsResultItem();
-            }
         }
     }
 }

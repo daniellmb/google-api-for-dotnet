@@ -28,6 +28,8 @@ namespace Google.API.Search
     using System;
     using System.Diagnostics.CodeAnalysis;
 
+    using Converters;
+
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
 
@@ -84,7 +86,7 @@ namespace Google.API.Search
         /// Supplies the application filing date of the patent (rfc-822 format).
         /// </summary>
         [JsonProperty("applicationDate")]
-        [JsonConverter(typeof(IsoDateTimeConverter))]
+        [JsonConverter(typeof(RFC822DateTimeConverter))]
         public DateTime ApplicationDate { get; private set; }
 
         /// <summary>
@@ -114,15 +116,14 @@ namespace Google.API.Search
 
         public override string ToString()
         {
-            IPatentResult result = this;
             return
                 string.Format(
                     "{0}" + Environment.NewLine + "US Pat. {1} - filed {2:d} - {3}" + Environment.NewLine + "{4}",
-                    result.Title,
-                    result.PatentNumber,
-                    result.ApplicationDate,
-                    result.Assignee,
-                    result.Content);
+                    this.Title,
+                    this.PatentNumber,
+                    this.ApplicationDate,
+                    this.Assignee,
+                    this.Content);
         }
 
         #region IPatentResult Members

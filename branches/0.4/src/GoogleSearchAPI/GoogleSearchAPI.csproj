@@ -55,29 +55,38 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Colorization.cs" />
+    <Compile Include="Converters\CustomArrayCreationConverter.cs" />
     <Compile Include="DuplicateFilter.cs" />
     <Compile Include="GblogResult.cs" />
     <Compile Include="GblogSearchClient.cs" />
+    <Compile Include="GblogSearchRequest.cs" />
     <Compile Include="GbookResult.cs" />
     <Compile Include="GbookSearchClient.cs" />
+    <Compile Include="GbookSearchRequest.cs" />
     <Compile Include="GimageResult.cs" />
     <Compile Include="GimageSearchClient.cs" />
+    <Compile Include="GimageSearchRequest.cs" />
     <Compile Include="GlocalResult.cs" />
     <Compile Include="GlocalSearchClient.cs" />
+    <Compile Include="GlocalSearchRequest.cs" />
     <Compile Include="GnewsImage.cs" />
     <Compile Include="GnewsResult.cs" />
     <Compile Include="GnewsResultItem.cs" />
     <Compile Include="GnewsSearchClient.cs" />
+    <Compile Include="GnewsSearchRequest.cs" />
     <Compile Include="GoogleSearchRequest.cs" />
     <Compile Include="GpatentResult.cs" />
     <Compile Include="GpatentSearchClient.cs" />
+    <Compile Include="GpatentSearchRequest.cs" />
     <Compile Include="GSearchClient.cs" />
     <Compile Include="GvideoResult.cs" />
     <Compile Include="GvideoSearchClient.cs" />
+    <Compile Include="GvideoSearchRequest.cs" />
     <Compile Include="GwebResult.cs" />
     <Compile Include="GwebSearchClient.cs" />
-    <Compile Include="HtmlFormatConverter.cs" />
-    <Compile Include="HtmlTagConverter.cs" />
+    <Compile Include="GwebSearchRequest.cs" />
+    <Compile Include="Converters\HtmlFormatConverter.cs" />
+    <Compile Include="Converters\HtmlTagConverter.cs" />
     <Compile Include="IBlogResult.cs" />
     <Compile Include="IBookResult.cs" />
     <Compile Include="IImageResult.cs" />
@@ -102,11 +111,12 @@
     <Compile Include="PhoneNumber.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResultSize.cs" />
+    <Compile Include="Converters\RFC822DateTimeConverter.cs" />
     <Compile Include="SafeLevel.cs" />
     <Compile Include="SearchData.cs" />
     <Compile Include="SearchUtility.cs" />
     <Compile Include="SortType.cs" />
-    <Compile Include="StringProcessConverter.cs" />
+    <Compile Include="Converters\StringProcessConverter.cs" />
     <Compile Include="TbImage.cs" />
     <None Include="Properties\AssemblyInfo.cs.template" />
   </ItemGroup>

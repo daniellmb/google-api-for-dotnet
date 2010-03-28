@@ -28,8 +28,9 @@ namespace Google.API.Search
     using System.Diagnostics.CodeAnalysis;
     using System.Text;
 
+    using Converters;
+
     using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
 
     [JsonObject]
     internal class GlocalResult : ILocalResult
@@ -168,41 +169,40 @@ namespace Google.API.Search
 
         public override string ToString()
         {
-            ILocalResult result = this;
             var sb = new StringBuilder();
-            sb.Append(result.Title);
-            if (!string.IsNullOrEmpty(result.StreetAddress))
+            sb.Append(this.Title);
+            if (!string.IsNullOrEmpty(this.StreetAddress))
             {
                 sb.AppendLine();
-                sb.Append(result.StreetAddress);
+                sb.Append(this.StreetAddress);
             }
 
-            if (!string.IsNullOrEmpty(result.City))
+            if (!string.IsNullOrEmpty(this.City))
             {
                 sb.AppendLine();
-                sb.Append(result.City);
-                if (!string.IsNullOrEmpty(result.Region))
+                sb.Append(this.City);
+                if (!string.IsNullOrEmpty(this.Region))
                 {
-                    sb.Append(", " + result.Region);
-                    ////if (!string.IsNullOrEmpty(result.PostalCode))
+                    sb.Append(", " + this.Region);
+                    ////if (!string.IsNullOrEmpty(this.PostalCode))
                     ////{
-                    ////    sb.Append(" " + result.PostalCode);
+                    ////    sb.Append(" " + this.PostalCode);
                     ////}
                 }
             }
-            else if (!string.IsNullOrEmpty(result.Region))
+            else if (!string.IsNullOrEmpty(this.Region))
             {
                 sb.AppendLine();
-                sb.Append(result.Region);
-                ////if (!string.IsNullOrEmpty(result.PostalCode))
+                sb.Append(this.Region);
+                ////if (!string.IsNullOrEmpty(this.PostalCode))
                 ////{
-                ////    sb.Append(" " + result.PostalCode);
+                ////    sb.Append(" " + this.PostalCode);
                 ////}
             }
 
             if (this.PhoneNumbers != null)
             {
-                foreach (var phoneNumber in result.PhoneNumbers)
+                foreach (var phoneNumber in this.PhoneNumbers)
                 {
                     sb.AppendLine();
                     sb.Append(phoneNumber);
@@ -224,12 +224,8 @@ namespace Google.API.Search
 
         #endregion
 
-        internal class PhoneNumberConverter : CustomCreationConverter<IPhoneNumber>
+        internal class PhoneNumberConverter : CustomArrayCreationConverter<IPhoneNumber, PhoneNumber>
         {
-            public override IPhoneNumber Create(System.Type objectType)
-            {
-                return new PhoneNumber();
-            }
         }
     }
 }
