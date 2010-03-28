@@ -161,11 +161,11 @@ namespace Google.API.Search
         [JsonProperty("maxAge")]
         public int MaxAge { get; private set; }
 
-        ////[JsonProperty("addressLookupResult")]
-        ////public string AddressLookupResult { get; private set; }
+        [JsonProperty("addressLookupResult")]
+        public string AddressLookupResult { get; private set; }
 
-        ////[JsonProperty("postalCode")]
-        ////public string PostalCode { get; private set; }
+        [JsonProperty("postalCode")]
+        public string PostalCode { get; private set; }
 
         public override string ToString()
         {

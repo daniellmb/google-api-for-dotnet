@@ -31,7 +31,6 @@ namespace Google.API.Search
     using Converters;
 
     using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
 
     [JsonObject]
     internal class GnewsResultItem : INewsResultItem
