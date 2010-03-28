@@ -34,7 +34,6 @@ namespace Google.API.Search
             : base(referrer)
         {
         }
-#endif
 
         internal List<TResult> Search<T, TResult>(GoogleSearchRequest request, int resultCount)
             where T : TResult
@@ -45,5 +44,6 @@ namespace Google.API.Search
 
             return list.ConvertAll(item => (TResult)item);
         }
+#endif
     }
 }

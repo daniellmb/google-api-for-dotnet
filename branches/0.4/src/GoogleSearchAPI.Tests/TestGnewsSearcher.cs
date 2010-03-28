@@ -37,9 +37,14 @@ namespace Google.API.Search.Tests
         [SetUp]
         public void SetUp()
         {
+#if SILVERLIGHT
+            this.Client = new GnewsSearchClient();
+#else
             this.Client = new GnewsSearchClient(@"http://code.google.com/p/google-api-for-dotnet/");
+#endif
         }
 
+#if !SILVERLIGHT
         [Test]
         public void SearchTest()
         {
@@ -201,9 +206,10 @@ namespace Google.API.Search.Tests
         [Test]
         public void SearchWithBigResultTest()
         {
-            var results = this.Client.Search("a", 50);
+            var results = this.Client.Search("a", 1000);
             Assert.Greater(results.Count, 0);
-            Assert.LessOrEqual(results.Count, 50);
+            Assert.LessOrEqual(results.Count, 1000);
         }
+#endif
     }
 }

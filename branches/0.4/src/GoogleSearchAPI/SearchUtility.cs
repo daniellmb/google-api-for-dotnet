@@ -29,6 +29,7 @@ namespace Google.API.Search
 
     internal static class SearchUtility
     {
+#if !SILVERLIGHT
         public static List<T> Search<T>(GoogleSearchRequest request, int resultCount)
         {
             var start = 0;
@@ -89,6 +90,7 @@ namespace Google.API.Search
             ResetRequest(request, start, resultSize);
             return RequestUtility.GetResponseData<SearchData<T>>(request);
         }
+#endif
 
         private static void ResetRequest(GoogleSearchRequest request, int start, string resultSize)
         {

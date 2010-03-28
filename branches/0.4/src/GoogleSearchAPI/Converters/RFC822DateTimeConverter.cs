@@ -119,7 +119,11 @@ namespace Google.API.Search.Converters
             tmp = Regex.Replace(tmp, "\\s+$", string.Empty);
 
             // extract week name part
+#if PocketPC || SILVERLIGHT
+            resp = tmp.Split(',');
+#else
             resp = tmp.Split(new[] { ',' }, 2);
+#endif
             if (resp.Length == 2)
             {
                 // there's week name

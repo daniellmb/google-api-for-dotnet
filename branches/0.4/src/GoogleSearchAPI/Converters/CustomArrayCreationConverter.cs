@@ -27,6 +27,7 @@ namespace Google.API.Search.Converters
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     using Newtonsoft.Json;
 
@@ -42,7 +43,11 @@ namespace Google.API.Search.Converters
         {
             var list = new List<T>();
             serializer.Populate(reader, list);
+#if SILVERLIGHT
+            return list.Select(item => (TInterface)item).ToArray();
+#else
             return list.ConvertAll(item => (TInterface)item).ToArray();
+#endif
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

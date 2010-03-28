@@ -39,6 +39,7 @@ namespace Google.API.Search
     /// <seealso cref="DuplicateFilter"/>
     public class GwebSearchClient : GSearchClient
     {
+#if !SILVERLIGHT
         /// <summary>
         /// Initializes a new instance of the <see cref="GwebSearchClient"/> class.
         /// </summary>
@@ -128,5 +129,6 @@ namespace Google.API.Search
                 };
             return this.Search<GwebResult, IWebResult>(request, resultCount);
         }
+#endif
     }
 }

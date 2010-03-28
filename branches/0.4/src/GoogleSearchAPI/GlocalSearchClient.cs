@@ -37,6 +37,7 @@ namespace Google.API.Search
     /// <seealso cref="LocalResultType"/>
     public class GlocalSearchClient : GSearchClient
     {
+#if !SILVERLIGHT
         /// <summary>
         /// Initializes a new instance of the <see cref="GlocalSearchClient"/> class.
         /// </summary>
@@ -144,5 +145,6 @@ namespace Google.API.Search
                 };
             return this.Search<GlocalResult, ILocalResult>(request, resultCount);
         }
+#endif
     }
 }

@@ -37,6 +37,7 @@ namespace Google.API.Search
     /// <seealso cref="SortType"/>
     public class GblogSearchClient : GSearchClient
     {
+#if !SILVERLIGHT
         /// <summary>
         /// Initializes a new instance of the <see cref="GblogSearchClient"/> class.
         /// </summary>
@@ -77,5 +78,6 @@ namespace Google.API.Search
             var request = new GblogSearchRequest { Query = keyword, SortBy = sortBy };
             return this.Search<GblogResult, IBlogResult>(request, resultCount);
         }
+#endif
     }
 }

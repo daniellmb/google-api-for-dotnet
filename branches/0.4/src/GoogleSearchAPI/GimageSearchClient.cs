@@ -42,6 +42,7 @@ namespace Google.API.Search
     /// <seealso cref="ImageFileType"/>
     public class GimageSearchClient : GSearchClient
     {
+#if !SILVERLIGHT
         /// <summary>
         /// Initializes a new instance of the <see cref="GimageSearchClient"/> class.
         /// </summary>
@@ -211,5 +212,6 @@ namespace Google.API.Search
                 };
             return this.Search<GimageResult, IImageResult>(request, resultCount);
         }
+#endif
     }
 }

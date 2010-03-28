@@ -37,9 +37,14 @@ namespace Google.API.Search.Tests
         [SetUp]
         public void SetUp()
         {
+#if SILVERLIGHT
+            this.Client = new GvideoSearchClient();
+#else
             this.Client = new GvideoSearchClient(@"http://code.google.com/p/google-api-for-dotnet/");
+#endif
         }
 
+#if !SILVERLIGHT
         [Test]
         public void SearchTest()
         {
@@ -72,5 +77,6 @@ namespace Google.API.Search.Tests
                 Console.WriteLine();
             }
         }
+#endif
     }
 }

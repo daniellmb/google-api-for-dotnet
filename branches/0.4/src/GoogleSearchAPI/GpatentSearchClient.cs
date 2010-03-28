@@ -37,6 +37,7 @@ namespace Google.API.Search
     /// <seealso cref="SortType"/>
     public class GpatentSearchClient : GSearchClient
     {
+#if !SILVERLIGHT
         /// <summary>
         /// Initializes a new instance of the <see cref="GpatentSearchClient"/> class.
         /// </summary>
@@ -124,5 +125,6 @@ namespace Google.API.Search
                 };
             return this.Search<GpatentResult, IPatentResult>(request, resultCount);
         }
+#endif
     }
 }

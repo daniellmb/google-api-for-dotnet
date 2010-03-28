@@ -37,6 +37,7 @@ namespace Google.API.Search
     /// <seealso cref="SortType"/>
     public class GvideoSearchClient : GSearchClient
     {
+#if !SILVERLIGHT
         /// <summary>
         /// Initializes a new instance of the <see cref="GvideoSearchClient"/> class.
         /// </summary>
@@ -77,5 +78,6 @@ namespace Google.API.Search
             var request = new GvideoSearchRequest { Query = keyword, SortBy = sortBy };
             return this.Search<GvideoResult, IVideoResult>(request, resultCount);
         }
+#endif
     }
 }

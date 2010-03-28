@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Google.API.Search</RootNamespace>
-    <AssemblyName>GoogleSearchAPI.Campact</AssemblyName>
+    <AssemblyName>GoogleSearchAPI.Compact</AssemblyName>
     <ProjectTypeGuids>{4D628B5B-2FBC-4AA6-8C16-197242AEB884};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <PlatformFamilyName>PocketPC</PlatformFamilyName>
     <PlatformID>b2c48bd2-963d-4549-9169-1fa021dce484</PlatformID>
@@ -50,6 +50,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
+    <Reference Include="Newtonsoft.Json.Compact, Version=3.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Json.NET\Compact\Newtonsoft.Json.Compact.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -58,7 +62,70 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Colorization.cs" />
+    <Compile Include="Converters\CustomArrayCreationConverter.cs" />
+    <Compile Include="DuplicateFilter.cs" />
+    <Compile Include="GblogResult.cs" />
+    <Compile Include="GblogSearchClient.cs" />
+    <Compile Include="GblogSearchRequest.cs" />
+    <Compile Include="GbookResult.cs" />
+    <Compile Include="GbookSearchClient.cs" />
+    <Compile Include="GbookSearchRequest.cs" />
+    <Compile Include="GimageResult.cs" />
+    <Compile Include="GimageSearchClient.cs" />
+    <Compile Include="GimageSearchRequest.cs" />
+    <Compile Include="GlocalResult.cs" />
+    <Compile Include="GlocalSearchClient.cs" />
+    <Compile Include="GlocalSearchRequest.cs" />
+    <Compile Include="GnewsImage.cs" />
+    <Compile Include="GnewsResult.cs" />
+    <Compile Include="GnewsResultItem.cs" />
+    <Compile Include="GnewsSearchClient.cs" />
+    <Compile Include="GnewsSearchRequest.cs" />
+    <Compile Include="GoogleSearchRequest.cs" />
+    <Compile Include="GpatentResult.cs" />
+    <Compile Include="GpatentSearchClient.cs" />
+    <Compile Include="GpatentSearchRequest.cs" />
+    <Compile Include="GSearchClient.cs" />
+    <Compile Include="GvideoResult.cs" />
+    <Compile Include="GvideoSearchClient.cs" />
+    <Compile Include="GvideoSearchRequest.cs" />
+    <Compile Include="GwebResult.cs" />
+    <Compile Include="GwebSearchClient.cs" />
+    <Compile Include="GwebSearchRequest.cs" />
+    <Compile Include="Converters\HtmlFormatConverter.cs" />
+    <Compile Include="Converters\HtmlTagConverter.cs" />
+    <Compile Include="IBlogResult.cs" />
+    <Compile Include="IBookResult.cs" />
+    <Compile Include="IImageResult.cs" />
+    <Compile Include="ILocalResult.cs" />
+    <Compile Include="ImageColor.cs" />
+    <Compile Include="ImageFileType.cs" />
+    <Compile Include="ImageSize.cs" />
+    <Compile Include="ImageType.cs" />
+    <Compile Include="INewsImage.cs" />
+    <Compile Include="INewsResult.cs" />
+    <Compile Include="INewsResultItem.cs" />
+    <Compile Include="IPatentResult.cs" />
+    <Compile Include="IPhoneNumber.cs" />
+    <Compile Include="ITbImage.cs" />
+    <Compile Include="IVideoResult.cs" />
+    <Compile Include="IWebResult.cs" />
+    <Compile Include="Language.cs" />
+    <Compile Include="LocalResultType.cs" />
+    <Compile Include="LocalSearchData.cs" />
+    <Compile Include="NewsEdition.cs" />
+    <Compile Include="NewsTopic.cs" />
+    <Compile Include="PhoneNumber.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResultSize.cs" />
+    <Compile Include="Converters\RFC822DateTimeConverter.cs" />
+    <Compile Include="SafeLevel.cs" />
+    <Compile Include="SearchData.cs" />
+    <Compile Include="SearchUtility.cs" />
+    <Compile Include="SortType.cs" />
+    <Compile Include="Converters\StringProcessConverter.cs" />
+    <Compile Include="TbImage.cs" />
     <None Include="Properties\AssemblyInfo.cs.template" />
   </ItemGroup>
   <ItemGroup>

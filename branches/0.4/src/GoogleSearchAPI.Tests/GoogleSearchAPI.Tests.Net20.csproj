@@ -47,6 +47,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestColorization.cs" />
+    <Compile Include="TestDuplicateFilter.cs" />
+    <Compile Include="TestGblogSearcher.cs" />
+    <Compile Include="TestGbookSearcher.cs" />
+    <Compile Include="TestGimageSearcher.cs" />
+    <Compile Include="TestGlocalSearcher.cs" />
+    <Compile Include="TestGnewsSearcher.cs" />
+    <Compile Include="TestGpatentSearcher.cs" />
+    <Compile Include="TestGvideoSearcher.cs" />
+    <Compile Include="TestGwebSearcher.cs" />
+    <Compile Include="TestImageColor.cs" />
+    <Compile Include="TestImageFileType.cs" />
+    <Compile Include="TestImageSize.cs" />
+    <Compile Include="TestImageType.cs" />
+    <Compile Include="TestLanguage.cs" />
+    <Compile Include="TestLocalResultType.cs" />
+    <Compile Include="TestNewsEdition.cs" />
+    <Compile Include="TestNewsTopic.cs" />
+    <Compile Include="TestResultSize.cs" />
+    <Compile Include="TestSafeLevel.cs" />
+    <Compile Include="TestSortType.cs" />
     <None Include="Properties\AssemblyInfo.cs.template" />
   </ItemGroup>
   <ItemGroup>

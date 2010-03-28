@@ -33,6 +33,7 @@ namespace Google.API.Search
     /// </summary>
     public class GbookSearchClient : GSearchClient
     {
+#if !SILVERLIGHT
         /// <summary>
         /// Initializes a new instance of the <see cref="GbookSearchClient"/> class.
         /// </summary>
@@ -87,5 +88,6 @@ namespace Google.API.Search
             var request = new GbookSearchRequest { Query = keyword, FullViewOnly = fullViewOnly, Library = library };
             return this.Search<GbookResult, IBookResult>(request, resultCount);
         }
+#endif
     }
 }

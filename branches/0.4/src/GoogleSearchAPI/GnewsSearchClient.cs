@@ -39,6 +39,7 @@ namespace Google.API.Search
     /// <seealso cref="NewsEdition"/>
     public class GnewsSearchClient : GSearchClient
     {
+#if !SILVERLIGHT
         /// <summary>
         /// Initializes a new instance of the <see cref="GnewsSearchClient"/> class.
         /// </summary>
@@ -196,5 +197,6 @@ namespace Google.API.Search
 
             return this.Search(null, resultCount, null, sortBy, quoteId, topic, edition);
         }
+#endif
     }
 }
