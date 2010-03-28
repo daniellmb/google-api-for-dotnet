@@ -50,46 +50,46 @@ namespace Google.API.Search
         }
 
         /// <summary>
-        /// Search.
+        /// Search web infos.
         /// </summary>
         /// <param name="keyword">The keyword.</param>
         /// <param name="resultCount">The count of result itmes.</param>
         /// <returns>The result items.</returns>
-        /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
+        /// <remarks>Now, the max count of items Google given is <b>64</b>.</remarks>
         public IList<IWebResult> Search(string keyword, int resultCount)
         {
             return this.Search(keyword, resultCount, Language.GetDefault(), SafeLevel.GetDefault());
         }
 
         /// <summary>
-        /// Search.
+        /// Search web infos.
         /// </summary>
         /// <param name="keyword">The keyword.</param>
         /// <param name="resultCount">The count of result itmes.</param>
         /// <param name="language">The language you want to search.</param>
         /// <returns>The result itmes.</returns>
-        /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
+        /// <remarks>Now, the max count of items Google given is <b>64</b>.</remarks>
         public IList<IWebResult> Search(string keyword, int resultCount, string language)
         {
             return this.Search(keyword, resultCount, language, SafeLevel.GetDefault());
         }
 
         /// <summary>
-        /// Search.
+        /// Search web infos.
         /// </summary>
         /// <param name="keyword">The keyword.</param>
         /// <param name="resultCount">The count of result itmes.</param>
         /// <param name="language">The language you want to search.</param>
         /// <param name="safeLevel">The search safety level.</param>
         /// <returns>The result itmes.</returns>
-        /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
+        /// <remarks>Now, the max count of items Google given is <b>64</b>.</remarks>
         public IList<IWebResult> Search(string keyword, int resultCount, string language, string safeLevel)
         {
-            return this.Search(keyword, resultCount, null, null, safeLevel, language, DuplicateFilter.GetDefault());
+            return this.Search(keyword, resultCount, null, null, safeLevel, language, DuplicateFilter.GetDefault(), null);
         }
 
         /// <summary>
-        /// Search.
+        /// Search web infos.
         /// </summary>
         /// <param name="keyword">The keyword.</param>
         /// <param name="resultCount">The count of result itmes.</param>
@@ -98,8 +98,9 @@ namespace Google.API.Search
         /// <param name="safeLevel">The search safety level.</param>
         /// <param name="language">The language you want to search.</param>
         /// <param name="duplicateFilter">This optional argument controls turning on or off the duplicate content filter. Default value is true.</param>
+        /// <param name="country">This optional argument allows the caller to tailor the results to a specific country. The value should be a valid <a href="http://en.wikipedia.org/wiki/ISO_3166-1">country code</a> (e.g. uk, de, etc.).</param>
         /// <returns>The result itmes.</returns>
-        /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
+        /// <remarks>Now, the max count of items Google given is <b>64</b>.</remarks>
         public IList<IWebResult> Search(
             string keyword,
             int resultCount,
@@ -107,14 +108,14 @@ namespace Google.API.Search
             string customSearchReference,
             string safeLevel,
             string language,
-            string duplicateFilter)
+            string duplicateFilter,
+            string country)
         {
             if (keyword == null)
             {
                 throw new ArgumentNullException("keyword");
             }
 
-            // TODO: Supporting new argument: country.
             var request = new GwebSearchRequest
                 {
                     Query = keyword,
@@ -122,7 +123,8 @@ namespace Google.API.Search
                     CustomSearchReference = customSearchReference,
                     SafeLevel = safeLevel,
                     Language = language,
-                    DuplicateFilter = duplicateFilter
+                    DuplicateFilter = duplicateFilter,
+                    Country = country
                 };
             return this.Search<GwebResult, IWebResult>(request, resultCount);
         }

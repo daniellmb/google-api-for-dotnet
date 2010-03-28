@@ -36,7 +36,7 @@ namespace Google.API.Search
         public float? Height { get; set; }
 
         [Argument("mrt")]
-        public LocalResultType ResultType { get; set; }
+        public string ResultType { get; set; }
 
         [Argument("sll")]
         public string Center

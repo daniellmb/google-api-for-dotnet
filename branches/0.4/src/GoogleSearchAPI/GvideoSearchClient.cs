@@ -53,7 +53,7 @@ namespace Google.API.Search
         /// <param name="keyword">The keyword.</param>
         /// <param name="resultCount">The count of result itmes.</param>
         /// <returns>The result items.</returns>
-        /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
+        /// <remarks>Now, the max count of items Google given is <b>64</b>.</remarks>
         public IList<IVideoResult> Search(string keyword, int resultCount)
         {
             return this.Search(keyword, resultCount, SortType.GetDefault());
@@ -66,7 +66,7 @@ namespace Google.API.Search
         /// <param name="resultCount">The count of result itmes.</param>
         /// <param name="sortBy">The way to order results.</param>
         /// <returns>The result items.</returns>
-        /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
+        /// <remarks>Now, the max count of items Google given is <b>64</b>.</remarks>
         public IList<IVideoResult> Search(string keyword, int resultCount, string sortBy)
         {
             if (keyword == null)

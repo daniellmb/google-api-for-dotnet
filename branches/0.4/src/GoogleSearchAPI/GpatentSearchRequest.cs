@@ -28,13 +28,13 @@ namespace Google.API.Search
     internal class GpatentSearchRequest : GoogleSearchRequest
     {
         /// <summary>
-        /// This optional argument tells the patent search system to restrict the search to ONLY patents that having been issued, skiping all patents that have only been filed. When specified, that value must be 1 as in &as_psrg=1.
+        /// This optional argument tells the patent search system to restrict the search to ONLY patents that having been issued, skiping all patents that have only been filed. When specified, that value must be 1 as in &amp;as_psrg=1.
         /// </summary>
         [Argument("as_psrg")]
         public bool IssuedOnly { get; set; }
 
         /// <summary>
-        /// This optional argument tells the patent search system to restrict the search to ONLY patents that only been filed, skipping over all patents that have been issued. When specified, that value must be 1 as in &as_psra=1.
+        /// This optional argument tells the patent search system to restrict the search to ONLY patents that only been filed, skipping over all patents that have been issued. When specified, that value must be 1 as in &amp;as_psra=1.
         /// </summary>
         [Argument("as_psra")]
         public bool FiledOnly { get; set; }

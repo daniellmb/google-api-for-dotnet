@@ -54,7 +54,7 @@ namespace Google.API.Search
         /// <param name="resultCount">The count of result itmes.</param>
         /// <returns>The result items.</returns>
         /// <remarks>
-        /// Now, the max count of items Google given is <b>32</b>.
+        /// Now, the max count of items Google given is <b>64</b>.
         /// </remarks>
         public IList<IPatentResult> Search(string keyword, int resultCount)
         {
@@ -69,7 +69,7 @@ namespace Google.API.Search
         /// <param name="sortBy">The way to order results.</param>
         /// <returns>The result items.</returns>
         /// <remarks>
-        /// Now, the max count of items Google given is <b>32</b>.
+        /// Now, the max count of items Google given is <b>64</b>.
         /// </remarks>
         public IList<IPatentResult> Search(string keyword, int resultCount, string sortBy)
         {
@@ -86,7 +86,7 @@ namespace Google.API.Search
         /// <returns>The result items.</returns>
         /// <remarks>
         /// When both issuedOnly and filedOnly are true, it equals to both are false.
-        /// Now, the max count of items Google given is <b>32</b>.
+        /// Now, the max count of items Google given is <b>64</b>.
         /// </remarks>
         public IList<IPatentResult> Search(string keyword, int resultCount, bool issuedOnly, bool filedOnly)
         {
@@ -104,7 +104,7 @@ namespace Google.API.Search
         /// <returns>The result items.</returns>
         /// <remarks>
         /// When both issuedOnly and filedOnly are true, it equals to both are false.
-        /// Now, the max count of items Google given is <b>32</b>.
+        /// Now, the max count of items Google given is <b>64</b>.
         /// </remarks>
         public IList<IPatentResult> Search(
             string keyword,

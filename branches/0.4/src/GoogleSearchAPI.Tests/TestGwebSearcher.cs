@@ -93,5 +93,28 @@ namespace Google.API.Search.Tests
                 Console.WriteLine();
             }
         }
+
+        [Test]
+        public void SearchTest4()
+        {
+            var keyword = "Cambridge";
+            var count = 64;
+            string customSearchId = null;
+            string customSearchReference = null;
+            var language = Language.Spanish;
+            var safeLevel = SafeLevel.Off;
+            var duplicateFilter = DuplicateFilter.Off;
+            var country = "uk";
+
+            var results = this.Client.Search(keyword, count, customSearchId, customSearchReference, language, safeLevel, duplicateFilter, country);
+            Assert.IsNotNull(results);
+            Assert.AreEqual(count, results.Count);
+            foreach (var result in results)
+            {
+                Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
+        }
     }
 }

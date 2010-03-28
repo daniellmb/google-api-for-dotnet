@@ -55,7 +55,7 @@ namespace Google.API.Search
         /// <param name="latitude">The latitude value of local.</param>
         /// <param name="longitude">The longitude value of local.</param>
         /// <returns>The result items.</returns>
-        /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
+        /// <remarks>Now, the max count of items Google given is <b>64</b>.</remarks>
         public IList<ILocalResult> Search(string keyword, int resultCount, float latitude, float longitude)
         {
             return this.Search(keyword, resultCount, latitude, longitude, null, null, LocalResultType.GetDefault());
@@ -70,7 +70,7 @@ namespace Google.API.Search
         /// <param name="longitude">The longitude value of local.</param>
         /// <param name="resultType">The type of local search results.</param>
         /// <returns>The result items.</returns>
-        /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
+        /// <remarks>Now, the max count of items Google given is <b>64</b>.</remarks>
         public IList<ILocalResult> Search(
             string keyword, int resultCount, float latitude, float longitude, string resultType)
         {
@@ -87,7 +87,7 @@ namespace Google.API.Search
         /// <param name="width">The width value of search bouding.</param>
         /// <param name="height">The height value of search bounding.</param>
         /// <returns>The result items.</returns>
-        /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
+        /// <remarks>Now, the max count of items Google given is <b>64</b>.</remarks>
         public IList<ILocalResult> Search(
             string keyword, int resultCount, float latitude, float longitude, float width, float height)
         {
@@ -106,7 +106,7 @@ namespace Google.API.Search
         /// <param name="height">The height value of search bounding.</param>
         /// <param name="resultType">The type of local search results.</param>
         /// <returns>The result items.</returns>
-        /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
+        /// <remarks>Now, the max count of items Google given is <b>64</b>.</remarks>
         public IList<ILocalResult> Search(
             string keyword,
             int resultCount,

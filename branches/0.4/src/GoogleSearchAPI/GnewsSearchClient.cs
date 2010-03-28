@@ -55,7 +55,7 @@ namespace Google.API.Search
         /// <param name="keyword">The keyword.</param>
         /// <param name="resultCount">The count of result itmes.</param>
         /// <returns>The result items.</returns>
-        /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
+        /// <remarks>Now, the max count of items Google given is <b>64</b>.</remarks>
         public IList<INewsResult> Search(string keyword, int resultCount)
         {
             return this.Search(keyword, resultCount, null, SortType.GetDefault());
@@ -69,7 +69,7 @@ namespace Google.API.Search
         /// <param name="geo">A particular location of the news. You must supply either a city, state, country, or zip code as in "Santa Barbara" or "British Columbia" or "Peru" or "93108".</param>
         /// <param name="sortBy">The way to order results.</param>
         /// <returns>The result items.</returns>
-        /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
+        /// <remarks>Now, the max count of items Google given is <b>64</b>.</remarks>
         public IList<INewsResult> Search(string keyword, int resultCount, string geo, string sortBy)
         {
             return this.Search(keyword, resultCount, geo, sortBy, null, NewsTopic.GetDefault(), NewsEdition.GetDefault());
@@ -86,7 +86,7 @@ namespace Google.API.Search
         /// <param name="topic">This optional argument tells the news search system to scope search results to a particular topic.</param>
         /// <param name="edition">This optional argument tells the news search system which edition of news to pull results from.</param>
         /// <returns>The result items.</returns>
-        /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
+        /// <remarks>Now, the max count of items Google given is <b>64</b>.</remarks>
         public IList<INewsResult> Search(
             string keyword,
             int resultCount,
@@ -114,7 +114,7 @@ namespace Google.API.Search
         /// <param name="geo">A particular location of the news. You must supply either a city, state, country, or zip code as in "Santa Barbara" or "British Columbia" or "Peru" or "93108".</param>
         /// <param name="resultCount">The count of result itmes.</param>
         /// <returns>The result items.</returns>
-        /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
+        /// <remarks>Now, the max count of items Google given is <b>64</b>.</remarks>
         public IList<INewsResult> SearchLocal(string geo, int resultCount)
         {
             return this.SearchLocal(geo, resultCount, SortType.GetDefault());
@@ -127,7 +127,7 @@ namespace Google.API.Search
         /// <param name="resultCount">The count of result itmes.</param>
         /// <param name="sortBy">The way to order results.</param>
         /// <returns>The result items.</returns>
-        /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
+        /// <remarks>Now, the max count of items Google given is <b>64</b>.</remarks>
         public IList<INewsResult> SearchLocal(string geo, int resultCount, string sortBy)
         {
             return this.SearchLocal(geo, resultCount, sortBy, null, NewsTopic.GetDefault(), NewsEdition.GetDefault());
@@ -143,7 +143,7 @@ namespace Google.API.Search
         /// <param name="topic">This optional argument tells the news search system to scope search results to a particular topic.</param>
         /// <param name="edition">This optional argument tells the news search system which edition of news to pull results from.</param>
         /// <returns>The result items.</returns>
-        /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
+        /// <remarks>Now, the max count of items Google given is <b>64</b>.</remarks>
         public IList<INewsResult> SearchLocal(
             string geo,
             int resultCount,
@@ -166,7 +166,7 @@ namespace Google.API.Search
         /// <param name="topic">This optional argument tells the news search system to scope search results to a particular topic.</param>
         /// <param name="resultCount">The count of result itmes.</param>
         /// <returns>The result items.</returns>
-        /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
+        /// <remarks>Now, the max count of items Google given is <b>64</b>.</remarks>
         public IList<INewsResult> SearchTopic(string topic, int resultCount)
         {
             return this.SearchTopic(topic, resultCount, SortType.GetDefault(), null, NewsEdition.GetDefault());
@@ -181,7 +181,7 @@ namespace Google.API.Search
         /// <param name="quoteId">This optional argument tells the news search system to scope search results to include only quote typed results.</param>
         /// <param name="edition">This optional argument tells the news search system which edition of news to pull results from.</param>
         /// <returns>The result items.</returns>
-        /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
+        /// <remarks>Now, the max count of items Google given is <b>64</b>.</remarks>
         public IList<INewsResult> SearchTopic(
             string topic,
             int resultCount,

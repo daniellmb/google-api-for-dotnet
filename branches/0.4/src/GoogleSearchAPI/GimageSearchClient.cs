@@ -58,7 +58,7 @@ namespace Google.API.Search
         /// <param name="keyword">The keyword.</param>
         /// <param name="resultCount">The count of result itmes.</param>
         /// <returns>The result itmes.</returns>
-        /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
+        /// <remarks>Now, the max count of items Google given is <b>64</b>.</remarks>
         public IList<IImageResult> Search(string keyword, int resultCount)
         {
             return this.Search(
@@ -79,7 +79,7 @@ namespace Google.API.Search
         /// <param name="resultCount">The count of result itmes.</param>
         /// <param name="site">The specified domain. It will restrict the search to images within this domain.e.g., <c>photobucket.com</c>.</param>
         /// <returns>The result itmes.</returns>
-        /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
+        /// <remarks>Now, the max count of items Google given is <b>64</b>.</remarks>
         public IList<IImageResult> Search(string keyword, int resultCount, string site)
         {
             return this.Search(
@@ -103,7 +103,7 @@ namespace Google.API.Search
         /// <param name="imageType">The special type of image.</param>
         /// <param name="fileType">The specified file type of image.</param>
         /// <returns>The result itmes.</returns>
-        /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
+        /// <remarks>Now, the max count of items Google given is <b>64</b>.</remarks>
         public IList<IImageResult> Search(
             string keyword,
             int resultCount,
@@ -127,7 +127,7 @@ namespace Google.API.Search
         /// <param name="fileType">The specified file type of image.</param>
         /// <param name="site">The specified domain. It will restrict the search to images within this domain.e.g., <c>photobucket.com</c>.</param>
         /// <returns>The result itmes.</returns>
-        /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
+        /// <remarks>Now, the max count of items Google given is <b>64</b>.</remarks>
         public IList<IImageResult> Search(
             string keyword,
             int resultCount,
@@ -153,7 +153,7 @@ namespace Google.API.Search
         /// <param name="fileType">The specified file type of image.</param>
         /// <param name="site">The specified domain. It will restrict the search to images within this domain.e.g., <c>photobucket.com</c>.</param>
         /// <returns>The result itmes.</returns>
-        /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
+        /// <remarks>Now, the max count of items Google given is <b>64</b>.</remarks>
         public IList<IImageResult> Search(
             string keyword,
             int resultCount,
@@ -181,7 +181,7 @@ namespace Google.API.Search
         /// <param name="fileType">The specified file type of image.</param>
         /// <param name="site">The specified domain. It will restrict the search to images within this domain.e.g., <c>photobucket.com</c>.</param>
         /// <returns>The result itmes.</returns>
-        /// <remarks>Now, the max count of items Google given is <b>32</b>.</remarks>
+        /// <remarks>Now, the max count of items Google given is <b>64</b>.</remarks>
         public IList<IImageResult> Search(
             string keyword,
             int resultCount,
