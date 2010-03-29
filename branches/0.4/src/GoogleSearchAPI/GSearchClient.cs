@@ -25,7 +25,10 @@
 
 namespace Google.API.Search
 {
+    using System;
     using System.Collections.Generic;
+
+    using System.Linq;
 
     public abstract class GSearchClient : GoogleClient
     {
@@ -45,5 +48,24 @@ namespace Google.API.Search
             return list.ConvertAll(item => (TResult)item);
         }
 #endif
+
+        internal IAsyncResult BeginSearch<T>(GoogleSearchRequest request, int resultCount, AsyncCallback callback, object state)
+        {
+            this.SetValueTo(request);
+
+            return SearchUtility.BeginSearch<T>(request, resultCount, callback, state);
+        }
+
+        internal List<TResult> EndSearch<T, TResult>(IAsyncResult asyncResult) 
+            where T : TResult
+        {
+            var list = SearchUtility.EndSearch<T>(asyncResult);
+
+#if SILVERLIGHT
+            return list.Select(item => (TResult)item).ToList();
+#else
+            return list.ConvertAll(item => (TResult)item);
+#endif
+        }
     }
 }

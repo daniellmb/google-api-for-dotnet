@@ -79,5 +79,26 @@ namespace Google.API.Search
             return this.Search<GblogResult, IBlogResult>(request, resultCount);
         }
 #endif
+
+        public IAsyncResult BeginSearch(string keyword, int resultCount, AsyncCallback callback, object state)
+        {
+            return this.BeginSearch(keyword, resultCount, SortType.GetDefault(), callback, state);
+        }
+
+        public IAsyncResult BeginSearch(string keyword, int resultCount, string sortBy, AsyncCallback callback, object state)
+        {
+            if (keyword == null)
+            {
+                throw new ArgumentNullException("keyword");
+            }
+
+            var request = new GblogSearchRequest { Query = keyword, SortBy = sortBy };
+            return this.BeginSearch<GblogResult>(request, resultCount, callback, state);
+        }
+
+        public IList<IBlogResult> EndSearch(IAsyncResult asyncResult)
+        {
+            return EndSearch<GblogResult, IBlogResult>(asyncResult);
+        }
     }
 }

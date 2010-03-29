@@ -26,6 +26,8 @@
 namespace Google.API.Search.Tests
 {
     using System;
+    using System.Collections.Generic;
+    using System.Threading;
 
     using NUnit.Framework;
 
@@ -82,5 +84,69 @@ namespace Google.API.Search.Tests
             }
         }
 #endif
+
+        [Test]
+        public void AsyncSearchTest()
+        {
+            var keyword = "Coldplay";
+            var count = 20;
+
+            var resetEvent = new ManualResetEvent(false);
+            IList<IBlogResult> results = null;
+            this.Client.BeginSearch(
+                keyword,
+                count,
+                ar =>
+                {
+                    results = this.Client.EndSearch(ar);
+                    resetEvent.Set();
+                },
+                null);
+            resetEvent.WaitOne();
+
+            Assert.IsNotNull(results);
+            ////Assert.AreEqual(count, results.Count);
+            Assert.Greater(results.Count, 0);
+            Assert.LessOrEqual(results.Count, count);
+            foreach (var result in results)
+            {
+                Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
+        }
+
+        [Test]
+        public void AsyncSearchTest2()
+        {
+            var keyword = "iron9light";
+            var count = 3;
+            var sortBy = SortType.Date;
+
+            var resetEvent = new ManualResetEvent(false);
+            IList<IBlogResult> results = null;
+            this.Client.BeginSearch(
+                keyword,
+                count,
+                sortBy,
+                ar =>
+                    {
+                        results = this.Client.EndSearch(ar);
+                        resetEvent.Set();
+                    },
+                null);
+            resetEvent.WaitOne();
+
+            Assert.IsNotNull(results);
+            ////Assert.AreEqual(count, results.Count);
+            Assert.Greater(results.Count, 0);
+            Assert.LessOrEqual(results.Count, count);
+            foreach (var result in results)
+            {
+                Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
+        }
     }
 }
