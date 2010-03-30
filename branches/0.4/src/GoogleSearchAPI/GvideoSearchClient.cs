@@ -79,5 +79,48 @@ namespace Google.API.Search
             return this.Search<GvideoResult, IVideoResult>(request, resultCount);
         }
 #endif
+
+        /// <summary>
+        /// Begins an asynchronous request for searching video.
+        /// </summary>
+        /// <param name="keyword">The keyword.</param>
+        /// <param name="resultCount">The count of result itmes.</param>
+        /// <param name="callback">The <see cref="AsyncCallback"/> delegate.</param>
+        /// <param name="state">An object containing state information for this asynchronous request.</param>
+        /// <returns>An <see cref="IAsyncResult"/> that references the asynchronous request.</returns>
+        public IAsyncResult BeginSearch(string keyword, int resultCount, AsyncCallback callback, object state)
+        {
+            return this.BeginSearch(keyword, resultCount, SortType.GetDefault(), callback, state);
+        }
+
+        /// <summary>
+        /// Begins an asynchronous request for searching video.
+        /// </summary>
+        /// <param name="keyword">The keyword.</param>
+        /// <param name="resultCount">The count of result itmes.</param>
+        /// <param name="sortBy">The way to order results.</param>
+        /// <param name="callback">The <see cref="AsyncCallback"/> delegate.</param>
+        /// <param name="state">An object containing state information for this asynchronous request.</param>
+        /// <returns>An <see cref="IAsyncResult"/> that references the asynchronous request.</returns>
+        public IAsyncResult BeginSearch(string keyword, int resultCount, string sortBy, AsyncCallback callback, object state)
+        {
+            if (keyword == null)
+            {
+                throw new ArgumentNullException("keyword");
+            }
+
+            var request = new GvideoSearchRequest { Query = keyword, SortBy = sortBy };
+            return this.BeginSearch<GvideoResult>(request, resultCount, callback, state);
+        }
+
+        /// <summary>
+        /// returns search results.
+        /// </summary>
+        /// <param name="asyncResult">An <see cref="IAsyncResult"/> that references a pending request for a response.</param>
+        /// <returns>The search results.</returns>
+        public IList<IVideoResult> EndSearch(IAsyncResult asyncResult)
+        {
+            return this.EndSearch<GvideoResult, IVideoResult>(asyncResult);
+        }
     }
 }

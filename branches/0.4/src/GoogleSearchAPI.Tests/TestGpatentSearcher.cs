@@ -26,6 +26,7 @@
 namespace Google.API.Search.Tests
 {
     using System;
+    using System.Collections.Generic;
 
     using NUnit.Framework;
 
@@ -119,5 +120,79 @@ namespace Google.API.Search.Tests
             }
         }
 #endif
+
+        [Test]
+        public void AsyncSearchTest()
+        {
+            var keyword = "Artificial Intelligence";
+            var count = 10;
+            var results = this.Client.RunSearch<IList<IPatentResult>>(keyword, count);
+
+            Assert.IsNotNull(results);
+            Assert.AreEqual(count, results.Count);
+            foreach (var result in results)
+            {
+                Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
+        }
+
+        [Test]
+        public void AsyncSearchTest2()
+        {
+            var keyword = "encode";
+            var count = 32;
+            var sortBy = SortType.Relevance;
+            var results = this.Client.RunSearch<IList<IPatentResult>>(keyword, count, sortBy);
+
+            Assert.IsNotNull(results);
+            Assert.AreEqual(count, results.Count);
+            foreach (var result in results)
+            {
+                Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
+        }
+
+        [Test]
+        public void AsyncSearchTest3()
+        {
+            var keyword = "wifi";
+            var count = 20;
+            var issuedOnly = false;
+            var filedOnly = true;
+            var results = this.Client.RunSearch<IList<IPatentResult>>(keyword, count, issuedOnly, filedOnly);
+
+            Assert.IsNotNull(results);
+            Assert.AreEqual(count, results.Count);
+            foreach (var result in results)
+            {
+                Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
+        }
+
+        [Test]
+        public void AsyncSearchTest4()
+        {
+            var keyword = "render";
+            var count = 30;
+            var issuedOnly = true;
+            var filedOnly = true;
+            var sortBy = SortType.Date;
+            var results = this.Client.RunSearch<IList<IPatentResult>>(keyword, count, issuedOnly, filedOnly, sortBy);
+
+            Assert.IsNotNull(results);
+            Assert.AreEqual(count, results.Count);
+            foreach (var result in results)
+            {
+                Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
+        }
     }
 }

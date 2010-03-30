@@ -126,5 +126,98 @@ namespace Google.API.Search
             return this.Search<GpatentResult, IPatentResult>(request, resultCount);
         }
 #endif
+
+        /// <summary>
+        /// Begins an asynchronous request for searching patents.
+        /// </summary>
+        /// <param name="keyword">The keyword.</param>
+        /// <param name="resultCount">The count of result itmes.</param>
+        /// <param name="callback">The <see cref="AsyncCallback"/> delegate.</param>
+        /// <param name="state">An object containing state information for this asynchronous request.</param>
+        /// <returns>An <see cref="IAsyncResult"/> that references the asynchronous request.</returns>
+        public IAsyncResult BeginSearch(string keyword, int resultCount, AsyncCallback callback, object state)
+        {
+            return this.BeginSearch(keyword, resultCount, false, false, SortType.GetDefault(), callback, state);
+        }
+
+        /// <summary>
+        /// Begins an asynchronous request for searching patents.
+        /// </summary>
+        /// <param name="keyword">The keyword.</param>
+        /// <param name="resultCount">The count of result itmes.</param>
+        /// <param name="sortBy">The way to order results.</param>
+        /// <param name="callback">The <see cref="AsyncCallback"/> delegate.</param>
+        /// <param name="state">An object containing state information for this asynchronous request.</param>
+        /// <returns>An <see cref="IAsyncResult"/> that references the asynchronous request.</returns>
+        public IAsyncResult BeginSearch(string keyword, int resultCount, string sortBy, AsyncCallback callback, object state)
+        {
+            return this.BeginSearch(keyword, resultCount, false, false, sortBy, callback, state);
+        }
+
+        /// <summary>
+        /// Begins an asynchronous request for searching patents.
+        /// </summary>
+        /// <param name="keyword">The keyword.</param>
+        /// <param name="resultCount">The count of result itmes.</param>
+        /// <param name="issuedOnly">Whether restrict the search to ONLY patents that having been issued, skiping all patents that have only been filed.</param>
+        /// <param name="filedOnly">Whether restrict the search to ONLY patents that only been filed, skipping over all patents that have been issued.</param>
+        /// <param name="callback">The <see cref="AsyncCallback"/> delegate.</param>
+        /// <param name="state">An object containing state information for this asynchronous request.</param>
+        /// <returns>An <see cref="IAsyncResult"/> that references the asynchronous request.</returns>
+        /// <remarks>
+        /// When both issuedOnly and filedOnly are true, it equals to both are false.
+        /// </remarks>
+        public IAsyncResult BeginSearch(string keyword, int resultCount, bool issuedOnly, bool filedOnly, AsyncCallback callback, object state)
+        {
+            return this.BeginSearch(keyword, resultCount, issuedOnly, filedOnly, SortType.GetDefault(), callback, state);
+        }
+
+        /// <summary>
+        /// Begins an asynchronous request for searching patents.
+        /// </summary>
+        /// <param name="keyword">The keyword.</param>
+        /// <param name="resultCount">The count of result itmes.</param>
+        /// <param name="issuedOnly">Whether restrict the search to ONLY patents that having been issued, skiping all patents that have only been filed.</param>
+        /// <param name="filedOnly">Whether restrict the search to ONLY patents that only been filed, skipping over all patents that have been issued.</param>
+        /// <param name="sortBy">The way to order results.</param>
+        /// <param name="callback">The <see cref="AsyncCallback"/> delegate.</param>
+        /// <param name="state">An object containing state information for this asynchronous request.</param>
+        /// <returns>An <see cref="IAsyncResult"/> that references the asynchronous request.</returns>
+        /// <remarks>
+        /// When both issuedOnly and filedOnly are true, it equals to both are false.
+        /// </remarks>
+        public IAsyncResult BeginSearch(
+            string keyword,
+            int resultCount,
+            bool issuedOnly,
+            bool filedOnly,
+            string sortBy,
+            AsyncCallback callback,
+            object state)
+        {
+            if (keyword == null)
+            {
+                throw new ArgumentNullException("keyword");
+            }
+
+            var request = new GpatentSearchRequest
+            {
+                Query = keyword,
+                IssuedOnly = issuedOnly,
+                FiledOnly = filedOnly,
+                SortBy = sortBy
+            };
+            return this.BeginSearch<GpatentResult>(request, resultCount, callback, state);
+        }
+
+        /// <summary>
+        /// returns search results.
+        /// </summary>
+        /// <param name="asyncResult">An <see cref="IAsyncResult"/> that references a pending request for a response.</param>
+        /// <returns>The search results.</returns>
+        public IList<IPatentResult> EndSearch(IAsyncResult asyncResult)
+        {
+            return this.EndSearch<GpatentResult, IPatentResult>(asyncResult);
+        }
     }
 }

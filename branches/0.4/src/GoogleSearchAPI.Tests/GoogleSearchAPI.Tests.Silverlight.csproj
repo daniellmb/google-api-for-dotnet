@@ -68,6 +68,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AsyncUtility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestColorization.cs" />
     <Compile Include="TestDuplicateFilter.cs" />

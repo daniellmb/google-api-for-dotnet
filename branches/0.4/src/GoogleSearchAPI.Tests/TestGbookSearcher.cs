@@ -26,6 +26,7 @@
 namespace Google.API.Search.Tests
 {
     using System;
+    using System.Collections.Generic;
 
     using NUnit.Framework;
 
@@ -99,5 +100,59 @@ namespace Google.API.Search.Tests
             }
         }
 #endif
+
+        [Test]
+        public void AsyncSearchTest()
+        {
+            var keyword = "cookbook";
+            var count = 20;
+
+            var results = this.Client.RunSearch<IList<IBookResult>>(keyword, count);
+            Assert.IsNotNull(results);
+            Assert.AreEqual(count, results.Count);
+            foreach (var result in results)
+            {
+                Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
+        }
+
+        [Test]
+        public void AsyncSearchTest2()
+        {
+            var keyword = "love";
+            var count = 4;
+            var isFullViewable = true;
+
+            var results = this.Client.RunSearch<IList<IBookResult>>(keyword, count, isFullViewable);
+            Assert.IsNotNull(results);
+            Assert.AreEqual(count, results.Count);
+            foreach (var result in results)
+            {
+                Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
+        }
+
+        [Test]
+        public void AsyncSearchTest3()
+        {
+            var keyword = "falkdjfaj;eage";
+            var count = 3;
+            var isFullViewable = false;
+            var library = "Madelena";
+
+            var results = this.Client.RunSearch<IList<IBookResult>>(keyword, count, isFullViewable, library);
+            Assert.IsNotNull(results);
+            Assert.AreEqual(0, results.Count);
+            foreach (var result in results)
+            {
+                Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
+        }
     }
 }

@@ -27,7 +27,6 @@ namespace Google.API.Search.Tests
 {
     using System;
     using System.Collections.Generic;
-    using System.Threading;
 
     using NUnit.Framework;
 
@@ -91,18 +90,7 @@ namespace Google.API.Search.Tests
             var keyword = "Coldplay";
             var count = 20;
 
-            var resetEvent = new ManualResetEvent(false);
-            IList<IBlogResult> results = null;
-            this.Client.BeginSearch(
-                keyword,
-                count,
-                ar =>
-                {
-                    results = this.Client.EndSearch(ar);
-                    resetEvent.Set();
-                },
-                null);
-            resetEvent.WaitOne();
+            var results = this.Client.RunSearch<IList<IBlogResult>>(keyword, count);
 
             Assert.IsNotNull(results);
             ////Assert.AreEqual(count, results.Count);
@@ -123,19 +111,7 @@ namespace Google.API.Search.Tests
             var count = 3;
             var sortBy = SortType.Date;
 
-            var resetEvent = new ManualResetEvent(false);
-            IList<IBlogResult> results = null;
-            this.Client.BeginSearch(
-                keyword,
-                count,
-                sortBy,
-                ar =>
-                    {
-                        results = this.Client.EndSearch(ar);
-                        resetEvent.Set();
-                    },
-                null);
-            resetEvent.WaitOne();
+            var results = this.Client.RunSearch<IList<IBlogResult>>(keyword, count, sortBy);
 
             Assert.IsNotNull(results);
             ////Assert.AreEqual(count, results.Count);

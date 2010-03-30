@@ -209,7 +209,7 @@ namespace Google.API.Translate
         /// <param name="to">The target language you want to translate to.</param>
         /// <param name="callback">The <see cref="AsyncCallback"/> delegate.</param>
         /// <param name="state">An object containing state information for this asynchronous request.</param>
-        /// <returns>The translate result.</returns>
+        /// <returns>An <see cref="IAsyncResult"/> that references the asynchronous request.</returns>
         public IAsyncResult BeginTranslate(string text, string from, string to, AsyncCallback callback, object state)
         {
             return this.BeginTranslate(text, from, to, TranslateFormat.GetDefault(), callback, state);

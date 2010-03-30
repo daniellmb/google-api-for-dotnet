@@ -198,5 +198,204 @@ namespace Google.API.Search
             return this.Search(null, resultCount, null, sortBy, quoteId, topic, edition);
         }
 #endif
+
+        /// <summary>
+        /// Begins an asynchronous request for searching news.
+        /// </summary>
+        /// <param name="keyword">The keyword.</param>
+        /// <param name="resultCount">The count of result itmes.</param>
+        /// <param name="callback">The <see cref="AsyncCallback"/> delegate.</param>
+        /// <param name="state">An object containing state information for this asynchronous request.</param>
+        /// <returns>An <see cref="IAsyncResult"/> that references the asynchronous request.</returns>
+        public IAsyncResult BeginSearch(string keyword, int resultCount, AsyncCallback callback, object state)
+        {
+            return this.BeginSearch(keyword, resultCount, null, SortType.GetDefault(), callback, state);
+        }
+
+        /// <summary>
+        /// Begins an asynchronous request for searching news.
+        /// </summary>
+        /// <param name="keyword">The keyword.</param>
+        /// <param name="resultCount">The count of result itmes.</param>
+        /// <param name="geo">A particular location of the news. You must supply either a city, state, country, or zip code as in "Santa Barbara" or "British Columbia" or "Peru" or "93108".</param>
+        /// <param name="sortBy">The way to order results.</param>
+        /// <param name="callback">The <see cref="AsyncCallback"/> delegate.</param>
+        /// <param name="state">An object containing state information for this asynchronous request.</param>
+        /// <returns>An <see cref="IAsyncResult"/> that references the asynchronous request.</returns>
+        public IAsyncResult BeginSearch(
+            string keyword, int resultCount, string geo, string sortBy, AsyncCallback callback, object state)
+        {
+            return this.BeginSearch(keyword, resultCount, geo, sortBy, null, NewsTopic.GetDefault(), NewsEdition.GetDefault(), callback, state);
+        }
+
+        /// <summary>
+        /// Begins an asynchronous request for searching news.
+        /// </summary>
+        /// <param name="keyword">The keyword.</param>
+        /// <param name="resultCount">The count of result itmes.</param>
+        /// <param name="geo">A particular location of the news. You must supply either a city, state, country, or zip code as in "Santa Barbara" or "British Columbia" or "Peru" or "93108".</param>
+        /// <param name="sortBy">The way to order results.</param>
+        /// <param name="quoteId">This optional argument tells the news search system to scope search results to include only quote typed results.</param>
+        /// <param name="topic">This optional argument tells the news search system to scope search results to a particular topic.</param>
+        /// <param name="edition">This optional argument tells the news search system which edition of news to pull results from.</param>
+        /// <param name="callback">The <see cref="AsyncCallback"/> delegate.</param>
+        /// <param name="state">An object containing state information for this asynchronous request.</param>
+        /// <returns>An <see cref="IAsyncResult"/> that references the asynchronous request.</returns>
+        public IAsyncResult BeginSearch(
+            string keyword,
+            int resultCount,
+            string geo,
+            string sortBy,
+            string quoteId,
+            string topic,
+            string edition,
+            AsyncCallback callback,
+            object state)
+        {
+            if (keyword == null && string.IsNullOrEmpty(geo) && string.IsNullOrEmpty(topic))
+            {
+                throw new ArgumentNullException("keyword");
+            }
+
+            var request = new GnewsSearchRequest
+            {
+                Query = keyword,
+                Geo = geo,
+                SortBy = sortBy,
+                QuoteId = quoteId,
+                Topic = topic,
+                Edition = edition
+            };
+            return this.BeginSearch<GnewsResult>(request, resultCount, callback, state);
+        }
+
+        /// <summary>
+        /// returns search results.
+        /// </summary>
+        /// <param name="asyncResult">An <see cref="IAsyncResult"/> that references a pending request for a response.</param>
+        /// <returns>The search results.</returns>
+        public IList<INewsResult> EndSearch(IAsyncResult asyncResult)
+        {
+            return this.EndSearch<GnewsResult, INewsResult>(asyncResult);
+        }
+
+        /// <summary>
+        /// Begins an asynchronous request for searching the latest local news.
+        /// </summary>
+        /// <param name="geo">A particular location of the news. You must supply either a city, state, country, or zip code as in "Santa Barbara" or "British Columbia" or "Peru" or "93108".</param>
+        /// <param name="resultCount">The count of result itmes.</param>
+        /// <param name="callback">The <see cref="AsyncCallback"/> delegate.</param>
+        /// <param name="state">An object containing state information for this asynchronous request.</param>
+        /// <returns>An <see cref="IAsyncResult"/> that references the asynchronous request.</returns>
+        public IAsyncResult BeginSearchLocal(string geo, int resultCount, AsyncCallback callback, object state)
+        {
+            return this.BeginSearchLocal(geo, resultCount, SortType.GetDefault(), callback, state);
+        }
+
+        /// <summary>
+        /// Begins an asynchronous request for searching the latest local news.
+        /// </summary>
+        /// <param name="geo">A particular location of the news. You must supply either a city, state, country, or zip code as in "Santa Barbara" or "British Columbia" or "Peru" or "93108".</param>
+        /// <param name="resultCount">The count of result itmes.</param>
+        /// <param name="sortBy">The way to order results.</param>
+        /// <param name="callback">The <see cref="AsyncCallback"/> delegate.</param>
+        /// <param name="state">An object containing state information for this asynchronous request.</param>
+        /// <returns>An <see cref="IAsyncResult"/> that references the asynchronous request.</returns>
+        public IAsyncResult BeginSearchLocal(
+            string geo, int resultCount, string sortBy, AsyncCallback callback, object state)
+        {
+            return this.BeginSearchLocal(geo, resultCount, sortBy, null, NewsTopic.GetDefault(), NewsEdition.GetDefault(), callback, state);
+        }
+
+        /// <summary>
+        /// Begins an asynchronous request for searching the latest local news.
+        /// </summary>
+        /// <param name="geo">A particular location of the news. You must supply either a city, state, country, or zip code as in "Santa Barbara" or "British Columbia" or "Peru" or "93108".</param>
+        /// <param name="resultCount">The count of result itmes.</param>
+        /// <param name="sortBy">The way to order results.</param>
+        /// <param name="quoteId">This optional argument tells the news search system to scope search results to include only quote typed results.</param>
+        /// <param name="topic">This optional argument tells the news search system to scope search results to a particular topic.</param>
+        /// <param name="edition">This optional argument tells the news search system which edition of news to pull results from.</param>
+        /// <param name="callback">The <see cref="AsyncCallback"/> delegate.</param>
+        /// <param name="state">An object containing state information for this asynchronous request.</param>
+        /// <returns>An <see cref="IAsyncResult"/> that references the asynchronous request.</returns>
+        public IAsyncResult BeginSearchLocal(
+            string geo,
+            int resultCount,
+            string sortBy,
+            string quoteId,
+            string topic,
+            string edition,
+            AsyncCallback callback,
+            object state)
+        {
+            if (geo == null)
+            {
+                throw new ArgumentNullException("geo");
+            }
+
+            return this.BeginSearch(null, resultCount, geo, sortBy, quoteId, topic, edition, callback, state);
+        }
+
+        /// <summary>
+        /// returns search results.
+        /// </summary>
+        /// <param name="asyncResult">An <see cref="IAsyncResult"/> that references a pending request for a response.</param>
+        /// <returns>The search results.</returns>
+        public IList<INewsResult> EndSearchLocal(IAsyncResult asyncResult)
+        {
+            return this.EndSearch(asyncResult);
+        }
+
+        /// <summary>
+        /// Begins an asynchronous request for searching the latest news of specified topic.
+        /// </summary>
+        /// <param name="topic">This optional argument tells the news search system to scope search results to a particular topic.</param>
+        /// <param name="resultCount">The count of result itmes.</param>
+        /// <param name="callback">The <see cref="AsyncCallback"/> delegate.</param>
+        /// <param name="state">An object containing state information for this asynchronous request.</param>
+        /// <returns>An <see cref="IAsyncResult"/> that references the asynchronous request.</returns>
+        public IAsyncResult BeginSearchTopic(string topic, int resultCount, AsyncCallback callback, object state)
+        {
+            return this.BeginSearchTopic(topic, resultCount, SortType.GetDefault(), null, NewsEdition.GetDefault(), callback, state);
+        }
+
+        /// <summary>
+        /// Begins an asynchronous request for searching the latest news of specified topic.
+        /// </summary>
+        /// <param name="topic">This optional argument tells the news search system to scope search results to a particular topic.</param>
+        /// <param name="resultCount">The count of result itmes.</param>
+        /// <param name="sortBy">The way to order results.</param>
+        /// <param name="quoteId">This optional argument tells the news search system to scope search results to include only quote typed results.</param>
+        /// <param name="edition">This optional argument tells the news search system which edition of news to pull results from.</param>
+        /// <param name="callback">The <see cref="AsyncCallback"/> delegate.</param>
+        /// <param name="state">An object containing state information for this asynchronous request.</param>
+        /// <returns>An <see cref="IAsyncResult"/> that references the asynchronous request.</returns>
+        public IAsyncResult BeginSearchTopic(
+            string topic,
+            int resultCount,
+            string sortBy,
+            string quoteId,
+            string edition,
+            AsyncCallback callback,
+            object state)
+        {
+            if (topic == null)
+            {
+                throw new ArgumentNullException("topic");
+            }
+
+            return this.BeginSearch(null, resultCount, null, sortBy, quoteId, topic, edition, callback, state);
+        }
+
+        /// <summary>
+        /// returns search results.
+        /// </summary>
+        /// <param name="asyncResult">An <see cref="IAsyncResult"/> that references a pending request for a response.</param>
+        /// <returns>The search results.</returns>
+        public IList<INewsResult> EndSearchTopic(IAsyncResult asyncResult)
+        {
+            return this.EndSearch(asyncResult);
+        }
     }
 }

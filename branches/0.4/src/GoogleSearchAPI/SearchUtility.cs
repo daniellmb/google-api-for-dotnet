@@ -147,9 +147,16 @@ namespace Google.API.Search
 
                                 var count = Math.Min(searchData.Results.Length, restCount);
 
-                                searchAsyncResult.Result.AddRange(searchData.Results.Take(count));
+                                if (count == 0)
+                                {
+                                    FinishSearch(searchAsyncResult, callback);
+                                }
+                                else
+                                {
+                                    searchAsyncResult.Result.AddRange(searchData.Results.Take(count));
 
-                                RunSearch(searchAsyncResult, request, start + count, restCount - count, callback);
+                                    RunSearch(searchAsyncResult, request, start + count, restCount - count, callback);
+                                }
                             }
                             catch (Exception ex)
                             {

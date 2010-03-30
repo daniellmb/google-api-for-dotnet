@@ -26,6 +26,7 @@
 namespace Google.API.Search.Tests
 {
     using System;
+    using System.Collections.Generic;
 
     using NUnit.Framework;
 
@@ -147,5 +148,107 @@ namespace Google.API.Search.Tests
             }
         }
 #endif
+
+        [Test]
+        public void AsyncAsyncSearchTest()
+        {
+            var keyword = "Virgin Islands";
+            var count = 15;
+            var imageSize = ImageSize.Xxlarge;
+            var colorization = Colorization.All;
+            var imageType = ImageType.All;
+            var fileType = ImageFileType.Bmp;
+            string searchSite = null;
+            var safeLevel = SafeLevel.Active;
+
+            var results = this.Client.RunSearch<IList<IImageResult>>(
+                keyword, count, safeLevel, imageSize, colorization, imageType, fileType, searchSite);
+            Assert.IsNotNull(results);
+            Assert.AreEqual(count, results.Count);
+            foreach (var result in results)
+            {
+                Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
+        }
+
+        [Test]
+        public void AsyncSearchTest1()
+        {
+            var keyword = "x game";
+            var count = 10;
+
+            var results = this.Client.RunSearch<IList<IImageResult>>(keyword, count);
+            Assert.IsNotNull(results);
+            Assert.AreEqual(count, results.Count);
+            foreach (var result in results)
+            {
+                Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
+        }
+
+        [Test]
+        public void AsyncSearchTest2()
+        {
+            var keyword = "iPhone";
+            var count = 6;
+            var site = "yahoo.com";
+
+            var results = this.Client.RunSearch<IList<IImageResult>>(keyword, count, site);
+            Assert.IsNotNull(results);
+            Assert.AreEqual(count, results.Count);
+            foreach (var result in results)
+            {
+                Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
+        }
+
+        [Test]
+        public void AsyncSearchTest3()
+        {
+            var keyword = "American Idol";
+            var count = 32;
+            var imageSize = ImageSize.Medium;
+            var colorization = Colorization.Gray;
+            var imageType = ImageType.Face;
+            var fileType = ImageFileType.Gif;
+
+            var results = this.Client.RunSearch<IList<IImageResult>>(keyword, count, imageSize, colorization, imageType, fileType);
+            Assert.IsNotNull(results);
+            Assert.AreEqual(count, results.Count);
+            foreach (var result in results)
+            {
+                Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
+        }
+
+        [Test]
+        public void AsyncSearchTest4()
+        {
+            var keyword = "金城武";
+            var count = 25;
+            var imageSize = ImageSize.All;
+            var colorization = Colorization.Color;
+            var imageType = ImageType.All;
+            var fileType = ImageFileType.Jpg;
+            var site = "sina.com";
+
+            var results = this.Client.RunSearch<IList<IImageResult>>(keyword, count, imageSize, colorization, imageType, fileType, site);
+            Assert.IsNotNull(results);
+            Assert.AreEqual(count, results.Count);
+            foreach (var result in results)
+            {
+                Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
+        }
     }
 }

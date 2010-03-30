@@ -89,5 +89,63 @@ namespace Google.API.Search
             return this.Search<GbookResult, IBookResult>(request, resultCount);
         }
 #endif
+
+        /// <summary>
+        /// Search books.
+        /// </summary>
+        /// <param name="keyword">The keyword.</param>
+        /// <param name="resultCount">The count of result itmes.</param>
+        /// <param name="callback">The <see cref="AsyncCallback"/> delegate.</param>
+        /// <param name="state">An object containing state information for this asynchronous request.</param>
+        /// <returns>An <see cref="IAsyncResult"/> that references the asynchronous request.</returns>
+        public IAsyncResult BeginSearch(string keyword, int resultCount, AsyncCallback callback, object state)
+        {
+            return this.BeginSearch(keyword, resultCount, false, null, callback, state);
+        }
+
+        /// <summary>
+        /// Search books.
+        /// </summary>
+        /// <param name="keyword">The keyword.</param>
+        /// <param name="resultCount">The count of result itmes.</param>
+        /// <param name="fullViewOnly">Whether to restrict the search to "full view" books.</param>
+        /// <param name="callback">The <see cref="AsyncCallback"/> delegate.</param>
+        /// <param name="state">An object containing state information for this asynchronous request.</param>
+        /// <returns>An <see cref="IAsyncResult"/> that references the asynchronous request.</returns>
+        public IAsyncResult BeginSearch(string keyword, int resultCount, bool fullViewOnly, AsyncCallback callback, object state)
+        {
+            return this.BeginSearch(keyword, resultCount, fullViewOnly, null, callback, state);
+        }
+
+        /// <summary>
+        /// Search books.
+        /// </summary>
+        /// <param name="keyword">The keyword.</param>
+        /// <param name="resultCount">The count of result itmes.</param>
+        /// <param name="fullViewOnly">Whether to restrict the search to "full view" books.</param>
+        /// <param name="library">The specified user-defined library. If it not null, the search will restrict the search to this library.</param>
+        /// <param name="callback">The <see cref="AsyncCallback"/> delegate.</param>
+        /// <param name="state">An object containing state information for this asynchronous request.</param>
+        /// <returns>An <see cref="IAsyncResult"/> that references the asynchronous request.</returns>
+        public IAsyncResult BeginSearch(string keyword, int resultCount, bool fullViewOnly, string library, AsyncCallback callback, object state)
+        {
+            if (keyword == null)
+            {
+                throw new ArgumentNullException("keyword");
+            }
+
+            var request = new GbookSearchRequest { Query = keyword, FullViewOnly = fullViewOnly, Library = library };
+            return this.BeginSearch<GbookResult>(request, resultCount, callback, state);
+        }
+
+        /// <summary>
+        /// returns search results.
+        /// </summary>
+        /// <param name="asyncResult">An <see cref="IAsyncResult"/> that references a pending request for a response.</param>
+        /// <returns>The search results.</returns>
+        public IList<IBookResult> EndSearch(IAsyncResult asyncResult)
+        {
+            return EndSearch<GbookResult, IBookResult>(asyncResult);
+        }
     }
 }

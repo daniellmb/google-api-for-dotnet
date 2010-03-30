@@ -26,6 +26,7 @@
 namespace Google.API.Search.Tests
 {
     using System;
+    using System.Collections.Generic;
 
     using NUnit.Framework;
 
@@ -78,5 +79,38 @@ namespace Google.API.Search.Tests
             }
         }
 #endif
+
+        [Test]
+        public void AsyncSearchTest()
+        {
+            var keyword = "Metal Gear Solid";
+            var count = 8;
+            var results = this.Client.RunSearch<IList<IVideoResult>>(keyword, count);
+            Assert.IsNotNull(results);
+            Assert.AreEqual(count, results.Count);
+            foreach (var result in results)
+            {
+                Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
+        }
+
+        [Test]
+        public void AsyncSearchTest2()
+        {
+            var keyword = "and1";
+            var count = 32;
+            var sortBy = SortType.Date;
+            var results = this.Client.RunSearch<IList<IVideoResult>>(keyword, count, sortBy);
+            Assert.IsNotNull(results);
+            Assert.AreEqual(count, results.Count);
+            foreach (var result in results)
+            {
+                Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
+        }
     }
 }

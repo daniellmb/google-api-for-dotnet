@@ -26,6 +26,7 @@
 namespace Google.API.Search.Tests
 {
     using System;
+    using System.Collections.Generic;
 
     using NUnit.Framework;
 
@@ -122,5 +123,82 @@ namespace Google.API.Search.Tests
             }
         }
 #endif
+
+        [Test]
+        public void AsyncSearchTest()
+        {
+            var count = 11;
+            var results = this.Client.RunSearch<IList<IWebResult>>("Kobe bryant", count);
+            Assert.IsNotNull(results);
+            foreach (var result in results)
+            {
+                Assert.IsNotNull(result);
+            }
+
+            Assert.AreEqual(count, results.Count);
+            foreach (var result in results)
+            {
+                Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
+        }
+
+        [Test]
+        public void AsyncSearchTest2()
+        {
+            var count = 50;
+            var language = Language.Japanese;
+            var results = this.Client.RunSearch<IList<IWebResult>>("Kobe bryant", count, language);
+            Assert.IsNotNull(results);
+            foreach (var result in results)
+            {
+                Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
+        }
+
+        [Test]
+        public void AsyncSearchTest3()
+        {
+            var keyword = "Disney";
+            var count = 25;
+            var language = Language.French;
+            var safeLevel = SafeLevel.Off;
+
+            var results = this.Client.RunSearch<IList<IWebResult>>(keyword, count, language, safeLevel);
+            Assert.IsNotNull(results);
+            Assert.AreEqual(count, results.Count);
+            foreach (var result in results)
+            {
+                Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
+        }
+
+        [Test]
+        public void AsyncSearchTest4()
+        {
+            var keyword = "Cambridge";
+            var count = 64;
+            string customSearchId = null;
+            string customSearchReference = null;
+            var language = Language.Spanish;
+            var safeLevel = SafeLevel.Off;
+            var duplicateFilter = DuplicateFilter.Off;
+            var country = "uk";
+
+            var results = this.Client.RunSearch<IList<IWebResult>>(keyword, count, customSearchId, customSearchReference, language, safeLevel, duplicateFilter, country);
+            Assert.IsNotNull(results);
+            Assert.AreEqual(count, results.Count);
+            foreach (var result in results)
+            {
+                Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
+        }
     }
 }

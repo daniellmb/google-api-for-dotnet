@@ -213,5 +213,225 @@ namespace Google.API.Search
             return this.Search<GimageResult, IImageResult>(request, resultCount);
         }
 #endif
+
+        /// <summary>
+        /// Begins an asynchronous request for searching images.
+        /// </summary>
+        /// <param name="keyword">The keyword.</param>
+        /// <param name="resultCount">The count of result itmes.</param>
+        /// <param name="callback">The <see cref="AsyncCallback"/> delegate.</param>
+        /// <param name="state">An object containing state information for this asynchronous request.</param>
+        /// <returns>An <see cref="IAsyncResult"/> that references the asynchronous request.</returns>
+        public IAsyncResult BeginSearch(string keyword, int resultCount,
+            AsyncCallback callback,
+            object state)
+        {
+            return this.BeginSearch(
+                keyword,
+                resultCount,
+                SafeLevel.GetDefault(),
+                ImageSize.GetDefault(),
+                Colorization.GetDefault(),
+                ImageType.GetDefault(),
+                ImageFileType.GetDefault(),
+                null,
+                callback,
+                state);
+        }
+
+        /// <summary>
+        /// Begins an asynchronous request for searching images.
+        /// </summary>
+        /// <param name="keyword">The keyword.</param>
+        /// <param name="resultCount">The count of result itmes.</param>
+        /// <param name="site">The specified domain. It will restrict the search to images within this domain.e.g., <c>photobucket.com</c>.</param>
+        /// <param name="callback">The <see cref="AsyncCallback"/> delegate.</param>
+        /// <param name="state">An object containing state information for this asynchronous request.</param>
+        /// <returns>An <see cref="IAsyncResult"/> that references the asynchronous request.</returns>
+        public IAsyncResult BeginSearch(string keyword, int resultCount, string site,
+            AsyncCallback callback,
+            object state)
+        {
+            return this.BeginSearch(
+                keyword,
+                resultCount,
+                SafeLevel.GetDefault(),
+                ImageSize.GetDefault(),
+                Colorization.GetDefault(),
+                ImageType.GetDefault(),
+                ImageFileType.GetDefault(),
+                site,
+                callback,
+                state);
+        }
+
+        /// <summary>
+        /// Begins an asynchronous request for searching images.
+        /// </summary>
+        /// <param name="keyword">The keyword.</param>
+        /// <param name="resultCount">The count of result itmes.</param>
+        /// <param name="imageSize">The size of image.</param>
+        /// <param name="colorization">The specified colorization of image.</param>
+        /// <param name="imageType">The special type of image.</param>
+        /// <param name="fileType">The specified file type of image.</param>
+        /// <param name="callback">The <see cref="AsyncCallback"/> delegate.</param>
+        /// <param name="state">An object containing state information for this asynchronous request.</param>
+        /// <returns>An <see cref="IAsyncResult"/> that references the asynchronous request.</returns>
+        public IAsyncResult BeginSearch(
+            string keyword,
+            int resultCount,
+            string imageSize,
+            string colorization,
+            string imageType,
+            string fileType,
+            AsyncCallback callback,
+            object state)
+        {
+            return this.BeginSearch(
+                keyword,
+                resultCount,
+                SafeLevel.GetDefault(),
+                imageSize,
+                colorization,
+                imageType,
+                fileType,
+                null,
+                callback,
+                state);
+        }
+
+        /// <summary>
+        /// Begins an asynchronous request for searching images.
+        /// </summary>
+        /// <param name="keyword">The keyword.</param>
+        /// <param name="resultCount">The count of result itmes.</param>
+        /// <param name="imageSize">The size of image.</param>
+        /// <param name="colorization">The specified colorization of image.</param>
+        /// <param name="imageType">The special type of image.</param>
+        /// <param name="fileType">The specified file type of image.</param>
+        /// <param name="site">The specified domain. It will restrict the search to images within this domain.e.g., <c>photobucket.com</c>.</param>
+        /// <param name="callback">The <see cref="AsyncCallback"/> delegate.</param>
+        /// <param name="state">An object containing state information for this asynchronous request.</param>
+        /// <returns>An <see cref="IAsyncResult"/> that references the asynchronous request.</returns>
+        public IAsyncResult BeginSearch(
+            string keyword,
+            int resultCount,
+            string imageSize,
+            string colorization,
+            string imageType,
+            string fileType,
+            string site,
+            AsyncCallback callback,
+            object state)
+        {
+            return this.BeginSearch(
+                keyword,
+                resultCount,
+                SafeLevel.GetDefault(),
+                imageSize,
+                colorization,
+                imageType,
+                fileType,
+                site,
+                callback,
+                state);
+        }
+
+        /// <summary>
+        /// Begins an asynchronous request for searching images.
+        /// </summary>
+        /// <param name="keyword">The keyword.</param>
+        /// <param name="resultCount">The count of result itmes.</param>
+        /// <param name="safeLevel">The search safety level.</param>
+        /// <param name="imageSize">The size of image.</param>
+        /// <param name="colorization">The specified colorization of image.</param>
+        /// <param name="imageType">The special type of image.</param>
+        /// <param name="fileType">The specified file type of image.</param>
+        /// <param name="site">The specified domain. It will restrict the search to images within this domain.e.g., <c>photobucket.com</c>.</param>
+        /// <param name="callback">The <see cref="AsyncCallback"/> delegate.</param>
+        /// <param name="state">An object containing state information for this asynchronous request.</param>
+        /// <returns>An <see cref="IAsyncResult"/> that references the asynchronous request.</returns>
+        public IAsyncResult BeginSearch(
+            string keyword,
+            int resultCount,
+            string safeLevel,
+            string imageSize,
+            string colorization,
+            string imageType,
+            string fileType,
+            string site,
+            AsyncCallback callback,
+            object state)
+        {
+            return this.BeginSearch(
+                keyword,
+                resultCount,
+                safeLevel,
+                imageSize,
+                colorization,
+                ImageColor.GetDefault(),
+                imageType,
+                fileType,
+                site,
+                callback,
+                state);
+        }
+
+        /// <summary>
+        /// Begins an asynchronous request for searching images.
+        /// </summary>
+        /// <param name="keyword">The keyword.</param>
+        /// <param name="resultCount">The count of result itmes.</param>
+        /// <param name="safeLevel">The search safety level.</param>
+        /// <param name="imageSize">The size of image.</param>
+        /// <param name="colorization">The specified colorization of image.</param>
+        /// <param name="color">The specified color of image.</param>
+        /// <param name="imageType">The special type of image.</param>
+        /// <param name="fileType">The specified file type of image.</param>
+        /// <param name="site">The specified domain. It will restrict the search to images within this domain.e.g., <c>photobucket.com</c>.</param>
+        /// <param name="callback">The <see cref="AsyncCallback"/> delegate.</param>
+        /// <param name="state">An object containing state information for this asynchronous request.</param>
+        /// <returns>An <see cref="IAsyncResult"/> that references the asynchronous request.</returns>
+        public IAsyncResult BeginSearch(
+            string keyword,
+            int resultCount,
+            string safeLevel,
+            string imageSize,
+            string colorization,
+            string color,
+            string imageType,
+            string fileType,
+            string site,
+            AsyncCallback callback,
+            object state)
+        {
+            if (keyword == null)
+            {
+                throw new ArgumentNullException("keyword");
+            }
+
+            var request = new GimageSearchRequest
+            {
+                Query = keyword,
+                SafeLevel = safeLevel,
+                ImageSize = imageSize,
+                Colorization = colorization,
+                ImageColor = color,
+                ImageType = imageType,
+                FileType = fileType,
+                Site = site
+            };
+            return this.BeginSearch<GimageResult>(request, resultCount, callback, state);
+        }
+
+        /// <summary>
+        /// returns search results.
+        /// </summary>
+        /// <param name="asyncResult">An <see cref="IAsyncResult"/> that references a pending request for a response.</param>
+        /// <returns>The search results.</returns>
+        public IList<IImageResult> EndSearch(IAsyncResult asyncResult)
+        {
+            return this.EndSearch<GimageResult, IImageResult>(asyncResult);
+        }
     }
 }

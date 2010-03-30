@@ -26,6 +26,7 @@
 namespace Google.API.Search.Tests
 {
     using System;
+    using System.Collections.Generic;
 
     using NUnit.Framework;
 
@@ -211,5 +212,171 @@ namespace Google.API.Search.Tests
             Assert.LessOrEqual(results.Count, 1000);
         }
 #endif
+
+        [Test]
+        public void AsyncSearchTest()
+        {
+            var keyword = "NBA";
+            var count = 15;
+            var results = this.Client.RunSearch<IList<INewsResult>>(keyword, count);
+            Assert.IsNotNull(results);
+            Assert.AreEqual(count, results.Count);
+            foreach (var result in results)
+            {
+                Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
+        }
+
+        [Test]
+        public void AsyncSearchTest2()
+        {
+            var keyword = "earthquake";
+            var geo = "China";
+            var count = 32;
+            var results = this.Client.RunSearch<IList<INewsResult>>(keyword, count, geo, SortType.GetDefault());
+            Assert.IsNotNull(results);
+            Assert.AreEqual(count, results.Count);
+            foreach (var result in results)
+            {
+                Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
+        }
+
+        [Test]
+        public void AsyncSearchTest3()
+        {
+            var keyword = "Obama";
+            var count = 32;
+            var resultsByRelevance = this.Client.RunSearch<IList<INewsResult>>(keyword, count, null, SortType.Relevance);
+            var resultsByDate = this.Client.RunSearch<IList<INewsResult>>(keyword, count, null, SortType.Date);
+            Assert.IsNotNull(resultsByRelevance);
+            Assert.IsNotNull(resultsByDate);
+            Assert.AreEqual(resultsByRelevance.Count, resultsByDate.Count);
+            var areSame = true;
+            for (var i = 0; i < resultsByRelevance.Count; ++i)
+            {
+                if (resultsByRelevance[i].ToString() != resultsByDate[i].ToString())
+                {
+                    areSame = false;
+                    break;
+                }
+            }
+
+            Assert.IsFalse(areSame);
+
+            Console.WriteLine("News by relevance");
+            Console.WriteLine("-----------------------------");
+            foreach (var result in resultsByRelevance)
+            {
+                Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
+
+            Console.WriteLine("News by date");
+            Console.WriteLine("-----------------------------");
+            foreach (var result in resultsByDate)
+            {
+                Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
+        }
+
+        [Test]
+        public void AsyncSearchLocalTest()
+        {
+            var count = 16;
+            var resultsInTokyo = this.Client.AsyncRun<IList<INewsResult>>("SearchLocal", "Tokyo", count);
+            var resultsInJapan = this.Client.AsyncRun<IList<INewsResult>>("SearchLocal", "Japan", count);
+            Assert.IsNotNull(resultsInTokyo);
+            Assert.IsNotNull(resultsInJapan);
+            Assert.AreEqual(count, resultsInTokyo.Count);
+            Assert.AreEqual(count, resultsInJapan.Count);
+
+            var areSame = true;
+            for (var i = 0; i < resultsInTokyo.Count; ++i)
+            {
+                if (resultsInTokyo[i].ToString() != resultsInJapan[i].ToString())
+                {
+                    areSame = false;
+                    break;
+                }
+            }
+
+            Assert.IsFalse(areSame);
+
+            Console.WriteLine("News in Tokyo");
+            Console.WriteLine("-----------------------------");
+            foreach (var result in resultsInTokyo)
+            {
+                Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
+
+            Console.WriteLine("News in Japan");
+            Console.WriteLine("-----------------------------");
+            foreach (var result in resultsInJapan)
+            {
+                Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
+        }
+
+        [Test]
+        public void AsyncSearchTopicTest()
+        {
+            var count = 16;
+            var resultsOfSports = this.Client.AsyncRun<IList<INewsResult>>("SearchTopic", NewsTopic.Sports, count);
+            var resultsOfTechnology = this.Client.AsyncRun<IList<INewsResult>>("SearchTopic", NewsTopic.Technology, count);
+            Assert.IsNotNull(resultsOfSports);
+            Assert.IsNotNull(resultsOfTechnology);
+            Assert.AreEqual(count, resultsOfSports.Count);
+            Assert.AreEqual(count, resultsOfTechnology.Count);
+
+            var areSame = true;
+            for (var i = 0; i < resultsOfSports.Count; ++i)
+            {
+                if (resultsOfSports[i].ToString() != resultsOfTechnology[i].ToString())
+                {
+                    areSame = false;
+                    break;
+                }
+            }
+
+            Assert.IsFalse(areSame);
+
+            Console.WriteLine("News of sports");
+            Console.WriteLine("-----------------------------");
+            foreach (var result in resultsOfSports)
+            {
+                Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
+
+            Console.WriteLine("News of technology");
+            Console.WriteLine("-----------------------------");
+            foreach (var result in resultsOfTechnology)
+            {
+                Assert.IsNotNull(result);
+                Console.WriteLine(result);
+                Console.WriteLine();
+            }
+        }
+
+        [Test]
+        public void AsyncSearchWithBigResultTest()
+        {
+            var results = this.Client.RunSearch<IList<INewsResult>>("a", 1000);
+            Assert.Greater(results.Count, 0);
+            Assert.LessOrEqual(results.Count, 1000);
+        }
     }
 }

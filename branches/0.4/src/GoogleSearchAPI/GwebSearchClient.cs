@@ -130,5 +130,101 @@ namespace Google.API.Search
             return this.Search<GwebResult, IWebResult>(request, resultCount);
         }
 #endif
+
+        /// <summary>
+        /// Begins an asynchronous request for searching web infos.
+        /// </summary>
+        /// <param name="keyword">The keyword.</param>
+        /// <param name="resultCount">The count of result itmes.</param>
+        /// <param name="callback">The <see cref="AsyncCallback"/> delegate.</param>
+        /// <param name="state">An object containing state information for this asynchronous request.</param>
+        /// <returns>An <see cref="IAsyncResult"/> that references the asynchronous request.</returns>
+        public IAsyncResult BeginSearch(string keyword, int resultCount, AsyncCallback callback, object state)
+        {
+            return this.BeginSearch(keyword, resultCount, Language.GetDefault(), SafeLevel.GetDefault(), callback, state);
+        }
+
+        /// <summary>
+        /// Begins an asynchronous request for searching web infos.
+        /// </summary>
+        /// <param name="keyword">The keyword.</param>
+        /// <param name="resultCount">The count of result itmes.</param>
+        /// <param name="language">The language you want to search.</param>
+        /// <param name="callback">The <see cref="AsyncCallback"/> delegate.</param>
+        /// <param name="state">An object containing state information for this asynchronous request.</param>
+        /// <returns>An <see cref="IAsyncResult"/> that references the asynchronous request.</returns>
+        public IAsyncResult BeginSearch(string keyword, int resultCount, string language, AsyncCallback callback, object state)
+        {
+            return this.BeginSearch(keyword, resultCount, language, SafeLevel.GetDefault(), callback, state);
+        }
+
+        /// <summary>
+        /// Begins an asynchronous request for searching web infos.
+        /// </summary>
+        /// <param name="keyword">The keyword.</param>
+        /// <param name="resultCount">The count of result itmes.</param>
+        /// <param name="language">The language you want to search.</param>
+        /// <param name="safeLevel">The search safety level.</param>
+        /// <param name="callback">The <see cref="AsyncCallback"/> delegate.</param>
+        /// <param name="state">An object containing state information for this asynchronous request.</param>
+        /// <returns>An <see cref="IAsyncResult"/> that references the asynchronous request.</returns>
+        public IAsyncResult BeginSearch(string keyword, int resultCount, string language, string safeLevel, AsyncCallback callback, object state)
+        {
+            return this.BeginSearch(keyword, resultCount, null, null, safeLevel, language, DuplicateFilter.GetDefault(), null, callback, state);
+        }
+
+        /// <summary>
+        /// Begins an asynchronous request for searching web infos.
+        /// </summary>
+        /// <param name="keyword">The keyword.</param>
+        /// <param name="resultCount">The count of result itmes.</param>
+        /// <param name="customSearchId">This optional argument supplies the unique id for the Custom Search Engine that should be used for this request.</param>
+        /// <param name="customSearchReference">This optional argument supplies the url of a linked Custom Search Engine specification that should be used to satisfy this request.</param>
+        /// <param name="safeLevel">The search safety level.</param>
+        /// <param name="language">The language you want to search.</param>
+        /// <param name="duplicateFilter">This optional argument controls turning on or off the duplicate content filter. Default value is true.</param>
+        /// <param name="country">This optional argument allows the caller to tailor the results to a specific country. The value should be a valid <a href="http://en.wikipedia.org/wiki/ISO_3166-1">country code</a> (e.g. uk, de, etc.).</param>
+        /// <param name="callback">The <see cref="AsyncCallback"/> delegate.</param>
+        /// <param name="state">An object containing state information for this asynchronous request.</param>
+        /// <returns>An <see cref="IAsyncResult"/> that references the asynchronous request.</returns>
+        public IAsyncResult BeginSearch(
+            string keyword,
+            int resultCount,
+            string customSearchId,
+            string customSearchReference,
+            string safeLevel,
+            string language,
+            string duplicateFilter,
+            string country,
+            AsyncCallback callback,
+            object state)
+        {
+            if (keyword == null)
+            {
+                throw new ArgumentNullException("keyword");
+            }
+
+            var request = new GwebSearchRequest
+            {
+                Query = keyword,
+                CustomSearchId = customSearchId,
+                CustomSearchReference = customSearchReference,
+                SafeLevel = safeLevel,
+                Language = language,
+                DuplicateFilter = duplicateFilter,
+                Country = country
+            };
+            return this.BeginSearch<GwebResult>(request, resultCount, callback, state);
+        }
+
+        /// <summary>
+        /// returns search results.
+        /// </summary>
+        /// <param name="asyncResult">An <see cref="IAsyncResult"/> that references a pending request for a response.</param>
+        /// <returns>The search results.</returns>
+        public IList<IWebResult> EndSearch(IAsyncResult asyncResult)
+        {
+            return this.EndSearch<GwebResult, IWebResult>(asyncResult);
+        }
     }
 }
