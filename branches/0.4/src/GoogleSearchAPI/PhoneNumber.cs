@@ -34,10 +34,10 @@ namespace Google.API.Search
         /// The value of the .type property can me one of "main", "fax", "mobile", "data", or "". 
         /// </summary>
         [JsonProperty("type")]
-        public string Type { get; private set; }
+        public string Type { get; internal set; }
 
         [JsonProperty("number")]
-        public string Number { get; private set; }
+        public string Number { get; internal set; }
 
         public override string ToString()
         {

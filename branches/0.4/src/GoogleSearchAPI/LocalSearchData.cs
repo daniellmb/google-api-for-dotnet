@@ -31,35 +31,35 @@ namespace Google.API.Search
     internal class LocalSearchData : ISearchData<GlocalResult>
     {
         [JsonProperty("results")]
-        public GlocalResult[] Results { get; private set; }
+        public GlocalResult[] Results { get; internal set; }
 
         [JsonProperty("viewport")]
-        public ViewportObject Viewport { get; private set; }
+        public ViewportObject Viewport { get; internal set; }
 
         [JsonObject]
         public class Point
         {
             [JsonProperty("lat")]
-            public float Latitude { get; private set; }
+            public float Latitude { get; internal set; }
 
             [JsonProperty("lng")]
-            public float Longitude { get; private set; }
+            public float Longitude { get; internal set; }
         }
 
         [JsonObject]
         public class ViewportObject
         {
             [JsonProperty("center")]
-            public Point center { get; private set; }
+            public Point center { get; internal set; }
 
             [JsonProperty("span")]
-            public Point span { get; private set; }
+            public Point span { get; internal set; }
 
             [JsonProperty("sw")]
-            public Point sw { get; private set; }
+            public Point sw { get; internal set; }
 
             [JsonProperty("ne")]
-            public Point ne { get; private set; }
+            public Point ne { get; internal set; }
         }
     }
 }

@@ -47,125 +47,125 @@ namespace Google.API.Search
         /// Indicates the "type" of result.
         /// </summary>
         [JsonProperty("GsearchResultClass")]
-        public string GSearchResultClass { get; private set; }
+        public string GSearchResultClass { get; internal set; }
 
         [JsonProperty("viewportmode")]
-        public string ViewportMode { get; private set; }
+        public string ViewportMode { get; internal set; }
 
         /// <summary>
         /// Supplies the title for the result. In some cases, the title and the streetAddress are the same. This typically occurs when the search term is a street address such as 1231 Lisa Lane, Los Altos, CA. 
         /// </summary>
         [JsonProperty("title")]
-        public string TitleWithFormatting { get; private set; }
+        public string TitleWithFormatting { get; internal set; }
 
         /// <summary>
         /// Supplies the title, but unlike .title, this property is stripped of html markup (e.g., &lt;b&gt;, &lt;i&gt;, etc.) 
         /// </summary>
         [JsonProperty("titleNoFormatting")]
-        public string Title { get; private set; }
+        public string Title { get; internal set; }
 
         /// <summary>
         /// Supplies a url to a Google Maps Details page associated with the search result 
         /// </summary>
         [JsonProperty("url")]
-        public string Url { get; private set; }
+        public string Url { get; internal set; }
 
         /// <summary>
         /// Supplies the latitude value of the result.
         /// </summary>
         [JsonProperty("lat")]
-        public float Latitude { get; private set; }
+        public float Latitude { get; internal set; }
 
         /// <summary>
         /// Supplies the longitude value of the result.
         /// </summary>
         [JsonProperty("lng")]
-        public float Longitude { get; private set; }
+        public float Longitude { get; internal set; }
 
         [JsonProperty("accuracy")]
-        public int Accuracy { get; private set; }
+        public int Accuracy { get; internal set; }
 
         /// <summary>
         /// Supplies the street address and number for the given result. Note:, in some cases, this property may be set to "" if the result has no known street address. address line. 
         /// </summary>
         [JsonProperty("streetAddress")]
-        public string StreetAddress { get; private set; }
+        public string StreetAddress { get; internal set; }
 
         /// <summary>
         /// Supplies the city name for the result. Note:, in some cases, this property may be set to "". 
         /// </summary>
         [JsonProperty("city")]
-        public string City { get; private set; }
+        public string City { get; internal set; }
 
         /// <summary>
         /// Supplies a region name for the result (e.g., in the us, this is typically a state abbreviation, in other regions it might be a province, etc.) Note:, in some cases, this property may be set to "". 
         /// </summary>
         [JsonProperty("region")]
-        public string Region { get; private set; }
+        public string Region { get; internal set; }
 
         /// <summary>
         /// Supplies a country name for the result. Note:, in some cases, this property may be set to "". 
         /// </summary>
         [JsonProperty("country")]
-        public string Country { get; private set; }
+        public string Country { get; internal set; }
 
         /// <summary>
         /// Supplies an array of phone number objects
         /// </summary>
         [JsonProperty("phoneNumbers")]
         [JsonConverter(typeof(PhoneNumberConverter))]
-        public IPhoneNumber[] PhoneNumbers { get; private set; }
+        public IPhoneNumber[] PhoneNumbers { get; internal set; }
 
         /// <summary>
         /// Supplies an array consisting of the mailing address lines for this result
         /// </summary>
         [JsonProperty("addressLines")]
-        public string[] AddressLines { get; private set; }
+        public string[] AddressLines { get; internal set; }
 
         /// <summary>
         /// Supplies a url that can be used to provide driving directions from the center of the set of search results to this search result. Note, in some cases this property may be missing or null.
         /// </summary>
         [JsonProperty("ddUrl")]
-        public string DirectionUrl { get; private set; }
+        public string DirectionUrl { get; internal set; }
 
         /// <summary>
         /// Supplies a url that can be used to provide driving directions from a user specified location to this search result. Note, in some cases this property may be missing or null.
         /// </summary>
         [JsonProperty("ddUrlToHere")]
-        public string ToHereDirectionUrl { get; private set; }
+        public string ToHereDirectionUrl { get; internal set; }
 
         /// <summary>
         /// Supplies a url that can be used to provide driving directions from this search result to a user specified location. Note, in some cases this property may be missing or null.
         /// </summary>
         [JsonProperty("ddUrlFromHere")]
-        public string FromHereDirectionUrl { get; private set; }
+        public string FromHereDirectionUrl { get; internal set; }
 
         /// <summary>
         /// Supplies a url to a static map image representation of the current result. The image is 150px wide by 100px tall with a single marker representing the current location. Expected usage is to hyperlink this image using the url property.
         /// </summary>
         [JsonProperty("staticMapUrl")]
-        public string StaticMapUrl { get; private set; }
+        public string StaticMapUrl { get; internal set; }
 
         /// <summary>
         /// This property indicates the type of this result which can either be "local" in the case of a local business listing or geocode result, or "kml" in the case of a KML listing. 
         /// </summary>
         [JsonProperty("listingType")]
-        public string ListingType { get; private set; }
+        public string ListingType { get; internal set; }
 
         /// <summary>
         /// For "kml" results, this property contains a content snippet associated with the KML result. For "local" results, this property is the empty string.
         /// </summary>
         [JsonProperty("content")]
-        public string Content { get; private set; }
+        public string Content { get; internal set; }
 
         [JsonProperty("maxAge")]
-        public int MaxAge { get; private set; }
+        public int MaxAge { get; internal set; }
 
         [JsonProperty("addressLookupResult")]
-        public string AddressLookupResult { get; private set; }
+        public string AddressLookupResult { get; internal set; }
 
         [JsonProperty("postalCode")]
-        public string PostalCode { get; private set; }
+        public string PostalCode { get; internal set; }
 
         public override string ToString()
         {

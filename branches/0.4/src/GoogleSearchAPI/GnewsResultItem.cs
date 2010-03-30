@@ -39,56 +39,56 @@ namespace Google.API.Search
         /// Supplies the title value of the result.
         /// </summary>
         [JsonProperty("title")]
-        public string TitleWithFormatting { get; protected set; }
+        public string TitleWithFormatting { get; internal set; }
 
         /// <summary>
         /// Supplies the title, but unlike .title, this property is stripped of html markup (e.g., &lt;b&gt;, &lt;i&gt;, etc.)
         /// </summary>
         [JsonProperty("titleNoFormatting")]
         [JsonConverter(typeof(HtmlFormatConverter))]
-        public string Title { get; protected set; }
+        public string Title { get; internal set; }
 
         /// <summary>
         /// Supplies the raw URL of the result.
         /// </summary>
         [JsonProperty("unescapedUrl")]
-        public string Url { get; protected set; }
+        public string Url { get; internal set; }
 
         /// <summary>
         /// Supplies an escaped version of the above URL.
         /// </summary>
         [JsonProperty("url")]
-        public string EscapedUrl { get; protected set; }
+        public string EscapedUrl { get; internal set; }
 
         /// <summary>
         /// Supplies the name of the publisher of the news story.
         /// </summary>
         [JsonProperty("publisher")]
         [JsonConverter(typeof(HtmlFormatConverter))]
-        public string Publisher { get; protected set; }
+        public string Publisher { get; internal set; }
 
         /// <summary>
         /// Contains the location of the news story. This is a list of locations in most specific to least specific order where the components are seperated by ",". Note, there may only be one element in the list... A typical value for this property is "Edinburgh,Scotland,UK" or possibly "USA".
         /// </summary>
         [JsonProperty("location")]
         [JsonConverter(typeof(HtmlFormatConverter))]
-        public string Location { get; protected set; }
+        public string Location { get; internal set; }
 
         /// <summary>
         /// Supplies the published date (rfc-822 format) of the news story referenced by this search result.
         /// </summary>
         [JsonProperty("publishedDate")]
         [JsonConverter(typeof(RFC822DateTimeConverter))]
-        public DateTime PublishedDate { get; protected set; }
+        public DateTime PublishedDate { get; internal set; }
 
         [JsonProperty("signedRedirectUrl")]
-        public string SignedRedirectUrl { get; private set; }
+        public string SignedRedirectUrl { get; internal set; }
 
         /// <summary>
         /// This property is optional. When present, it indicates the language of the news story.
         /// </summary>
         [JsonProperty("language")]
-        public string Language { get; private set; }
+        public string Language { get; internal set; }
 
         public override string ToString()
         {

@@ -47,71 +47,71 @@ namespace Google.API.Search
         /// Indicates the "type" of result.
         /// </summary>
         [JsonProperty("GsearchResultClass")]
-        public string GSearchResultClass { get; private set; }
+        public string GSearchResultClass { get; internal set; }
 
         /// <summary>
         /// Supplies the title value of the result.
         /// </summary>
         [JsonProperty("title")]
-        public string TitleWithFormatting { get; private set; }
+        public string TitleWithFormatting { get; internal set; }
 
         /// <summary>
         /// Supplies the title, but unlike .title, this property is stripped of html markup (e.g., &lt;b&gt;, &lt;i&gt;, etc.)
         /// </summary>
         [JsonProperty("titleNoFormatting")]
         [JsonConverter(typeof(HtmlFormatConverter))]
-        public string Title { get; private set; }
+        public string Title { get; internal set; }
 
         /// <summary>
         /// Supplies a snippet style description of the patent.
         /// </summary>
         [JsonProperty("content")]
         [JsonConverter(typeof(HtmlTagConverter))]
-        public string Content { get; private set; }
+        public string Content { get; internal set; }
 
         /// <summary>
         /// Supplies the raw URL of the result.
         /// </summary>
         [JsonProperty("unescapedUrl")]
-        public string Url { get; private set; }
+        public string Url { get; internal set; }
 
         /// <summary>
         /// Supplies an escaped version of the above URL.
         /// </summary>
         [JsonProperty("url")]
-        public string EscapedUrl { get; private set; }
+        public string EscapedUrl { get; internal set; }
 
         /// <summary>
         /// Supplies the application filing date of the patent (rfc-822 format).
         /// </summary>
         [JsonProperty("applicationDate")]
         [JsonConverter(typeof(RFC822DateTimeConverter))]
-        public DateTime ApplicationDate { get; private set; }
+        public DateTime ApplicationDate { get; internal set; }
 
         /// <summary>
         /// Supplies the patent number for issued patents, and the application number for filed, but not yet issued patents.
         /// </summary>
         [JsonProperty("patentNumber")]
-        public string PatentNumber { get; private set; }
+        public string PatentNumber { get; internal set; }
 
         /// <summary>
         /// Supplies the status of the patent which can either be "filed" for filed, but not yet issued patents, or "issued" for issued patents.
         /// </summary>
         [JsonProperty("patentStatus")]
-        public string PatentStatus { get; private set; }
+        public string PatentStatus { get; internal set; }
 
         /// <summary>
         /// Supplies the assignee of the patent.
         /// </summary>
         [JsonProperty("assignee")]
         [JsonConverter(typeof(HtmlFormatConverter))]
-        public string Assignee { get; private set; }
+        public string Assignee { get; internal set; }
 
         /// <summary>
         /// Supplies the url of a thumbnail image which visually represents the patent.
         /// </summary>
         [JsonProperty("tbUrl")]
-        public string TbUrl { get; private set; }
+        public string TbUrl { get; internal set; }
 
         public override string ToString()
         {

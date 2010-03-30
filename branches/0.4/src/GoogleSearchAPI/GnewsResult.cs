@@ -40,37 +40,37 @@ namespace Google.API.Search
         /// Indicates the "type" of result.
         /// </summary>
         [JsonProperty("GsearchResultClass")]
-        public string GSearchResultClass { get; private set; }
+        public string GSearchResultClass { get; internal set; }
 
         /// <summary>
         /// When a news result has a set of related stories, this URL is available and non-null. In this situation, the URL points to a landing page that points to all of the related stories.
         /// </summary>
         [JsonProperty("clusterUrl")]
-        public string ClusterUrl { get; private set; }
+        public string ClusterUrl { get; internal set; }
 
         /// <summary>
         /// Supplies a snippet of content from the news story associated with this search result.
         /// </summary>
         [JsonProperty("content")]
         [JsonConverter(typeof(HtmlTagConverter))]
-        public string Content { get; private set; }
+        public string Content { get; internal set; }
 
         /// <summary>
         /// This property is optional. It only appears in a result when the story also has a set of closely related stories. In this case, the relatedStories[] array will be present.
         /// </summary>
         [JsonProperty("relatedStories")]
         [JsonConverter(typeof(NewsResultItemConverter))]
-        public INewsResultItem[] RelatedStories { get; private set; }
+        public INewsResultItem[] RelatedStories { get; internal set; }
 
         /// <summary>
         /// This property is optional. It only appears in a result when the system has determined that there is a good image that represents the cluster of news articles related to this result.
         /// </summary>
         [JsonProperty("image")]
         [JsonConverter(typeof(NewsImageConverter))]
-        public INewsImage Image { get; private set; }
+        public INewsImage Image { get; internal set; }
 
         [JsonProperty("author")]
-        public string Author { get; private set; }
+        public string Author { get; internal set; }
 
         public override string ToString()
         {

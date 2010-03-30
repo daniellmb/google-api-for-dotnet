@@ -34,46 +34,46 @@ namespace Google.API.Search
         /// supplies the title of the article associated with the image
         /// </summary>
         [JsonProperty("title")]
-        public string Title { get; protected set; }
+        public string Title { get; internal set; }
 
         /// <summary>
         /// same as above but stripped of HTML formatting
         /// </summary>
         [JsonProperty("titleNoFormatting")]
-        public string TitleNoFormatting { get; protected set; }
+        public string TitleNoFormatting { get; internal set; }
 
         /// <summary>
         /// supplies the URL of the image
         /// </summary>
         [JsonProperty("url")]
-        public string Url { get; private set; }
+        public string Url { get; internal set; }
 
         /// <summary>
         /// supplies the URL of the article that contains this image. The image, when displayed, should normally link through this URL
         /// </summary>
         [JsonProperty("originalContextUrl")]
-        public string OriginalContextUrl { get; private set; }
+        public string OriginalContextUrl { get; internal set; }
 
         /// <summary>
         /// supplies the publisher of the news article containing the image. The suggested user interface is to display this under or in close proximity to the image, hyper linked through the .url property from above
         /// </summary>
         [JsonProperty("publisher")]
-        public string Publisher { get; private set; }
+        public string Publisher { get; internal set; }
 
         [JsonProperty("tbUrl")]
-        public string TbUrl { get; private set; }
+        public string TbUrl { get; internal set; }
 
         /// <summary>
         /// supplies the width of the image referenced above. The standard size of this image is 80 pixels wide and 50 pixels tall
         /// </summary>
         [JsonProperty("tbWidth")]
-        public int TbWidth { get; private set; }
+        public int TbWidth { get; internal set; }
 
         /// <summary>
         /// supplies the height of the image referenced above. The standard size of this image is 80 pixels wide and 50 pixels tall
         /// </summary>
         [JsonProperty("tbHeight")]
-        public int TbHeight { get; private set; }
+        public int TbHeight { get; internal set; }
 
         public override string ToString()
         {

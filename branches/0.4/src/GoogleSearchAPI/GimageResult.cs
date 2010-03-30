@@ -38,90 +38,90 @@ namespace Google.API.Search
         /// Indicates the "type" of result.
         /// </summary>
         [JsonProperty("GsearchResultClass")]
-        public string GSearchResultClass { get; private set; }
+        public string GSearchResultClass { get; internal set; }
 
         [JsonProperty("imageId")]
-        public string ImageId { get; private set; }
+        public string ImageId { get; internal set; }
 
         /// <summary>
         /// Supplies the title of the image, which is usually the base filename.
         /// </summary>
         [JsonProperty("title")]
-        public string TitleWithFormatting { get; private set; }
+        public string TitleWithFormatting { get; internal set; }
 
         /// <summary>
         /// Supplies the title, but unlike .title, this property is stripped of html markup (e.g., &lt;b&gt;, &lt;i&gt;, etc.)
         /// </summary>
         [JsonProperty("titleNoFormatting")]
         [JsonConverter(typeof(HtmlFormatConverter))]
-        public string Title { get; private set; }
+        public string Title { get; internal set; }
 
         /// <summary>
         /// Supplies the raw URL of the result.
         /// </summary>
         [JsonProperty("unescapedUrl")]
-        public string Url { get; private set; }
+        public string Url { get; internal set; }
 
         /// <summary>
         /// Supplies an escaped version of the above URL.
         /// </summary>
         [JsonProperty("url")]
-        public string EscapedUrl { get; private set; }
+        public string EscapedUrl { get; internal set; }
 
         /// <summary>
         /// Supplies a shortened version of the URL associated with the result. Typically displayed in green, stripped of a protocol and path.
         /// </summary>
         [JsonProperty("visibleUrl")]
-        public string VisibleUrl { get; private set; }
+        public string VisibleUrl { get; internal set; }
 
         /// <summary>
         /// Supplies the URL of the page containing the image.
         /// </summary>
         [JsonProperty("originalContextUrl")]
-        public string OriginalContextUrl { get; private set; }
+        public string OriginalContextUrl { get; internal set; }
 
         /// <summary>
         /// Supplies the width of the image in pixels.
         /// </summary>
         [JsonProperty("width")]
-        public int Width { get; private set; }
+        public int Width { get; internal set; }
 
         /// <summary>
         /// Supplies the height of the image in pixels.
         /// </summary>
         [JsonProperty("height")]
-        public int Height { get; private set; }
+        public int Height { get; internal set; }
 
         /// <summary>
         /// Supplies the width in pixels of the image thumbnail.
         /// </summary>
         [JsonProperty("tbWidth")]
-        public int TbWidth { get; private set; }
+        public int TbWidth { get; internal set; }
 
         /// <summary>
         /// Supplies the height in pixels of the image thumbnail.
         /// </summary>
         [JsonProperty("tbHeight")]
-        public int TbHeight { get; private set; }
+        public int TbHeight { get; internal set; }
 
         /// <summary>
         /// Supplies the url of a thumbnail image.
         /// </summary>
         [JsonProperty("tbUrl")]
-        public string TbUrl { get; private set; }
+        public string TbUrl { get; internal set; }
 
         /// <summary>
         /// Supplies a brief snippet of information from the page associated with the search result.
         /// </summary>
         [JsonProperty("content")]
         [JsonConverter(typeof(HtmlTagConverter))]
-        public string Content { get; private set; }
+        public string Content { get; internal set; }
 
         /// <summary>
         /// Supplies the same information as .content only stripped of HTML formatting.
         /// </summary>
         [JsonProperty("contentNoFormatting")]
-        public string ContentNoFormatting { get; private set; }
+        public string ContentNoFormatting { get; internal set; }
 
         public override string ToString()
         {

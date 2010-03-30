@@ -36,34 +36,34 @@ namespace Google.API.Search
     internal class SearchData<TResult> : ISearchData<TResult>
     {
         [JsonProperty("results")]
-        public TResult[] Results { get; private set; }
+        public TResult[] Results { get; internal set; }
 
         [JsonProperty("cursor")]
-        public CursorObject Cursor { get; private set; }
+        public CursorObject Cursor { get; internal set; }
 
         [JsonObject]
         public class CursorObject
         {
             [JsonProperty("pages")]
-            public Page[] Pages { get; private set; }
+            public Page[] Pages { get; internal set; }
 
             [JsonProperty("estimatedResultCount")]
-            public long EstimatedResultCount { get; private set; }
+            public long EstimatedResultCount { get; internal set; }
 
             [JsonProperty("currentPageIndex")]
-            public long CurrentPageIndex { get; private set; }
+            public long CurrentPageIndex { get; internal set; }
 
             [JsonProperty("moreResultsUrl")]
-            public string MoreResultsUrl { get; private set; }
+            public string MoreResultsUrl { get; internal set; }
 
             [JsonObject]
             public class Page
             {
                 [JsonProperty("start")]
-                public long Start { get; private set; }
+                public long Start { get; internal set; }
 
                 [JsonProperty("label")]
-                public long Label { get; private set; }
+                public long Label { get; internal set; }
 
                 public override string ToString()
                 {

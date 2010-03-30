@@ -43,75 +43,75 @@ namespace Google.API.Search
         /// Indicates the "type" of result.
         /// </summary>
         [JsonProperty("GsearchResultClass")]
-        public string GSearchResultClass { get; private set; }
+        public string GSearchResultClass { get; internal set; }
 
         /// <summary>
         /// Supplies the title of the book.
         /// </summary>
         [JsonProperty("title")]
-        public string TitleWithFormatting { get; private set; }
+        public string TitleWithFormatting { get; internal set; }
 
         /// <summary>
         /// Supplies the title, but unlike .title, this property is stripped of html markup (e.g., &lt;b&gt;, &lt;i&gt;, etc.)
         /// </summary>
         [JsonProperty("titleNoFormatting")]
         [JsonConverter(typeof(HtmlFormatConverter))]
-        public string Title { get; private set; }
+        public string Title { get; internal set; }
 
         /// <summary>
         /// Supplies the raw URL of the result.
         /// </summary>
         [JsonProperty("unescapedUrl")]
-        public string UnescapedUrl { get; private set; }
+        public string UnescapedUrl { get; internal set; }
 
         /// <summary>
         /// Supplies an escaped version of the above URL.
         /// </summary>
         [JsonProperty("url")]
-        public string Url { get; private set; }
+        public string Url { get; internal set; }
 
         /// <summary>
         /// Supplies the list of authors of the book.
         /// </summary>
         [JsonProperty("authors")]
         [JsonConverter(typeof(HtmlTagConverter))]
-        public string Authors { get; private set; }
+        public string Authors { get; internal set; }
 
         /// <summary>
         /// Supplies the identifier associated with the book. This is typically an ISBN.
         /// </summary>
         [JsonProperty("bookId")]
-        public string BookId { get; private set; }
+        public string BookId { get; internal set; }
 
         /// <summary>
         /// Supplies the year that the book was published.
         /// </summary>
         [JsonProperty("publishedYear")]
-        public string PublishedYear { get; private set; }
+        public string PublishedYear { get; internal set; }
 
         /// <summary>
         /// Supplies the number of pages contained within the book.
         /// </summary>
         [JsonProperty("pageCount")]
-        public int PageCount { get; private set; }
+        public int PageCount { get; internal set; }
 
         /// <summary>
         /// Supplies the width in pixels of the book cover thumbnail.
         /// </summary>
         [JsonProperty("tbWidth")]
-        public int TbWidth { get; private set; }
+        public int TbWidth { get; internal set; }
 
         /// <summary>
         /// Supplies the height in pixels of the book cover thumbnail.
         /// </summary>
         [JsonProperty("tbHeight")]
-        public int TbHeight { get; private set; }
+        public int TbHeight { get; internal set; }
 
         /// <summary>
         /// Supplies the url of a thumbnail image which visually represents book cover.
         /// </summary>
         [JsonProperty("tbUrl")]
-        public string TbUrl { get; private set; }
+        public string TbUrl { get; internal set; }
 
         public override string ToString()
         {
