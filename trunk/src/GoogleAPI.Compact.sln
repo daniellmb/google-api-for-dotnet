@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Compact", "Core\Core.Compact.csproj", "{8DBE9C0C-E8C1-4C4A-A770-7C44E43E010B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Tests.Compact", "Core.Tests\Core.Tests.Compact.csproj", "{72A1957A-A8B3-45CC-AA4A-4B61A4750F46}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleTranslateAPI.Compact", "GoogleTranslateAPI\GoogleTranslateAPI.Compact.csproj", "{B81DF147-947A-4745-A8AD-8474E51820F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleTranslateAPI.Tests.Compact", "GoogleTranslateAPI.Tests\GoogleTranslateAPI.Tests.Compact.csproj", "{B63A0FBC-BA06-4D1F-80B8-A2630421EE2F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleSearchAPI.Tests.Compact", "GoogleSearchAPI.Tests\GoogleSearchAPI.Tests.Compact.csproj", "{77520C9E-495F-401A-9CA6-597F135B4D77}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleSearchAPI.Compact", "GoogleSearchAPI\GoogleSearchAPI.Compact.csproj", "{E9F8B4E2-76C7-4F69-876D-4C1DAADDC5C3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8DBE9C0C-E8C1-4C4A-A770-7C44E43E010B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DBE9C0C-E8C1-4C4A-A770-7C44E43E010B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DBE9C0C-E8C1-4C4A-A770-7C44E43E010B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DBE9C0C-E8C1-4C4A-A770-7C44E43E010B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72A1957A-A8B3-45CC-AA4A-4B61A4750F46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72A1957A-A8B3-45CC-AA4A-4B61A4750F46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72A1957A-A8B3-45CC-AA4A-4B61A4750F46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72A1957A-A8B3-45CC-AA4A-4B61A4750F46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B81DF147-947A-4745-A8AD-8474E51820F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B81DF147-947A-4745-A8AD-8474E51820F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B81DF147-947A-4745-A8AD-8474E51820F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B81DF147-947A-4745-A8AD-8474E51820F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B63A0FBC-BA06-4D1F-80B8-A2630421EE2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B63A0FBC-BA06-4D1F-80B8-A2630421EE2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B63A0FBC-BA06-4D1F-80B8-A2630421EE2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B63A0FBC-BA06-4D1F-80B8-A2630421EE2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77520C9E-495F-401A-9CA6-597F135B4D77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77520C9E-495F-401A-9CA6-597F135B4D77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77520C9E-495F-401A-9CA6-597F135B4D77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77520C9E-495F-401A-9CA6-597F135B4D77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9F8B4E2-76C7-4F69-876D-4C1DAADDC5C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9F8B4E2-76C7-4F69-876D-4C1DAADDC5C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9F8B4E2-76C7-4F69-876D-4C1DAADDC5C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9F8B4E2-76C7-4F69-876D-4C1DAADDC5C3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
