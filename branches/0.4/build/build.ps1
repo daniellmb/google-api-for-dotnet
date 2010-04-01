@@ -81,6 +81,9 @@ task Package -depends Merge {
       move -Path $workingDir\Documentation\$name\LastBuild.log -Destination $workingDir\$name.Documentation.log
     }
 	
+	Copy-Item -Path $docDir\$name.readme.txt -Destination $workingDir\package\$name
+	Rename-Item -Path $workingDir\package\$name\$name.readme.txt -NewName readme.txt
+	
 	$zipFileName = $name + $zipFilePostfix
 	
 	exec { .\tool\7-zip\7za.exe a -tzip $workingDir\$zipFileName $workingDir\package\$name\* } "Error zipping"
@@ -103,7 +106,7 @@ task Test -depends Deploy {
   {
     foreach ($build in $builds)
     {
-	  Trap {Write-Host -ForegroundColor Red "$($_.Exception.Message)"; Write-Host; Continue}
+#	  Trap {Write-Host -ForegroundColor Red "$($_.Exception.Message)"; Write-Host; Continue}
 	
 	  $testsDir = $name + $names.TestsPostfix
       $testsname = $name + $names.TestsPostfix + $build.Postfix
