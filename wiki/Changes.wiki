@@ -2,6 +2,13 @@
 
 = Change Log =
 
+*0.4 alpha (1.April.2010)*
+ * Back to Json.NET as json transfer.
+ * Now support 4 .NET versions (.NET 3.5, .NET 2.0, .NET CF 3.5 and Silverlight 3.0)
+ * Add asynchronize methods along with every request methods.
+ * Auto build via psake.
+ * Fixed some bugs and updated APIs(for GwebSearch).
+ * Now all timeout properties are useless.
 *0.3.1*
  * Fixed Issue 26.
 *0.3:*
