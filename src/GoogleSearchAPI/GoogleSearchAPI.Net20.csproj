@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E9F8B4E2-76C7-4F69-876D-4C1DAADDC5C3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Google.API.Search</RootNamespace>
+    <AssemblyName>GoogleSearchAPI.Net20</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SignAssembly>false</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\GoogleAPI.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NET20</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\GoogleSearchAPI.Net20.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;NET20</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\GoogleSearchAPI.Net20.XML</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="LinqBridge, Version=1.1.0.0, Culture=neutral, PublicKeyToken=c2b14eb747628076, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\LinqBridge\LinqBridge.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json.Net20, Version=3.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Json.NET\DotNet20\Newtonsoft.Json.Net20.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Colorization.cs" />
+    <Compile Include="Converters\CustomArrayCreationConverter.cs" />
+    <Compile Include="DuplicateFilter.cs" />
+    <Compile Include="GblogResult.cs" />
+    <Compile Include="GblogSearchClient.cs" />
+    <Compile Include="GblogSearchRequest.cs" />
+    <Compile Include="GbookResult.cs" />
+    <Compile Include="GbookSearchClient.cs" />
+    <Compile Include="GbookSearchRequest.cs" />
+    <Compile Include="GimageResult.cs" />
+    <Compile Include="GimageSearchClient.cs" />
+    <Compile Include="GimageSearchRequest.cs" />
+    <Compile Include="GlocalResult.cs" />
+    <Compile Include="GlocalSearchClient.cs" />
+    <Compile Include="GlocalSearchRequest.cs" />
+    <Compile Include="GnewsImage.cs" />
+    <Compile Include="GnewsResult.cs" />
+    <Compile Include="GnewsResultItem.cs" />
+    <Compile Include="GnewsSearchClient.cs" />
+    <Compile Include="GnewsSearchRequest.cs" />
+    <Compile Include="GoogleSearchRequest.cs" />
+    <Compile Include="GpatentResult.cs" />
+    <Compile Include="GpatentSearchClient.cs" />
+    <Compile Include="GpatentSearchRequest.cs" />
+    <Compile Include="GSearchClient.cs" />
+    <Compile Include="GvideoResult.cs" />
+    <Compile Include="GvideoSearchClient.cs" />
+    <Compile Include="GvideoSearchRequest.cs" />
+    <Compile Include="GwebResult.cs" />
+    <Compile Include="GwebSearchClient.cs" />
+    <Compile Include="GwebSearchRequest.cs" />
+    <Compile Include="Converters\HtmlFormatConverter.cs" />
+    <Compile Include="Converters\HtmlTagConverter.cs" />
+    <Compile Include="IBlogResult.cs" />
+    <Compile Include="IBookResult.cs" />
+    <Compile Include="IImageResult.cs" />
+    <Compile Include="ILocalResult.cs" />
+    <Compile Include="ImageColor.cs" />
+    <Compile Include="ImageFileType.cs" />
+    <Compile Include="ImageSize.cs" />
+    <Compile Include="ImageType.cs" />
+    <Compile Include="INewsImage.cs" />
+    <Compile Include="INewsResult.cs" />
+    <Compile Include="INewsResultItem.cs" />
+    <Compile Include="IPatentResult.cs" />
+    <Compile Include="IPhoneNumber.cs" />
+    <Compile Include="ITbImage.cs" />
+    <Compile Include="IVideoResult.cs" />
+    <Compile Include="IWebResult.cs" />
+    <Compile Include="Language.cs" />
+    <Compile Include="LocalResultType.cs" />
+    <Compile Include="LocalSearchData.cs" />
+    <Compile Include="NewsEdition.cs" />
+    <Compile Include="NewsTopic.cs" />
+    <Compile Include="PhoneNumber.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResultSize.cs" />
+    <Compile Include="Converters\RFC822DateTimeConverter.cs" />
+    <Compile Include="SafeLevel.cs" />
+    <Compile Include="SearchData.cs" />
+    <Compile Include="SearchUtility.cs" />
+    <Compile Include="SortType.cs" />
+    <Compile Include="Converters\StringProcessConverter.cs" />
+    <Compile Include="TbImage.cs" />
+    <None Include="Properties\AssemblyInfo.cs.template" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Core.Net20.csproj">
+      <Project>{8DBE9C0C-E8C1-4C4A-A770-7C44E43E010B}</Project>
+      <Name>Core.Net20</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PreBuildEvent>$(SolutionDir)..\tool\TortoiseSVN\SubWCRev.exe $(SolutionDir).. $(ProjectDir)Properties\AssemblyInfo.cs.template $(ProjectDir)Properties\AssemblyInfo.cs</PreBuildEvent>
+  </PropertyGroup>
+</Project>
