@@ -33,6 +33,9 @@ namespace Google.API.Translate.Tests
 
     using NUnit.Framework;
 
+#if SILVERLIGHT
+    [Ignore("Silverlight runtime forbid blocking thread.")]
+#endif
     [TestFixture]
     public class TestTranslateClient
     {
@@ -68,7 +71,7 @@ namespace Google.API.Translate.Tests
         public void TranslateTest()
         {
             var originalLanguage = Language.English;
-            var originalText = "dog";
+            var originalText = "fish";
 
             Print(originalLanguage, originalText);
 
@@ -115,7 +118,7 @@ namespace Google.API.Translate.Tests
         {
             // TODO : The test case TranslateTestForHtml is not stable. There may add some space after being translated.
             var from = Language.English;
-            var to = Language.ChineseSimplified;
+            var to = Language.ChineseTraditional;
 
             var textTemplate = "<html><head><title>{0} </title></head><body> <b>{1}</b> </body></html>";
 
@@ -254,7 +257,7 @@ namespace Google.API.Translate.Tests
         public void AsyncTranslateTest()
         {
             var originalLanguage = Language.English;
-            var originalText = "dog";
+            var originalText = "fish";
 
             Print(originalLanguage, originalText);
 

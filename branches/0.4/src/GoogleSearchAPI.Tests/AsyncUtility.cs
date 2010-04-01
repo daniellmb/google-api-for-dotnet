@@ -33,6 +33,10 @@ namespace Google.API.Search.Tests
         public static T Run<T>(Func<AsyncCallback, object, IAsyncResult> beginInvoke, Func<IAsyncResult, T> endInvoke)
             where T : class
         {
+#if SILVERLIGHT
+            NUnit.Framework.Assert.Ignore("Silverlight runtime forbid blocking thread.");
+#endif
+
             T result = null;
             var asyncResult = beginInvoke(ar => result = endInvoke(ar), null);
             asyncResult.AsyncWaitHandle.WaitOne();
