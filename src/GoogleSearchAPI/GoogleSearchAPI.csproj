@@ -5,16 +5,16 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{E9F8B4E2-76C7-4F69-876D-4C1DAADDC5C3}</ProjectGuid>
+    <ProjectGuid>{A082B9C3-1FD6-423A-ABD8-3DEF4A346C84}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Google.API.Search</RootNamespace>
+    <RootNamespace>Google.API</RootNamespace>
     <AssemblyName>GoogleSearchAPI</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SignAssembly>false</SignAssembly>
-    <AssemblyOriginatorKeyFile>..\GoogleAPI.snk</AssemblyOriginatorKeyFile>
     <TargetFrameworkSubset>Client</TargetFrameworkSubset>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\GoogleAPI.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -24,7 +24,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\GoogleSearchAPI.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -36,95 +35,109 @@
     <DocumentationFile>bin\Release\GoogleSearchAPI.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=3.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\Json.NET\DotNet\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.ServiceModel">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.ServiceModel.Web">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Colorization.cs" />
-    <Compile Include="Converters\CustomArrayCreationConverter.cs" />
-    <Compile Include="DuplicateFilter.cs" />
-    <Compile Include="GblogResult.cs" />
-    <Compile Include="GblogSearchClient.cs" />
-    <Compile Include="GblogSearchRequest.cs" />
-    <Compile Include="GbookResult.cs" />
-    <Compile Include="GbookSearchClient.cs" />
-    <Compile Include="GbookSearchRequest.cs" />
-    <Compile Include="GimageResult.cs" />
-    <Compile Include="GimageSearchClient.cs" />
-    <Compile Include="GimageSearchRequest.cs" />
-    <Compile Include="GlocalResult.cs" />
-    <Compile Include="GlocalSearchClient.cs" />
-    <Compile Include="GlocalSearchRequest.cs" />
-    <Compile Include="GnewsImage.cs" />
-    <Compile Include="GnewsResult.cs" />
-    <Compile Include="GnewsResultItem.cs" />
-    <Compile Include="GnewsSearchClient.cs" />
-    <Compile Include="GnewsSearchRequest.cs" />
-    <Compile Include="GoogleSearchRequest.cs" />
-    <Compile Include="GpatentResult.cs" />
-    <Compile Include="GpatentSearchClient.cs" />
-    <Compile Include="GpatentSearchRequest.cs" />
-    <Compile Include="GSearchClient.cs" />
-    <Compile Include="GvideoResult.cs" />
-    <Compile Include="GvideoSearchClient.cs" />
-    <Compile Include="GvideoSearchRequest.cs" />
-    <Compile Include="GwebResult.cs" />
-    <Compile Include="GwebSearchClient.cs" />
-    <Compile Include="GwebSearchRequest.cs" />
-    <Compile Include="Converters\HtmlFormatConverter.cs" />
-    <Compile Include="Converters\HtmlTagConverter.cs" />
-    <Compile Include="IBlogResult.cs" />
-    <Compile Include="IBookResult.cs" />
-    <Compile Include="IImageResult.cs" />
-    <Compile Include="ILocalResult.cs" />
-    <Compile Include="ImageColor.cs" />
-    <Compile Include="ImageFileType.cs" />
-    <Compile Include="ImageSize.cs" />
-    <Compile Include="ImageType.cs" />
-    <Compile Include="INewsImage.cs" />
-    <Compile Include="INewsResult.cs" />
-    <Compile Include="INewsResultItem.cs" />
-    <Compile Include="IPatentResult.cs" />
-    <Compile Include="IPhoneNumber.cs" />
-    <Compile Include="ITbImage.cs" />
-    <Compile Include="IVideoResult.cs" />
-    <Compile Include="IWebResult.cs" />
-    <Compile Include="Language.cs" />
-    <Compile Include="LocalResultType.cs" />
-    <Compile Include="LocalSearchData.cs" />
-    <Compile Include="NewsEdition.cs" />
-    <Compile Include="NewsTopic.cs" />
-    <Compile Include="PhoneNumber.cs" />
+    <Compile Include="..\Core\Enumeration.cs">
+      <Link>Enumeration.cs</Link>
+    </Compile>
+    <Compile Include="..\Core\Enumeration.Generic.cs">
+      <Link>Enumeration.Generic.cs</Link>
+    </Compile>
+    <Compile Include="..\Core\GoogleAPIException.cs">
+      <Link>GoogleAPIException.cs</Link>
+    </Compile>
+    <Compile Include="..\Core\GoogleClient.cs">
+      <Link>GoogleClient.cs</Link>
+    </Compile>
+    <Compile Include="..\Core\GoogleServiceException.cs">
+      <Link>GoogleServiceException.cs</Link>
+    </Compile>
+    <Compile Include="..\Core\HtmlEntities.cs">
+      <Link>HtmlEntities.cs</Link>
+    </Compile>
+    <Compile Include="..\Core\HttpUtility.cs">
+      <Link>HttpUtility.cs</Link>
+    </Compile>
+    <Compile Include="..\Core\MyWebContentTypeMapper.cs">
+      <Link>MyWebContentTypeMapper.cs</Link>
+    </Compile>
+    <Compile Include="..\Core\RequestUtility.cs">
+      <Link>RequestUtility.cs</Link>
+    </Compile>
+    <Compile Include="..\Core\ResponseStatusConstant.cs">
+      <Link>ResponseStatusConstant.cs</Link>
+    </Compile>
+    <Compile Include="..\Core\ResultObject.cs">
+      <Link>ResultObject.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ResultSize.cs" />
-    <Compile Include="Converters\RFC822DateTimeConverter.cs" />
-    <Compile Include="SafeLevel.cs" />
-    <Compile Include="SearchData.cs" />
-    <Compile Include="SearchUtility.cs" />
-    <Compile Include="SortType.cs" />
-    <Compile Include="Converters\StringProcessConverter.cs" />
-    <Compile Include="TbImage.cs" />
+    <None Include="GoogleSearchAPI.shfbproj" />
     <None Include="Properties\AssemblyInfo.cs.template" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Core\Core.csproj">
-      <Project>{8DBE9C0C-E8C1-4C4A-A770-7C44E43E010B}</Project>
-      <Name>Core</Name>
-    </ProjectReference>
+    <Compile Include="Search\Colorization.cs" />
+    <Compile Include="Search\DuplicateFilter.cs" />
+    <Compile Include="Search\ImageFileType.cs" />
+    <Compile Include="Search\GblogResult.cs" />
+    <Compile Include="Search\GblogSearchClient.cs" />
+    <Compile Include="Search\GbookResult.cs" />
+    <Compile Include="Search\GbookSearchClient.cs" />
+    <Compile Include="Search\GimageResult.cs" />
+    <Compile Include="Search\GimageSearchClient.cs" />
+    <Compile Include="Search\GlocalResult.cs" />
+    <Compile Include="Search\GlocalSearchClient.cs" />
+    <Compile Include="Search\GnewsImage.cs" />
+    <Compile Include="Search\GnewsSearchClient.cs" />
+    <Compile Include="Search\GnewsResult.cs" />
+    <Compile Include="Search\GnewsResultItem.cs" />
+    <Compile Include="Search\GpatentResult.cs" />
+    <Compile Include="Search\GpatentSearchClient.cs" />
+    <Compile Include="Search\GvideoResult.cs" />
+    <Compile Include="Search\GvideoSearchClient.cs" />
+    <Compile Include="Search\GwebSearchClient.cs" />
+    <Compile Include="Search\GwebResult.cs" />
+    <Compile Include="Search\IBlogResult.cs" />
+    <Compile Include="Search\IBookResult.cs" />
+    <Compile Include="Search\IImageResult.cs" />
+    <Compile Include="Search\ILocalResult.cs" />
+    <Compile Include="Search\ImageColor.cs" />
+    <Compile Include="Search\ImageSize.cs" />
+    <Compile Include="Search\ImageType.cs" />
+    <Compile Include="Search\INewsImage.cs" />
+    <Compile Include="Search\INewsResult.cs" />
+    <Compile Include="Search\INewsResultItem.cs" />
+    <Compile Include="Search\IPatentResult.cs" />
+    <Compile Include="Search\IPhoneNumber.cs" />
+    <Compile Include="Search\ISearchService.cs" />
+    <Compile Include="Search\ITbImage.cs" />
+    <Compile Include="Search\IVideoResult.cs" />
+    <Compile Include="Search\IWebResult.cs" />
+    <Compile Include="Search\Language.cs" />
+    <Compile Include="Search\LocalResultType.cs" />
+    <Compile Include="Search\LocalSearchData.cs" />
+    <Compile Include="Search\NewsEdition.cs" />
+    <Compile Include="Search\NewsTopic.cs" />
+    <Compile Include="Search\PhoneNumber.cs" />
+    <Compile Include="Search\GSearchClient.cs" />
+    <Compile Include="Search\ResultSize.cs" />
+    <Compile Include="Search\SafeLevel.cs" />
+    <Compile Include="Search\SearchData.cs" />
+    <Compile Include="Search\SearchUtility.cs" />
+    <Compile Include="Search\SortType.cs" />
+    <Compile Include="Search\TbImage.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -135,6 +148,12 @@
   </Target>
   -->
   <PropertyGroup>
-    <PreBuildEvent>$(SolutionDir)..\tool\TortoiseSVN\SubWCRev.exe $(SolutionDir).. $(ProjectDir)Properties\AssemblyInfo.cs.template $(ProjectDir)Properties\AssemblyInfo.cs</PreBuildEvent>
+    <PreBuildEvent>$(SolutionDir)..\thirdparty\TortoiseSVN\SubWCRev.exe $(SolutionDir).. $(ProjectDir)Properties\AssemblyInfo.cs.template $(ProjectDir)Properties\AssemblyInfo.cs</PreBuildEvent>
+    <PostBuildEvent>IF "$(ConfigurationName)"=="Debug" Goto Exit
+
+ECHO Building SHFB help file via MSBuild
+"$(SystemRoot)\Microsoft.NET\Framework\v3.5\MSBuild.exe" /p:CleanIntermediates=True /p:Configuration=Release "$(ProjectDir)GoogleSearchAPI.shfbproj"
+
+:Exit</PostBuildEvent>
   </PropertyGroup>
 </Project>

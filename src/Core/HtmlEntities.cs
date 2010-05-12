@@ -1,44 +1,18 @@
-//-----------------------------------------------------------------------
-// <copyright file="HtmlEntities.cs" company="iron9light">
-// Copyright (c) 2010 iron9light
-//
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-//
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
-// </copyright>
-// <author>iron9light@gmail.com</author>
-//-----------------------------------------------------------------------
+// The code below is provided by Microsoft .NET reference source project.
+// http://referencesource.microsoft.com/
+
+using System;
+using System.Collections;
 
 namespace Google.API
 {
-    using System.Collections.Generic;
-
-    /// <summary>
-    /// helper class for lookup of HTML encoding entities
-    /// </summary>
+    // helper class for lookup of HTML encoding entities
     internal class HtmlEntities
     {
-        private static readonly object LookupLockObject = new object();
+        private static object _lookupLockObject = new object();
 
-        /// <summary>
-        /// The list is from http://www.w3.org/TR/REC-html40/sgml/entities.html
-        /// </summary>
-        private static readonly string[] EntitiesList = new[] 
-                                                              {
+        // The list is from http://www.w3.org/TR/REC-html40/sgml/entities.html
+        private static String[] _entitiesList = new String[] {
                                                                  "\x0022-quot", 
                                                                  "\x0026-amp",
                                                                  "\x003c-lt", 
@@ -293,41 +267,37 @@ namespace Google.API
                                                                  "\x2666-diams",
                                                              };
 
-        private static Dictionary<string, char> entitiesLookupTable;
+        private static Hashtable _entitiesLookupTable;
 
         private HtmlEntities()
         {
         }
 
-        internal static char Lookup(string entity)
+        internal /*public*/ static char Lookup(String entity)
         {
-            if (entitiesLookupTable == null)
+            if (_entitiesLookupTable == null)
             {
                 // populate hashtable on demand 
-                lock (LookupLockObject)
+                lock (_lookupLockObject)
                 {
-                    if (entitiesLookupTable == null)
+                    if (_entitiesLookupTable == null)
                     {
-                        var t = new Dictionary<string, char>();
+                        Hashtable t = new Hashtable();
 
-                        foreach (var s in EntitiesList)
-                        {
-                            t[s.Substring(2)] = s[0]; // 1st char is the code, 2nd '-'
-                        }
+                        foreach (String s in _entitiesList)
+                            t[s.Substring(2)] = s[0];  // 1st char is the code, 2nd '-'
 
-                        entitiesLookupTable = t;
+                        _entitiesLookupTable = t;
                     }
                 }
             }
 
-            char c;
+            Object obj = _entitiesLookupTable[entity];
 
-            if (entitiesLookupTable.TryGetValue(entity, out c))
-            {
-                return c;
-            }
-
-            return (char)0;
+            if (obj != null)
+                return (char)obj;
+            else
+                return (char)0;
         }
     }
 }

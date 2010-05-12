@@ -5,16 +5,16 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{B81DF147-947A-4745-A8AD-8474E51820F1}</ProjectGuid>
+    <ProjectGuid>{F0C72CD2-791D-476A-9D3B-076B8F9A25D9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Google.API.Translate</RootNamespace>
+    <RootNamespace>Google.API</RootNamespace>
     <AssemblyName>GoogleTranslateAPI</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SignAssembly>false</SignAssembly>
-    <AssemblyOriginatorKeyFile>..\GoogleAPI.snk</AssemblyOriginatorKeyFile>
     <TargetFrameworkSubset>Client</TargetFrameworkSubset>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\GoogleAPI.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -24,7 +24,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\GoogleTranslateAPI.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -36,39 +35,65 @@
     <DocumentationFile>bin\Release\GoogleTranslateAPI.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=3.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\Json.NET\DotNet\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.ServiceModel">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.ServiceModel.Web">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DetectData.cs" />
-    <Compile Include="DetectRequest.cs" />
-    <Compile Include="Language.cs" />
+    <Compile Include="..\Core\Enumeration.cs">
+      <Link>Enumeration.cs</Link>
+    </Compile>
+    <Compile Include="..\Core\Enumeration.Generic.cs">
+      <Link>Enumeration.Generic.cs</Link>
+    </Compile>
+    <Compile Include="..\Core\GoogleAPIException.cs">
+      <Link>GoogleAPIException.cs</Link>
+    </Compile>
+    <Compile Include="..\Core\GoogleClient.cs">
+      <Link>GoogleClient.cs</Link>
+    </Compile>
+    <Compile Include="..\Core\GoogleServiceException.cs">
+      <Link>GoogleServiceException.cs</Link>
+    </Compile>
+    <Compile Include="..\Core\HtmlEntities.cs">
+      <Link>HtmlEntities.cs</Link>
+    </Compile>
+    <Compile Include="..\Core\HttpUtility.cs">
+      <Link>HttpUtility.cs</Link>
+    </Compile>
+    <Compile Include="..\Core\MyWebContentTypeMapper.cs">
+      <Link>MyWebContentTypeMapper.cs</Link>
+    </Compile>
+    <Compile Include="..\Core\RequestUtility.cs">
+      <Link>RequestUtility.cs</Link>
+    </Compile>
+    <Compile Include="..\Core\ResponseStatusConstant.cs">
+      <Link>ResponseStatusConstant.cs</Link>
+    </Compile>
+    <Compile Include="..\Core\ResultObject.cs">
+      <Link>ResultObject.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TranslateClient.cs" />
-    <Compile Include="TranslateData.cs" />
-    <Compile Include="TranslateFormat.cs" />
-    <Compile Include="TranslateRequest.cs" />
+    <None Include="GoogleTranslateAPI.shfbproj" />
     <None Include="Properties\AssemblyInfo.cs.template" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Core\Core.csproj">
-      <Project>{8DBE9C0C-E8C1-4C4A-A770-7C44E43E010B}</Project>
-      <Name>Core</Name>
-    </ProjectReference>
+    <Compile Include="Translate\DetectData.cs" />
+    <Compile Include="Translate\ILanguageService.cs" />
+    <Compile Include="Translate\Language.cs" />
+    <Compile Include="Translate\TranslateClient.cs" />
+    <Compile Include="Translate\TranslateData.cs" />
+    <Compile Include="Translate\TranslateFormat.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -79,6 +104,12 @@
   </Target>
   -->
   <PropertyGroup>
-    <PreBuildEvent>$(SolutionDir)..\tool\TortoiseSVN\SubWCRev.exe $(SolutionDir).. $(ProjectDir)Properties\AssemblyInfo.cs.template $(ProjectDir)Properties\AssemblyInfo.cs</PreBuildEvent>
+    <PreBuildEvent>$(SolutionDir)..\thirdparty\TortoiseSVN\SubWCRev.exe $(SolutionDir).. $(ProjectDir)Properties\AssemblyInfo.cs.template $(ProjectDir)Properties\AssemblyInfo.cs</PreBuildEvent>
+    <PostBuildEvent>IF "$(ConfigurationName)"=="Debug" Goto Exit
+
+ECHO Building SHFB help file via MSBuild
+"$(SystemRoot)\Microsoft.NET\Framework\v3.5\MSBuild.exe" /p:CleanIntermediates=True /p:Configuration=Release "$(ProjectDir)GoogleTranslateAPI.shfbproj"
+
+:Exit</PostBuildEvent>
   </PropertyGroup>
 </Project>

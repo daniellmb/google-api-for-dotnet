@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------
 // <copyright file="GoogleClient.cs" company="iron9light">
-// Copyright (c) 2010 iron9light
+// Copyright (c) 2009 iron9light
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,34 +26,19 @@
 namespace Google.API
 {
     using System;
-    using System.Net;
+    using System.ServiceModel.Channels;
 
     /// <summary>
     /// The abstract base class for all google service client classes.
     /// </summary>
     public abstract class GoogleClient
     {
-#if SILVERLIGHT
-        protected GoogleClient()
-        {
-#else
         protected GoogleClient(string referrer)
         {
             this.Referrer = referrer;
-#endif
 
-            this.OpenTimeout = new TimeSpan(0, 1, 0);
-            this.CloseTimeout = new TimeSpan(0, 1, 0);
-            this.SendTimeout = new TimeSpan(0, 1, 0);
-            this.ReceiveTimeout = new TimeSpan(0, 10, 0);
+            this.Binding = RequestUtility.CreateBinding();
         }
-
-        /// <summary>
-        /// This argument supplies the IP address of the end-user on whose behalf the request is being made.
-        /// Requests that include it are less likely to be mistaken for abuse.
-        /// In choosing to utilize this parameter, please be sure that you're in compliance with any local laws, including any laws relating to disclosure of personal information being sent.
-        /// </summary>
-        public IPAddress UserIP { get; set; }
 
         /// <summary>
         /// This optional argument supplies the host language of the application making the request.
@@ -69,74 +54,89 @@ namespace Google.API
         /// <value>The API key.</value>
         public string ApiKey { get; set; }
 
-#if !SILVERLIGHT
         /// <summary>
         /// Gets or sets the http referrer header.
         /// </summary>
         /// <value>The referrer.</value>
         /// <remarks>Applications MUST always include a valid and accurate http referer header in their requests.</remarks>
         public string Referrer { get; set; }
-#endif
 
         /// <summary>
         /// Gets or sets the interval of time after which the open method, invoked by a communication object, times out.
         /// </summary>
         /// <returns>The <see cref="System.TimeSpan"/> that specifies the interval of time to wait for the open method to time out.</returns>
-        public TimeSpan OpenTimeout { get; set; }
+        public TimeSpan OpenTimeout
+        {
+            get
+            {
+                return this.Binding.OpenTimeout;
+            }
+
+            set
+            {
+                this.Binding.OpenTimeout = value;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the interval of time after which the close method, invoked by a communication object, times out.
         /// </summary>
         /// <returns>The <see cref="System.TimeSpan"/> that specifies the interval of time to wait for the close method to time out.</returns>
-        public TimeSpan CloseTimeout { get; set; }
+        public TimeSpan CloseTimeout
+        {
+            get
+            {
+                return this.Binding.CloseTimeout;
+            }
+
+            set
+            {
+                this.Binding.CloseTimeout = value;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the interval of time after which the send method, invoked by a communication object, times out.
         /// </summary>
         /// <returns>The <see cref="System.TimeSpan"/> that specifies the interval of time to wait for the send method to time out.</returns>
-        public TimeSpan SendTimeout { get; set; }
+        public TimeSpan SendTimeout
+        {
+            get
+            {
+                return this.Binding.SendTimeout;
+            }
+
+            set
+            {
+                this.Binding.SendTimeout = value;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the interval of time after which the receive method, invoked by a communication object, times out.
         /// </summary>
         /// <returns>The <see cref="System.TimeSpan"/> that specifies the interval of time to wait for the receive method to time out.</returns>
-        public TimeSpan ReceiveTimeout { get; set; }
-
-        internal IAsyncResult BeginGetResponseData(GoogleRequest request, AsyncCallback callback, object state)
+        public TimeSpan ReceiveTimeout
         {
-            this.SetValueTo(request);
+            get
+            {
+                return this.Binding.ReceiveTimeout;
+            }
 
-            return RequestUtility.BeginGetResponseData(request, callback, state);
+            set
+            {
+                this.Binding.ReceiveTimeout = value;
+            }
         }
 
-        internal T EndGetResponseData<T>(IAsyncResult asyncResult)
+        protected Binding Binding { get; set; }
+
+        protected abstract Uri Address { get; }
+
+        internal T GetResponseData<T, TService>(RequestCallback<ResultObject<T>, TService> request)
+            where TService : class
         {
-            return RequestUtility.EndGetResponseData<T>(asyncResult);
-        }
-
-#if !SILVERLIGHT
-        internal T GetResponseData<T>(GoogleRequest request)
-        {
-            this.SetValueTo(request);
-
-            return RequestUtility.GetResponseData<T>(request);
-        }
-#endif
-
-        internal void SetValueTo(GoogleRequest request)
-        {
-#if !SILVERLIGHT
-            request.Referrer = this.Referrer;
-#endif
-
-            request.OpenTimeout = this.OpenTimeout;
-            request.CloseTimeout = this.CloseTimeout;
-            request.SendTimeout = this.SendTimeout;
-            request.ReceiveTimeout = this.ReceiveTimeout;
-
-            request.UserIP = this.UserIP;
-            request.HostLanguage = this.AcceptLanguage;
-            request.APIKey = this.ApiKey;
+            return RequestUtility.GetResponseData(request, this.Address, this.Binding, this.Referrer);
         }
     }
 }

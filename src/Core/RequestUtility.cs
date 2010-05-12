@@ -1,6 +1,6 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="RequestUtility.cs" company="iron9light">
-// Copyright (c) 2010 iron9light
+// Copyright (c) 2009 iron9light
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,192 +26,37 @@
 namespace Google.API
 {
     using System;
-    using System.IO;
     using System.Net;
-    using System.Text;
-    using System.Threading;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Web;
 
-    using Newtonsoft.Json;
+    internal delegate T RequestCallback<T, TService>(TService service) where TService : class;
 
     internal static class RequestUtility
     {
-        private static readonly Encoding Encoding = Encoding.UTF8;
-
-////        internal static T GetResponseData2<T>(IRequestInfo requestInfo)
-////        {
-////            if (requestInfo == null)
-////            {
-////                throw new ArgumentNullException("requestInfo");
-////            }
-
-////            var webRequest = (HttpWebRequest)WebRequest.Create(requestInfo.Url);
-
-////#if !SILVERLIGHT
-////            webRequest.Referer = requestInfo.Referrer;
-////#endif
-
-////            if (!string.IsNullOrEmpty(requestInfo.PostContent))
-////            {
-////#if PocketPC || SILVERLIGHT
-////                webRequest.Method = "POST";
-////#else
-////                webRequest.Method = WebRequestMethods.Http.Post;
-////#endif
-
-////                var postBytes = Encoding.GetBytes(requestInfo.PostContent);
-
-////#if SILVERLIGHT
-////                webRequest.Headers[HttpRequestHeader.ContentLength] = postBytes.Length.ToString();
-////#else
-////                webRequest.ContentLength = postBytes.Length;
-////#endif
-
-////                var requestStream = GetRequestStream(webRequest, requestInfo.OpenTimeout);
-
-////                WriteRequestStream(requestStream, postBytes, requestInfo.SendTimeout);
-////            }
-
-////            string resultString = GetResultString(webRequest, requestInfo);
-
-////            return Deserialize<T>(resultString);
-////        }
-
-////        private static Stream GetRequestStream(WebRequest webRequest, TimeSpan timeout)
-////        {
-////            return Invoke<Stream>(webRequest.BeginGetRequestStream, webRequest.EndGetRequestStream, timeout);
-////        }
-
-////        private static void WriteRequestStream(Stream stream, byte[] postBytes, TimeSpan timeout)
-////        {
-////            using (stream)
-////            {
-////                stream.WriteTimeout = (int)timeout.TotalMilliseconds;
-////                stream.Write(postBytes, 0, postBytes.Length);
-////            }
-////        }
-
-////        private static string GetResultString(WebRequest webRequest, IRequestInfo requestInfo)
-////        {
-////            try
-////            {
-////                // HACK: Not sure it should be OpenTimeout, CloseTimeout or ReceiveTimeout.
-////                using (var webResponse = GetResponse(webRequest, requestInfo.OpenTimeout))
-////                {
-////                    using (var reader = new StreamReader(webResponse.GetResponseStream(), Encoding))
-////                    {
-////                        reader.BaseStream.ReadTimeout = (int)requestInfo.ReceiveTimeout.TotalMilliseconds;
-////                        return reader.ReadToEnd();
-////                    }
-////                }
-////            }
-////            catch (WebException ex)
-////            {
-////                throw new GoogleAPIException("Failed to get response.", ex);
-////            }
-////            catch (IOException ex)
-////            {
-////                throw new GoogleAPIException("Cannot read the response stream.", ex);
-////            }
-////        }
-
-////        private static WebResponse GetResponse(WebRequest webRequest, TimeSpan timeout)
-////        {
-////            return Invoke<WebResponse>(webRequest.BeginGetResponse, webRequest.EndGetResponse, timeout);
-////        }
-
-////        private static T Invoke<T>(Func<AsyncCallback, object, IAsyncResult> beginInvoke, Func<IAsyncResult, T> endInvoke, TimeSpan timeout)
-////        {
-////            Thread threadToKill = Thread.CurrentThread;
-
-////            var asyncResult = beginInvoke(null, null);
-////#if PocketPC
-////            if (!asyncResult.AsyncWaitHandle.WaitOne((int)timeout.TotalMilliseconds, false))
-////#else
-////            if (!asyncResult.AsyncWaitHandle.WaitOne(timeout))
-////#endif
-////            {
-////                threadToKill.Abort();
-////                throw new TimeoutException();
-////            }
-
-////            return endInvoke(asyncResult);
-////        }
-
-        public static IAsyncResult BeginGetResponseData(IRequestInfo requestInfo, AsyncCallback callback, object state)
+        public static T GetResponseData<T, TService>(
+            RequestCallback<ResultObject<T>, TService> request, Uri address, Binding binding, string referrer)
+            where TService : class
         {
-            if (requestInfo == null)
+            if (request == null)
             {
-                throw new ArgumentNullException("requestInfo");
+                throw new ArgumentNullException("request");
             }
 
-            var webRequest = (HttpWebRequest)WebRequest.Create(requestInfo.Url);
-
-#if !SILVERLIGHT
-            webRequest.Referer = requestInfo.Referrer;
-#endif
-
-            var getResponseAsyncResult = new GetResponseAsyncResult(webRequest, state);
-
-            var innerAsyncResult = webRequest.BeginGetResponse(
-                asyncResult =>
-                    {
-                        getResponseAsyncResult.InnerAsyncResult = asyncResult;
-
-                        if (callback != null)
-                        {
-                            callback(getResponseAsyncResult);
-                        }
-                    },
-                null);
-
-            getResponseAsyncResult.InnerAsyncResult = innerAsyncResult;
-
-            return getResponseAsyncResult;
-        }
-
-        public static T EndGetResponseData<T>(IAsyncResult asyncResult)
-        {
-            var resultString = ((GetResponseAsyncResult)asyncResult).Value;
-
-            return Deserialize<T>(resultString);
-        }
-
-#if !SILVERLIGHT
-        public static T GetResponseData<T>(IRequestInfo requestInfo)
-        {
-            if (requestInfo == null)
+            if (address == null)
             {
-                throw new ArgumentNullException("requestInfo");
+                throw new ArgumentNullException("address");
             }
 
-            var webRequest = (HttpWebRequest)WebRequest.Create(requestInfo.Url);
-
-#if !SILVERLIGHT
-            webRequest.Referer = requestInfo.Referrer;
-#endif
-            string resultString;
-            using (var webResponse = webRequest.GetResponse())
-            {
-                using (var reader = new StreamReader(webResponse.GetResponseStream(), Encoding))
-                {
-                    resultString = reader.ReadToEnd();
-                }
-            }
-
-            return Deserialize<T>(resultString);
-        }
-#endif
-
-        private static T Deserialize<T>(string text)
-        {
             ResultObject<T> resultObject;
             try
             {
-                resultObject = JsonConvert.DeserializeObject<ResultObject<T>>(text);
+                resultObject = GetResultObject(request, address, binding, referrer);
             }
             catch (Exception ex)
             {
-                throw new DeserializeException(typeof(ResultObject<T>), text, ex);
+                throw new GoogleAPIException("Failed to get response.", ex);
             }
 
             if (resultObject.ResponseStatus != ResponseStatusConstant.DefaultStatus)
@@ -222,61 +67,41 @@ namespace Google.API
             return resultObject.ResponseData;
         }
 
-        private class GetResponseAsyncResult : IAsyncResult
+        public static Binding CreateBinding()
         {
-            private readonly WebRequest webRequest;
-
-            public GetResponseAsyncResult(WebRequest webRequest, object state)
-            {
-                this.webRequest = webRequest;
-                this.AsyncState = state;
-            }
-
-            public string Value
-            {
-                get
+            var customBinding = new CustomBinding();
+            var webMessageEncodingBindingElement = new WebMessageEncodingBindingElement
                 {
-                    using (var webResponse = this.webRequest.EndGetResponse(this.InnerAsyncResult))
-                    {
-                        using (var reader = new StreamReader(webResponse.GetResponseStream(), Encoding))
-                        {
-                            return reader.ReadToEnd();
-                        }
-                    }
-                }
-            }
+                    ContentTypeMapper = new MyWebContentTypeMapper() 
+                };
+            var httpTransportBindingElement = new HttpTransportBindingElement { ManualAddressing = true };
+            customBinding.Elements.Add(webMessageEncodingBindingElement);
+            customBinding.Elements.Add(httpTransportBindingElement);
+            return customBinding;
+        }
 
-            public IAsyncResult InnerAsyncResult { private get; set; }
-
-            #region IAsyncResult Members
-
-            public object AsyncState { get; private set; }
-
-            public WaitHandle AsyncWaitHandle
+        public static string GetString(this bool value)
+        {
+            if (value)
             {
-                get 
-                {
-                    return this.InnerAsyncResult.AsyncWaitHandle;
-                }
+                return "1";
             }
 
-            public bool CompletedSynchronously
+            return null;
+        }
+
+        private static T GetResultObject<TService, T>(
+            RequestCallback<T, TService> request, Uri address, Binding binding, string referrer) where TService : class
+        {
+            var channelFactory = new WebChannelFactory<TService>(binding, address);
+            var client = channelFactory.CreateChannel();
+            using (new OperationContextScope((IContextChannel)client))
             {
-                get
-                {
-                    return this.InnerAsyncResult.CompletedSynchronously;
-                }
-            }
+                WebOperationContext.Current.OutgoingRequest.Headers.Add(HttpRequestHeader.Referer, referrer);
 
-            public bool IsCompleted
-            {
-                get
-                {
-                    return this.InnerAsyncResult.IsCompleted;
-                }
+                var resultObject = request(client);
+                return resultObject;
             }
-
-            #endregion
         }
     }
 }

@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------
 // <copyright file="ResponseStatusConstant.cs" company="iron9light">
-// Copyright (c) 2010 iron9light
+// Copyright (c) 2009 iron9light
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal

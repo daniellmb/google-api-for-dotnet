@@ -1,6 +1,6 @@
 ﻿//-----------------------------------------------------------------------
 // <copyright file="GoogleAPIException.cs" company="iron9light">
-// Copyright (c) 2010 iron9light
+// Copyright (c) 2009 iron9light
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,16 +26,12 @@
 namespace Google.API
 {
     using System;
-#if !SILVERLIGHT && !PocketPC
     using System.Runtime.Serialization;
-#endif
 
     /// <summary>
     /// Google API exception.
     /// </summary>
-#if !SILVERLIGHT
     [Serializable]
-#endif
     public class GoogleAPIException : Exception
     {
         /// <summary>
@@ -64,7 +60,6 @@ namespace Google.API
         {
         }
 
-#if !SILVERLIGHT && !PocketPC
         /// <summary>
         /// Initializes a new instance of the <see cref="GoogleAPIException"/> class with serialized data.
         /// </summary>
@@ -74,6 +69,5 @@ namespace Google.API
             : base(info, context)
         {
         }
-#endif
     }
 }
