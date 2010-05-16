@@ -30,6 +30,7 @@ namespace Google.API.Search
     internal interface ISearchData<TResult>
     {
         TResult[] Results { get; }
+        int? CurrentIndex { get; }
     }
 
     [DataContract]
@@ -69,6 +70,18 @@ namespace Google.API.Search
                 {
                     return string.Format("start : {0}, label : {1}", this.Start, this.Label);
                 }
+            }
+        }
+
+        public int? CurrentIndex
+        {
+            get
+            {
+                if (this.Cursor.Pages == null)
+                {
+                    return null;
+                }
+                return (int?)this.Cursor.CurrentPageIndex;
             }
         }
     }
