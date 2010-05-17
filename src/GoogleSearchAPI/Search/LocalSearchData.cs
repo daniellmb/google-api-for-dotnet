@@ -28,11 +28,8 @@ namespace Google.API.Search
     using System.Runtime.Serialization;
 
     [DataContract]
-    internal class LocalSearchData : ISearchData<GlocalResult>
+    internal class LocalSearchData : SearchData<GlocalResult>
     {
-        [DataMember(Name = "results")]
-        public GlocalResult[] Results { get; private set; }
-
         [DataMember(Name = "viewport")]
         public ViewportObject Viewport { get; private set; }
 
@@ -50,62 +47,16 @@ namespace Google.API.Search
         public class ViewportObject
         {
             [DataMember(Name = "center")]
-            public Point center { get; private set; }
+            public Point Center { get; private set; }
 
             [DataMember(Name = "span")]
-            public Point span { get; private set; }
+            public Point Span { get; private set; }
 
             [DataMember(Name = "sw")]
-            public Point sw { get; private set; }
+            public Point SW { get; private set; }
 
             [DataMember(Name = "ne")]
-            public Point ne { get; private set; }
-        }
-
-        [DataMember(Name = "cursor")]
-        public CursorObject Cursor { get; private set; }
-
-        [DataContract]
-        public class CursorObject
-        {
-            [DataMember(Name = "pages")]
-            public Page[] Pages { get; private set; }
-
-            [DataMember(Name = "estimatedResultCount")]
-            public long EstimatedResultCount { get; private set; }
-
-            [DataMember(Name = "currentPageIndex")]
-            public long CurrentPageIndex { get; private set; }
-
-            [DataMember(Name = "moreResultsUrl")]
-            public string MoreResultsUrl { get; private set; }
-
-            [DataContract]
-            public class Page
-            {
-                [DataMember(Name = "start")]
-                public long Start { get; private set; }
-
-                [DataMember(Name = "label")]
-                public long Label { get; private set; }
-
-                public override string ToString()
-                {
-                    return string.Format("start : {0}, label : {1}", this.Start, this.Label);
-                }
-            }
-        }
-
-        public int? CurrentIndex
-        {
-            get
-            {
-                if (this.Cursor.Pages == null)
-                {
-                    return null;
-                }
-                return (int?)this.Cursor.CurrentPageIndex;
-            }
+            public Point NE { get; private set; }
         }
     }
 }
