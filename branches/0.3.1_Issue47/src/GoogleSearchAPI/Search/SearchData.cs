@@ -30,6 +30,7 @@ namespace Google.API.Search
     internal interface ISearchData<TResult>
     {
         TResult[] Results { get; }
+
         int? CurrentIndex { get; }
     }
 
@@ -41,6 +42,19 @@ namespace Google.API.Search
 
         [DataMember(Name = "cursor")]
         public CursorObject Cursor { get; private set; }
+
+        public int? CurrentIndex
+        {
+            get
+            {
+                if (this.Cursor.Pages == null)
+                {
+                    return null;
+                }
+
+                return (int?)this.Cursor.CurrentPageIndex;
+            }
+        }
 
         [DataContract]
         public class CursorObject
@@ -70,18 +84,6 @@ namespace Google.API.Search
                 {
                     return string.Format("start : {0}, label : {1}", this.Start, this.Label);
                 }
-            }
-        }
-
-        public int? CurrentIndex
-        {
-            get
-            {
-                if (this.Cursor.Pages == null)
-                {
-                    return null;
-                }
-                return (int?)this.Cursor.CurrentPageIndex;
             }
         }
     }

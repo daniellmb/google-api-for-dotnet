@@ -38,6 +38,7 @@ namespace Google.API.Search
             var start = 0;
             var results = new List<T>();
             var restCount = resultCount;
+            int? previousPageIndex = -1;
             while (restCount > 0)
             {
                 ISearchData<T> searchData;
@@ -70,7 +71,20 @@ namespace Google.API.Search
 
                 if (count <= restCount)
                 {
+                    int? currentPageIndex = searchData.CurrentIndex;
+                    if (currentPageIndex == previousPageIndex)
+                    {
+                        break;
+                    }
+
                     results.AddRange(searchData.Results);
+
+                    if (count < 8)
+                    {
+                        break;
+                    }
+
+                    previousPageIndex = currentPageIndex;
                 }
                 else
                 {
