@@ -31,7 +31,7 @@ namespace Google.API.Search
     {
         TResult[] Results { get; }
 
-        int? CurrentIndex { get; }
+        long? CurrentPageIndex { get; }
     }
 
     [DataContract]
@@ -43,7 +43,7 @@ namespace Google.API.Search
         [DataMember(Name = "cursor")]
         public CursorObject Cursor { get; private set; }
 
-        public int? CurrentIndex
+        public long? CurrentPageIndex
         {
             get
             {
@@ -52,7 +52,7 @@ namespace Google.API.Search
                     return null;
                 }
 
-                return (int?)this.Cursor.CurrentPageIndex;
+                return this.Cursor.CurrentPageIndex;
             }
         }
 
